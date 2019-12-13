@@ -1,0 +1,270 @@
+.select
+  width 100%
+
+  .{newAppName}-dark-theme &
+    color white
+
+  &--is-reset-width
+    width auto !important
+
+  &__inner
+    display block
+    width 100%
+    text-align left
+    min-height: 100%
+
+  &-arrow
+    position absolute
+    top -15px
+    bottom: 0
+    margin-top: auto
+    margin-bottom: auto
+    right 0
+    transform rotate(0)
+    transition-timing-function ease-in-out
+    transition-duration .2s
+    transition-property transform, top
+    width: 13px
+    height: 7px
+
+    .select--is-open &
+      transform rotate(-180deg)
+      top 15px!important
+
+    &__icon
+      opacity .7
+      transition-timing-function ease-in-out
+      transition-duration .2s
+      transition-property opacity, fill
+      fill main-color
+
+      .{newAppName}-dark-theme &
+        fill white
+
+      .select:hover &
+        opacity 1
+
+      .select--disabled &
+        opacity .3 !important
+
+  &-value
+    min-height 100%
+    margin-top -5px
+    padding-top 5px
+    padding-bottom 5px
+    cursor pointer
+    position: relative
+
+    .select--disabled &
+      color main-color05
+      cursor default
+
+  &-input
+    max-width 100%
+    overflow hidden
+    text-overflow ellipsis
+    white-space nowrap
+    padding-right 20px
+    outline none
+    border none
+    width 100%
+    min-height 20px
+
+  &-list
+    width 100%
+    max-height 0
+    overflow-y auto
+    font-size 14px
+    background-color white
+    box-shadow 0 5px 10px box-shadow-background
+    opacity 0
+    visibility hidden
+    position absolute
+    top 52px
+    z-index 3
+    transition-timing-function ease-in-out
+    transition-duration .2s
+    transition-property opacity, visibility, height, max-height
+
+    .select--invert-open-list &
+      box-shadow 0 -5px 10px box-shadow-background
+      top initial
+      bottom 56px
+
+    .{newAppName}-dark-theme &
+      background-color dark-theme-dropdown-background
+
+    .select--is-open &
+      max-height 200px
+      opacity 1
+      visibility visible
+
+    &-native
+      display block
+      width calc(100% - 20px)
+      overflow hidden
+      text-indent 1px
+      text-overflow ellipsis
+      white-space nowrap
+      background none
+      border none
+      outline none
+      -webkit-appearance none
+      -moz-appearance none
+
+  &-option
+    &__inner
+      display block
+      width 100%
+      line-height 20px
+      text-align left
+      border none
+      padding-top 6px
+      padding-bottom 7px
+      padding-left 14px
+      padding-right 14px
+      cursor pointer
+
+      .select-option--select &
+        color inherit
+        font-weight 600
+
+      &:focus,
+      &:hover
+        color white
+        background-color b2c-purple-high
+        transition-duration 0s
+    &--hidden
+      display none
+    &--multi
+      position relative
+      padding 0 20px
+      &:hover
+        background-color b2c-purple
+        color b2c-white
+        .select-option__inner
+          border-top none!important
+      &:before
+        content: ''
+        position absolute
+        left 20px
+        top 50%
+        transform translateY(-50%)
+        width 20px
+        height 20px
+        box-sizing border-box
+        border 2px solid b2c-cool-grey07
+        background-color b2c-white
+      .select-option__inner
+        padding 14px 0
+        text-indent 30px
+        &:hover
+          background-color: transparent
+      &+&
+        .select-option__inner
+          border-top 1px solid b2c-cool-grey
+    &__checked-sign
+      display inline-block
+      position absolute
+      top 15px
+      left 25px
+      opacity 0
+      transition opacity .2s linear
+    &__hidden-checkbox
+      display: none
+      &:checked+.select-option__checked-sign
+        opacity 1
+
+.{b2bAppName}-select
+  height 60px !important
+  background-color b2c-white
+
+  .select-option--select
+    .select-option__inner
+      color b2c-white
+      font-weight inherit
+      background-color b2c-purple
+
+  .select-value
+    margin-top 0
+    padding 10px 10px 0
+
+  .select-arrow
+    top -15px
+    bottom: 0
+    margin-top: auto
+    margin-bottom: auto
+    right 10px
+
+  .floating-placeholder
+    top 20px
+    left 10px
+
+    &--go-top
+      color main-color05
+      top 7px
+
+  .select__inner[disabled]
+    &+.text-field__line
+      border-color transparent
+
+    .floating-placeholder
+      color main-color05
+
+  &--outlined
+    position relative
+
+    .text-field__border
+      border 1px solid b2c-cool-grey05
+      position absolute
+      top 0
+      bottom 0
+      left 0
+      right 0
+      z-index 1
+      transition border-color .3s linear
+
+      &--error
+        border-color error-color
+
+    .select__inner
+      position relative
+      z-index 2
+
+    .floating-placeholder
+      top 0
+
+      &--go-top
+        color main-color05
+        top -15px
+
+  .select-list
+    top 60px
+    height: 200px
+    @supports (height: fit-content) {
+      height: fit-content
+    }
+    &:hover
+      .text-field__border
+        border-color b2c-purple
+
+      .select__inner[disabled]+.text-field__border
+        border-color b2c-cool-grey05
+
+      .text-field__border--error
+        border-color error-color
+
+  &:hover
+    .floating-placeholder
+      color b2c-purple
+
+    .select__inner[disabled]
+      .floating-placeholder
+        color main-color05
+
+  &--multi
+    min-height 49px
+    height auto!important
+    .select-input
+      white-space normal
+      text-overflow initial

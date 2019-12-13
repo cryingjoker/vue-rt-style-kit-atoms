@@ -1,0 +1,97 @@
+.ripple
+  display flex
+  justify-content center
+  align-items center
+  width 100%
+  height 100%
+  box-sizing border-box
+  overflow hidden
+  padding-left 30px
+  padding-right 30px
+  position relative
+  transition-timing-function ease-in-out
+  transition-duration .3s
+  transition-property left
+
+  .{newAppName}-button.{newAppName}-space-horizontal05 &
+    width "calc(100% + %s)" % horizontal-space
+    left -1 * horizontal-space * .5
+
+  .{newAppName}-button.{newAppName}-space-horizontal &
+    width "calc(100% + %s)" % (horizontal-space * 2)
+    left -1 * horizontal-space
+
+  .radio-button &,
+  .checkbox &,
+  .switch-container &
+    width 48px
+    height 48px
+    border-radius 50%
+    padding-left 0
+    padding-right 0
+    position absolute
+    top: calc(-24px + 1.2ex);
+    z-index 2
+
+  .checkbox &,
+  .radio-button &
+    left -15px
+
+  .switch-container &
+    left -20px
+
+  .button &
+    border-radius 4px
+    padding-left 24px
+    padding-right 24px
+
+  &-wave
+    width 10px
+    height 10px
+    background currentColor
+    background-color b2c-purple
+    border-radius 50%
+    opacity 0
+    position absolute
+    z-index 1
+    transform scale(.5) translateZ(0)
+    transition-timing-function cubic-bezier(1, .2, .9, .65)
+    transition-duration .2s
+    transition-property width, height, margin, transform, opacity, visibility
+    animation .4s showRipple linear
+    pointer-events none
+
+    .{newAppName}-dark-theme .checkbox &
+      background-color b2c-orange
+
+    .white-wave &
+      background-color #fff
+
+.button .ripple-wave
+  transform scale(1) translateZ(0)
+  transition-duration .3s
+
+.radio-button .ripple-wave,
+.checkbox .ripple-wave,
+.switch-container .ripple-wave
+  width 1px
+  height 1px
+  background-color b2c-purple
+
+  .{newAppName}-dark-theme &
+    background-color b2c-orange
+
+  top 25px !important
+  left 25px !important
+  transition-timing-function cubic-bezier(.11, .34, .97, .33)
+  transition-duration .4s
+
+@keyframes showRipple
+  0%
+    opacity 0
+
+  20%
+    opacity .26
+
+  100%
+    opacity 0

@@ -1,0 +1,54 @@
+{
+  "items": [
+    {
+      "name": "rt-price",
+      "property":":value",
+      "type": ["Number"],
+      "description":"Обязательное поле \n Значение ценника",
+      "value" :"0"
+    },
+    {
+      "name": "rt-price",
+      "property":":show-float",
+      "type": ["Boolean"],
+      "description":"Флаг отображения плавующей точки",
+      "value" :"false"
+    },
+    {
+      "name": "rt-price",
+      "property":":old-value",
+      "type": ["Number"],
+      "description":"Значение ценника до",
+      "value" :"null"
+    },
+    {
+      "name": "rt-price",
+      "property":"time-interval",
+      "type": ["String"],
+      "description":"Значение временного интервала 'мес' 'день' и т.п.",
+      "value" :"null"
+    },
+    {
+      "name": "rt-price",
+      "property":":is-option",
+      "type": ["Boolean"],
+      "description":"Отображение 'от'",
+      "value" :"false"
+    },
+    {
+      "name": "rt-price",
+      "property":":option-label",
+      "type": ["String"],
+      "description":"Текст лейбл вместо 'от'",
+      "value" :"null",
+      "version" : "0.0.33"
+    },
+    {
+      "name": "rt-price",
+      "property":":only-price",
+      "type": ["Boolean"],
+      "description":"Отображение только ценника в валюте",
+      "value" :"false"
+    }
+  ]
+}

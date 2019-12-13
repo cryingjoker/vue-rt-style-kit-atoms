@@ -1,0 +1,371 @@
+.{newAppName}-button
+  height 49px
+  box-sizing border-box
+  font-size 16px
+  text-align center
+  text-transform none
+  border-radius 5px
+  box-shadow 0 2px 5px rgba(0, 0, 0, 0)
+  margin 0
+  padding-left 30px
+  padding-right 30px
+  cursor pointer
+  transition-timing-function ease-in-out
+  transition-duration .4s
+  transition-property background-color, box-shadow, border, text-shadow, color, opacity
+
+  &[disabled]
+    box-shadow none !important
+    cursor default
+
+  &--is-fitched
+    color transparent !important
+
+  &--is-block
+    display block
+    min-width 100%
+  &-td--is-block
+    @media (max-width: tablet-upper-limit)
+      display block
+      min-width 100%
+  &-md--is-block
+    @media (max-width: mobile-upper-limit)
+      display block
+      min-width 100%
+  .ripple-wave
+    background-color default-wive-color
+
+  &-with-ripple
+    overflow hidden
+    padding-left 0
+    padding-right 0
+
+  & + &
+    margin-left horizontal-space
+
+  &-vertical
+    display table
+
+    & + &
+      margin-top vertical-space
+      margin-left 0
+
+  &-small
+    height 34px
+    font-size 14px
+    //padding 0 20px
+
+    .ripple
+      padding 0 20px!important
+
+  &-md-small
+    @media (max-width: 767px)
+      height 34px
+      font-size 14px
+
+      //.ripple
+      //  padding-left 20px!important
+      //  padding-right 20px!important
+
+  &:before
+    display none
+    opacity 0
+
+  &-orange
+    color #fff
+    background-color b2c-orange
+
+    &.{newAppName}-button-no-wive &:active
+      background-color b2c-orange-low
+
+    &:hover
+      @media (hover: hover) {
+        background-color b2c-orange-high
+        box-shadow 0 2px 5px rgba(0, 0, 0, .2)
+      }
+
+    &[disabled]
+      color white
+      background-color main-color01
+
+      .{newAppName}-dark-theme &
+        color b2c-white03
+        background-color b2c-white01
+        border-color b2c-white
+
+    .ripple-wave
+      background-color b2c-white
+
+  &-orange-border
+    color b2c-orange
+    background-color transparent
+    border 2px solid b2c-orange
+
+    &.{newAppName}-button-no-wive &:active
+      background-color transparent !important
+
+    &:hover
+      @media (hover: hover) {
+        color b2c-orange-low
+        background-color rgba(b2c-orange, .1)
+        border-color b2c-orange-low
+      }
+
+    &[disabled]
+      color main-color01
+      border-color main-color01
+
+      &:hover
+        @media (hover: hover) {
+          background-color transparent
+        }
+
+      .{newAppName}-dark-theme &
+        color b2c-white03
+        border-color b2c-white03
+
+    .ripple-wave
+      background-color b2c-orange-low
+
+    .ripple
+      padding 0 30px
+
+    .fake-radiobutton-for-button:checked+&
+      color b2c-white
+      background-color b2c-orange
+
+      .original-text
+        display none
+
+      .checked-text
+        display inline
+
+  &-white
+    border 2px solid white
+
+    &:hover
+      @media (hover: hover) {
+        background-color b2c-cool-grey05
+        opacity .7
+      }
+
+      .{newAppName}-dark-theme &
+        background-color b2c-white01
+
+    &:active
+      background-color transparent
+
+    &[disabled]
+      color main-color01
+
+      &:hover
+        @media (hover: hover) {
+          background-color transparent
+        }
+
+      .{newAppName}-dark-theme &
+        color b2c-white03 !important
+        border-color white
+        opacity 1
+
+      .ripple-wave
+        background-color b2c-cool-grey
+
+  &-full-white
+    background-color: white
+    color #000000
+    .ripple-wave
+      background-color b2c-white
+    &:hover
+      @media (hover: hover) {
+        border-color b2c-white05
+        background-color b2c-white05
+      }
+
+
+    &:active
+      background-color b2c-white05
+
+    &[disabled]
+      color main-color01
+      background-color: transparent
+
+      &:hover
+        @media (hover: hover) {
+          background-color transparent
+        }
+
+
+
+  &-purple
+    color #fff
+    background-color b2c-purple
+
+    &.{newAppName}-button-no-wive &:active
+      background-color b2c-purple-low
+
+    &:hover
+      @media (hover: hover) {
+        background-color b2c-purple-high
+        box-shadow 0 2px 5px rgba(0, 0, 0, .2)
+      }
+
+    &[disabled]
+      color white
+      background-color main-color01
+
+      .{newAppName}-dark-theme &
+        color b2c-white03
+        background-color b2c-white01
+
+    .ripple-wave
+      background-color b2c-white
+
+  &-purple-border
+    color b2c-purple
+    background-color transparent
+    border 2px solid b2c-purple
+
+  &-purple-border,
+  &-transparent-purple
+
+    .ripple
+      box-shadow none
+
+    &[disabled]
+      color main-color01
+      border-color main-color01
+
+      .{newAppName}-dark-theme &
+        color b2c-white03
+        border-color b2c-white03
+
+      &:hover
+        @media (hover: hover) {
+          background-color transparent
+        }
+
+    &:hover
+      @media (hover: hover) {
+        color b2c-purple-low
+        background-color hsl(rgba(b2c-purple, .1))
+        border-color b2c-purple-low
+      }
+
+    .ripple-wave
+      background-color b2c-purple-low
+
+    &[disabled]
+      color main-color01
+      border-color main-color01
+
+    .ripple
+      padding 0 30px
+
+    .fake-radiobutton-for-button:checked+&
+      color b2c-white
+      background-color b2c-purple
+
+      .original-text
+        display none
+
+      .checked-text
+        display inline
+
+  &-transparent
+    border 2px solid transparent
+
+    &:hover
+      @media (hover: hover) {
+        background-color b2c-cool-grey05
+        opacity .7
+      }
+
+      .{newAppName}-dark-theme &
+        background-color b2c-white01
+
+    &:active
+      background-color transparent
+
+    &[disabled]
+      color main-color01
+
+      &:hover
+        @media (hover: hover) {
+          background-color transparent
+        }
+
+      .{newAppName}-dark-theme &
+        color b2c-white03 !important
+        border-color transparent
+        opacity 1
+
+      .ripple-wave
+        background-color b2c-cool-grey
+  &--as-tag
+      border-radius 10px
+      background-color: b2c-purple-high
+      padding-top: 3px
+      padding-bottom: 3px
+      padding-right: 10px
+      padding-left: 10px
+      color: white
+      height: auto
+      font-size 12px
+      width: auto
+      min-width auto
+      .ripple
+        width:auto
+        padding: 0
+    &--td-as-text
+      @media (max-width: tablet-upper-limit)
+        background-color: transparent
+        color b2c-purple-high
+        padding: 0
+
+  &-cool-grey-border
+    border 2px solid b2c-cool-grey
+
+    &:hover
+      @media (hover: hover) {
+        background-color b2c-cool-grey05
+        opacity .7
+      }
+
+      .{newAppName}-dark-theme &
+        background-color b2c-white01
+
+    .ripple
+      padding 0 30px
+
+    .fake-radiobutton-for-button:checked+&
+      color b2c-white
+      background-color b2c-cool-grey
+
+      .original-text
+        display none
+
+      .checked-text
+        display inline
+
+  &-transparent-purple
+    color b2c-purple
+    //margin-top 5px
+
+.fake-radiobutton-for-button
+  display none
+
+.original-text
+  display inline
+
+.checked-text
+  display none
+
+
+.rtb-button
+  .ripple
+    padding 0 20px
+
+.rt-button-small.rtb-button
+  .ripple
+    padding 0 10px!important
