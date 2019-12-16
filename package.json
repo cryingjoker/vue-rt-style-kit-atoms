@@ -1,6 +1,6 @@
 {
   "name": "vue-rt-style-kit-atoms",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "",
   "main": "lib/vue-rt-style-kit-atoms.js",
   "scripts": {
