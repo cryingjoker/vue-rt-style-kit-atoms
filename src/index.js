@@ -2,14 +2,37 @@ import styles from "./css/vue-rt-style-atoms.styl";
 import Global from "./variables.json";
 import Project from "../package.json";
 
-import {} from "./components";
+import {
+    Button,
+    ButtonRippleWithoutJs,
+    ButtonWithoutRipple,
+    Checkbox,
+    CheckboxContainer,
+    Input,
+    InputWithoutJs,
+    Price,
+    RadioButton,
+    RadioButtonContainer,
+    Ripple,
+    RippleWihoutJs,
+    Select,
+    SelectOption,
+    SelectWithoutJs,
+    Switch,
+    SwitchContainer,
+    Textarea,
+    TextareaStatic,
+    Annotation,
+    ColorLineText,
+    Ussd,
+    Spinner
+} from "./components";
 
-// console.info('OptionsList',OptionsList)
 import 'element-closest-polyfill';
 import 'nodelist-foreach-polyfill';
 import 'element-remove';
 
-const VueRtStyle = {
+let VueRtStyle = {
     install(Vue, config) {
         if (!Vue.RtStyleAtoms) {
             Vue.component(Button.name, Button);
@@ -29,9 +52,9 @@ const VueRtStyle = {
             Vue.component(SelectWithoutJs.name, SelectWithoutJs);
             Vue.component(Switch.name, Switch);
             Vue.component(SwitchContainer.name, SwitchContainer);
+            Vue.component(Spinner.name, Spinner);
             Vue.component(Textarea.name, Textarea);
             Vue.component(TextareaStatic.name, TextareaStatic);
-            Vue.component(CheckboxTabs.name, CheckboxTabs);
             Vue.component(Annotation.name, Annotation);
             Vue.component(ColorLineText.name, ColorLineText);
             Vue.component(Ussd.name, Ussd);
@@ -39,12 +62,10 @@ const VueRtStyle = {
         }
     }
 };
-// VueRtStyle.directives = { SwipeLeft, SwipeRight, OutsideClickDirective, FilterCallerDirective};
-VueRtStyle.directives = {SwipeLeft, SwipeRight, OutsideClickDirective};
+VueRtStyle = {
+    ...VueRtStyle
+};
 
-// if(localStorage && localStorage.getItem('dev_mode')){
-//   localStorage.setItem('dev_mode__version',version);
-// }
 
 /**
  * Глобальные настройки библиотеки
@@ -64,3 +85,29 @@ window.RTK_STYLE_VER = version;
 VueRtStyle.version = version;
 
 export default VueRtStyle;
+
+export {
+    Button,
+    ButtonRippleWithoutJs,
+    ButtonWithoutRipple,
+    Checkbox,
+    CheckboxContainer,
+    Input,
+    InputWithoutJs,
+    Price,
+    RadioButton,
+    RadioButtonContainer,
+    Ripple,
+    RippleWihoutJs,
+    Select,
+    SelectOption,
+    SelectWithoutJs,
+    Switch,
+    SwitchContainer,
+    Textarea,
+    TextareaStatic,
+    Annotation,
+    ColorLineText,
+    Ussd,
+    Spinner
+}

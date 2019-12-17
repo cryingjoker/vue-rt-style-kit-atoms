@@ -1,23 +1,23 @@
 {
   "name": "vue-rt-style-kit-atoms",
-  "version": "0.2.1",
+  "version": "0.2.4",
   "description": "",
-  "main": "lib/vue-rt-style-kit-atoms.js",
+  "main": "",
   "scripts": {
     "start": "node bin/local/index.js",
     "build": "cross-env NODE_ENV=production webpack --config ./bin/webpack.config.lib.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cryingjoker/vue-rt-style-kit-atoms.git"
+    "url": "git+https://github.com/vue-rt-style/vue-rt-style-kit-atoms.git"
   },
   "keywords": [],
   "author": "Alex Nikolaev / cryingjoker",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cryingjoker/vue-rt-style-kit-atoms/issues"
+    "url": "https://github.com/vue-rt-style/vue-rt-style-kit-atoms/issues"
   },
-  "homepage": "https://github.com/cryingjoker/vue-rt-style-kit-atoms",
+  "homepage": "https://github.com/vue-rt-style/vue-rt-style-kit-atoms",
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
     "@babel/runtime": "^7.5.5",

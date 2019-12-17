@@ -13,6 +13,7 @@
  export { default as Select } from './Select/Select.vue';
  export { default as SelectOption } from './Select/SelectOption.vue';
  export { default as SelectWithoutJs } from './Select/SelectWithoutJs.vue';
+ export { default as Spinner } from './Spinner/Spinner.vue';
 
 
  export { default as Switch } from './Switch/Switch.vue';
