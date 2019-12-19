@@ -25,6 +25,7 @@ const config = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
+      '@projectAtoms': path.join(local_dirname,'package.json'),
       'vue$': 'vue/dist/vue.esm.js',
     }
   },
