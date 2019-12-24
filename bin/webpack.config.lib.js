@@ -2,6 +2,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const webpack = require('webpack');
 const path = require(`path`);
 const UglifyJsPlugin = require(`uglifyjs-webpack-plugin`);
+
 const MiniCssExtractPlugin = require(`mini-css-extract-plugin`);
 const nib = require('nib');
 const stylusLoader = require('stylus-loader');
@@ -18,7 +19,7 @@ const config = {
   output: {
     path: local_dirname + '/lib',
     filename: 'vue-rt-style-kit-atoms.js',
-    library: 'vue-rt-style-kit-atoms  ',
+    library: 'vue-rt-style-kit-atoms',
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
@@ -94,7 +95,7 @@ const config = {
   },
   plugins: [
     new webpack.LoaderOptionsPlugin({
-      debug: true
+      debug: false
     }),
 
 
@@ -106,7 +107,6 @@ const config = {
     }),
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin(),
-
   ]
 };
 
