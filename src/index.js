@@ -1,6 +1,6 @@
 import styles from "./css/vue-rt-style-atoms.styl";
-import Global from "./variables.json";
-import Project from "../package.json";
+import Global from "@vue-rt-style-kit-atoms-local/variables.json";
+import Project from "@projectAtoms";
 
 import {
     Button,
