@@ -30,61 +30,60 @@
       "version": "0.2.6"
     }, {
       "name": "rt-row",
-      "property": "tabletTop",
+      "property": "tablet-top",
       "type": "Number",
       "description": "Устанавливает отстут для планшетов сверху",
       "value": "-1",
       "version": "0.2.6"
     }, {
       "name": "rt-row",
-      "property": "tabletBottom",
+      "property": "tablet-bottom",
       "type": "Number",
       "description": "Устанавливает отстут для планшетов снизу",
       "value": "-1",
       "version": "0.2.6"
     }, {
       "name": "rt-row",
-      "property": "tabletLeft",
+      "property": "tablet-left",
       "type": "Number",
       "description": "Устанавливает отстут для планшетов слева",
       "value": "-1",
       "version": "0.2.6"
     }, {
       "name": "rt-row",
-      "property": "tabletRight",
+      "property": "tablet-right",
       "type": "Number",
       "description": "Устанавливает отстут для планшетов справа",
       "value": "-1",
       "version": "0.2.6"
     }, {
       "name": "rt-row",
-      "property": "mobileTop",
+      "property": "mobile-top",
       "type": "Number",
       "description": "Устанавливает отстут для мобильных устройств сверху",
       "value": "-1",
       "version": "0.2.6"
     }, {
       "name": "rt-row",
-      "property": "mobileBottom",
+      "property": "mobile-bottom",
       "type": "Number",
       "description": "Устанавливает отстут для мобильных устройств снизу",
       "value": "-1",
       "version": "0.2.6"
     }, {
       "name": "rt-row",
-      "property": "mobileLeft",
+      "property": "mobile-left",
       "type": "Number",
       "description": "Устанавливает отстут для мобильных устройств слева",
       "value": "-1",
       "version": "0.2.6"
     }, {
       "name": "rt-row",
-      "property": "mobileRight",
+      "property": "mobile-right",
       "type": "Number",
       "description": "Устанавливает отстут для мобильных устройств справа",
       "value": "-1",
       "version": "0.2.6"
     }
-
   ]
 }
