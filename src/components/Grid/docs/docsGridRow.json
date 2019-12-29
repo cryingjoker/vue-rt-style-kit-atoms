@@ -1,0 +1,90 @@
+{
+  "items": [
+    {
+      "name": "rt-row",
+      "property": "top",
+      "type": "Number",
+      "description": "Устанавливает отстут сверху",
+      "value": "-1",
+      "version": "0.2.6"
+    }, {
+      "name": "rt-row",
+      "property": "bottom",
+      "type": "Number",
+      "description": "Устанавливает отстут снизу",
+      "value": "-1",
+      "version": "0.2.6"
+    }, {
+      "name": "rt-row",
+      "property": "left",
+      "type": "Number",
+      "description": "Устанавливает отстут слева",
+      "value": "-1",
+      "version": "0.2.6"
+    }, {
+      "name": "rt-row",
+      "property": "right",
+      "type": "Number",
+      "description": "Устанавливает отстут справа",
+      "value": "-1",
+      "version": "0.2.6"
+    }, {
+      "name": "rt-row",
+      "property": "tabletTop",
+      "type": "Number",
+      "description": "Устанавливает отстут для планшетов сверху",
+      "value": "-1",
+      "version": "0.2.6"
+    }, {
+      "name": "rt-row",
+      "property": "tabletBottom",
+      "type": "Number",
+      "description": "Устанавливает отстут для планшетов снизу",
+      "value": "-1",
+      "version": "0.2.6"
+    }, {
+      "name": "rt-row",
+      "property": "tabletLeft",
+      "type": "Number",
+      "description": "Устанавливает отстут для планшетов слева",
+      "value": "-1",
+      "version": "0.2.6"
+    }, {
+      "name": "rt-row",
+      "property": "tabletRight",
+      "type": "Number",
+      "description": "Устанавливает отстут для планшетов справа",
+      "value": "-1",
+      "version": "0.2.6"
+    }, {
+      "name": "rt-row",
+      "property": "mobileTop",
+      "type": "Number",
+      "description": "Устанавливает отстут для мобильных устройств сверху",
+      "value": "-1",
+      "version": "0.2.6"
+    }, {
+      "name": "rt-row",
+      "property": "mobileBottom",
+      "type": "Number",
+      "description": "Устанавливает отстут для мобильных устройств снизу",
+      "value": "-1",
+      "version": "0.2.6"
+    }, {
+      "name": "rt-row",
+      "property": "mobileLeft",
+      "type": "Number",
+      "description": "Устанавливает отстут для мобильных устройств слева",
+      "value": "-1",
+      "version": "0.2.6"
+    }, {
+      "name": "rt-row",
+      "property": "mobileRight",
+      "type": "Number",
+      "description": "Устанавливает отстут для мобильных устройств справа",
+      "value": "-1",
+      "version": "0.2.6"
+    }
+
+  ]
+}

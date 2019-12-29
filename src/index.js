@@ -25,7 +25,8 @@ import {
     Annotation,
     ColorLineText,
     Ussd,
-    Spinner
+    Spinner,
+    GridRow
 } from "./components";
 
 import 'element-closest-polyfill';
@@ -58,6 +59,7 @@ let VueRtStyle = {
             Vue.component(Annotation.name, Annotation);
             Vue.component(ColorLineText.name, ColorLineText);
             Vue.component(Ussd.name, Ussd);
+            Vue.component(GridRow.name, GridRow);
             Vue.RtStyleAtoms = true;
         }
     }
@@ -85,7 +87,7 @@ window.RTK_STYLE_VER = version;
 VueRtStyle.version = version;
 
 export default VueRtStyle;
-
+console.log('GridRow',GridRow)
 export {
     Button,
     ButtonRippleWithoutJs,
@@ -109,5 +111,6 @@ export {
     Annotation,
     ColorLineText,
     Ussd,
-    Spinner
+    Spinner,
+    GridRow
 }
