@@ -1,69 +1,30 @@
 <script type="text/jsx">
 
 
-    import {getSpacesClass, spacesParamsNames} from "./spaceClassMixin.ts";
-    import {spacesParamsNames} from "./spaceClassMixin.ts";
+    import {getSpacesClass, spacesParamsNames, spacesParamsProps} from "../../mixins/spaceClassMixin.ts";
+    import {getDisplayClass, displayParamsNames, displayParamsProps} from "../../mixins/displayClassMixin.ts";
 
+    const componentProps = {
+        size: {
+            type: [Number, String],
+            default: 0
+        },
+        tabletSize: {
+            type: [Number, String],
+            default: -1
+        },
+        mobileSize: {
+            type: [Number, String],
+            default: -1
+        }
+    }
     const componentsList = {};
     export default {
         name: "RtCol",
-        props: {
-            size: {
-                type: [Number, String],
-                default: 1
-            },
-            tablerSize: {
-                type: [Number, String],
-                default: 1
-            },
-            mobileSize: {
-                type: [Number, String],
-                default: 1
-            },
-            left: {
-                type: [Number, String],
-                default: -1
-            },
-            right: {
-                type: [Number, String],
-                default: -1
-            },
-            tabletTop: {
-                type: [Number, String],
-                default: -1
-            },
-            tabletBottom: {
-                type: [Number, String],
-                default: -1
-            },
-            tabletLeft: {
-                type: [Number, String],
-                default: -1
-            },
-            tabletRight: {
-                type: [Number, String],
-                default: -1
-            },
-            mobileTop: {
-                type: [Number, String],
-                default: -1
-            },
-            mobileBottom: {
-                type: [Number, String],
-                default: -1
-            },
-            mobileLeft: {
-                type: [Number, String],
-                default: -1
-            },
-            mobileRight: {
-                type: [Number, String],
-                default: -1
-            },
-        },
+        props: {...componentProps, ...spacesParamsProps, ...displayParamsProps},
         data() {
             return {
-                sizeParams:['size','mobileSize','tabletSize'],
+                sizeParams: ['size', 'mobileSize', 'tabletSize'],
             }
         },
 
@@ -71,21 +32,43 @@
         },
         computed: {
             rowClassName() {
-                const classNamesArray = spacesParamsNames.map((name)=>{
-                    if(parseInt(this[name]) >= 0){
+                const classNamesArray = [...spacesParamsNames.map((name) => {
+                    if (this[name] >= 0) {
                         return getSpacesClass(name, this[name]);
                     }
-                }).filter((i)=>i && i.length > 0)
+                }), ...displayParamsNames.map((name) => {
+                    if (this[name]) {
+                        return getDisplayClass(name, this[name]);
+                    }
+                }), ...this.sizeParams.map((name)=>{
+                    if(this[name] >= 0){
+                        return this.getClassName(name, this[name])
+                    }
+                })
+                ].filter((i) => i && i.length > 0);
 
-                classNamesArray.concat(displayParamsNames.map((name)=>{
-                    return getSpacesClass(name, this[name]);
-                }).filter((i)=>i && i.length > 0))
 
-
+                console.info('classNamesArray',classNamesArray,classNamesArray.join(' '));
                 return classNamesArray.join(' ');
             }
         },
-        methods: {},
+        methods: {
+            getClassName(name, value){
+                const classNameArray = ['rt','col'];
+                if(value > 0) {
+                switch (true) {
+                    case name.search(/mobile/i)>=0:
+                        classNameArray.push('md');
+                        break;
+                    case name.search(/tablet/i)>=0:
+                        classNameArray.push('td');
+                        break;
+                }
+                    classNameArray.push(value.toString());
+                }
+                return classNameArray.join('-');
+            }
+        },
         render(h) {
             return <div class={this.rowClassName}>{this.$slots.default}</div>
         }

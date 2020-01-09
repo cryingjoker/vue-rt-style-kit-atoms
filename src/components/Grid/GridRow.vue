@@ -8,7 +8,7 @@
 
     export default {
         name: "RtRow",
-        props: {...componentProps,...spacesParamsProps, ...displayParamsProps},
+        props: {...componentProps, ...spacesParamsProps, ...displayParamsProps},
 
         mounted() {
         },

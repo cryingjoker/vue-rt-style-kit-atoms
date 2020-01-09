@@ -26,7 +26,8 @@ import {
     ColorLineText,
     Ussd,
     Spinner,
-    GridRow
+    GridRow,
+    GridColumn
 } from "./components";
 
 import 'element-closest-polyfill';
@@ -60,6 +61,7 @@ let VueRtStyle = {
             Vue.component(ColorLineText.name, ColorLineText);
             Vue.component(Ussd.name, Ussd);
             Vue.component(GridRow.name, GridRow);
+            Vue.component(GridColumn.name, GridColumn);
             Vue.RtStyleAtoms = true;
         }
     }
@@ -112,5 +114,6 @@ export {
     ColorLineText,
     Ussd,
     Spinner,
-    GridRow
+    GridRow,
+    GridColumn
 }
