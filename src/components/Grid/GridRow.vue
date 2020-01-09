@@ -1,10 +1,10 @@
 <script type="text/jsx">
 
-    import {getSpacesClass, spacesParamsNames, spacesParamsProps} from "./spaceClassMixin.ts";
-    import {getDisplayClass, displayParamsNames, displayParamsProps } from "./displayClassMixin.ts";
+    import {getSpacesClass, spacesParamsNames, spacesParamsProps} from "../../mixins/spaceClassMixin.ts";
+    import {getDisplayClass, displayParamsNames, displayParamsProps } from "../../mixins/displayClassMixin.ts";
 
     const componentsList = {};
-    let componentProps = {};
+    const componentProps = {};
 
     export default {
         name: "RtRow",
