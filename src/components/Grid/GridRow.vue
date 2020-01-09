@@ -1,8 +1,9 @@
 <script type="text/jsx">
-    import {default as RippleComponent} from "../Ripple/Ripple.vue";
+
+    import {getSpacesClass, spacesParamsNames} from "./spaceClassMixin.ts";
+    import {getDisplayClass, displayParamsNames} from "./displayClassMixin.ts";
 
     const componentsList = {};
-    componentsList[RippleComponent.name] = RippleComponent;
     export default {
         name: "RtRow",
         props: {
@@ -54,10 +55,17 @@
                 type: [Number, String],
                 default: -1
             },
-        },
-        data() {
-            return {
-                spacesParams: ['top', 'bottom', 'left', 'right', 'tabletTop', 'tabletBottom', 'tabletLeft', 'tabletRight', 'mobileTop', 'mobileBottom', 'mobileLeft', 'mobileRight',]
+            display: {
+                type: String,
+                default: null
+            },
+            tabletDisplay: {
+                type: String,
+                default: null
+            },
+            mobileDisplay: {
+                type: String,
+                default: null
             }
         },
 
@@ -65,78 +73,21 @@
         },
         computed: {
             rowClassName() {
-                const classNamesArray = this.spacesParams.map((name)=>{
-                    if(this[name] >= 0){
-                        return this.getClassName(name, this[name]);
+                const classNamesArray = [...spacesParamsNames.map((name) => {
+                    if (this[name] >= 0) {
+                        return getSpacesClass(name, this[name]);
                     }
-                }).filter((i)=>i && i.length > 0)
-                console.info('classNamesArray',classNamesArray);
+                }), ...displayParamsNames.map((name) => {
+                    if (this[name]) {
+                        return getDisplayClass(name, this[name]);
+                    }
+                })].filter((i) => i && i.length > 0);
 
-                classNamesArray.push('row');
+                classNamesArray.unshift('row');
                 return classNamesArray.join(' ');
             }
         },
-        methods: {
-            getClassName(name, value) {
-                value = parseInt(value);
-                if (value < 0) {
-                    return ''
-                } else {
-                    const classNamesParts = ['rt-'];
-                    if (name.search('tablet') === 0) {
-                        classNamesParts.push('td-')
-                    }
-                    if (name.search('mobile') === 0) {
-                        classNamesParts.push('md-')
-                    }
-                    classNamesParts.push('space-')
-                    switch (true) {
-                        case name.search(/left/ig) >= 0:
-                            classNamesParts.push('left');
-                            break;
-                        case name.search(/right/ig) >= 0:
-                            classNamesParts.push('right');
-                            break;
-                        case name.search(/top/ig) >= 0:
-                            classNamesParts.push('top');
-                            break;
-                        case name.search(/bottom/ig) >= 0:
-                            classNamesParts.push('bottom');
-                            break
-                    }
-                    switch (true) {
-                        case value % 20 === 0:
-                            if (value === 0) {
-                                classNamesParts.push('-none')
-                            } else if (value !== 20) {
-                                classNamesParts.push(value / 20 + '');
-                            }
-                            break;
-                        case value % 10 === 0:
-                            if (value === 10) {
-                                classNamesParts.push('05');
-                            } else {
-                                classNamesParts.push(value / 20 * 10 + '');
-                            }
-                            break;
-                        case value % 5 === 0:
-                            let localName = (value - 5) / 20;
-                            if (localName === 1) {
-                                localName = ''
-                            } else {
-                                localName *= 10;
-                                if (localName < 10) {
-                                    localName = '0' + localName
-                                }
-                            }
-                            localName += '-half'
-                            classNamesParts.push(localName);
-                    }
-                    return classNamesParts.join('');
-
-                }
-            }
-        },
+        methods: {},
         render(h) {
             return <div class={this.rowClassName}>{this.$slots.default}</div>
         }
