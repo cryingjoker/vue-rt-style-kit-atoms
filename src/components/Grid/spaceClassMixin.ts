@@ -1,5 +1,54 @@
 export const spacesParamsNames : string[] = ['top', 'bottom', 'left', 'right', 'tabletTop', 'tabletBottom', 'tabletLeft', 'tabletRight', 'mobileTop', 'mobileBottom', 'mobileLeft', 'mobileRight']
-
+export const spacesParamsProps : any = {
+    top: {
+        type: [Number, String],
+        default: -1
+    },
+    bottom: {
+        type: [Number, String],
+        default: -1
+    },
+    left: {
+        type: [Number, String],
+        default: -1
+    },
+    right: {
+        type: [Number, String],
+        default: -1
+    },
+    tabletTop: {
+        type: [Number, String],
+        default: -1
+    },
+    tabletBottom: {
+        type: [Number, String],
+        default: -1
+    },
+    tabletLeft: {
+        type: [Number, String],
+        default: -1
+    },
+    tabletRight: {
+        type: [Number, String],
+        default: -1
+    },
+    mobileTop: {
+        type: [Number, String],
+        default: -1
+    },
+    mobileBottom: {
+        type: [Number, String],
+        default: -1
+    },
+    mobileLeft: {
+        type: [Number, String],
+        default: -1
+    },
+    mobileRight: {
+        type: [Number, String],
+        default: -1
+    }
+}
 export function getSpacesClass(name: string, value:[string, number]) : string {
     const localValue: number = parseInt(value.toString());
     if (localValue < 0) {
