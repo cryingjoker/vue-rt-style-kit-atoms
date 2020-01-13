@@ -1,6 +1,4 @@
 export {default as Button} from './Button/Button.vue';
-export {default as ButtonRippleWithoutJs} from './Button/ButtonRippleWithoutJs.vue';
-export {default as ButtonWithoutRipple} from './Button/ButtonWithoutRipple.vue';
 export {default as Checkbox} from './Checkbox/Checkbox.vue';
 export {default as CheckboxContainer} from './Checkbox/CheckboxContainer.vue';
 export {default as Input} from './Input/Input.vue';

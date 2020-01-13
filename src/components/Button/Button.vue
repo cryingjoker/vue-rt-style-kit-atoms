@@ -69,6 +69,10 @@
       smallerPadding: {
         type: Boolean,
         default: false
+      },
+      backgroundColor:{
+          type: String,
+          default: 'orange'
       }
     },
     data: () => ({

@@ -4,8 +4,6 @@ import Project from "@projectAtoms";
 
 import {
     Button,
-    ButtonRippleWithoutJs,
-    ButtonWithoutRipple,
     Checkbox,
     CheckboxContainer,
     Input,
@@ -38,8 +36,6 @@ let VueRtStyle = {
     install(Vue, config) {
         if (!Vue.RtStyleAtoms) {
             Vue.component(Button.name, Button);
-            Vue.component(ButtonRippleWithoutJs.name, ButtonRippleWithoutJs);
-            Vue.component(ButtonWithoutRipple.name, ButtonWithoutRipple);
             Vue.component(Checkbox.name, Checkbox);
             Vue.component(CheckboxContainer.name, CheckboxContainer);
             Vue.component(Input.name, Input);
@@ -92,8 +88,6 @@ export default VueRtStyle;
 console.log('GridRow',GridRow)
 export {
     Button,
-    ButtonRippleWithoutJs,
-    ButtonWithoutRipple,
     Checkbox,
     CheckboxContainer,
     Input,
