@@ -48,7 +48,6 @@
                 ].filter((i) => i && i.length > 0);
 
 
-                console.info('classNamesArray',classNamesArray,classNamesArray.join(' '));
                 return classNamesArray.join(' ');
             }
         },
