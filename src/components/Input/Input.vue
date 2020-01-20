@@ -394,14 +394,27 @@
         this.passwordVisibilityLocal = !this.passwordVisibilityLocal;
       },
       mask(e) {
-        let matrix = "+7 (___) ___ ____",
-            i = 0,
-            def = matrix.replace(/\D/g, ""),
-            val = this.$refs.input.value.replace(/\D/g, "");
-        if (def.length >= val.length) val = def;
-        this.$refs.input.value = matrix.replace(/./g, function(a) {
-          return /[_\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? "" : a;
-        });
+        if (e.type === "focus") {
+            setTimeout(() => {
+                let matrix = "+7 (___) ___ ____",
+                        i = 0,
+                        def = matrix.replace(/\D/g, ""),
+                        val = this.$refs.input.value.replace(/\D/g, "");
+                if (def.length >= val.length) val = def;
+                this.$refs.input.value = matrix.replace(/./g, function(a) {
+                    return /[_\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? "" : a;
+                });
+            },500)
+        } else {
+            let matrix = "+7 (___) ___ ____",
+                    i = 0,
+                    def = matrix.replace(/\D/g, ""),
+                    val = this.$refs.input.value.replace(/\D/g, "");
+            if (def.length >= val.length) val = def;
+            this.$refs.input.value = matrix.replace(/./g, function(a) {
+                return /[_\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? "" : a;
+            });
+        }
         if (e.type === "blur") {
           if (this.$refs.input.value.length == 2){
             this.$refs.input.value = "";
@@ -426,7 +439,6 @@
       },
       enablePhoneMask() {
         this.$refs.input.addEventListener("input", this.mask, false);
-        this.$refs.input.addEventListener("focus", this.mask, false);
         this.$refs.input.addEventListener("blur", this.mask, false);
       },
       getCode() {
