@@ -8,32 +8,32 @@ renderColorClass(classname, var, media)
   if media == 'desktop'
     .{classname}
       stroke lookup(var)
-    .{replace(classname, 'color-','dark-theme-color-')}
+    .{replace(classname, 'stroke-','dark-theme-color-')}
       .{newAppName}-dark-theme &
         stroke lookup(var)
   if media == 'tablet'
     @media (max-width: tablet-upper-limit)
-      .{replace(classname, 'color-','color-td-')}
+      .{replace(classname, 'stroke-','color-td-')}
         stroke lookup(var)
-      .{replace(classname, 'color-','dark-theme-color-td-')}
+      .{replace(classname, 'stroke-','dark-theme-color-td-')}
         .{newAppName}-dark-theme &
           stroke lookup(var)
   if media == 'mobile'
     @media (max-width: mobile-upper-limit)
-      .{replace(classname, 'color-','color-md-')}
+      .{replace(classname, 'stroke-','color-md-')}
         stroke lookup(var)
-      .{replace(classname, 'color-','dark-theme-color-md-')}
+      .{replace(classname, 'stroke-','dark-theme-color-md-')}
         .{newAppName}-dark-theme &
           stroke lookup(var)
 for $type in ('desktop' 'tablet' 'mobile')
   for $i in colors
     if search($i,'b2c') >= 0
-      className = 'color-'+replace($i,'b2c-','')
+      className = 'stroke-'+replace($i,'b2c-','')
       renderColorClass(className, $i, $type)
 
     else
       if search($i,'main-') == 0
-        className = 'color-'+replace($i,'-color','')
+        className = 'stroke-'+replace($i,'-color','')
         renderColorClass(className, $i, $type)
 
 
