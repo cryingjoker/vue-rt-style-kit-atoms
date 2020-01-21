@@ -4,36 +4,37 @@ use("./plugins/replace.js")
 use("./plugins/callVariable.js")
 colors = readJsonKeys('../../../color.json')
 
-renderColorClass(classname, var)
-
-  .{classname}
-    color lookup(var)
-  .{replace(classname, 'color-','dark-theme-color-')}
-    .{newAppName}-dark-theme &
+renderColorClass(classname, var, media)
+  if media == 'desktop'
+    .{classname}
       color lookup(var)
-  @media (max-width: tablet-upper-limit)
-    .{replace(classname, 'color-','color-td-')}
-      color lookup(var)
-    .{replace(classname, 'color-','dark-theme-color-td-')}
+    .{replace(classname, 'color-','dark-theme-color-')}
       .{newAppName}-dark-theme &
         color lookup(var)
-
-  @media (max-width: mobile-upper-limit)
-    .{replace(classname, 'color-','color-md-')}
-      color lookup(var)
-    .{replace(classname, 'color-','dark-theme-color-md-')}
-      .{newAppName}-dark-theme &
+  if media == 'tablet'
+    @media (max-width: tablet-upper-limit)
+      .{replace(classname, 'color-','color-td-')}
         color lookup(var)
+      .{replace(classname, 'color-','dark-theme-color-td-')}
+        .{newAppName}-dark-theme &
+          color lookup(var)
+  if media == 'mobile'
+    @media (max-width: mobile-upper-limit)
+      .{replace(classname, 'color-','color-md-')}
+        color lookup(var)
+      .{replace(classname, 'color-','dark-theme-color-md-')}
+        .{newAppName}-dark-theme &
+          color lookup(var)
+for $type in ('desktop' 'tablet' 'mobile')
+  for $i in colors
+    if search($i,'b2c') >= 0
+      className = 'color-'+replace($i,'b2c-','')
+      renderColorClass(className, $i, $type)
 
-for $i in colors
-  if search($i,'b2c') >= 0
-    className = 'color-'+replace($i,'b2c-','')
-    renderColorClass(className, $i)
-
-  else
-    if search($i,'main-') == 0
-      className = 'color-'+replace($i,'-color','')
-      renderColorClass(className, $i)
+    else
+      if search($i,'main-') == 0
+        className = 'color-'+replace($i,'-color','')
+        renderColorClass(className, $i, $type)
 
 
 //.color-main
