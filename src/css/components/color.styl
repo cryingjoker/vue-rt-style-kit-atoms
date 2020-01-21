@@ -1,166 +1,149 @@
+use("./plugins/readJsonKeys.js")
+use("./plugins/search.js")
+use("./plugins/replace.js")
+use("./plugins/callVariable.js")
+colors = readJsonKeys('../../../color.json')
 
-.color-main
-  color main-color
+renderColorClass(classname, var)
 
-.dark-theme-color-main
-  .{newAppName}-dark-theme &
-    color main-color
+  .{classname}
+    color lookup(var)
+  .{replace(classname, 'color-','dark-theme-color-')}
+    .{newAppName}-dark-theme &
+      color lookup(var)
+  @media (max-width: tablet-upper-limit)
+    .{replace(classname, 'color-','color-td-')}
+      color lookup(var)
+    .{replace(classname, 'color-','dark-theme-color-td-')}
+      .{newAppName}-dark-theme &
+        color lookup(var)
 
-.color-main09
-  color main-color09
+  @media (max-width: mobile-upper-limit)
+    .{replace(classname, 'color-','color-md-')}
+      color lookup(var)
+    .{replace(classname, 'color-','dark-theme-color-md-')}
+      .{newAppName}-dark-theme &
+        color lookup(var)
 
-.dark-theme-color-main09
-  .{newAppName}-dark-theme &
-    color main-color09
+for $i in colors
+  if search($i,'b2c') >= 0
+    className = 'color-'+replace($i,'b2c-','')
+    renderColorClass(className, $i)
 
-.color-main07
-  color main-color07
+  else
+    if search($i,'main-') == 0
+      className = 'color-'+replace($i,'-color','')
+      renderColorClass(className, $i)
 
-.dark-theme-color-main07
-  .{newAppName}-dark-theme &
-    color main-color07
 
-.color-main05
-  color main-color05
-
-.color-main025
-  color rgba(main-color, .25)
-
-.dark-theme-color-main05
-  .{newAppName}-dark-theme &
-    color main-color05
-
-.color-main03
-  color main-color03
-
-.dark-theme-color-main03
-  .{newAppName}-dark-theme &
-    color main-color03
-
-.color-white
-  color b2c-white
-
-.dark-theme-color-white
-  .{newAppName}-dark-theme &
-    color b2c-white
-
-.color-white07
-  color b2c-white07
-
-.dark-theme-color-white07
-  .{newAppName}-dark-theme &
-    color b2c-white07
-
-.color-white05
-  color b2c-white05
-
-.dark-theme-color-white05
-  .{newAppName}-dark-theme &
-    color b2c-white05
-
-.dark-theme-color-white03
-  .{newAppName}-dark-theme &
-    color b2c-white03
-
-.color-dark
-  color main-color
-
-.dark-theme-color-dark
-  .{newAppName}-dark-theme &
-    color main-color
-
-.color-dark09
-  color main-color09
-
-.dark-theme-color-dark09
-  .{newAppName}-dark-theme &
-    color main-color09
-
-.color-dark08
-  color main-color08
-
-.dark-theme-color-dark08
-  .{newAppName}-dark-theme &
-    color main-color08
-
-.color-dark07
-  color main-color07
-
-.dark-theme-color-dark07
-  .{newAppName}-dark-theme &
-    color main-color07
-
-.color-dark06
-  color main-color06
-
-.dark-theme-color-dark06
-  .{newAppName}-dark-theme &
-    color main-color06
-
-.color-dark05
-  color main-color05
-
-.dark-theme-color-dark05
-  .{newAppName}-dark-theme &
-    color main-color05
-
-.color-dark04
-  color main-color04
-
-.dark-theme-color-dark04
-  .{newAppName}-dark-theme &
-    color main-color04
-
-.color-dark03
-  color main-color03
-
-.dark-theme-color-dark03
-  .{newAppName}-dark-theme &
-    color main-color03
-
-.color-dark02
-  color main-color02
-
-.dark-theme-color-dark02
-  .{newAppName}-dark-theme &
-    color main-color02
-
-.color-dark01
-  color main-color01
-
-.dark-theme-color-dark01
-  .{newAppName}-dark-theme &
-    color main-color01
-
-.color-orange
-  color b2c-orange
-
-.dark-theme-color-orange
-  .{newAppName}-dark-theme &
-    color b2c-orange
-
-.color-purple
-  color b2c-purple
-
-.dark-theme-color-purple
-  .{newAppName}-dark-theme &
-    color b2c-purple
-
-.color-orange
-  color b2c-orange
-
-.dark-theme-color-orange
-  .{newAppName}-dark-theme &
-    color b2c-orange
-.color-red
-  color b2c-red
-
+//.color-main
+//  color main-color
+//
+//.dark-theme-color-main
+//  .{newAppName}-dark-theme &
+//    color main-color
+//
+//.color-main09
+//  color main-color09
+//
+//.dark-theme-color-main09
+//  .{newAppName}-dark-theme &
+//    color main-color09
+//
+//.color-main07
+//  color main-color07
+//
+//.dark-theme-color-main07
+//  .{newAppName}-dark-theme &
+//    color main-color07
+//
+//.color-main05
+//  color main-color05
+//
+//.color-main025
+//  color rgba(main-color, .25)
+//
+//.color-white07
+//  color b2c-white07
+//
+//.dark-theme-color-main05
+//  .{newAppName}-dark-theme &
+//    color main-color05
+//
+//.color-main03
+//  color main-color03
+//
+//.dark-theme-color-main03
+//  .{newAppName}-dark-theme &
+//    color main-color03
+//
+//.color-white
+//  color b2c-white
+//
+//.dark-theme-color-white
+//  .{newAppName}-dark-theme &
+//    color b2c-white
+//
+//
+//
+//.dark-theme-color-white07
+//  .{newAppName}-dark-theme &
+//    color b2c-white07
+//
+//.color-white05
+//  color b2c-white05
+//
+//.dark-theme-color-white05
+//  .{newAppName}-dark-theme &
+//    color b2c-white05
+//
+//.dark-theme-color-white03
+//  .{newAppName}-dark-theme &
+//    color b2c-white03
+//
+//
+//
+//
+//
+//.color-main07
+//  color main-color07
+//
+//
+//.color-main06
+//  color main-color06
+//
+//
+//.color-orange
+//  color b2c-orange
+//
+//.dark-theme-color-orange
+//  .{newAppName}-dark-theme &
+//    color b2c-orange
+//
+//.color-purple
+//  color b2c-purple
+//
+//.dark-theme-color-purple
+//  .{newAppName}-dark-theme &
+//    color b2c-purple
+//
+//.color-orange
+//  color b2c-orange
+//
+//.dark-theme-color-orange
+//  .{newAppName}-dark-theme &
+//    color b2c-orange
+//
+//.color-red
+//  color b2c-red
+//
 .color-main-md-white
   color main-color
   @media(max-width mobile-upper-limit)
-    color b2b-white
+    color b2c-white
 
 .color-white-md-main
-  color b2b-white
+  color b2c-white
   @media(max-width mobile-upper-limit)
     color main-color
+

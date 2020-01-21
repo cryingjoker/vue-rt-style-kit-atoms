@@ -134,7 +134,7 @@
           const button = this.$refs["button"];
           if (button.parentElement.tagName.toLocaleLowerCase() === "a") {
             button.parentElement.addEventListener("click", (e) => {
-              if (!this.getAttribute("data-ga-pushed")) {
+              if (!this.$el.getAttribute("data-ga-pushed")) {
                 e.preventDefault();
                 if (!window.dataLayer) {
                   window.dataLayer = [];
@@ -147,7 +147,7 @@
             }, false);
           } else {
             button.addEventListener("click", (e) => {
-              if (!this.getAttribute("data-ga-pushed")) {
+              if (!this.$el.getAttribute("data-ga-pushed")) {
                 e.preventDefault();
                 if (!window.dataLayer) {
                   window.dataLayer = [];
