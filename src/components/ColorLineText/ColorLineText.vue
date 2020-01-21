@@ -3,11 +3,10 @@
     import {getColorsCustomProps, getColorClassByProps} from "../../mixins/colorTextClassMixin.ts";
     import {getFillClassByProps, fillColorProps} from "../../mixins/fillTextClassMixin.ts";
 
-    const colorProps = getColorsCustomProps(true);
-
     const componentProps = {
-        colorIcon: {
-            type: String, //['purple','red','dark-blue','light-blue','yellow','pink','green'],
+
+        colorIcon: { /** @deprecated */
+            type: String,
             default: "orange"
         },
 
@@ -31,6 +30,7 @@
         props: {...componentProps,...getColorsCustomProps(true), ...fillColorProps},
         data: () => ({
             isMobile: false,
+            isTablet: false,
             isSafari: /constructor/i.test(window.HTMLElement) || (function (p) {
                 return p.toString() === "[object SafariRemoteNotification]";
             })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification))
@@ -40,6 +40,7 @@
             const adjust = () => {
                 setTimeout(() => {
                     this.isMobile = window.innerWidth <= parseInt(variables['mobile-upper-limit']);
+                    this.isTablet = window.innerWidth <= parseInt(variables['tablet-upper-limit']) && window.innerWidth >= parseInt(variables['tablet-lower-limit']);
                 }, 0);
             };
             window.addEventListener('resize', () => {
@@ -83,17 +84,22 @@
                 return className.join(' ');
             },
             topPartTransform() {
-                if (this.isMobile) {
-                    return this.isSafari ? "translate(-4, 0)" : null;
+                if(this.isMobile) {
+                    return null;
+                } else if(this.isTablet) {
+                    return this.isSafari ? "translate(-.95, -.25)" : "translate(-.25, -.75)";
                 } else {
-                    return this.isSafari ? "translate(-0.35, -0.25)" : "translate(0.25, -0.75)";
+                    return this.isSafari ? "translate(.75, -.25)" : "translate(.25, -.75)";
                 }
+
             },
             bottomPartTransform() {
-                if (this.isMobile) {
-                    return this.isSafari ? "translate(-4, 0)" : null;
+                if(this.isMobile) {
+                    return null;
+                } else if(this.isTablet) {
+                    return this.isSafari ? "translate(-.95, 1.25)" : "translate(0, 1)";
                 } else {
-                    return this.isSafari ? "translate(0, 0.5)" : "translate(0, 1)";
+                    return this.isSafari ? "translate(.75, 1)" : "translate(0, 1)";
                 }
             },
         },
@@ -112,7 +118,7 @@
                     <path
                         class="color-line-paragraph-icon__background"
                         d="M33-1.0172375h-45V.04327594l43.7946512.04908113v7.93806336l1.4849033-.08350525c2.6481474-.14892161 4.7192255-2.33971054 4.7192629-4.99204202L38-0.0172375c.0000389-2.7614238-2.2385058-5.0000315-4.9999296-5.0000704H33z"
-                         transform={this.topPartTransform}
+                        transform={this.topPartTransform}
                     />
                     <path
                         d="M33.5561211 0H0l22.4131224 22.4131038L36.5337472 6.67090677c1.4751011-1.64449747 1.3377782-4.17343176-.3067193-5.64853284C35.4931384.36408091 34.5419931 0 33.5561211 0z"

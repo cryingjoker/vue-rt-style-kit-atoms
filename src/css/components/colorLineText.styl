@@ -45,13 +45,13 @@
     overflow: hidden;
     @media (max-width: tablet-upper-limit)
       height 19px
-      bottom -19px
+      bottom -18px
       right -22px
     @media (max-width: mobile-upper-limit)
-      width 22px
-      height 10px
-      bottom -10px
-      right -20px
+    //  width 22px
+    //  height 10px
+      bottom -19px
+    //  right -20px
 
 
 
@@ -64,6 +64,8 @@
     box-shadow 15px 0 0 #fff, -15px 0 0 #fff
     .color-line-paragraph-icon__background
       fill white
+    @media (max-width: mobile-upper-limit)
+      border-top-right-radius 4px
     .color-line--is-paragraph &
       @media (max-width: mobile-upper-limit)
         box-shadow none!important
