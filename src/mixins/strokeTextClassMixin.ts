@@ -38,7 +38,7 @@ export function getStrokeClassByProps() {
 }
 
 export function getStrokeClass(colorValue: string = '', type: string = 'desktop'): string {
-    console.info('getStrokeClass',colorValue,type);
+    // console.info('getStrokeClass',colorValue,type);
     if(!colorValue || colorValue.length === 0){
         return ''
     }
@@ -99,7 +99,7 @@ export function getStrokeClass(colorValue: string = '', type: string = 'desktop'
     } else {
         console.error('Check colors props value');
     }
-    console.info('colorName',colorName);
+    // console.info('colorName',colorName);
     return colorName;
 }
 

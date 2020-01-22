@@ -66,10 +66,6 @@
         type: String,
         default: ''
       },
-      smallerPadding: {
-        type: Boolean,
-        default: false
-      },
       backgroundColor:{
           type: String,
           default: 'orange'
@@ -92,9 +88,6 @@
         }
         if(this.color && this.color.length > 0){
           className += ' rt-button-'+this.color
-        }
-        if(this.smallerPadding) {
-          className += ' rtb-button'
         }
 
         className += " " + this.buttonClassList + "";

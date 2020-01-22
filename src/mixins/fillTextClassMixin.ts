@@ -30,7 +30,7 @@ export function getFillClassByProps(oldProps) {
     const classNames = fillPropsNames.map((key) => {
         let classes;
         if(oldProps && oldProps[key]){
-            console.info('oldProps[key]',key,oldProps[key]);
+            // console.info('oldProps[key]',key,oldProps[key]);
             classes = getFillClass(this[oldProps[key]], key.replace(/fillcolor/gi, ''));
         }
         else{
@@ -44,7 +44,7 @@ export function getFillClassByProps(oldProps) {
 }
 
 export function getFillClass(colorValue: string = '', type: string = 'desktop'): string {
-    console.info('getFillClass',colorValue,type);
+    // console.info('getFillClass',colorValue,type);
     if(!colorValue || colorValue.length === 0){
         return ''
     }
@@ -105,7 +105,7 @@ export function getFillClass(colorValue: string = '', type: string = 'desktop'):
     } else {
         console.error('Check colors props value');
     }
-    console.info('colorName',colorName);
+    // console.info('colorName',colorName);
     return colorName;
 }
 

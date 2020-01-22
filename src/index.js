@@ -31,6 +31,11 @@ import {
 import 'element-closest-polyfill';
 import 'nodelist-foreach-polyfill';
 import 'element-remove';
+import {fontColorPropsNames, fontColorProps, getColorsCustomProps, getColorClassByProps, getColorClass} from "./mixins/colorTextClassMixin.ts";
+import {fillPropsNames, fillColorProps, getFillClassByProps, getFillClass} from "./mixins/fillTextClassMixin.ts";
+import {spacesParamsNames, spacesParamsProps, getSpacesClass} from "./mixins/spaceClassMixin.ts";
+import {displayParamsNames, displayParamsProps, getDisplayClass} from "./mixins/displayClassMixin.ts";
+import {strokePropsNames, strokeColorProps, getStrokeClassByProps, getStrokeClass} from "./mixins/strokeTextClassMixin.ts";
 
 let VueRtStyle = {
     install(Vue, config) {
@@ -85,7 +90,7 @@ window.RTK_STYLE_VER = version;
 VueRtStyle.version = version;
 
 export default VueRtStyle;
-console.log('GridRow',GridRow)
+
 export {
     Button,
     Checkbox,
@@ -109,5 +114,33 @@ export {
     Ussd,
     Spinner,
     GridRow,
-    GridColumn
+    GridColumn,
+
+    // mixins
+    fontColorPropsNames,
+    fontColorProps,
+    getColorsCustomProps,
+    getColorClassByProps,
+    getColorClass,
+
+    fillPropsNames,
+    fillColorProps,
+    getFillClassByProps,
+    getFillClass,
+
+    spacesParamsNames,
+    spacesParamsProps,
+    getSpacesClass,
+
+    displayParamsNames,
+    displayParamsProps,
+    getDisplayClass,
+
+    strokePropsNames,
+    strokeColorProps,
+    getStrokeClassByProps,
+    getStrokeClass
+
 }
+
+
