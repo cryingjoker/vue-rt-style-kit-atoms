@@ -53,19 +53,14 @@
   &-small
     height 34px
     font-size 14px
-    //padding 0 20px
 
     .ripple
-      padding 0 20px!important
+      padding 0 10px!important
 
   &-md-small
     @media (max-width: 767px)
       height 34px
       font-size 14px
-
-      //.ripple
-      //  padding-left 20px!important
-      //  padding-right 20px!important
 
   &:before
     display none
@@ -79,10 +74,9 @@
       background-color b2c-orange-low
 
     &:hover
-      @media (hover: hover) {
+      @media (hover: hover)
         background-color b2c-orange-high
         box-shadow 0 2px 5px rgba(0, 0, 0, .2)
-      }
 
     &[disabled]
       color white
@@ -105,20 +99,18 @@
       background-color transparent !important
 
     &:hover
-      @media (hover: hover) {
+      @media (hover: hover)
         color b2c-orange-low
         background-color rgba(b2c-orange, .1)
         border-color b2c-orange-low
-      }
 
     &[disabled]
       color main-color01
       border-color main-color01
 
       &:hover
-        @media (hover: hover) {
+        @media (hover: hover)
           background-color transparent
-        }
 
       .{newAppName}-dark-theme &
         color b2c-white03
@@ -128,7 +120,7 @@
       background-color b2c-orange-low
 
     .ripple
-      padding 0 30px
+      padding 0 20px
 
     .fake-radiobutton-for-button:checked+&
       color b2c-white
@@ -144,10 +136,9 @@
     border 2px solid white
 
     &:hover
-      @media (hover: hover) {
+      @media (hover: hover)
         background-color b2c-cool-grey05
         opacity .7
-      }
 
       .{newAppName}-dark-theme &
         background-color b2c-white01
@@ -159,9 +150,8 @@
       color main-color01
 
       &:hover
-        @media (hover: hover) {
+        @media (hover: hover)
           background-color transparent
-        }
 
       .{newAppName}-dark-theme &
         color b2c-white03 !important
@@ -177,11 +167,9 @@
     .ripple-wave
       background-color b2c-white
     &:hover
-      @media (hover: hover) {
+      @media (hover: hover)
         border-color b2c-white05
         background-color b2c-white05
-      }
-
 
     &:active
       background-color b2c-white05
@@ -191,11 +179,8 @@
       background-color: transparent
 
       &:hover
-        @media (hover: hover) {
+        @media (hover: hover)
           background-color transparent
-        }
-
-
 
   &-purple
     color #fff
@@ -241,16 +226,14 @@
         border-color b2c-white03
 
       &:hover
-        @media (hover: hover) {
+        @media (hover: hover)
           background-color transparent
-        }
 
     &:hover
-      @media (hover: hover) {
+      @media (hover: hover)
         color b2c-purple-low
         background-color hsl(rgba(b2c-purple, .1))
         border-color b2c-purple-low
-      }
 
     .ripple-wave
       background-color b2c-purple-low
@@ -260,7 +243,7 @@
       border-color main-color01
 
     .ripple
-      padding 0 30px
+      padding 0 20px
 
     .fake-radiobutton-for-button:checked+&
       color b2c-white
@@ -276,10 +259,9 @@
     border 2px solid transparent
 
     &:hover
-      @media (hover: hover) {
+      @media (hover: hover)
         background-color b2c-cool-grey05
         opacity .7
-      }
 
       .{newAppName}-dark-theme &
         background-color b2c-white01
@@ -291,9 +273,8 @@
       color main-color01
 
       &:hover
-        @media (hover: hover) {
+        @media (hover: hover)
           background-color transparent
-        }
 
       .{newAppName}-dark-theme &
         color b2c-white03 !important
@@ -327,16 +308,15 @@
     border 2px solid b2c-cool-grey
 
     &:hover
-      @media (hover: hover) {
+      @media (hover: hover)
         background-color b2c-cool-grey05
         opacity .7
-      }
 
       .{newAppName}-dark-theme &
         background-color b2c-white01
 
     .ripple
-      padding 0 30px
+      padding 0 20px
 
     .fake-radiobutton-for-button:checked+&
       color b2c-white
@@ -350,7 +330,6 @@
 
   &-transparent-purple
     color b2c-purple
-    //margin-top 5px
 
 .fake-radiobutton-for-button
   display none
@@ -361,11 +340,3 @@
 .checked-text
   display none
 
-
-.rtb-button
-  .ripple
-    padding 0 20px
-
-.rt-button-small.rtb-button
-  .ripple
-    padding 0 10px!important
