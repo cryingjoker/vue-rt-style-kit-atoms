@@ -45,7 +45,7 @@ let VueRtStyle = {
             Vue.component(CheckboxContainer.name, CheckboxContainer);
             Vue.component(Input.name, Input);
             Vue.component(InputWithoutJs.name, InputWithoutJs);
-            Vue.component(Price.name, Price);
+            Vue.component(Price.name, Price.component);
             Vue.component(RadioButton.name, RadioButton);
             Vue.component(RadioButtonContainer.name, RadioButtonContainer);
             Vue.component(Ripple.name, Ripple);
@@ -60,7 +60,7 @@ let VueRtStyle = {
             Vue.component(TextareaStatic.name, TextareaStatic);
             Vue.component(Annotation.name, Annotation);
             Vue.component(ColorLineText.name, ColorLineText);
-            Vue.component(Ussd.name, Ussd);
+            Vue.component(Ussd.name, Ussd.component);
             Vue.component(GridRow.name, GridRow);
             Vue.component(GridColumn.name, GridColumn);
             Vue.RtStyleAtoms = true;
