@@ -8,21 +8,21 @@ renderColorClass(classname, var, media)
   if media == 'desktop'
     .{classname}
       background-color lookup(var)
-    .{replace(classname, 'background-color-','dark-theme-color-')}
+    .{replace(classname, 'background-','dark-theme-background-')}
       .{newAppName}-dark-theme &
         background-color lookup(var)
   if media == 'tablet'
     @media (max-width: tablet-upper-limit)
-      .{replace(classname, 'background-','color-td-')}
+      .{replace(classname, 'background-','background-td-')}
         background-color lookup(var)
-      .{replace(classname, 'background-','dark-theme-color-td-')}
+      .{replace(classname, 'background-','dark-theme-background-td-')}
         .{newAppName}-dark-theme &
           background-color lookup(var)
   if media == 'mobile'
     @media (max-width: mobile-upper-limit)
-      .{replace(classname, 'background-','color-md-')}
+      .{replace(classname, 'background-','background-md-')}
         background-color lookup(var)
-      .{replace(classname, 'background-','dark-theme-color-md-')}
+      .{replace(classname, 'background-','dark-theme-background-md-')}
         .{newAppName}-dark-theme &
           background-color lookup(var)
 for $type in ('desktop' 'tablet' 'mobile')
@@ -33,7 +33,7 @@ for $type in ('desktop' 'tablet' 'mobile')
 
     else
       if search($i,'main-') == 0
-        className = 'background-'+replace($i,'-color','')
+        className = 'background-'+replace($i,'-background','')
         renderColorClass(className, $i, $type)
 
 

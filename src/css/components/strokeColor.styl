@@ -8,21 +8,21 @@ renderColorClass(classname, var, media)
   if media == 'desktop'
     .{classname}
       stroke lookup(var)
-    .{replace(classname, 'stroke-color-','dark-theme-color-')}
+    .{replace(classname, 'stroke-color-','dark-theme-stroke-color-')}
       .{newAppName}-dark-theme &
         stroke lookup(var)
   if media == 'tablet'
     @media (max-width: tablet-upper-limit)
-      .{replace(classname, 'stroke-color-','color-td-')}
+      .{replace(classname, 'stroke-color-','stroke-color-td-')}
         stroke lookup(var)
-      .{replace(classname, 'stroke-color-','dark-theme-color-td-')}
+      .{replace(classname, 'stroke-color-','dark-theme-stroke-color-td-')}
         .{newAppName}-dark-theme &
           stroke lookup(var)
   if media == 'mobile'
     @media (max-width: mobile-upper-limit)
-      .{replace(classname, 'stroke-color-','color-md-')}
+      .{replace(classname, 'stroke-color-','stroke-color-md-')}
         stroke lookup(var)
-      .{replace(classname, 'stroke-color-','dark-theme-color-md-')}
+      .{replace(classname, 'stroke-color-','dark-theme-stroke-color-md-')}
         .{newAppName}-dark-theme &
           stroke lookup(var)
 for $type in ('desktop' 'tablet' 'mobile')

@@ -31,21 +31,19 @@ export function getBackgroundClassByProps(oldProps) {
     const classNames = backgroundColorPropsNames.map((key) => {
         let classes;
         if(oldProps && oldProps[key]){
-            // console.info('oldProps[key]',key,oldProps[key]);
             classes = getBackgroundClass(this[oldProps[key]], key.replace(/backgroundcolor/gi, ''));
         }
         else{
             classes = getBackgroundClass(this[key], key.replace(/backgroundcolor/gi, ''));
         }
         return classes;
-    })
+    }).filter(i => i && i.length > 0)
 
     return classNames
 
 }
 
 export function getBackgroundClass(colorValue: string = '', type: string = 'desktop'): string {
-    // console.info('getBackgroundClass',colorValue,type);
     if(!colorValue || colorValue.length === 0){
         return ''
     }
@@ -86,20 +84,20 @@ export function getBackgroundClass(colorValue: string = '', type: string = 'desk
     if (colorName) {
         switch (true) {
             case colorName.search('b2c-') >= 0:
-                colorName = 'background-color-' + colorName.replace('b2c-', '');
+                colorName = 'background-' + colorName.replace('b2c-', '');
                 break;
             case colorName.search('main-') >= 0:
-                colorName = 'background-color-' + colorName.replace('-color', '');
+                colorName = 'background-' + colorName.replace('-color', '');
                 break
         }
         ;
         if (type) {
             switch (true) {
                 case type.search('tablet') === 0:
-                    colorName = colorName.replace('color-', 'color-td-');
+                    colorName = colorName.replace('background-', 'backgrounds-td-');
                     break;
                 case type.search('mobile') === 0:
-                    colorName = colorName.replace('color-', 'color-md-');
+                    colorName = colorName.replace('background-', 'background-md-');
                     break;
             }
         }
