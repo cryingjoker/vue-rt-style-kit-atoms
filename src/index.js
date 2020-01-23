@@ -31,11 +31,29 @@ import {
 import 'element-closest-polyfill';
 import 'nodelist-foreach-polyfill';
 import 'element-remove';
-import {fontColorPropsNames, fontColorProps, getColorsCustomProps, getColorClassByProps, getColorClass} from "./mixins/colorTextClassMixin.ts";
+import {
+    fontColorPropsNames,
+    fontColorProps,
+    getColorsCustomProps,
+    getColorClassByProps,
+    getColorClass
+} from "./mixins/colorTextClassMixin.ts";
 import {fillPropsNames, fillColorProps, getFillClassByProps, getFillClass} from "./mixins/fillTextClassMixin.ts";
 import {spacesParamsNames, spacesParamsProps, getSpacesClass} from "./mixins/spaceClassMixin.ts";
 import {displayParamsNames, displayParamsProps, getDisplayClass} from "./mixins/displayClassMixin.ts";
-import {strokePropsNames, strokeColorProps, getStrokeClassByProps, getStrokeClass} from "./mixins/strokeTextClassMixin.ts";
+import {
+    strokePropsNames,
+    strokeColorProps,
+    getStrokeClassByProps,
+    getStrokeClass
+} from "./mixins/strokeTextClassMixin.ts";
+
+import {
+    backgroundColorPropsNames,
+    backgroundColorProps,
+    getBackgroundClassByProps,
+    getBackgroundClass
+} from "./mixins/backgroundColorTextClassMixin.ts";
 
 let VueRtStyle = {
     install(Vue, config) {
@@ -139,7 +157,12 @@ export {
     strokePropsNames,
     strokeColorProps,
     getStrokeClassByProps,
-    getStrokeClass
+    getStrokeClass,
+
+    backgroundColorPropsNames,
+    backgroundColorProps,
+    getBackgroundClassByProps,
+    getBackgroundClass
 
 }
 
