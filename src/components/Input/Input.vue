@@ -275,7 +275,16 @@
         this.hasInputText = this.localValue.toString() ? this.localValue.toString().length > 0 : false;
       },
       inputHandler($event) {
-        this.localValue = this.$el.querySelector(".input-element").value;
+        let temporaryValue = this.$el.querySelector(".input-element").value;
+        if(this.insertType === 'number') {
+          if(!isNaN(parseInt(temporaryValue))) {
+            this.localValue = temporaryValue;
+          } else {
+            this.$el.querySelector(".input-element").value = '';
+          }
+        } else {
+          this.localValue = temporaryValue;
+        }
         this.setValueLength();
       },
       clearInput() {
