@@ -13,6 +13,7 @@
     text-align left
     min-height: 100%
 
+
   &-arrow
     position absolute
     top -15px
@@ -54,7 +55,9 @@
     padding-bottom 5px
     cursor pointer
     position: relative
-
+    transition-timing-function ease-in-out
+    transition-duration .05s
+    transition-property color
     .select--disabled &
       color main-color05
       cursor default
@@ -124,6 +127,9 @@
       padding-left 14px
       padding-right 14px
       cursor pointer
+      transition-timing-function ease-in-out
+      transition-duration .05s
+      transition-property background-color
 
       .select-option--select &
         color inherit
@@ -138,37 +144,26 @@
       display none
     &--multi
       position relative
-      padding 0 20px
       &:hover
         background-color b2c-purple
         color b2c-white
-        .select-option__inner
-          border-top none!important
-      &:before
-        content: ''
-        position absolute
-        left 20px
-        top 50%
-        transform translateY(-50%)
-        width 20px
-        height 20px
-        box-sizing border-box
-        border 2px solid b2c-cool-grey07
-        background-color b2c-white
+
+      .select-option__inner
+        display: flex
+
+
       .select-option__inner
         padding 14px 0
-        text-indent 30px
-        &:hover
-          background-color: transparent
+        overflow: visible;
+
+
       &+&
         .select-option__inner
-          border-top 1px solid b2c-cool-grey
+          padding-top: 15px
+          position: relative
+
+
     &__checked-sign
-      display inline-block
-      position absolute
-      top 15px
-      left 25px
-      opacity 0
       transition opacity .2s linear
     &__hidden-checkbox
       display: none
@@ -268,3 +263,70 @@
     .select-input
       white-space normal
       text-overflow initial
+
+.select-option__checkbox-angle
+  position relative
+  text-align: center
+  line-height: 20px
+  width 20px
+  height 20px
+  box-sizing border-box
+  border 2px solid b2c-cool-grey07
+  background-color b2c-white
+  margin-left: 20px
+  margin-right: 20px
+  .select-option__hidden-checkbox:checked + & .select-option__checkbox-angle-icon
+    opacity: 1
+
+.select-option__checkbox-angle-icon
+  opacity: 0
+  width: 12px
+  height: 12px
+  display: inline-block
+  transition-timing-function ease-in-out
+  transition-duration .3s
+  transition-property opacity
+
+.select-option--multi
+  overflow: visible;
+  &+&
+    &:before
+      content ''
+      background-color: b2c-cool-grey
+      height: 1px
+      width: 100%
+      position: absolute;
+      top: 0
+      left: 0
+      right: 0
+      transition-timing-function ease-in-out
+      transition-duration .05s
+      transition-property opacity
+      z-index 1
+
+
+
+  .select-option__inner
+    &:after
+      content ''
+      //background-color: b2c-cool-grey
+      background-color:  transparent
+      height: 1px
+      width: 100%
+      position: absolute;
+      bottom: -1px
+      z-index: 2
+      left: 0
+      right: 0
+      transition-timing-function ease-in-out
+      transition-duration .05s
+      transition-property background-color
+  &:hover
+    .select-option__inner
+      &:after
+        background-color b2c-purple-high
+  .select-option__inner
+    &:focus
+      &:after
+        background-color b2c-purple-high
+        z-index 3
