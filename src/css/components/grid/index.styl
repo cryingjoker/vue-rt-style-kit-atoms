@@ -332,6 +332,32 @@ for devideStep in steps
       margin-right -1 * horizontal-space * .5
       padding-bottom vertical-space
 
+.row-td-reverse
+  @media (max-width: tablet-upper-limit)
+    flex-direction row-reverse
+    flex-wrap: wrap-reverse
+
+
+
+.row-td-only-reverse
+  @media (max-width: tablet-upper-limit) and (min-width: mobile-upper-limit)
+    flex-direction row-reverse
+    flex-wrap: wrap-reverse
+
+.row-md-reverse
+  @media (max-width: mobile-upper-limit)
+    flex-direction row-reverse
+    flex-wrap: wrap-reverse
+
+
+
+
+
+.row-md-reverse
+  @media (max-width: mobile-upper-limit)
+    flex-direction column-reverse
+
+
 .desctop-hide-scroll
   @media (min-width: desktop-lower-limit)
     overflow-y hidden
