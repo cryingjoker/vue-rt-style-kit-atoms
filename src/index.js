@@ -105,6 +105,10 @@ if (settingsKey) {
 
 // @Deprecated
 window.RTK_STYLE_VER = version;
+
+window.addEventListener('getVueRtStyleVersion', function () {
+    window.postMessage({from: "vue-rt-style-kit", type: "setVersion", label: "atoms", version: version}, "*");
+})
 VueRtStyle.version = version;
 
 export default VueRtStyle;

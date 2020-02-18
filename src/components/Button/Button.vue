@@ -141,7 +141,6 @@
           } else {
             button.addEventListener("click", (e) => {
               if (!this.$el.getAttribute("data-ga-pushed")) {
-                e.preventDefault();
                 if (!window.dataLayer) {
                   window.dataLayer = [];
                 }
