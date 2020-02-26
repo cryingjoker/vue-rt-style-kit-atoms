@@ -148,13 +148,7 @@
                 this.isActiveLocal = buttonsStore.getStatus(this._uid);
             },
             triggerClick($event) {
-                if (this.checkboxBehavior) {
-                    if (!this.$el.querySelector(".fake-radiobutton-for-button").checked) {
-                        this.$el.querySelector(".fake-radiobutton-for-button").click();
-                    } else {
-                        this.$el.querySelector(".fake-radiobutton-for-button").checked = false;
-                    }
-                } else if (this.popupButton && this.targetPopup) {
+                if (this.popupButton && this.targetPopup) {
                     let target = [this.$el, this.targetPopup];
                     document.querySelector('body').dispatchEvent(new CustomEvent("open-popup", {'detail': target}));
                     this.$emit("click", $event);
@@ -205,7 +199,7 @@
                 return <span>{this.$slots["button-text"]}</span>;
             })();
             const icon = (() => {
-                return this.$slots.icon;
+                return <span class="rt-button__icon rt-space-right05">{this.$slots.icon}</span>;
             })();
             const spinner = (() => {
                 if (this.isFetched) {
@@ -216,26 +210,21 @@
             })();
             if (this.checkboxBehavior) {
                 return (
-                    <label ref="button">
-                        <input type="radio" class="fake-radiobutton-for-button" name={this.radioGroupName}
-                               onChange={this.getStatusActive}
-                               onInput={this.getStatusActive}
-                               value={this.radioValue}/>
-                        <button class={this.buttonClass} onClick={this.triggerClick}>
-                            <rt-ripple notRender={this.hide} twiceRender={true}>
-                                {spinner}
-                                {this.isActiveLocal ? this.$slots.active : this.$slots.not_active}
-                            </rt-ripple>
-                        </button>
-                    </label>
+                    <button class={this.buttonClass} onClick={this.triggerClick}>
+                        <rt-ripple notRender={this.hide} twiceRender={true}>
+                            {spinner}
+                            {this.isActiveLocal ? this.$slots.active : this.$slots.not_active}
+                        </rt-ripple>
+                    </button>
                 );
             } else {
                 if (this.hasIcon) {
                     return (
                         <button ref="button" class={this.buttonClass} onClick={this.triggerClick}
                                 style="position: relative;">
-                            {icon}
+
                             <rt-ripple notRender={this.hide} twiceRender={true}>
+                                {icon}
                                 {spinner}
                                 {buttonTextContent}
                             </rt-ripple>
