@@ -111,10 +111,10 @@
                 if (this.color && this.color.length > 0) {
                     className.push('rt-button-' + this.color)
                 }
-                if(this.activeClass.length > 0 && this.isActiveLocal){
+                if (this.activeClass.length > 0 && this.isActiveLocal) {
                     className.push(this.activeClass)
                 }
-                if(this.notActiveClass.length > 0 && !this.isActiveLocal){
+                if (this.notActiveClass.length > 0 && !this.isActiveLocal) {
                     className.push(this.notActiveClass)
                 }
                 className = className.concat(this.buttonClassList.split(' '));
@@ -133,7 +133,7 @@
                 this.activateEventToLink('b2b', this.gaB2b);
             }
             if (this.checkboxBehavior) {
-                buttonsStore.init(this._uid, this.radioGroupName ,{isActiveLocal: this.isActiveLocal}).then(() => {
+                buttonsStore.init(this._uid, this.radioGroupName, {isActiveLocal: this.isActiveLocal}).then(() => {
                     buttonsStore.addWatcher(this._uid, this.getStatusActive.bind(this), this.clearStatusActive.bind(this))
                 })
             }
@@ -155,7 +155,7 @@
                 } else {
                     this.$emit("click", $event);
                 }
-                if(this.checkboxBehavior){
+                if (this.checkboxBehavior) {
                     buttonsStore.changeStatus(this._uid, {isActiveLocal: true})
                 }
             },
@@ -208,38 +208,41 @@
                     return null;
                 }
             })();
-            if (this.checkboxBehavior) {
-                return (
-                    <button class={this.buttonClass} onClick={this.triggerClick}>
+            const content = () => {
+                if (this.checkboxBehavior) {
+                    return (
+
                         <rt-ripple notRender={this.hide} twiceRender={true}>
                             {spinner}
                             {this.isActiveLocal ? this.$slots.active : this.$slots.not_active}
                         </rt-ripple>
-                    </button>
-                );
-            } else {
-                if (this.hasIcon) {
-                    return (
-                        <button ref="button" class={this.buttonClass} onClick={this.triggerClick}
-                                style="position: relative;">
+                    );
+                } else {
+                    if (this.hasIcon) {
+                        return (
 
                             <rt-ripple notRender={this.hide} twiceRender={true}>
                                 {icon}
                                 {spinner}
                                 {buttonTextContent}
                             </rt-ripple>
-                        </button>
-                    );
-                } else {
-                    return (
-                        <button ref="button" onClick={this.triggerClick} class={this.buttonClass}>
+                        );
+                    } else {
+                        return (
                             <rt-ripple notRender={this.hide} twiceRender={true} waitParentClicked={true}>
                                 {spinner}
                                 {this.$slots.default}
                             </rt-ripple>
-                        </button>
-                    );
+                        );
+                    }
                 }
+            }
+            if(this.href.length > 0){
+                return <a href={this.href} target={this.target} class={this.buttonClass} onClick={this.triggerClick}>
+                    {content()}
+                </a>
+            }else {
+                return <button class={this.buttonClass} onClick={this.triggerClick}>{content()} </button>
             }
         }
     };
