@@ -71,6 +71,46 @@
       "description": "Устанавливает google analitics для b2b",
       "value": "",
       "version": "0.1.68"
+    },
+    {
+      "name": "rt-button",
+      "property": ":is-active",
+      "type": "Boolean",
+      "description": "Устанавливает флаг активной кнопки для checkbox-behavior props",
+      "value": "flase",
+      "version": "0.2.17"
+    },
+    {
+      "name": "rt-button",
+      "property": ":active-class",
+      "type": "String",
+      "description": "Устанавливает класс для активной кнопки для checkbox-behavior props",
+      "value": "''",
+      "version": "0.2.17"
+    },
+    {
+      "name": "rt-button",
+      "property": ":not-active-class",
+      "type": "String",
+      "description": "Устанавливает класс для неактивной кнопки для checkbox-behavior props",
+      "value": "''",
+      "version": "0.2.17"
+    },
+    {
+      "name": "rt-button",
+      "property": ":href",
+      "type": "String",
+      "description": "Устанавливает ссылку для кнопки /  вместо <button> рендерится <a>",
+      "value": "''",
+      "version": "0.2.17"
+    },
+    {
+      "name": "rt-button",
+      "property": ":target",
+      "type": "String",
+      "description": "Устанавливает атрибут для  кнопки-ссылки",
+      "value": "_blank",
+      "version": "0.2.17"
     }
   ]
 }
