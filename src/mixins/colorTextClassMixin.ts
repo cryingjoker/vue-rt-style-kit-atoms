@@ -147,7 +147,7 @@ export function getColorClass(colorValue: string = '', type: string = 'desktop')
             }
         }
     } else {
-        console.error('Check colors props value');
+        console.error('Check colors text props value',colorValue);
     }
     return colorName;
 }
