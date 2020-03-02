@@ -36,23 +36,37 @@
 
 
   &-paragraph-icon
-    width 41px
-    height 21px
+    width 40px
+    height 20px
     overflow visible
     position absolute
-    bottom -20px
+    bottom -19px
     right -20px
-    overflow: hidden;
+    @media (max-width: laptop-upper-limit)
+      height 20px
+      bottom -18px
+      right -20px
     @media (max-width: tablet-upper-limit)
       height 19px
       bottom -18px
       right -22px
     @media (max-width: mobile-upper-limit)
-    //  width 22px
-    //  height 10px
       bottom -19px
-    //  right -20px
-
+    .color-line-label-single &
+      width: 39px
+      position: relative;
+      margin-left: -41.5px
+      bottom: -37px
+      overflow: hidden;
+      @media (max-width: laptop-upper-limit)
+        bottom -34px
+        right -20px
+      @media (max-width: tablet-upper-limit)
+        bottom: -31px
+        right -21px
+      @media (max-width: mobile-upper-limit)
+        bottom: -29px
+        right -21px
 
 
   &-text
