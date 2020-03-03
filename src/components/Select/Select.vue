@@ -53,6 +53,10 @@
             fieldId: {
                 type: String,
                 default: ''
+            },
+            hasContentText: {
+                type: Boolean,
+                default: false
             }
         },
         data() {
@@ -99,6 +103,9 @@
                         break;
                     case this.multi:
                         selectClasses.push("rtb-select--multi");
+                        break;
+                    case this.hasContentText:
+                        selectClasses.push("rt-select--has-content");
                         break;
                 }
                 return selectClasses.join(' ');
@@ -148,8 +155,7 @@
                 const {value, text} = data;
                 if (!this.multi) {
                     this.localValue = text;
-                }
-                else {
+                } else {
                     if (text !== null) {
                         if (!this.multiLocalValue.includes(text)) {
                             this.multiLocalValue.push(text)
@@ -166,9 +172,6 @@
                     this.removeBindEvents();
                 }
                 this.$emit("select", data);
-                // if (this.localValue === '' && this.multiLocalValue.length === 0) {
-                //     this.$el.querySelector(".floating-placeholder").classList.remove("floating-placeholder--go-top")
-                // }
             },
             toggleOpen(e) {
                 if (!this.disabled) {
@@ -254,15 +257,17 @@
                 }
             },
             liftPlaceholder() {
-                if (!this.$el.querySelector(".floating-placeholder").classList.contains("floating-placeholder--go-top")) {
-                    this.$el.querySelector(".floating-placeholder").classList.add("floating-placeholder--go-top");
-                } else if (!this.focused) {
-                    if (this.$refs.simpleSelect && !this.$refs.simpleSelect.innerText) {
-                        this.$el.querySelector(".floating-placeholder").classList.remove("floating-placeholder--go-top");
-                    } else if (this.$refs.autoCompleteSelect && !this.$refs.autoCompleteSelect.value) {
-                        this.$el.querySelector(".floating-placeholder").classList.remove("floating-placeholder--go-top");
-                    } else if (this.localValue === '' && this.multiLocalValue.length === 0) {
-                        this.$el.querySelector(".floating-placeholder").classList.remove("floating-placeholder--go-top");
+                if(this.$refs['placeholder']) {
+                    if (!this.$refs['placeholder'].classList.contains("floating-placeholder--go-top")) {
+                        this.$refs['placeholder'].classList.add("floating-placeholder--go-top");
+                    } else if (!this.focused) {
+                        if (this.$refs.simpleSelect && !this.$refs.simpleSelect.innerText) {
+                            this.$refs['placeholder'].classList.remove("floating-placeholder--go-top");
+                        } else if (this.$refs.autoCompleteSelect && !this.$refs.autoCompleteSelect.value) {
+                            this.$refs['placeholder'].classList.remove("floating-placeholder--go-top");
+                        } else if (this.localValue === '' && this.multiLocalValue.length === 0) {
+                            this.$refs['placeholder'].classList.remove("floating-placeholder--go-top");
+                        }
                     }
                 }
             },
@@ -284,19 +289,19 @@
                 this.isOpen = false;
                 this.$refs.autoCompleteSelect.blur();
                 setTimeout(() => {
-                    !this.localValue ? this.$el.querySelector(".floating-placeholder").classList.remove("floating-placeholder--go-top") : null;
+                    !this.localValue ? this.$refs['placeholder'].classList.remove("floating-placeholder--go-top") : null;
                 }, 1);
 
             }
         },
         render(h) {
-            const disabled = (() => {
+            const renderChilds = () => {
                 if (!this.disabled) {
                     return <div style={this.selectListStyle} class="select-list">
                         {this.$slots.default}
                     </div>
                 }
-            })();
+            };
             const errorMessage = (() => {
                 if (!!this.hasError) {
                     return <p class="text-field__error-message">{this.errorMessage}</p>
@@ -318,24 +323,47 @@
                     return <p class="select-input" ref="simpleSelect" id={this.fieldId}>{this.localValue}</p>
                 }
             })();
-
+            const renderBorder = () => {
+                if (this.hasContentText && this.$slots.content) {
+                    return null
+                }
+                return <div class={this.borderClass}></div>
+            }
+            const renderContent = () => {
+                if (!this.hasContentText || !this.$slots.content) {
+                    return null
+                }
+                return <div class="rt-select-contents">
+                    {this.$slots.content}
+                </div>
+            }
+            const renderPlaceholder = () => {
+                if (this.hasContentText && this.$slots.content) {
+                    return null
+                }
+                return <label ref="placeholder" class={this.placeholderClasses}>{this.label}</label>
+            }
             return <div class={this.selectClasses}>
-                <button disabled={this.disabled} class="select__inner" onClick={this.toggleOpen}>
-                    <label class={this.placeholderClasses}>{this.label}</label>
-                    <div class="select-value">
-                        {selectType}
-                        <div class="select-arrow">
-                            <svg class="select-arrow__icon" width="13" height="7">
-                                <path d="M.705 1.704l5.999 6 6-6L11.295.295h-.002l-4.59 4.58L2.115.294h-.002z"
-                                      fill="#575D68" fill-rule="evenodd"/>
-                            </svg>
+                <div class="select-inner-contaner">
+                    <button disabled={this.disabled} class="select__inner" onClick={this.toggleOpen}>
+                        {renderPlaceholder()}
+                        <div class="select-value">
+                            {selectType}
+                            {renderContent()}
+                            <div class="select-arrow">
+                                <svg class="select-arrow__icon" width="13" height="7">
+                                    <path d="M.705 1.704l5.999 6 6-6L11.295.295h-.002l-4.59 4.58L2.115.294h-.002z"
+                                          fill="#575D68" fill-rule="evenodd"/>
+                                </svg>
+                            </div>
                         </div>
-                    </div>
-                </button>
-                <div class={this.borderClass}/>
-                {disabled}
+                    </button>
+                    {renderBorder()}
+                    {renderChilds()}
+                </div>
                 {errorMessage}
             </div>
+
         }
     };
 </script>

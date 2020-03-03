@@ -6,6 +6,10 @@
             value: {
                 type: String,
                 default: null
+            },
+            selected: {
+                type: Boolean,
+                default: false
             }
         },
         data() {
@@ -42,12 +46,24 @@
             }
         },
         mounted() {
+
             this.setValue();
-            this.setIsSelected();
+            this.setIsSelected(() => {
+                if (this.selected) {
+                    this.RtSelect.setValue({text: this.text, value: this.value});
+                }
+            });
+
         },
         methods: {
-            setIsSelected() {
+            setIsSelected(callbackFn) {
                 this.isSelected = this.selectedValue === this.text;
+                if (callbackFn) {
+                    setTimeout(() => {
+                        callbackFn()
+                    }, 0)
+                }
+
             },
             setValue() {
                 this.text = this.getTextContent();
@@ -57,7 +73,9 @@
                 if (this.$refs['multiSelectCheckboxInput']) {
                     this.$refs['multiSelectCheckboxInput'].checked = !this.$refs['multiSelectCheckboxInput'].checked;
                 }
-                e.preventDefault();
+                if (e) {
+                    e.preventDefault();
+                }
             },
             getTextContent() {
                 if (this.$el) {
@@ -74,7 +92,8 @@
                     return <div class="select-option__checkbox" ref="multiSelectCheckbox">
                         <input type="checkbox" class="select-option__hidden-checkbox" ref="multiSelectCheckboxInput"/>
                         <div class="select-option__checkbox-angle">
-                            <svg class="select-option__checkbox-angle-icon" width="12" height="10" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="select-option__checkbox-angle-icon" width="12" height="10"
+                                 xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1 5l3.448 3L11 2" stroke="#70F" stroke-width="3" fill="none"
                                       fill-rule="evenodd"/>
                             </svg>
