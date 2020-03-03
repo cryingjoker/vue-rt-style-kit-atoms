@@ -15,7 +15,6 @@ import {
     RippleWihoutJs,
     Select,
     SelectOption,
-    SelectWithoutJs,
     Switch,
     SwitchContainer,
     Textarea,
@@ -70,7 +69,6 @@ let VueRtStyle = {
             Vue.component(RippleWihoutJs.name, RippleWihoutJs);
             Vue.component(Select.name, Select);
             Vue.component(SelectOption.name, SelectOption);
-            Vue.component(SelectWithoutJs.name, SelectWithoutJs);
             Vue.component(Switch.name, Switch);
             Vue.component(SwitchContainer.name, SwitchContainer);
             Vue.component(Spinner.name, Spinner);
@@ -126,7 +124,6 @@ export {
     RippleWihoutJs,
     Select,
     SelectOption,
-    SelectWithoutJs,
     Switch,
     SwitchContainer,
     Textarea,
