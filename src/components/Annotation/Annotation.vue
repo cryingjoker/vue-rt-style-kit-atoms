@@ -22,7 +22,7 @@
         </g>
       </svg>
     </p>
-    <div class="rt-annotation__content" :style="{maxHeight: allowHeight}">
+    <div class="rt-annotation__content">
       <div
         ref="contentHeightResolver"
         class="rt-annotation__content-height-resolver"
@@ -54,7 +54,6 @@ export default {
   },
   data() {
     return {
-      allowHeight: null,
       isOpen: this.open
     };
   },
@@ -71,7 +70,6 @@ export default {
   methods: {
     toggleOpen() {
       this.isOpen = !this.isOpen;
-      this.allowHeight = this.isOpen ? `${parseInt(getComputedStyle(this.$refs.contentHeightResolver).height, 10) + 10}px` : null
     }
   }
 };
