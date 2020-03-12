@@ -76,6 +76,7 @@ export default {
     toggleOpen() {
       this.isOpen = !this.isOpen;
       this.allowHeight = this.isOpen ? `${parseInt(getComputedStyle(this.$refs.contentHeightResolver).height, 10) + 10}px` : null
+      this.$emit('toggleAnnotation', this.isOpen)
     }
   }
 };
