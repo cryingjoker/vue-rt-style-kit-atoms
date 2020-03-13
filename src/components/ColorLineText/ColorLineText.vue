@@ -1,7 +1,7 @@
 <script type="text/jsx">
-    import variables from '../../variables.json';
     import {getColorsCustomProps, getColorClassByProps} from "../../mixins/colorTextClassMixin.ts";
     import {getFillClassByProps, fillColorProps} from "../../mixins/fillTextClassMixin.ts";
+    import {deviceTypeStore} from "../../stores/deviceTypeStoreMixin.ts";
 
     const componentProps = {
 
@@ -35,19 +35,27 @@
                 return p.toString() === "[object SafariRemoteNotification]";
             })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification))
         }),
-
+        beforeUpdate(){
+            deviceTypeStore.removeWatcher(this._uid,this.calculateMobileOptions);
+        },
+        updated(){
+            deviceTypeStore.addWatcher(this._uid,this.calculateMobileOptions);
+        },
+        beforeDestroy(){
+            deviceTypeStore.removeWatcher(this._uid,this.calculateMobileOptions);
+        },
         mounted() {
-            const adjust = () => {
-                setTimeout(() => {
-                    this.isMobile = window.innerWidth <= parseInt(variables['mobile-upper-limit']);
-                    this.isTablet = window.innerWidth <= parseInt(variables['tablet-upper-limit']) && window.innerWidth >= parseInt(variables['tablet-lower-limit']);
-                }, 0);
-            };
-            window.addEventListener('resize', () => {
-                adjust()
-            });
-            adjust();
 
+            deviceTypeStore.addWatcher(this._uid,this.calculateMobileOptions);
+            this.calculateMobileOptions();
+
+        },
+        methods:{
+            calculateMobileOptions(){
+                const type =  deviceTypeStore.getStatus();
+                this.isMobile = type === 'mobile';
+                this.isTablet = type === 'tablet';
+            }
         },
         computed: {
             colorLineIconClass() {
@@ -61,8 +69,6 @@
             },
             labelClass() {
                 let className = ["color-line-text", ...getColorClassByProps.bind(this)(true).label];
-
-                this.isMobile = window.innerWidth <= parseInt(variables['mobile-upper-limit']);
                 if (this.fillColor) {
                     className.push("color-line-text--" + this.fillColor);
                 }
@@ -74,7 +80,6 @@
             contentClass() {
 
                 let className = ['color-line-text', 'rt-font-paragraph', ...getColorClassByProps.bind(this)(true).content];
-                this.isMobile = window.innerWidth <= parseInt(variables['mobile-upper-limit']);
                 if (this.fillColor) {
                     className.push("color-line-text--" + this.fillColor);
                 }
