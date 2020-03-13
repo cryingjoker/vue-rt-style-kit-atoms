@@ -48,6 +48,10 @@ import {
 } from "./mixins/strokeTextClassMixin.ts";
 
 import {
+    deviceTypeStore
+} from "./stores/deviceTypeStoreMixin.ts";
+
+import {
     backgroundColorPropsNames,
     backgroundColorProps,
     getBackgroundClassByProps,
@@ -163,8 +167,9 @@ export {
     backgroundColorPropsNames,
     backgroundColorProps,
     getBackgroundClassByProps,
-    getBackgroundClass
+    getBackgroundClass,
 
+    deviceTypeStore
 }
 
 

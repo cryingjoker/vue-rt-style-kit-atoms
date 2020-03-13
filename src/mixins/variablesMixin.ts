@@ -1,4 +1,4 @@
-import variables from "vue-rt-style-kit-atoms/src/variables.json";
+import variables from "../variables.json";
 const _normalizeVariables = {};
 (function(){
     if(Object.keys(_normalizeVariables).length === 0) {
