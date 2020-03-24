@@ -1,4 +1,4 @@
-import getVariable from '../mixins/variablesMixin.ts'
+import getVariable from '../mixins/variablesMixin'
 import Vue from 'vue';
 import {debounce} from 'ts-debounce';
 

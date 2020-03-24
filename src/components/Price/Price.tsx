@@ -141,7 +141,18 @@ class Price extends Vue {
     const rtPriceInfoClass = "rt-price__info" + (this.boldOption ? " rt-price__info--bold-font" : "");
     const timeIntervalRender = () => {
       if (this.normalizeTimeInterval && !this.onlyPrice) {
+        console.info('1')
+        console.info('1')
+        console.info('1')
+        console.info('1')
+        console.info('1')
         return <div class="rt-price__info-item">
+         <p>fuck</p>
+         <p>fuck</p>
+         <p>fuck</p>
+         <p>fuck</p>
+         <p>fuck</p>
+         <p>fuck</p>
           {this.normalizeTimeInterval}
         </div>;
       } else {

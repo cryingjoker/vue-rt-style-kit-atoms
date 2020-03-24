@@ -18,7 +18,7 @@ const config = {
   output: {
     path: local_dirname + '/lib',
     filename: 'vue-rt-style-kit-atoms.js',
-    library: 'vue-rt-style-kit-atoms  ',
+    library: 'vue-rt-style-kit-atoms',
     libraryTarget: 'umd',
     umdNamedDefine: true
   },

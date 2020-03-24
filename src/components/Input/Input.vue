@@ -1,6 +1,4 @@
 <script type="text/jsx">
-    /* eslint-disable vue/return-in-computed-property */
-    import Vue from "vue";
     import VeeValidate from "vee-validate";
     import variables from "../../variables.json";
 

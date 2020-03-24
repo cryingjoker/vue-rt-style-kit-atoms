@@ -1,6 +1,7 @@
-import styles from "./css/vue-rt-style-atoms.styl";
+import  "./css/vue-rt-style-atoms.styl";
 import Global from "./variables.json";
-import Project from "@projectAtoms";
+// import Project from "@projectAtoms";
+import Project from './package.json'
 
 import {
     Button,
@@ -27,9 +28,9 @@ import {
     GridColumn
 } from "./components";
 
-import 'element-closest-polyfill';
-import 'nodelist-foreach-polyfill';
-import 'element-remove';
+// import 'element-closest-polyfill';
+// import 'nodelist-foreach-polyfill';
+// import 'element-remove';
 import {
     fontColorPropsNames,
     fontColorProps,
@@ -80,7 +81,7 @@ let VueRtStyle = {
             Vue.component(TextareaStatic.name, TextareaStatic);
             Vue.component(Annotation.name, Annotation);
             Vue.component(ColorLineText.name, ColorLineText);
-            Vue.component(Ussd.name, Ussd.component);
+            // Vue.component(Ussd.name, Ussd.component);
             Vue.component(GridRow.name, GridRow);
             Vue.component(GridColumn.name, GridColumn);
             Vue.RtStyleAtoms = true;
@@ -98,6 +99,7 @@ VueRtStyle = {
  * с названием из Global.globalSettingsKey и положите перед подключением либы
  */
 const settingsKey = Global.globalSettingsKey;
+
 const version = Project.version;
 if (settingsKey) {
     if (!window[settingsKey]) window[settingsKey] = {}

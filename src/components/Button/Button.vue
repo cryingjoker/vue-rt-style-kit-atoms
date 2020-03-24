@@ -242,7 +242,7 @@
                     {content()}
                 </a>
             }else {
-                return <button class={this.buttonClass} onClick={this.triggerClick}>{content()} </button>
+                return <button class={this.buttonClass} onClick={this.triggerClick}>fuck{content()} </button>
             }
         }
     };

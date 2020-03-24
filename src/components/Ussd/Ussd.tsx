@@ -1,15 +1,14 @@
-import Vue, { CreateElement, VNode } from "vue";
-import { Component, Prop } from "vue-property-decorator";
+// import Vue, { CreateElement, VNode } from "vue";
+import { Vue, Prop } from "vue-property-decorator";
 
-@Component
 class Ussd extends Vue {
-  tel: String = "";
+
   @Prop({ default: null }) phone: String;
   @Prop({ default: false }) withoutLeftSpace: Boolean;
   @Prop({ default: 0 }) checkAfterTime: number;
   private hasHtml: boolean = false;
   private telHtml: string = '';
-
+  tel: String = "";
   mounted() {
     setTimeout(() => {
       let tel = "";
@@ -40,9 +39,7 @@ class Ussd extends Vue {
       this.tel = tel;
     }, this.checkAfterTime);
   }
-
-
-  render(h: CreateElement): VNode {
+  render() {
     let ussdClassName = "rt-ussd";
     if (this.withoutLeftSpace) {
       ussdClassName += " rt-ussd--stand-alone";
