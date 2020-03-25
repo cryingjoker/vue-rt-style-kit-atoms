@@ -369,12 +369,12 @@
                         case "number":
                             let value = event.target.value - 0;
                             if (this.maxNumber !== null && value > this.maxNumber) {
-                                this.localValue = String(this.maxNumber);
-                                event.target.value = String(this.maxNumber);
+                                this.localValue = this.maxNumber + "";
+                                event.target.value = this.maxNumber + "";
                             }
                             if (this.minNumber !== null && value < this.minNumber) {
-                                this.localValue = String(this.minNumber);
-                                event.target.value = String(this.minNumber);
+                                this.localValue = this.minNumber + "";
+                                event.target.value = this.minNumber + "";
                             }
                             break;
                     }
