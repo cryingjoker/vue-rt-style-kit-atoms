@@ -367,14 +367,14 @@
                 if (this.insertType) {
                     switch (this.insertType) {
                         case "number":
-                            let value = event.target.value - 0;
+                            let value = event.target.value;
                             if (this.maxNumber !== null && value > this.maxNumber) {
-                                this.localValue = this.maxNumber;
-                                event.target.value = this.maxNumber;
+                                this.localValue = String(this.maxNumber);
+                                event.target.value = String(this.maxNumber);
                             }
                             if (this.minNumber !== null && value < this.minNumber) {
-                                this.localValue = this.minNumber;
-                                event.target.value = this.minNumber;
+                                this.localValue = String(this.minNumber);
+                                event.target.value = String(this.minNumber);
                             }
                             break;
                     }
