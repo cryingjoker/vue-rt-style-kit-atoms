@@ -1,6 +1,6 @@
 <template>
   <div :class="annotationClasses" class="rt-annotation">
-    <p class="rt-annotation__title rt-font-paragraph" @click="toggleOpen()">
+    <p :class="`rt-annotation__title ${titleFontClass}`" @click="toggleOpen()">
       {{ label }}
 
       <svg
@@ -50,6 +50,10 @@ export default {
     hasWhiteColor: {
       type: Boolean,
       default: false
+    },
+    titleFontClass: {
+      type: String,
+      default: 'rt-font-paragraph'
     }
   },
   data() {
@@ -72,6 +76,7 @@ export default {
     toggleOpen() {
       this.isOpen = !this.isOpen;
       this.allowHeight = this.isOpen ? `${parseInt(getComputedStyle(this.$refs.contentHeightResolver).height, 10) + 10}px` : null
+      this.$emit('toggleAnnotation', this.isOpen)
     }
   }
 };

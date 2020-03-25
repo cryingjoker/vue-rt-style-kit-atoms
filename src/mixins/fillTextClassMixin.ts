@@ -103,7 +103,7 @@ export function getFillClass(colorValue: string = '', type: string = 'desktop'):
             }
         }
     } else {
-        console.error('Check colors props value');
+        console.error('Check colors fill props value',colorValue);
     }
     // console.info('colorName',colorName);
     return colorName;

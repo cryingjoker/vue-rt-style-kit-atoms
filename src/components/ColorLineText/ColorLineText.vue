@@ -1,7 +1,7 @@
 <script type="text/jsx">
-    import variables from '../../variables.json';
     import {getColorsCustomProps, getColorClassByProps} from "../../mixins/colorTextClassMixin.ts";
     import {getFillClassByProps, fillColorProps} from "../../mixins/fillTextClassMixin.ts";
+    import {deviceTypeStore} from "../../stores/deviceTypeStoreMixin.ts";
 
     const componentProps = {
 
@@ -35,19 +35,27 @@
                 return p.toString() === "[object SafariRemoteNotification]";
             })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification))
         }),
-
+        beforeUpdate(){
+            deviceTypeStore.removeWatcher(this._uid,this.calculateMobileOptions);
+        },
+        updated(){
+            deviceTypeStore.addWatcher(this._uid,this.calculateMobileOptions);
+        },
+        beforeDestroy(){
+            deviceTypeStore.removeWatcher(this._uid,this.calculateMobileOptions);
+        },
         mounted() {
-            const adjust = () => {
-                setTimeout(() => {
-                    this.isMobile = window.innerWidth <= parseInt(variables['mobile-upper-limit']);
-                    this.isTablet = window.innerWidth <= parseInt(variables['tablet-upper-limit']) && window.innerWidth >= parseInt(variables['tablet-lower-limit']);
-                }, 0);
-            };
-            window.addEventListener('resize', () => {
-                adjust()
-            });
-            adjust();
 
+            deviceTypeStore.addWatcher(this._uid,this.calculateMobileOptions);
+            this.calculateMobileOptions();
+
+        },
+        methods:{
+            calculateMobileOptions(){
+                const type =  deviceTypeStore.getStatus();
+                this.isMobile = type === 'mobile';
+                this.isTablet = type === 'tablet';
+            }
         },
         computed: {
             colorLineIconClass() {
@@ -61,8 +69,6 @@
             },
             labelClass() {
                 let className = ["color-line-text", ...getColorClassByProps.bind(this)(true).label];
-
-                this.isMobile = window.innerWidth <= parseInt(variables['mobile-upper-limit']);
                 if (this.fillColor) {
                     className.push("color-line-text--" + this.fillColor);
                 }
@@ -74,7 +80,6 @@
             contentClass() {
 
                 let className = ['color-line-text', 'rt-font-paragraph', ...getColorClassByProps.bind(this)(true).content];
-                this.isMobile = window.innerWidth <= parseInt(variables['mobile-upper-limit']);
                 if (this.fillColor) {
                     className.push("color-line-text--" + this.fillColor);
                 }
@@ -109,6 +114,15 @@
                 if (this.hideArrow) {
                     return null
                 }
+
+                return <svg viewBox="0 0 39 23" class={this.colorLineIconClass}>
+                    <g id="Page-1" fill-rule="evenodd">
+                        <g id="001-bw" >
+                            <path class="color-line-paragraph-icon__background" d="M33,-1.13686838e-13 L34.2595405,7.93519842 C36.9076879,7.78627681 38.2488174,3.85720464 38.2488174,1.20487316 L38.2488174,-1.13686838e-13 L33,-1.13686838e-13 Z" id="Path" fill="#FFFFFF" transform={this.topPartTransform}></path>
+                            <path d="M33.5561211,0 L0,0 L22.4131224,22.4131038 L36.5337472,6.67090677 C38.0088483,5.0264093 37.8715254,2.49747501 36.2270279,1.02237393 C35.4931384,0.36408091 34.5419931,0 33.5561211,0 Z" id="Path"  transform={this.bottomPartTransform}></path>
+                        </g>
+                    </g>
+                </svg>
                 return <svg
                     class={this.colorLineIconClass}
                     width="38"
@@ -128,13 +142,17 @@
             };
 
             const label = () => {
+                const labelClasses = ['rt-font-banner-label', 'color-line', 'color-line-label']
                 if (this.$slots.content && !this.isMobile) {
-                    return <p class="rt-font-banner-label color-line color-line-label">
+                    return <p class={labelClasses.join(' ')}>
         <span class={this.labelClass}
         >{this.$slots.label}</span>
                     </p>;
                 } else {
-                    return <p class="rt-font-banner-label color-line">
+                    if(!this.$slots.content){
+                        labelClasses.push('color-line-label-single');
+                    }
+                    return <p class={labelClasses.join(' ')}>
         <span class={this.labelClass}
         >{this.$slots.label} {icon()}</span>
                     </p>;

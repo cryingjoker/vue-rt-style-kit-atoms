@@ -15,7 +15,6 @@ import {
     RippleWihoutJs,
     Select,
     SelectOption,
-    SelectWithoutJs,
     Switch,
     SwitchContainer,
     Textarea,
@@ -49,6 +48,10 @@ import {
 } from "./mixins/strokeTextClassMixin.ts";
 
 import {
+    deviceTypeStore
+} from "./stores/deviceTypeStoreMixin.ts";
+
+import {
     backgroundColorPropsNames,
     backgroundColorProps,
     getBackgroundClassByProps,
@@ -70,7 +73,6 @@ let VueRtStyle = {
             Vue.component(RippleWihoutJs.name, RippleWihoutJs);
             Vue.component(Select.name, Select);
             Vue.component(SelectOption.name, SelectOption);
-            Vue.component(SelectWithoutJs.name, SelectWithoutJs);
             Vue.component(Switch.name, Switch);
             Vue.component(SwitchContainer.name, SwitchContainer);
             Vue.component(Spinner.name, Spinner);
@@ -105,6 +107,10 @@ if (settingsKey) {
 
 // @Deprecated
 window.RTK_STYLE_VER = version;
+
+window.addEventListener('getVueRtStyleVersion', function () {
+    window.postMessage({from: "vue-rt-style-kit", type: "setVersion", label: "atoms", version: version}, "*");
+})
 VueRtStyle.version = version;
 
 export default VueRtStyle;
@@ -122,7 +128,6 @@ export {
     RippleWihoutJs,
     Select,
     SelectOption,
-    SelectWithoutJs,
     Switch,
     SwitchContainer,
     Textarea,
@@ -162,8 +167,9 @@ export {
     backgroundColorPropsNames,
     backgroundColorProps,
     getBackgroundClassByProps,
-    getBackgroundClass
+    getBackgroundClass,
 
+    deviceTypeStore
 }
 
 

@@ -97,7 +97,7 @@ export function getStrokeClass(colorValue: string = '', type: string = 'desktop'
             }
         }
     } else {
-        console.error('Check colors props value');
+        console.error('Check colors stroke props value',colorValue);
     }
     // console.info('colorName',colorName);
     return colorName;
