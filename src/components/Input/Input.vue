@@ -367,7 +367,7 @@
                 if (this.insertType) {
                     switch (this.insertType) {
                         case "number":
-                            let value = event.target.value;
+                            let value = event.target.value - 0;
                             if (this.maxNumber !== null && value > this.maxNumber) {
                                 this.localValue = String(this.maxNumber);
                                 event.target.value = String(this.maxNumber);
