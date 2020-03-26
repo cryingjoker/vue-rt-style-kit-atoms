@@ -1,50 +1,49 @@
 import colors from '../color.json'
 
 
-export const fillPropsNames: string[] = ['fillColor',   'tabletFillColor',  'mobileFillColor'];
+export const backgroundColorPropsNames = ['backgroundColor', 'tabletBackgroundColor', 'mobileBackgroundColor']
 
-export const fillColorProps: any = {
-    fillColor: {
+export const backgroundColorProps = {
+    backgroundColor: {
         type: String,
         default: ''
     },
-
-    tabletFillColor: {
+    tabletBackgroundColor: {
         type: String,
         default: ''
     },
-
-    mobileFillColor: {
+    mobileBackgroundColor: {
         type: String,
         default: ''
     }
-};
+}
+
+
+
 
 
 
 // type deviceType = "mobile" | "desktop" | "tablet";
 
-const deviceTypeArray: any = ["mobile", "desktop", "tablet"];
+const deviceTypeArray = ["mobile", "desktop", "tablet"];
 
-export function getFillClassByProps(oldProps) {
-    const classNames = fillPropsNames.map((key) => {
+export function getBackgroundClassByProps(oldProps) {
+    const classNames = backgroundColorPropsNames.map((key) => {
         let classes;
         if(oldProps && oldProps[key]){
-            // console.info('oldProps[key]',key,oldProps[key]);
-            classes = getFillClass(this[oldProps[key]], key.replace(/fillcolor/gi, ''));
+            classes = getBackgroundClass(this[oldProps[key]], key.replace(/backgroundcolor/gi, ''));
         }
         else{
-            classes = getFillClass(this[key], key.replace(/fillcolor/gi, ''));
+            classes = getBackgroundClass(this[key], key.replace(/backgroundcolor/gi, ''));
         }
         return classes;
-    })
+    }).filter(i => i && i.length > 0)
 
     return classNames
 
 }
 
-export function getFillClass(colorValue: string = '', type: string = 'desktop'): string {
-    // console.info('getFillClass',colorValue,type);
+export function getBackgroundClass(colorValue = '', type = 'desktop') {
     if(!colorValue || colorValue.length === 0){
         return ''
     }
@@ -85,25 +84,25 @@ export function getFillClass(colorValue: string = '', type: string = 'desktop'):
     if (colorName) {
         switch (true) {
             case colorName.search('b2c-') >= 0:
-                colorName = 'fill-color-' + colorName.replace('b2c-', '');
+                colorName = 'background-' + colorName.replace('b2c-', '');
                 break;
             case colorName.search('main-') >= 0:
-                colorName = 'fill-color-' + colorName.replace('-color', '');
+                colorName = 'background-' + colorName.replace('-color', '');
                 break
         }
         ;
         if (type) {
             switch (true) {
                 case type.search('tablet') === 0:
-                    colorName = colorName.replace('color-', 'color-td-');
+                    colorName = colorName.replace('background-', 'backgrounds-td-');
                     break;
                 case type.search('mobile') === 0:
-                    colorName = colorName.replace('color-', 'color-md-');
+                    colorName = colorName.replace('background-', 'background-md-');
                     break;
             }
         }
     } else {
-        console.error('Check colors fill props value',colorValue);
+        console.error('Check backgorund-colors props value');
     }
     // console.info('colorName',colorName);
     return colorName;

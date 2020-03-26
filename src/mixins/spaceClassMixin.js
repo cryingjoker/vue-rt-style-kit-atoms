@@ -1,5 +1,5 @@
-export const spacesParamsNames : string[] = ['top', 'bottom', 'left', 'right', 'tabletTop', 'tabletBottom', 'tabletLeft', 'tabletRight', 'mobileTop', 'mobileBottom', 'mobileLeft', 'mobileRight']
-export const spacesParamsProps : any = {
+export const spacesParamsNames  = ['top', 'bottom', 'left', 'right', 'tabletTop', 'tabletBottom', 'tabletLeft', 'tabletRight', 'mobileTop', 'mobileBottom', 'mobileLeft', 'mobileRight']
+export const spacesParamsProps  = {
     top: {
         type: [Number, String],
         default: -1
@@ -49,8 +49,8 @@ export const spacesParamsProps : any = {
         default: -1
     }
 }
-export function getSpacesClass(name: string, value:[string, number]) : string {
-    const localValue: number = parseInt(value.toString());
+export function getSpacesClass(name, value)  {
+    const localValue = parseInt(value.toString());
     if (localValue < 0) {
         return ''
     } else {
@@ -92,7 +92,7 @@ export function getSpacesClass(name: string, value:[string, number]) : string {
                 }
                 break;
             case localValue % 5 === 0:
-                let localName: any = (localValue - 5) / 20;
+                let localName = (localValue - 5) / 20;
                 if (localName === 1) {
                     localName = ''
                 } else {

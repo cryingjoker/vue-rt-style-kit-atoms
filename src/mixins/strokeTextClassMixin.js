@@ -1,49 +1,44 @@
 import colors from '../color.json'
 
 
-export const backgroundColorPropsNames: string[] = ['backgroundColor', 'tabletBackgroundColor', 'mobileBackgroundColor']
+export const strokePropsNames = ['strokeColor',   'tabletStrokeColor',  'mobileStrokeColor'];
 
-export const backgroundColorProps: any = {
-    backgroundColor: {
+export const strokeColorProps = {
+    strokeColor: {
         type: String,
         default: ''
     },
-    tabletBackgroundColor: {
+
+    tabletStrokeColor: {
         type: String,
         default: ''
     },
-    mobileBackgroundColor: {
+
+    mobileStrokeColor: {
         type: String,
         default: ''
     }
-}
-
-
-
+};
 
 
 
 // type deviceType = "mobile" | "desktop" | "tablet";
 
-const deviceTypeArray: any = ["mobile", "desktop", "tablet"];
+const deviceTypeArray = ["mobile", "desktop", "tablet"];
 
-export function getBackgroundClassByProps(oldProps) {
-    const classNames = backgroundColorPropsNames.map((key) => {
-        let classes;
-        if(oldProps && oldProps[key]){
-            classes = getBackgroundClass(this[oldProps[key]], key.replace(/backgroundcolor/gi, ''));
-        }
-        else{
-            classes = getBackgroundClass(this[key], key.replace(/backgroundcolor/gi, ''));
-        }
+export function getStrokeClassByProps() {
+
+
+    const classNames = strokePropsNames.map((key) => {
+        const classes = getStrokeClass(this[key], key.replace(/strokecolor/gi, ''));
         return classes;
-    }).filter(i => i && i.length > 0)
-
+    })
     return classNames
 
 }
 
-export function getBackgroundClass(colorValue: string = '', type: string = 'desktop'): string {
+export function getStrokeClass(colorValue = '', type = 'desktop') {
+    // console.info('getStrokeClass',colorValue,type);
     if(!colorValue || colorValue.length === 0){
         return ''
     }
@@ -84,25 +79,25 @@ export function getBackgroundClass(colorValue: string = '', type: string = 'desk
     if (colorName) {
         switch (true) {
             case colorName.search('b2c-') >= 0:
-                colorName = 'background-' + colorName.replace('b2c-', '');
+                colorName = 'stroke-color-' + colorName.replace('b2c-', '');
                 break;
             case colorName.search('main-') >= 0:
-                colorName = 'background-' + colorName.replace('-color', '');
+                colorName = 'stroke-color-' + colorName.replace('-color', '');
                 break
         }
         ;
         if (type) {
             switch (true) {
                 case type.search('tablet') === 0:
-                    colorName = colorName.replace('background-', 'backgrounds-td-');
+                    colorName = colorName.replace('color-', 'color-td-');
                     break;
                 case type.search('mobile') === 0:
-                    colorName = colorName.replace('background-', 'background-md-');
+                    colorName = colorName.replace('color-', 'color-md-');
                     break;
             }
         }
     } else {
-        console.error('Check backgorund-colors props value');
+        console.error('Check colors stroke props value',colorValue);
     }
     // console.info('colorName',colorName);
     return colorName;

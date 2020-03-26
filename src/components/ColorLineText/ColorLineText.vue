@@ -1,7 +1,7 @@
 <script type="text/jsx">
-    import {getColorsCustomProps, getColorClassByProps} from "../../mixins/colorTextClassMixin.ts";
-    import {getFillClassByProps, fillColorProps} from "../../mixins/fillTextClassMixin.ts";
-    import {deviceTypeStore} from "../../stores/deviceTypeStoreMixin.ts";
+    import {getColorsCustomProps, getColorClassByProps} from "../../mixins/colorTextClassMixin.js";
+    import {getFillClassByProps, fillColorProps} from "../../mixins/fillTextClassMixin.js";
+    import {deviceTypeStore} from "../../stores/deviceTypeStoreMixin.js";
 
     const componentProps = {
 

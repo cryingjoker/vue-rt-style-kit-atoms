@@ -1,14 +1,26 @@
-// import Vue, { CreateElement, VNode } from "vue";
-import { Vue, Prop } from "vue-property-decorator";
+<script type="text/jsx">
+  export default {
+    name: "RtUssd",
+    props: {
+      phone: {
+        type: String,
+        default: ''
+      },
+      withoutLeftSpace: {
+        type: Boolean,
+        default: false
+      },
+      checkAfterTime: {
+        type: Number,
+        default: 0
+      },
+    },
+    data: () => ({
+      hasHtml: false,
+      telHtml: '',
+      tel: ''
+    }),
 
-class Ussd extends Vue {
-
-  @Prop({ default: null }) phone: String;
-  @Prop({ default: false }) withoutLeftSpace: Boolean;
-  @Prop({ default: 0 }) checkAfterTime: number;
-  private hasHtml: boolean = false;
-  private telHtml: string = '';
-  tel: String = "";
   mounted() {
     setTimeout(() => {
       let tel = "";
@@ -38,7 +50,7 @@ class Ussd extends Vue {
       }
       this.tel = tel;
     }, this.checkAfterTime);
-  }
+  },
   render() {
     let ussdClassName = "rt-ussd";
     if (this.withoutLeftSpace) {
@@ -67,9 +79,4 @@ class Ussd extends Vue {
   }
 }
 
-export default {
-  component: Ussd,
-  name: "RtUssd"
-};
-
-
+</script>

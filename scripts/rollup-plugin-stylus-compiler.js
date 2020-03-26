@@ -14,19 +14,16 @@ module.exports = function (options = {}) {
     return {
         name: 'rollup-plugin-stylus-compiler',
         resolveId(importee, importer) {
-            console.info('&&& resolveId')
             if (compiledCache[importee+'.css']) {
                 return compiledCache[importee]
             }
         },
         load(id) {
-            console.info('&&& load')
             if (compiledCache[id+'.css']) {
                 return compiledCache[id]
             }
         },
         transform(code, id) {
-            console.info('&&& transform',id)
             if (!filter(id)) return
             return new Promise(function (resolve, reject) {
                 const relativePath = path.relative(process.cwd(), id)

@@ -1,8 +1,8 @@
 <script type="text/jsx">
 
 
-    import {getSpacesClass, spacesParamsNames, spacesParamsProps} from "../../mixins/spaceClassMixin.ts";
-    import {getDisplayClass, displayParamsNames, displayParamsProps} from "../../mixins/displayClassMixin.ts";
+    import {getSpacesClass, spacesParamsNames, spacesParamsProps} from "../../mixins/spaceClassMixin.js";
+    import {getDisplayClass, displayParamsNames, displayParamsProps} from "../../mixins/displayClassMixin.js";
 
     const componentProps = {
         size: {

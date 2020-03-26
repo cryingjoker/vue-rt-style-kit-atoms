@@ -1,5 +1,5 @@
-export const displayParamsNames : string[] = ["display", "tabletDisplay", "mobileDisplay"];
-export const displayParamsProps : any = {
+export const displayParamsNames  = ["display", "tabletDisplay", "mobileDisplay"];
+export const displayParamsProps  = {
     display: {
         type: String,
         default: null
@@ -13,7 +13,7 @@ export const displayParamsProps : any = {
         default: null
     }
 };
-export function getDisplayClass(name: string, value:string) : string {
+export function getDisplayClass(name, value) {
 
 
     const classNamesParts = [];

@@ -1,20 +1,18 @@
-import colors from '../color.json'
+import { default as colors }  from '../color.json'
+export const fillPropsNames = ['fillColor',   'tabletFillColor',  'mobileFillColor'];
 
-
-export const strokePropsNames: string[] = ['strokeColor',   'tabletStrokeColor',  'mobileStrokeColor'];
-
-export const strokeColorProps: any = {
-    strokeColor: {
+export const fillColorProps = {
+    fillColor: {
         type: String,
         default: ''
     },
 
-    tabletStrokeColor: {
+    tabletFillColor: {
         type: String,
         default: ''
     },
 
-    mobileStrokeColor: {
+    mobileFillColor: {
         type: String,
         default: ''
     }
@@ -24,21 +22,26 @@ export const strokeColorProps: any = {
 
 // type deviceType = "mobile" | "desktop" | "tablet";
 
-const deviceTypeArray: any = ["mobile", "desktop", "tablet"];
+const deviceTypeArray = ["mobile", "desktop", "tablet"];
 
-export function getStrokeClassByProps() {
-
-
-    const classNames = strokePropsNames.map((key) => {
-        const classes = getStrokeClass(this[key], key.replace(/strokecolor/gi, ''));
+export function getFillClassByProps(oldProps) {
+    const classNames = fillPropsNames.map((key) => {
+        let classes;
+        if(oldProps && oldProps[key]){
+            classes = getFillClass(this[oldProps[key]], key.replace(/fillcolor/gi, ''));
+        }
+        else{
+            classes = getFillClass(this[key], key.replace(/fillcolor/gi, ''));
+        }
         return classes;
     })
+
     return classNames
 
 }
 
-export function getStrokeClass(colorValue: string = '', type: string = 'desktop'): string {
-    // console.info('getStrokeClass',colorValue,type);
+export function getFillClass(colorValue = '', type = 'desktop') {
+    // console.info('getFillClass',colorValue,type);
     if(!colorValue || colorValue.length === 0){
         return ''
     }
@@ -79,10 +82,10 @@ export function getStrokeClass(colorValue: string = '', type: string = 'desktop'
     if (colorName) {
         switch (true) {
             case colorName.search('b2c-') >= 0:
-                colorName = 'stroke-color-' + colorName.replace('b2c-', '');
+                colorName = 'fill-color-' + colorName.replace('b2c-', '');
                 break;
             case colorName.search('main-') >= 0:
-                colorName = 'stroke-color-' + colorName.replace('-color', '');
+                colorName = 'fill-color-' + colorName.replace('-color', '');
                 break
         }
         ;
@@ -97,7 +100,7 @@ export function getStrokeClass(colorValue: string = '', type: string = 'desktop'
             }
         }
     } else {
-        console.error('Check colors stroke props value',colorValue);
+        console.error('Check colors fill props value',colorValue);
     }
     // console.info('colorName',colorName);
     return colorName;

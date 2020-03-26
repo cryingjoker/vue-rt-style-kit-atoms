@@ -1,7 +1,7 @@
 import  "./css/vue-rt-style-atoms.styl";
 import Global from "./variables.json";
 // import Project from "@projectAtoms";
-import Project from './package.json'
+import Project from '../package.json'
 
 import {
     Button,
@@ -31,33 +31,34 @@ import {
 // import 'element-closest-polyfill';
 // import 'nodelist-foreach-polyfill';
 // import 'element-remove';
+
 import {
     fontColorPropsNames,
     fontColorProps,
     getColorsCustomProps,
     getColorClassByProps,
     getColorClass
-} from "./mixins/colorTextClassMixin.ts";
-import {fillPropsNames, fillColorProps, getFillClassByProps, getFillClass} from "./mixins/fillTextClassMixin.ts";
-import {spacesParamsNames, spacesParamsProps, getSpacesClass} from "./mixins/spaceClassMixin.ts";
-import {displayParamsNames, displayParamsProps, getDisplayClass} from "./mixins/displayClassMixin.ts";
+} from "./mixins/colorTextClassMixin.js";
+import {fillPropsNames, fillColorProps, getFillClassByProps, getFillClass} from "./mixins/fillTextClassMixin.js";
+import {spacesParamsNames, spacesParamsProps, getSpacesClass} from "./mixins/spaceClassMixin.js";
+import {displayParamsNames, displayParamsProps, getDisplayClass} from "./mixins/displayClassMixin.js";
 import {
     strokePropsNames,
     strokeColorProps,
     getStrokeClassByProps,
     getStrokeClass
-} from "./mixins/strokeTextClassMixin.ts";
+} from "./mixins/strokeTextClassMixin.js";
 
 import {
     deviceTypeStore
-} from "./stores/deviceTypeStoreMixin.ts";
+} from "./stores/deviceTypeStoreMixin.js";
 
 import {
     backgroundColorPropsNames,
     backgroundColorProps,
     getBackgroundClassByProps,
     getBackgroundClass
-} from "./mixins/backgroundColorTextClassMixin.ts";
+} from "./mixins/backgroundColorTextClassMixin.js";
 
 let VueRtStyle = {
     install(Vue, config) {
@@ -81,7 +82,7 @@ let VueRtStyle = {
             Vue.component(TextareaStatic.name, TextareaStatic);
             Vue.component(Annotation.name, Annotation);
             Vue.component(ColorLineText.name, ColorLineText);
-            // Vue.component(Ussd.name, Ussd.component);
+            Vue.component(Ussd.name, Ussd);
             Vue.component(GridRow.name, GridRow);
             Vue.component(GridColumn.name, GridColumn);
             Vue.RtStyleAtoms = true;

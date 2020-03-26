@@ -9,7 +9,8 @@ const flow = require('rollup-plugin-flow-no-whitespace')
 const postcss = require('rollup-plugin-postcss')
 const postcssEnv = require('postcss-preset-env');
 const externals = require('rollup-plugin-node-externals')
-const typescript = require('@rollup/plugin-typescript');
+// const typescript = require('@rollup/plugin-typescript');
+// const typescript = require('rollup-plugin-typescript2');
 const stylusCompilerPlugin = require('./rollup-plugin-stylus-compiler');
 const stylusMixin = require('./stylus-mixin')
 const terser = require("rollup-plugin-terser").terser;
@@ -58,21 +59,19 @@ function genConfig(name = 'web-full-prod') {
         plugins: [
 
             flow(),
-            json(),
-            typescript({module: 'es2020'}),
 
+            json(),
             externals({
                 include: [
                     'vue',
                     'vue-validate'
                 ]
             }),
+
             stylusCompilerPlugin({
                 fn: stylusMixin,
             }),
-            // babel({
-            //     babelrc: true
-            // }),
+
             postcss({
                 inject: false,
                 minimize: true,
@@ -88,7 +87,13 @@ function genConfig(name = 'web-full-prod') {
                     cssnano()
                 ],
             }),
+            // typescript(),
             babelCompilerPlugin(),
+            // babel({
+            //     babelrc: true
+            // }),
+
+            cjs(),
 
 
 
@@ -99,7 +104,7 @@ function genConfig(name = 'web-full-prod') {
 
             terser(),
 
-            cjs(),
+
             vue(),
 
 

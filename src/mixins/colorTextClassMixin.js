@@ -1,9 +1,7 @@
 import colors from '../color.json'
+export const fontColorPropsNames = ['fontColor', 'labelColor', 'contentColor', 'tabletFontColor', 'tabletLabelColor', 'tabletContentColor', 'mobileFontColor', 'mobileLabelColor', 'mobileContentColor']
 
-
-export const fontColorPropsNames: string[] = ['fontColor', 'labelColor', 'contentColor', 'tabletFontColor', 'tabletLabelColor', 'tabletContentColor', 'mobileFontColor', 'mobileLabelColor', 'mobileContentColor']
-
-export const fontColorProps: any = {
+export const fontColorProps = {
     fontColor: {
         type: String,
         default: ''
@@ -43,7 +41,7 @@ export const fontColorProps: any = {
 }
 
 
-export function getColorsCustomProps(withLabelAndContent: boolean = false) {
+export function getColorsCustomProps(withLabelAndContent = false) {
     const newProps = {};
     getFontColorPropsKeys(withLabelAndContent).forEach((key) => {
         newProps[key] = fontColorProps[key]
@@ -54,9 +52,9 @@ export function getColorsCustomProps(withLabelAndContent: boolean = false) {
 
 // type deviceType = "mobile" | "desktop" | "tablet";
 
-const deviceTypeArray: any = ["mobile", "desktop", "tablet"];
+const deviceTypeArray = ["mobile", "desktop", "tablet"];
 
-export function getColorClassByProps(withLabelAndContent: boolean) {
+export function getColorClassByProps(withLabelAndContent) {
     const fontColorPropsKeys = getFontColorPropsKeys(withLabelAndContent);
     if (withLabelAndContent) {
         const fontColorPropsKeysByType = {
@@ -76,7 +74,6 @@ export function getColorClassByProps(withLabelAndContent: boolean) {
             classObjects[key] = fontColorPropsKeysByType[key].map(key => getColorClass(this[key], key.replace(/(labelcolor)|(contentcolor)/gi, ''))).filter((item)=>item && item.length > 0)
         });
         return classObjects;
-
     } else {
         const classNames = fontColorPropsKeys.map((key) => {
             const classes = getColorClass(this[key], key.replace(/fontcolor/gi, ''));
@@ -84,10 +81,11 @@ export function getColorClassByProps(withLabelAndContent: boolean) {
         })
         return classNames
     }
-
 }
 
-export function getColorClass(colorValue: string = '', type: string = 'desktop'): string {
+
+
+export function getColorClass(colorValue = '', type = 'desktop') {
 
     if(!colorValue || colorValue.length === 0){
         return ''
@@ -134,8 +132,7 @@ export function getColorClass(colorValue: string = '', type: string = 'desktop')
             case colorName.search('main-') >= 0:
                 colorName = 'color-' + colorName.replace('-color', '');
                 break
-        }
-        ;
+        };
         if (type) {
             switch (true) {
                 case type.search('tablet') === 0:
