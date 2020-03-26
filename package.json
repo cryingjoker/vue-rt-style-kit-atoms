@@ -91,7 +91,6 @@
     "stylus-loader": "^3.0.2",
     "stylus-supremacy": "^2.12.7",
     "terser": "^4.6.6",
-    "ts-debounce": "^1.0.0",
     "ts-loader": "^6.0.4",
     "typescript": "^3.8.3",
     "uglifyjs-webpack-plugin": "^2.2.0",

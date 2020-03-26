@@ -1,6 +1,6 @@
 import getVariable from '../mixins/variablesMixin';
 import Vue from 'vue';
-import { debounce } from 'ts-debounce';
+import { debounce } from 'debounce';
 
 const possibleTypes = ['desktop', 'tablet', 'mobile'];
 const tabletUpperLimit = getVariable('tabletUpperLimit');
