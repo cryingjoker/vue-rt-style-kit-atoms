@@ -41,7 +41,7 @@ const builds = {
         // dest: [resolve('lib/vue-rt-style-kit-atoms.js'),resolve('lib/vue-rt-style-kit-atoms.js')],
         destCss: resolve('lib/vue-rt-style-kit-atoms.css'),
         destCssPath: resolve('lib/'),
-        // format: 'umd',
+        format: 'umd',
         env: 'production',
         sourcemap: true,
         banner,
@@ -65,6 +65,9 @@ function genConfig(name = 'web-full-prod') {
                 include: [
                     'vue',
                     'vue-validate'
+                ],
+                exclude:[
+                    'debounce'
                 ]
             }),
 
@@ -88,12 +91,12 @@ function genConfig(name = 'web-full-prod') {
                 ],
             }),
             // typescript(),
-            babelCompilerPlugin(),
-            // babel({
-            //     babelrc: true
-            // }),
+            // babelCompilerPlugin(),
+            babel({
+                babelrc: true
+            }),
 
-            cjs(),
+
 
 
 
@@ -106,6 +109,7 @@ function genConfig(name = 'web-full-prod') {
 
 
             vue(),
+            cjs(),
 
 
         ].concat(opts.plugins || []),
