@@ -178,7 +178,7 @@
                     /(\d)(?=(\d\d\d)+([^\d]|$))/g,
                     "$1 "
                 ).trim();
-              normalizeOldValue =  parseInt(this.oldValue.toString(), 10).toString().replace(
+              this.normalizeOldValue =  parseInt(this.oldValue.toString(), 10).toString().replace(
                       /(\d)(?=(\d\d\d)+([^\d]|$))/g,
                       "$1 "
               ).trim();
