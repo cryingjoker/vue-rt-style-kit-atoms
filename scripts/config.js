@@ -36,12 +36,23 @@ const banner =
 const builds = {
     'web-full-prod': {
         entry: resolve('src/index.js'),
-        // entry: [resolve('src/index.js'),resolve('src/css/vue-rt-style-atoms.styl')],
         dest: resolve('lib/vue-rt-style-kit-atoms.js'),
-        // dest: [resolve('lib/vue-rt-style-kit-atoms.js'),resolve('lib/vue-rt-style-kit-atoms.js')],
         destCss: resolve('lib/vue-rt-style-kit-atoms.css'),
         destCssPath: resolve('lib/'),
         format: 'umd',
+        env: 'production',
+        sourcemap: true,
+        banner,
+        external: ['vee-validate'],
+        assetPath: resolve('lib'),
+
+    },
+    'web-es-full-prod': {
+        entry: resolve('src/index.js'),
+        dest: resolve('lib/vue-rt-style-kit-atoms.esm.js'),
+        destCss: resolve('lib/vue-rt-style-kit-atoms.css'),
+        destCssPath: resolve('lib/'),
+        format: 'es',
         env: 'production',
         sourcemap: true,
         banner,
@@ -154,4 +165,4 @@ function genConfig(name = 'web-full-prod') {
     }
 }
 
-module.exports = genConfig(process.env.TARGET)
+module.exports = genConfig
