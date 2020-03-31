@@ -19,6 +19,8 @@ const cssnano = require('cssnano')
 const version = process.env.VERSION || require('../package.json').version
 const aliases = {}
 const json = require('rollup-plugin-json');
+const alias = require('@rollup/plugin-alias');
+
 const resolve = p => {
     const base = p.split('/')[0]
     if (aliases[base]) {
@@ -68,7 +70,10 @@ function genConfig(name = 'web-full-prod') {
         input: opts.entry,
         external: opts.external,
         plugins: [
-
+            alias({
+                entries: [
+                    { find: '@projectAtoms', replacement: '../package.json' },
+                ]}),
             flow(),
 
             json(),
