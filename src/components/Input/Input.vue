@@ -622,7 +622,7 @@
                             ref="input"
                             autocomplete={this.autocomplete}
                             autocapitalize="off"
-                            type={this.type}
+                            type={this.type === 'search' ? 'text' : this.type}
                             class="input-element"
                             name={this.fieldName}
                             onInput={this.inputHandler}
