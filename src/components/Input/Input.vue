@@ -545,7 +545,7 @@
                 if (this.type === "search" && !this.hasInputText) {
                     return <div class="password-icon" onClick={this.focusInput}>
                         <svg viewBox="0 0 20 30" xmlns="http://www.w3.org/2000/svg" style="height: 20px;" class="password-icon__icon">
-                            <g stroke="#575D68" stroke-width="2" fill="none" fill-rule="evenodd"
+                            <g stroke="#575D68" stroke-width="1.4" fill="none" fill-rule="evenodd"
                                 stroke-linecap="round">
                                 <path d="M19.129,18.164l-4.518-4.52c1.152-1.373,1.852-3.143,1.852-5.077c0-4.361-3.535-7.896-7.896-7.896
                                     c-4.361,0-7.896,3.535-7.896,7.896s3.535,7.896,7.896,7.896c1.934,0,3.705-0.698,5.078-1.853l4.52,4.519
@@ -622,7 +622,7 @@
                             ref="input"
                             autocomplete={this.autocomplete}
                             autocapitalize="off"
-                            type={this.type}
+                            type={this.type === 'search' ? 'text' : this.type}
                             class="input-element"
                             name={this.fieldName}
                             onInput={this.inputHandler}
