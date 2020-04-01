@@ -82,22 +82,31 @@
                 switch (true) {
                     case this.hasError:
                         selectClasses.push("select--error text-field--error");
+                        break;
                     case this.isOpen:
                         selectClasses.push("select--is-open");
+                        break;
                     case this.resetWrapperWidth:
                         selectClasses.push("select--is-reset-width");
+                        break;
                     case Boolean(this.disabled):
                         selectClasses.push("select--disabled");
+                        break;
                     case this.isOpenListOnTop:
                         selectClasses.push("select--invert-open-list");
+                        break;
                     case this.isB2bSelect:
                         selectClasses.push("rtb-select");
+                        break;
                     case this.outlined:
                         selectClasses.push("rtb-select--outlined");
+                        break;
                     case this.multi:
                         selectClasses.push("rtb-select--multi");
-                    case this.hasContentText:
-                        selectClasses.push("rt-select--has-content");
+                        break;
+                }
+                if(this.hasContentText) {
+                    selectClasses.push("rt-select--has-content")
                 }
                 return selectClasses.join(' ');
             },
