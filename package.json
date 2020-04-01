@@ -6,7 +6,7 @@
   "style": "lib/vue-rt-style-kit-atoms.css",
   "scripts": {
     "start": "node bin/local/index.js",
-    "build": "cross-env NODE_ENV=production webpack --config ./bin/webpack.config.lib.js"
+    "build": "node  scripts/build.js"
   },
   "type": "module",
   "repository": {
