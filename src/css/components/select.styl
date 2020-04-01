@@ -169,6 +169,29 @@
       &:checked+.select-option__checked-sign
         opacity 1
 
+.{newAppName}-select--has-content
+  height auto!important
+  left -20px
+  width calc(100% + 40px)
+  padding 0 20px
+  font-size 16px
+  .select-list
+    left 0
+  .select-option
+    border-image-width 0
+    &--select
+      background-color b2c-purple
+      color b2c-white
+      .select-option__inner
+        font-weight 400
+    &:hover
+      background-color b2c-purple-high
+  .select-option__inner
+    padding 15px 20px
+    font-size 16px
+    border-image-width 0
+    outline none
+
 .{b2bAppName}-select
   height 60px !important
   background-color b2c-white
