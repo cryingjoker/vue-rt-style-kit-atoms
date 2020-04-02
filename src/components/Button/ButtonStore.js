@@ -4,7 +4,6 @@ const idsButtons = [];
 const groupsButton = {};
 const buttonsData = {};
 const init = (_id, group = '', data)=>{
-  console.info('_id',_id)
   return new Promise((resolve)=> {
     if (idsButtons.indexOf(_id) < 0) {
       idsButtons.push(_id)
