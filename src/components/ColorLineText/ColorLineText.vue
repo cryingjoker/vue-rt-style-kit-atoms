@@ -163,7 +163,7 @@
 
                 if (!this.isMobile) {
                     if (this.$slots.content) {
-                        return <p class="color-line color-line--is-paragraph rt-space-bottom">
+                        return <p class="color-line color-line--is-paragraph">
           <span
               class={this.contentClass}>{this.$slots.content}{icon()}</span>
                         </p>;
@@ -172,7 +172,7 @@
                     }
                 } else {
                     if (this.$slots.content) {
-                        return <p class="color-line color-line--is-paragraph rt-space-bottom"> <span
+                        return <p class="color-line color-line--is-paragraph"> <span
                             class={this.contentClass}>{this.$slots.content}</span>
                         </p>
                     } else {
