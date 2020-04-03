@@ -58,6 +58,7 @@ import {
     getBackgroundClassByProps,
     getBackgroundClass
 } from "./mixins/backgroundColorTextClassMixin.js";
+import getVariable from "./mixins/variablesMixin.js";
 
 let VueRtStyle = {
     install(Vue, config) {
@@ -171,7 +172,8 @@ export {
     getBackgroundClassByProps,
     getBackgroundClass,
 
-    deviceTypeStore
+    deviceTypeStore,
+    getVariable
 }
 
 
