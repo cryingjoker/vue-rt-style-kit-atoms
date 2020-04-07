@@ -24,6 +24,14 @@ class StorePrototype {
         });
     }
 
+    runWatchersById = (id) => {
+        if(this.watchers[id]) {
+            Object.values(this.watchers[id]).forEach((fn) => {
+                fn.call();
+            });
+        }
+    }
+
     removeWatcher = id => {
         delete this.watchers[id];
         this.eventListener(Object.keys(this.watchers).length > 0);

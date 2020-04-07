@@ -48,10 +48,8 @@ import {
     getStrokeClass
 } from "./mixins/strokeTextClassMixin.js";
 
-import {
-    deviceTypeStore
-} from "./stores/deviceTypeStoreMixin.js";
-
+import {deviceTypeStore} from "./stores/deviceTypeStoreMixin.js";
+import {viewportPositionStore} from "./stores/viewportPositionStoreMixin";
 import {
     backgroundColorPropsNames,
     backgroundColorProps,
@@ -59,6 +57,7 @@ import {
     getBackgroundClass
 } from "./mixins/backgroundColorTextClassMixin.js";
 import getVariable from "./mixins/variablesMixin.js";
+
 
 let VueRtStyle = {
     install(Vue, config) {
@@ -172,8 +171,12 @@ export {
     getBackgroundClassByProps,
     getBackgroundClass,
 
+
+    viewportPositionStore,
     deviceTypeStore,
-    getVariable
+    getVariable,
 }
+
+console.info('@@@@@viewportPositionStore',viewportPositionStore)
 
 
