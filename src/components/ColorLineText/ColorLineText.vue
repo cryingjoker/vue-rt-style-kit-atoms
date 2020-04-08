@@ -122,39 +122,32 @@
                             <path d="M33.5561211,0 L0,0 L22.4131224,22.4131038 L36.5337472,6.67090677 C38.0088483,5.0264093 37.8715254,2.49747501 36.2270279,1.02237393 C35.4931384,0.36408091 34.5419931,0 33.5561211,0 Z" id="Path"  transform={this.bottomPartTransform}></path>
                         </g>
                     </g>
-                </svg>
-                return <svg
-                    class={this.colorLineIconClass}
-                    width="38"
-                    height="23"
-                    viewBox="0 0 38 23"
-                >
-                    <path
-                        class="color-line-paragraph-icon__background"
+                </svg>;
+                return <svg class={this.colorLineIconClass}
+                            width="38"
+                            height="23"
+                            viewBox="0 0 38 23">
+                    <path class="color-line-paragraph-icon__background"
                         d="M33-1.0172375h-45V.04327594l43.7946512.04908113v7.93806336l1.4849033-.08350525c2.6481474-.14892161 4.7192255-2.33971054 4.7192629-4.99204202L38-0.0172375c.0000389-2.7614238-2.2385058-5.0000315-4.9999296-5.0000704H33z"
-                        transform={this.topPartTransform}
-                    />
-                    <path
-                        d="M33.5561211 0H0l22.4131224 22.4131038L36.5337472 6.67090677c1.4751011-1.64449747 1.3377782-4.17343176-.3067193-5.64853284C35.4931384.36408091 34.5419931 0 33.5561211 0z"
-                        transform={this.bottomPartTransform}
-                    />
+                        transform={this.topPartTransform}/>
+                    <path d="M33.5561211 0H0l22.4131224 22.4131038L36.5337472 6.67090677c1.4751011-1.64449747 1.3377782-4.17343176-.3067193-5.64853284C35.4931384.36408091 34.5419931 0 33.5561211 0z"
+                        transform={this.bottomPartTransform}/>
                 </svg>;
             };
 
             const label = () => {
-                const labelClasses = ['rt-font-banner-label', 'color-line', 'color-line-label']
+                const labelClasses = ['rt-font-banner-label', 'color-line', 'color-line-label'];
                 if (this.$slots.content && !this.isMobile) {
                     return <p class={labelClasses.join(' ')}>
-        <span class={this.labelClass}
-        >{this.$slots.label}</span>
+                        <span class={this.labelClass}>{this.$slots.label}</span>
                     </p>;
                 } else {
                     if(!this.$slots.content){
                         labelClasses.push('color-line-label-single');
                     }
                     return <p class={labelClasses.join(' ')}>
-        <span class={this.labelClass}
-        >{this.$slots.label} {icon()}</span>
+                        <span class={this.labelClass}>{this.$slots.label}</span>
+                        {icon()}
                     </p>;
                 }
             };
@@ -164,16 +157,15 @@
                 if (!this.isMobile) {
                     if (this.$slots.content) {
                         return <p class="color-line color-line--is-paragraph">
-          <span
-              class={this.contentClass}>{this.$slots.content}{icon()}</span>
+                            <span class={this.contentClass}>{this.$slots.content}{icon()}</span>
                         </p>;
                     } else {
                         return null;
                     }
                 } else {
                     if (this.$slots.content) {
-                        return <p class="color-line color-line--is-paragraph"> <span
-                            class={this.contentClass}>{this.$slots.content}</span>
+                        return <p class="color-line color-line--is-paragraph">
+                            <span class={this.contentClass}>{this.$slots.content}</span>
                         </p>
                     } else {
                         return null;
