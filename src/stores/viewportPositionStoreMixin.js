@@ -40,25 +40,29 @@ class ViewportPositionStore extends StorePrototype {
     checkPosition = (id) => {
 
         const el = this.$els[id].el;
-        const rect = el.getClientRects()[0];
-        let viewPortDelta;
-        if(rect.top > 0){
-          if(this.viewportH > rect.top){
-            viewPortDelta = 0
-          }else {
-            viewPortDelta = rect.top / this.viewportH  - 1;
-          }
-        }else{
-          if(Math.abs(rect.top) < rect.height){
-            viewPortDelta = 0
-          }else{
-            viewPortDelta = (Math.abs(rect.top) - rect.height) / this.viewportH
-          }
-        }
-        viewPortDelta = viewPortDelta.toFixed(2)
-        if(this.$els[id].position != viewPortDelta) {
-          this.$els[id].position = viewPortDelta
-          this.runWatchersById(id);
+        if(el) {
+            const rect = el.getClientRects()[0];
+            if(rect) {
+                let viewPortDelta;
+                if (rect.top > 0) {
+                    if (this.viewportH > rect.top) {
+                        viewPortDelta = 0
+                    } else {
+                        viewPortDelta = rect.top / this.viewportH - 1;
+                    }
+                } else {
+                    if (Math.abs(rect.top) < rect.height) {
+                        viewPortDelta = 0
+                    } else {
+                        viewPortDelta = (Math.abs(rect.top) - rect.height) / this.viewportH
+                    }
+                }
+                viewPortDelta = viewPortDelta.toFixed(2)
+                if (this.$els[id].position != viewPortDelta) {
+                    this.$els[id].position = viewPortDelta
+                    this.runWatchersById(id);
+                }
+            }
         }
 
     }
