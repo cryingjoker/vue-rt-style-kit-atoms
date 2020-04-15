@@ -21,6 +21,10 @@
         hideArrow: {
             type: Boolean,
             default: false
+        },
+        isAdvertise: {
+            type: Boolean,
+            default: false
         }
     };
 
@@ -172,7 +176,7 @@
                     }
                 }
             };
-            return <div class="color-line-wrapper">
+            return <div class={"color-line-wrapper" + (this.isAdvertise ? " color-line-wrapper--is-advertise" : "")}>
                 {label()}
                 {content()}
             </div>;
