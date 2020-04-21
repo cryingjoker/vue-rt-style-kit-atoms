@@ -81,14 +81,13 @@
     opacity 0
     visibility hidden
     position absolute
-    bottom -17px
+    transform translateY(100%)
+    bottom: 0
     left 0
     transition-timing-function ease-in-out
     transition-duration .4s
     transition-property opacity, visibility
 
-    &--has-label
-      bottom -20px
 
     .text-field--error &
       opacity 1
