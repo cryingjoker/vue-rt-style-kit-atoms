@@ -177,6 +177,5 @@ export {
     getVariable,
 }
 
-console.info('@@@@@viewportPositionStore',viewportPositionStore)
 
 
