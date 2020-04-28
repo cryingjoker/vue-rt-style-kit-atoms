@@ -126,18 +126,14 @@
         mounted: function () {
             this.isActiveLocal = this.isActive;
             this.hide = this.$el.disabled || this.isDisabled;
-            if (this.ga) {
-                this.activateEventToLink('b2c', this.ga);
-            }
-            if (this.gaB2b) {
-                this.activateEventToLink('b2b', this.gaB2b);
+            if (this.ga || this.gaB2b) {
+                this.activateEventToLink(this.ga);
             }
             if (this.checkboxBehavior) {
                 buttonsStore.init(this._uid, this.radioGroupName, {isActiveLocal: this.isActiveLocal}).then(() => {
                     buttonsStore.addWatcher(this._uid, this.getStatusActive.bind(this), this.clearStatusActive.bind(this))
                 })
             }
-
         },
         methods: {
             clearStatusActive() {
@@ -159,38 +155,15 @@
                     buttonsStore.changeStatus(this._uid, {isActiveLocal: true})
                 }
             },
-            activateEventToLink(typeEvent, ga) {
-
+            activateEventToLink(ga) {
                 if (this.$refs && this.$refs["button"]) {
                     const button = this.$refs["button"];
-                    if (button.parentElement.tagName.toLocaleLowerCase() === "a") {
-                        button.parentElement.addEventListener("click", (e) => {
-                            if (!this.$el.getAttribute("data-ga-pushed")) {
-                                // e.preventDefault();
-                                if (!window.dataLayer) {
-                                    window.dataLayer = [];
-                                }
-                                window.dataLayer.push({
-                                    event: typeEvent,
-                                    button: button.innerText
-                                });
-                            }
-                        }, false);
-                    } else {
-                        button.addEventListener("click", (e) => {
-                            if (!this.$el.getAttribute("data-ga-pushed")) {
-                                if (!window.dataLayer) {
-                                    window.dataLayer = [];
-                                }
-                                window.dataLayer.push({
-                                    event: typeEvent,
-                                    button: button.innerText
-                                });
-
-                            }
-                        }, false);
-
-                    }
+                    button.addEventListener("click", (e) => {
+                        if (!window.dataLayer) {
+                            window.dataLayer = [];
+                        }
+                        window.dataLayer.push(ga);
+                    }, false);
                 }
             }
         },
@@ -210,39 +183,31 @@
             })();
             const content = () => {
                 if (this.checkboxBehavior) {
-                    return (
-
-                        <rt-ripple notRender={this.hide} twiceRender={true}>
-                            {spinner}
-                            {this.isActiveLocal ? this.$slots.active : this.$slots.not_active}
-                        </rt-ripple>
-                    );
+                    return <rt-ripple notRender={this.hide} twiceRender={true}>
+                        {spinner}
+                        {this.isActiveLocal ? this.$slots.active : this.$slots.not_active}
+                    </rt-ripple>;
                 } else {
                     if (this.hasIcon) {
-                        return (
-
-                            <rt-ripple notRender={this.hide} twiceRender={true}>
-                                {icon}
-                                {spinner}
-                                {buttonTextContent}
-                            </rt-ripple>
-                        );
+                        return <rt-ripple notRender={this.hide} twiceRender={true}>
+                            {icon}
+                            {spinner}
+                            {buttonTextContent}
+                        </rt-ripple>;
                     } else {
-                        return (
-                            <rt-ripple notRender={this.hide} twiceRender={true} waitParentClicked={true}>
-                                {spinner}
-                                {this.$slots.default}
-                            </rt-ripple>
-                        );
+                        return <rt-ripple notRender={this.hide} twiceRender={true} waitParentClicked={true}>
+                            {spinner}
+                            {this.$slots.default}
+                        </rt-ripple>;
                     }
                 }
             }
             if(this.href.length > 0){
-                return <a href={this.href} target={this.target} class={this.buttonClass} onClick={this.triggerClick}>
+                return <a href={this.href} target={this.target} class={this.buttonClass} onClick={this.triggerClick} ref="button">
                     {content()}
                 </a>
             }else {
-                return <button class={this.buttonClass} onClick={this.triggerClick}>{content()} </button>
+                return <button class={this.buttonClass} onClick={this.triggerClick} ref="button">{content()} </button>
             }
         }
     };
