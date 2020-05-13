@@ -81,6 +81,15 @@
         watch: {
             localValue(val) {
                 this.$emit("change", val);
+            },
+            value(val,a){
+              if(val != this.localValue){
+                this.localValue = val;
+                setTimeout(()=>{
+                  this.calculateHeight()
+	                this.setValueLength()
+                },0)
+              }
             }
         },
         mounted: function () {
