@@ -87,6 +87,9 @@
             this.localValue = this.value;
             this.setValueLength();
             this.setDisabled();
+            if(this.localValue?.length > 0){
+              this.calculateHeight()
+            }
         },
         methods: {
 
