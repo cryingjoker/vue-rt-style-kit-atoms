@@ -44,22 +44,22 @@ h1,
 .{newAppName}-font-h1
   font-size 50px
   line-height 60px
-  font-weight 200
+  font-weight 500
 
   @media (max-width: laptop-upper-limit)
     font-size 44px
-    line-height 54px
+    line-height 52px
 
   @media (max-width: tablet-upper-limit)
     font-size 36px
-    line-height 46px
+    line-height 44px
 
   @media (max-width: mobile-upper-limit)
     font-size 28px
-    line-height 34px
-  .{newAppName}-card &
-    font-size 50px
-    line-height 60px
+    line-height 32px
+  //.{newAppName}-card &
+  //  font-size 50px
+  //  line-height 60px
 
 .{newAppName}-font-banner-label
   font-size 50px
@@ -68,15 +68,15 @@ h1,
 
   @media (max-width: laptop-upper-limit)
     font-size 44px
-    line-height 54px
+    line-height 52px
 
   @media (max-width: tablet-upper-limit)
     font-size 36px
-    line-height 46px
+    line-height 44px
 
   @media (max-width: mobile-upper-limit)
     font-size 28px
-    line-height 36px
+    line-height 32px
 
 .{newAppName}-font-banner-label-bold
   font-size 48px
@@ -88,7 +88,7 @@ h1,
 
 .{newAppName}-font-banner-label-thin
   font-size 48px
-  line-height 63px
+  line-height 60px
   font-weight 200
 
   @media (max-width: mobile-upper-limit)
@@ -97,8 +97,8 @@ h1,
 h2,
 .{newAppName}-font-h2
   font-size 36px
-  line-height 46px
-  font-weight 200
+  line-height 44px
+  font-weight 500
 
   @media (max-width: laptop-upper-limit)
     font-size 32px
@@ -107,9 +107,9 @@ h2,
   @media (max-width: mobile-upper-limit)
     font-size 24px
     line-height 32px
-  .{newAppName}-card &
-    font-size 36px
-    line-height 46px
+  //.{newAppName}-card &
+  //  font-size 36px
+  //  line-height 46px
 
 .{newAppName}-font-promo-title
   font-size 36px
@@ -118,7 +118,7 @@ h3,
 .{newAppName}-font-h3
   font-size 28px
   line-height 36px
-  font-weight 200
+  font-weight 500
 
   @media (max-width: laptop-upper-limit)
     font-size 24px
@@ -126,10 +126,10 @@ h3,
 
   @media (max-width: mobile-upper-limit)
     font-size 22px
-    line-height 30px
-  .{newAppName}-card &
-    font-size 28px
-    line-height 36px
+    line-height 28px
+  //.{newAppName}-card &
+  //  font-size 28px
+  //  line-height 36px
 
 .{newAppName}-font-promo
   font-size 24px
@@ -140,18 +140,22 @@ h4,
 .{newAppName}-font-h4
   font-size 22px
   line-height 28px
-  font-weight 200
+  font-weight 500
 
   @media (max-width: laptop-upper-limit)
     font-size 20px
-    line-height 26px
+    line-height 24px
+
+  @media (max-width: tablet-upper-limit)
+    font-size 20px
+    line-height 24px
 
   @media (max-width: mobile-upper-limit)
     font-size 18px
     line-height 24px
-  .{newAppName}-card &
-    font-size 22px
-    line-height 28px
+  //.{newAppName}-card &
+  //  font-size 20px
+  //  line-height 28px
 
 strong,
 b,
@@ -170,47 +174,62 @@ b,
 .p1,
 .{newAppName}-font-paragraph
   font-size 18px
-  line-height 26px
-
-  @media (max-width: laptop-upper-limit)
-    font-size 16px
-    line-height 22px
-  .{newAppName}-card &
-    font-size 18px
-    line-height 26px
-
-.p2,
-.{newAppName}-font-small-paragraph
-  font-size 16px
   line-height 24px
 
   @media (max-width: laptop-upper-limit)
     font-size 16px
-    line-height 22px
+    line-height 20px
+  //.{newAppName}-card &
+  //  font-size 16px
+  //  line-height 20px
+
+.p2,
+.{newAppName}-font-small-paragraph
+  font-size 16px
+  line-height 20px
+
+  @media (max-width: laptop-upper-limit)
+    font-size 16px
+    line-height 20px
+
+  @media (max-width: tablet-upper-limit)
+    font-size 16px
+    line-height 20px
 
   @media (max-width: mobile-upper-limit)
     font-size 14px
-    line-height 18px
-  .{newAppName}-card &
-    font-size 16px
-    line-height 24px
+    line-height 16px
+
+  //.{newAppName}-card &
+  //  font-size 16px
+  //  line-height 20px
 
 .p3,
 .{newAppName}-font-control
   font-size 14px
-  line-height 18px
+  line-height 16px
+
+  @media (max-width: laptop-upper-limit)
+    font-size 14px
+    line-height 16px
+
+  @media (max-width: tablet-upper-limit)
+    font-size 14px
+    line-height 16px
 
   @media (max-width: mobile-upper-limit)
     font-size 12px
     line-height 16px
-  .{newAppName}-card &
-    font-size 14px
-    line-height 18px
+
+  //.{newAppName}-card &
+  //  font-size 14px
+  //  line-height 16px
 
 .p4,
 .{newAppName}-font-label
   font-size 12px
   line-height 16px
+
 
 .tagline,
 .{newAppName}-font-label-uppercase
@@ -250,9 +269,23 @@ b,
 .{newAppName}-font-link
   color inherit
   text-decoration underline
-
   &:hover
     color inherit
+
+.{newAppName}-font-link
+  font-size 16px
+  line-height 24px
+  @media (max-width: mobile-upper-limit)
+    font-size 14px
+    line-height 20px
+
+.{newAppName}-font-small-link
+  font-size 14px
+  line-height 20px
+  @media (max-width: mobile-upper-limit)
+    font-size 12px
+    line-height 16px
+
 
 .{newAppName}-td-font-left
   @media (max-width: tablet-upper-limit)
