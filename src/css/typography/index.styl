@@ -6,8 +6,15 @@ body
 
 .{newAppName}-font
   font-size 16px
-  line-height 1.5
+  line-height 24px
   font-weight 400
+  @media (max-width: laptop-upper-limit)
+    line-height 24px
+  @media (max-width: tablet-upper-limit)
+    line-height 24px
+  @media (max-width: mobile-upper-limit)
+    line-height: 20px
+
 
 .{newAppName}-font-dashed
   position: relative
