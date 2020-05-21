@@ -174,11 +174,15 @@ b,
 .p1,
 .{newAppName}-font-paragraph
   font-size 18px
-  line-height 24px
+  line-height 28px
+  &.{newAppName}-font-bold
+    line-height 24px
 
   @media (max-width: laptop-upper-limit)
     font-size 16px
     line-height 20px
+    &.{newAppName}-font-bold
+      line-height 20px
   //.{newAppName}-card &
   //  font-size 16px
   //  line-height 20px
@@ -186,19 +190,27 @@ b,
 .p2,
 .{newAppName}-font-small-paragraph
   font-size 16px
-  line-height 20px
+  line-height 24px
+  &.{newAppName}-font-bold
+    line-height 20px
 
   @media (max-width: laptop-upper-limit)
     font-size 16px
-    line-height 20px
+    line-height 24px
+    &.{newAppName}-font-bold
+      line-height 20px
 
   @media (max-width: tablet-upper-limit)
     font-size 16px
-    line-height 20px
+    line-height 24px
+    &.{newAppName}-font-bold
+      line-height 20px
 
   @media (max-width: mobile-upper-limit)
     font-size 14px
-    line-height 16px
+    line-height 20px
+    &.{newAppName}-font-bold
+      line-height 16px
 
   //.{newAppName}-card &
   //  font-size 16px
@@ -207,19 +219,27 @@ b,
 .p3,
 .{newAppName}-font-control
   font-size 14px
-  line-height 16px
+  line-height 20px
+  &.{newAppName}-font-bold
+    line-height 16px
 
   @media (max-width: laptop-upper-limit)
     font-size 14px
-    line-height 16px
+    line-height 20px
+    &.{newAppName}-font-bold
+      line-height 16px
 
   @media (max-width: tablet-upper-limit)
     font-size 14px
-    line-height 16px
+    line-height 20px
+    &.{newAppName}-font-bold
+      line-height 16px
 
   @media (max-width: mobile-upper-limit)
     font-size 12px
     line-height 16px
+    &.{newAppName}-font-bold
+      line-height 16px
 
   //.{newAppName}-card &
   //  font-size 14px
@@ -266,18 +286,6 @@ b,
 .{newAppName}-font-light
   font-weight 200
 
-.{newAppName}-font-link
-  color inherit
-  text-decoration underline
-  &:hover
-    color inherit
-
-.{newAppName}-font-link
-  font-size 16px
-  line-height 24px
-  @media (max-width: mobile-upper-limit)
-    font-size 14px
-    line-height 20px
 
 .{newAppName}-font-small-link
   font-size 14px
@@ -420,3 +428,4 @@ a
 
 .{newAppName}-va-top
   vertical-align: top
+
