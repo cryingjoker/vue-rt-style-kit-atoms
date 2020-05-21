@@ -136,7 +136,8 @@
         background-color rgba(b2c-orange, .4)
 
     &[disabled]
-      color main-color01
+
+      color main-color05
       border-color main-color01
       background-color: transparent
 
@@ -168,16 +169,18 @@
       background-color transparent
 
     &[disabled]
-      color main-color01
+      color main-color05
+      background-color: transparent
+      opacity: 1
+      .{newAppName}-dark-theme &
+        color b2c-white05
+        border-color b2c-white01
+        background-color: transparent
 
       &:hover
         @media (hover: hover)
           background-color transparent
 
-      .{newAppName}-dark-theme &
-        color b2c-white03 !important
-        border-color white
-        opacity 1
 
       .ripple-wave
         background-color b2c-cool-grey
@@ -230,21 +233,7 @@
   &-purple-border,
   &-transparent-purple
 
-    &[disabled]
-      color main-color01
-      border-color main-color01
 
-      .{newAppName}-dark-theme &
-        background-color: transparent
-        color b2c-white05
-        border-color b2c-white01
-        &:hover
-          @media (hover: hover)
-            background-color transparent
-
-      &:hover
-        @media (hover: hover)
-          background-color transparent
 
     &:hover
       @media (hover: hover)
@@ -262,7 +251,7 @@
         background-color main-color
 
     &[disabled]
-      color main-color01
+      color main-color05
       border-color main-color01
       background-color: transparent
       .{newAppName}-dark-theme &
@@ -293,14 +282,13 @@
       background-color transparent
 
 
+
       &:hover
         @media (hover: hover)
           background-color transparent
 
       .{newAppName}-dark-theme &
-        color b2c-white03 !important
-        border-color transparent
-        opacity 1
+        color hsl(rgba(b2c-white, .5))
 
       .ripple-wave
         background-color b2c-cool-grey
