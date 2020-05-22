@@ -192,11 +192,19 @@
       background-color b2c-white
     &:hover
       @media (hover: hover)
-        border-color b2c-white05
-        background-color b2c-white05
+        background-color hsl(rgba(main-color, .05))
+
+      .{newAppName}-dark-theme &
+        background-color main-color003-no-opacity
 
     &:active
-      background-color b2c-white05
+      background-color hsl(rgba(main-color, .1))
+      .{newAppName}-dark-theme &
+        background-color main-color03-no-opacity
+
+
+
+
 
     &[disabled]
       color main-color01
