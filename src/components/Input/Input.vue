@@ -522,7 +522,7 @@
                                     <path d="M3.333 1C4.838 3.687 7.06 5.031 10 5.031S15.162 3.687 16.667 1M10 7.667v1.25M14.396 6.833l.572
               1.031M5.801 6.833L5.23 7.864M17.5 4.333l.833.834M2.5 4.333l-.833.834"/>
                                 </g>
-                            </svg>i
+                            </svg>
                         </div>;
                     } else {
                         return <div class="password-icon" onClick={this.togglePasswordVisibility}>
