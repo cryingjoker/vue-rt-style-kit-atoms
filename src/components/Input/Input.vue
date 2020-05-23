@@ -146,8 +146,8 @@
             return {
                 index: null,
                 localLabel: this.label,
-                localValue: this.value ? this.value : "",
-                hasInputText: this.value ? this.value.length > 0 : false,
+                localValue: this.value.length > 0 ? this.value : "",
+                hasInputText: this.value.length > 0,
                 hintPosition: "right",
                 passwordVisibilityLocal: this.passwordVisibility
             };
@@ -257,32 +257,32 @@
                 this.localValue = typeof parseInt(this.localValue) === "number" ? this.localValue - 1 : 0;
                 if (this.minNumber !== null && this.localValue < this.minNumber) {
                     this.localValue = this.minNumber;
-                    event.target.value = this.minNumber;
+                    // event.target.value = this.minNumber;
                 }
                 this.updateInputValue();
                 this.setValueLength();
                 this.$refs.input.focus();
             },
             updateInputValue() {
-                this.$el.querySelector(".input-element").value = this.localValue;
+                this.$refs.input.value = this.localValue;
             },
             setValue() {
-                this.$el.querySelector(".input-element").value = this.localValue;
+                this.$refs.input.value = this.localValue;
                 this.setValueLength();
             },
             setDisabled() {
-                this.$el.querySelector(".input-element").disabled = Boolean(this.disabled);
+                this.$refs.input.disabled = Boolean(this.disabled);
             },
             setValueLength() {
-                this.hasInputText = this.localValue.toString() ? this.localValue.toString().length > 0 : false;
+                this.hasInputText = this.localValue?.toString()?.length > 0;
             },
             inputHandler($event) {
-                let temporaryValue = this.$el.querySelector(".input-element").value;
+                let temporaryValue = this.$refs.input.value;
                 if (this.insertType === 'number' && this.isInteger) {
                     if (!isNaN(parseInt(temporaryValue)) && !this.isSpecialCharacters($event.data)) {
                         this.localValue = temporaryValue;
                     } else {
-                        this.$el.querySelector(".input-element").value = temporaryValue;
+                        this.$refs.input.value = temporaryValue;
                         setTimeout(() => {
                             this.$refs.input.blur();
                             this.$refs.input.focus();
@@ -522,7 +522,7 @@
                                     <path d="M3.333 1C4.838 3.687 7.06 5.031 10 5.031S15.162 3.687 16.667 1M10 7.667v1.25M14.396 6.833l.572
               1.031M5.801 6.833L5.23 7.864M17.5 4.333l.833.834M2.5 4.333l-.833.834"/>
                                 </g>
-                            </svg>
+                            </svg>i
                         </div>;
                     } else {
                         return <div class="password-icon" onClick={this.togglePasswordVisibility}>
