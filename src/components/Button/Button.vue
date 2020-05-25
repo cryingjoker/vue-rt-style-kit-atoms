@@ -19,6 +19,14 @@
                 type: Object,
                 default: null
             },
+            bright:{
+              type: Boolean,
+	            default: false
+            },
+		        small:{
+	              type: Boolean,
+			          default: false
+		        },
             isBlock: {
                 type: Boolean,
                 default: false
@@ -98,7 +106,7 @@
         }),
         computed: {
             buttonClass() {
-                let className = ["rt-button rt-button-with-ripple"];
+                let className = ["rt-button-with-ripple"];
                 if (this.isBlock) {
                     className.push("rt-button--is-block");
                 }
@@ -117,8 +125,18 @@
                 if (this.notActiveClass.length > 0 && !this.isActiveLocal) {
                     className.push(this.notActiveClass)
                 }
+                if(this.bright){
+                  className.push('rt-button-bright');
+                }
+
+                if(this.small){
+                  className.push('rt-button-small');
+                }
+
                 className = className.concat(this.buttonClassList.split(' '));
 
+              className = className.sort((a,b)=>a<b ? 1 : -1)
+	            className.unshift('rt-button')
                 return className.join(' ');
             }
         },

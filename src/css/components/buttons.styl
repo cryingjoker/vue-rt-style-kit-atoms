@@ -1,4 +1,5 @@
 .{newAppName}-button
+  display inline-block
   height 52px
   box-sizing border-box
   font-size 16px
@@ -9,333 +10,400 @@
   padding-left 28px
   padding-right 28px
   cursor pointer
-  display: inline-block
   transition-timing-function ease-in-out
   transition-duration .4s
   transition-property background-color, border, text-shadow, color, opacity
+
   .ripple
-    padding-left: 28px
-    padding-right: 28px
+    padding-left 28px
+    padding-right 28px
+
   &[disabled]
     cursor default
 
-  &--is-fitched
-    color transparent !important
+.{newAppName}-button--is-fitched
+  color transparent !important
 
-  &--is-block
+.{newAppName}-button--is-block
+  display block
+  min-width 100%
+
+.{newAppName}-button-td--is-block
+  @media (max-width tablet-upper-limit)
     display block
     min-width 100%
-  &-td--is-block
-    @media (max-width: tablet-upper-limit)
-      display block
-      min-width 100%
-  &-md--is-block
-    @media (max-width: mobile-upper-limit)
-      display block
-      min-width 100%
-  .ripple-wave
-    background-color default-wive-color
 
-  &-with-ripple
-    overflow hidden
-    padding-left 0
-    padding-right 0
+.{newAppName}-button-md--is-block
+  @media (max-width mobile-upper-limit)
+    display block
+    min-width 100%
 
-  & + &
-    margin-left horizontal-space
+.ripple-wave
+  background-color default-wive-color
 
-  &-vertical
-    display table
+.{newAppName}-button-with-ripple
+  overflow hidden
+  padding-left 0
+  padding-right 0
 
-    & + &
-      margin-top vertical-space
-      margin-left 0
+.{newAppName}-button-small
+  height 36px
+  font-size 14px
 
-  &-small
-    height 36px
+  .ripple
+    padding 0 20px !important
+
+.{newAppName}-button-md-small
+  @media (max-width 767px)
+    height 34px
     font-size 14px
 
-    .ripple
-      padding 0 20px!important
+&:before
+  display none
+  opacity 0
 
-  &-md-small
-    @media (max-width: 767px)
-      height 34px
-      font-size 14px
+.{newAppName}-button-orange
+  color #fff
+  background-color b2c-orange
 
-  &:before
-    display none
-    opacity 0
+  &:hover
+    @media (hover hover)
+      background-color b2c-orange-button-hover
 
-  &-orange
-    color #fff
-    background-color b2c-orange
+  &:active
+    background-color b2c-orange-button-active
 
-    &:hover
-      @media (hover: hover)
-        background-color b2c-orange-button-hover
-    &:active
-      background-color b2c-orange-button-active
+  &[disabled]
+    color main-color05
+    background-color main-color005
 
-    &[disabled]
-      color main-color05
+    .{newAppName}-dark-theme &,
+    &.{newAppName}-button-bright
+      color b2c-white05
+      background-color b2c-white005
+
+  .ripple-wave
+    background-color b2c-white
+
+.{newAppName}-button-gray
+  background-color transparent
+  border 2px solid main-color003-no-opacity
+  color main-color
+  .{newAppName}-dark-theme &,
+  &.{newAppName}-button-bright
+    color b2c-white
+  &:hover
+    @media (hover hover)
       background-color main-color005
 
-      .{newAppName}-dark-theme &
-        color b2c-white05
-        background-color b2c-white005
-
-    .ripple-wave
-      background-color b2c-white
-  &-gray
-    background-color transparent
-    border 2px solid main-color003-no-opacity
-
-    &:hover
-      @media (hover: hover)
-        background-color main-color005
-        .{newAppName}-dark-theme &
-          background-color hsl(rgba(b2c-white, .05))
-    &:active
-      background-color main-color01
-      .{newAppName}-dark-theme &
-        background-color hsl(rgba(b2c-white, .1))
-
-    &[disabled]
-      color main-color05
-      border-color hsl(rgba(main-color, .1))
-      &:hover
-        @media (hover: hover)
-          background-color: transparent
-
-      .{newAppName}-dark-theme &
-        background-color: transparent
-        color b2c-white05
-        border-color b2c-white01
-        &:hover
-          @media (hover: hover)
-            background-color transparent
-
-    .ripple-wave
-      background-color main-color05
-      .{newAppName}-dark-theme &
-        background-color hsl(rgba(b2c-white, .5))
-
-  &-orange-border
-    border 2px solid b2c-orange
-
-    &:hover
-      @media (hover: hover)
-        background-color rgba(b2c-orange, .05)
-        .{newAppName}-dark-theme &
-          background-color rgba(b2c-orange, .2)
-
-    &:active
-      background-color rgba(b2c-orange, .1)
-      .{newAppName}-dark-theme &
-        background-color rgba(b2c-orange, .4)
-
-    &[disabled]
-
-      color main-color05
-      border-color main-color01
-      background-color: transparent
-
-      .{newAppName}-dark-theme &
-        color b2c-white05
-        border-color b2c-white01
-        background-color: transparent
-
-
-    .ripple-wave
-      background-color b2c-orange-low
-      .{newAppName}-dark-theme &
-        background-color main-color
-
-
-
-  &-white
-    border 2px solid white
-
-    &:hover
-      @media (hover: hover)
-        background-color b2c-cool-grey05
-        opacity .7
-
-      .{newAppName}-dark-theme &
-        background-color b2c-white01
-
-    &:active
-      background-color transparent
-
-    &[disabled]
-      color main-color05
-      background-color: transparent
-      opacity: 1
-      .{newAppName}-dark-theme &
-        color b2c-white05
-        border-color b2c-white01
-        background-color: transparent
-
-      &:hover
-        @media (hover: hover)
-          background-color transparent
-
-
-      .ripple-wave
-        background-color b2c-cool-grey
-
-  &-full-white
-    background-color: white
-    color #000000
-    .ripple-wave
-      background-color b2c-white
-    &:hover
-      @media (hover: hover)
-        background-color hsl(rgba(main-color, .05))
-
-      .{newAppName}-dark-theme &
-        background-color main-color003-no-opacity
-
-    &:active
-      background-color hsl(rgba(main-color, .1))
-      .{newAppName}-dark-theme &
-        background-color main-color03-no-opacity
-
-
-
-
-
-    &[disabled]
-      color main-color01
-      background-color: transparent
-
-      &:hover
-        @media (hover: hover)
-          background-color transparent
-
-  &-purple
-    color #fff
-    background-color b2c-purple
-
-    &:hover
-      @media (hover: hover)
-        background-color b2c-purple-button-hover
-    &:active
-      background-color b2c-purple-button-active
-    &[disabled]
-      color main-color05
-      background-color main-color005
-
-      .{newAppName}-dark-theme &
-        color b2c-white05
-        background-color b2c-white005
-
-    .ripple-wave
-      background-color b2c-white
-
-  &-purple-border
-    background-color transparent
-    border 2px solid b2c-purple
-
-  &-purple-border,
-  &-transparent-purple
-
-
-
-    &:hover
-      @media (hover: hover)
-        background-color hsl(rgba(b2c-purple, .05))
-        .{newAppName}-dark-theme &
-          background-color hsl(rgba(b2c-purple, .2))
-
-    &:active
-      background-color hsl(rgba(b2c-purple, .1))
-      .{newAppName}-dark-theme &
-        background-color hsl(rgba(b2c-purple, .4))
-    .ripple-wave
-      background-color b2c-purple-low
-      .{newAppName}-dark-theme &
-        background-color main-color
-
-    &[disabled]
-      color main-color05
-      border-color main-color01
-      background-color: transparent
-      .{newAppName}-dark-theme &
-        color b2c-white05
-        border-color b2c-white01
-
-
-
-
-
-  &-transparent
-    border 2px solid transparent
-
-    &:hover
-      @media (hover: hover)
-        background-color hsl(rgba(main-color, .05))
-
-      .{newAppName}-dark-theme &
+      .{newAppName}-dark-theme &,
+      &.{newAppName}-button-bright
         background-color hsl(rgba(b2c-white, .05))
 
-    &:active
-      background-color hsl(rgba(main-color, .1))
-      .{newAppName}-dark-theme &
-        background-color hsl(rgba(b2c-white, .1))
+  &:active
+    background-color main-color01
 
-    &[disabled]
-      color hsl(rgba(main-color, .5))
-      background-color transparent
+    .{newAppName}-dark-theme &,
+    &.{newAppName}-button-bright
+      background-color hsl(rgba(b2c-white, .1))
 
-
-
-      &:hover
-        @media (hover: hover)
-          background-color transparent
-
-      .{newAppName}-dark-theme &
-        color hsl(rgba(b2c-white, .5))
-
-      .ripple-wave
-        background-color b2c-cool-grey
-  &--as-tag
-      border-radius 10px
-      background-color: b2c-purple-high
-      padding-top: 3px
-      padding-bottom: 3px
-      padding-right: 10px
-      padding-left: 10px
-      color: white
-      height: auto
-      font-size 12px
-      width: auto
-      min-width auto
-      .ripple
-        width:auto
-        padding: 0
-    &--td-as-text
-      @media (max-width: tablet-upper-limit)
-        background-color: transparent
-        color b2c-purple-high
-        padding: 0
-
-  &-cool-grey-border
-    border 2px solid b2c-cool-grey
+  &[disabled]
+    color main-color05
+    border-color hsl(rgba(main-color, .1))
 
     &:hover
-      @media (hover: hover)
-        background-color b2c-cool-grey05
-        opacity .7
+      @media (hover hover)
+        background-color transparent
 
-      .{newAppName}-dark-theme &
+    .{newAppName}-dark-theme &,
+    &.{newAppName}-button-bright
+      color b2c-white05
+      background-color transparent
+      border-color b2c-white01
+
+      &:hover
+        @media (hover hover)
+          background-color transparent
+
+  .ripple-wave
+    background-color main-color05
+
+    .{newAppName}-dark-theme &,
+    &.{newAppName}-button-bright
+      background-color hsl(rgba(b2c-white, .5))
+
+.{newAppName}-button-white
+  background-color transparent
+  border 2px solid main-color003-no-opacity
+  color b2c-white
+  &:hover
+    @media (hover hover)
+      background-color hsl(rgba(b2c-white, .05))
+
+  &:active
+    background-color hsl(rgba(b2c-white, .1))
+
+  &[disabled]
+    color b2c-white05
+    background-color transparent
+    border-color b2c-white01
+
+    &:hover
+      @media (hover hover)
+        background-color transparent
+
+  .ripple-wave
+    background-color hsl(rgba(b2c-white, .5))
+
+
+.{newAppName}-button-orange-border
+  border 2px solid b2c-orange
+  color main-color
+  .{newAppName}-dark-theme &,
+  &.{newAppName}-button-bright
+    color b2c-white
+  &:hover
+    @media (hover hover)
+      background-color rgba(b2c-orange, .05)
+
+      .{newAppName}-dark-theme &,
+      &.{newAppName}-button-bright
+        background-color rgba(b2c-orange, .2)
+
+  &:active
+    background-color rgba(b2c-orange, .1)
+
+    .{newAppName}-dark-theme &,
+    &.{newAppName}-button-bright
+      background-color rgba(b2c-orange, .4)
+
+  &[disabled]
+    color main-color05
+    background-color transparent
+    border-color main-color01
+
+    .{newAppName}-dark-theme &,
+    &.{newAppName}-button-bright
+      color b2c-white05
+      background-color transparent
+      border-color b2c-white01
+
+  .ripple-wave
+    background-color b2c-orange-low
+
+    .{newAppName}-dark-theme &,
+    &.{newAppName}-button-bright
+      background-color main-color
+
+.{newAppName}-button-white
+  border 2px solid white
+
+  &:hover
+    @media (hover hover)
+      background-color b2c-cool-grey05
+      opacity .7
+
+    .{newAppName}-dark-theme &,
+    &.{newAppName}-button-bright
+      background-color b2c-white01
+
+  &:active
+    background-color transparent
+
+  &[disabled]
+    color main-color05
+    background-color transparent
+    opacity 1
+
+    .{newAppName}-dark-theme &,
+    &.{newAppName}-button-bright
+      color b2c-white05
+      background-color transparent
+      border-color b2c-white01
+
+    &:hover
+      @media (hover hover)
+        background-color transparent
+
+    .ripple-wave
+      background-color b2c-cool-grey
+
+
+.{newAppName}-button-full-white
+  color main-color
+  background-color white
+
+  .ripple-wave
+    background-color b2c-white
+
+  &:hover
+    @media (hover hover)
+      background-color hsl(rgba(main-color, .05))
+
+    .{newAppName}-dark-theme &,
+    &.{newAppName}-button-bright
+
+      @media (hover hover)
+        background-color main-color003-no-opacity
+
+  &:active
+    background-color hsl(rgba(main-color, .1))
+
+    .{newAppName}-dark-theme &,
+    &.{newAppName}-button-bright
+      background-color main-color03-no-opacity
+
+  &[disabled]
+    color b2c-white05
+    background-color b2c-white005
+
+    &:hover
+      @media (hover hover)
+        background-color b2c-white005
+
+.{newAppName}-button-purple
+  color #fff
+  background-color b2c-purple
+
+  &:hover
+    @media (hover hover)
+      background-color b2c-purple-button-hover
+
+  &:active
+    background-color b2c-purple-button-active
+
+  &[disabled]
+    color main-color05
+    background-color main-color005
+
+    .{newAppName}-dark-theme &,
+    &.{newAppName}-button-bright
+      color b2c-white05
+      background-color b2c-white005
+
+  .ripple-wave
+    background-color b2c-white
+
+.{newAppName}-button-purple-border
+  color main-color
+  background-color transparent
+  border 2px solid b2c-purple
+  .{newAppName}-dark-theme &
+  &.{newAppName}-button-bright
+    color b2c-white
+
+
+.{newAppName}-button-purple-border,
+.{newAppName}-button-transparent-purple
+  &:hover
+    @media (hover hover)
+      background-color hsl(rgba(b2c-purple, .05))
+
+      .{newAppName}-dark-theme &,
+      &.{newAppName}-button-bright
+        background-color hsl(rgba(b2c-purple, .2))
+
+  &:active
+    background-color hsl(rgba(b2c-purple, .1))
+
+    .{newAppName}-dark-theme &,
+    &.{newAppName}-button-bright
+      background-color hsl(rgba(b2c-purple, .4))
+
+  .ripple-wave
+    background-color b2c-purple-low
+
+    .{newAppName}-dark-theme &,
+    &.{newAppName}-button-bright
+      background-color main-color
+
+  &[disabled]
+    color main-color05
+    background-color transparent
+    border-color main-color01
+
+    .{newAppName}-dark-theme &,
+    &.{newAppName}-button-bright
+      color b2c-white05
+      border-color b2c-white01
+      @media (hover hover)
+        &:hover
+          background-color transparent
+
+.{newAppName}-button-transparent
+  border 2px solid transparent
+  color main-color
+  .{newAppName}-dark-theme &,
+  &.{newAppName}-button-bright
+    color b2c-white
+  &:hover
+    @media (hover hover)
+      background-color hsl(rgba(main-color, .05))
+
+      .{newAppName}-dark-theme &,
+      &.{newAppName}-button-bright
+        background-color hsl(rgba(b2c-white, .05))
+
+  &:active
+    background-color hsl(rgba(main-color, .1))
+
+    .{newAppName}-dark-theme &,
+    &.{newAppName}-button-bright
+      background-color hsl(rgba(b2c-white, .1))
+
+  &[disabled]
+    color hsl(rgba(main-color, .5))
+    background-color transparent
+
+    &:hover
+      @media (hover hover)
+        background-color transparent
+
+    .{newAppName}-dark-theme &,
+    &.{newAppName}-button-bright
+      color hsl(rgba(b2c-white, .5))
+
+    .ripple-wave
+      background-color b2c-cool-grey
+
+.{newAppName}-button--as-tag
+  width auto
+  min-width auto
+  height auto
+  color white
+  font-size 12px
+  background-color b2c-purple-high
+  border-radius 10px
+  padding-top 3px
+  padding-bottom 3px
+  padding-left 10px
+  padding-right 10px
+
+  .ripple
+    width auto
+    padding 0
+
+.{newAppName}-button--td-as-text
+  @media (max-width tablet-upper-limit)
+    color b2c-purple-high
+    background-color transparent
+    padding 0
+
+.{newAppName}-button-cool-grey-border
+  border 2px solid b2c-cool-grey
+
+  &:hover
+    @media (hover hover)
+      background-color b2c-cool-grey05
+      opacity .7
+
+    .{newAppName}-dark-theme &,
+    &.{newAppName}-button-bright
+      @media (hover hover)
         background-color b2c-white01
 
-
-
-  &-transparent-purple
-    color b2c-purple
+.{newAppName}-button-transparent-purple
+  color b2c-purple
 
 .fake-radiobutton-for-button
   display none
@@ -347,5 +415,4 @@
   display none
 
 .{newAppName}-button__icon
-  width: 22px
-
+  width 22px
