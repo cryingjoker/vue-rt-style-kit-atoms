@@ -1,15 +1,12 @@
 <template>
-    <label
-            :class="{
-      active: isChecked,
-      disabled: isDisabled,
-      invalid: required && !isChecked
-    }"
-            class="checkbox"
-    >
+    <label :class="{
+                    active: isChecked,
+                    disabled: isDisabled,
+                    invalid: required && !isChecked
+                    }"
+            class="checkbox">
         <rt-ripple ref="ripple" :not-render="isDisabled" />
-        <input
-                :id="uid"
+        <input :id="uid"
                 ref="input"
                 v-model="isChecked"
                 v-validate="{ required: requiredRule }"
@@ -17,28 +14,21 @@
                 :name="name"
                 type="checkbox"
                 class="checkbox-element"
-                @change="changeInput"
-        />
+                @change="changeInput"/>
 
         <div class="checkbox-container">
-            <svg
-                    class="checkbox-container__angle"
-                    width="12px"
-                    height="10px"
-                    viewBox="0 0 12 10"
-                    version="1.1"
-                    xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg class="checkbox-container__angle"
+                width="12px"
+                height="10px"
+                viewBox="0 0 12 10"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg">
                 <g id="Symbols" stroke-width="1" fill="none" fill-rule="evenodd">
                     <g id="controls/checkbox/active/mark/violet" stroke-width="3">
-                        <polyline
-                                id="Stroke-4"
-                                points="1 4 4.44815083 7 7.5882241 4.12440883 11 1"
-                        />
+                        <polyline id="Stroke-4" points="1 4 4.44815083 7 7.5882241 4.12440883 11 1"/>
                     </g>
                 </g>
             </svg>
-
             <slot />
         </div>
     </label>
@@ -77,7 +67,8 @@
             },
             required: Boolean,
             uid: {
-                type: String
+                type: String,
+                default: ''
             }
         },
 

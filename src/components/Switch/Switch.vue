@@ -35,17 +35,17 @@ export default {
       type: Boolean,
       default: false
     },
-    checkIdAllChecked: {
-      type: Boolean,
-      default: false
-    },
+//    checkIdAllChecked: {
+//      type: Boolean,
+//      default: false
+//    },
     value: {
       type: String,
-      default: null
+      default: ''
     },
     name: {
       type: String,
-      default: null
+      default: ''
     },
     checked: {
       type: Boolean,

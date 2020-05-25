@@ -15,10 +15,6 @@
                 type: Object,
                 default: null
             },
-            gaB2b: {
-                type: Object,
-                default: null
-            },
             isBlock: {
                 type: Boolean,
                 default: false
@@ -67,10 +63,10 @@
                 type: String,
                 default: ''
             },
-            backgroundColor: {
-                type: String,
-                default: 'orange'
-            },
+//            backgroundColor: {
+//                type: String,
+//                default: 'orange'
+//            },
             href: {
                 type: String,
                 default: ''
@@ -126,7 +122,7 @@
         mounted: function () {
             this.isActiveLocal = this.isActive;
             this.hide = this.$el.disabled || this.isDisabled;
-            if (this.ga || this.gaB2b) {
+            if (this.ga) {
                 this.activateEventToLink(this.ga);
             }
             if (this.checkboxBehavior) {

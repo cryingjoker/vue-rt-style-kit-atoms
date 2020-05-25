@@ -1,0 +1,32 @@
+{
+  "items": [
+    {
+      "name": "rt-radio-button",
+      "property":"name",
+      "type": "String",
+      "description":"Задаёт переключателю атрибут `name`",
+      "value" :"0"
+    },
+    {
+      "name": "rt-radio-button",
+      "property":":checked",
+      "type": "Boolean",
+      "description":"Предустанавливает выбранное состояние переключателю (атрибут `checked`)",
+      "value" :"false"
+    },
+    {
+      "name": "rt-radio-button",
+      "property":"value",
+      "type": "String | Number",
+      "description":"Задаёт переключателю атрибут `value`",
+      "value" :"null"
+    },
+    {
+      "name": "rt-radio-button",
+      "property":":is-disabled",
+      "type": "Boolean",
+      "description":"Флаг установки неактивного состояния для переключателя",
+      "value" :"false"
+    }
+  ]
+}

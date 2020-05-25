@@ -12,11 +12,11 @@
             },
             value: {
                 type: String,
-                default: null
+                default: ''
             },
             text: {
                 type: String,
-                default: null
+                default: ''
             },
             disabled: {
                 type: Boolean,
@@ -24,7 +24,7 @@
             },
             errorMessage: {
                 type: String,
-                default: null
+                default: ''
             },
             dropdownMinWidth: {
                 type: [String, Number],
@@ -344,7 +344,7 @@
                 return <label ref="placeholder" class={this.placeholderClasses}>{this.label}</label>
             }
             return <div class={this.selectClasses}>
-                <div class="select-inner-contaner">
+                <div class="select-inner-container">
                     <button disabled={this.disabled} class="select__inner" onClick={this.toggleOpen}>
                         {renderPlaceholder()}
                         <div class="select-value">

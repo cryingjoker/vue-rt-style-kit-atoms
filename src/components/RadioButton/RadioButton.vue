@@ -28,7 +28,7 @@
         props: {
             name: {
                 type: String,
-                default: null
+                default: ''
             },
             checked: {
                 type: Boolean,
