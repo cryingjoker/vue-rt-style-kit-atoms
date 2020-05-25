@@ -64,7 +64,6 @@ class ViewportPositionStore extends StorePrototype {
                 }
             }
         }
-
     }
 
     checkAllPositions = () => {

@@ -62,7 +62,7 @@
                 type: Boolean,
                 default: false
             },
-            darkened: {
+            darkened: { /**Deprecated. need to be cut off*/
                 type: Boolean,
                 default: false
             },
@@ -201,9 +201,9 @@
                     return null;
                 }
             };
-            const opinionRender = () => {
+            const optionRender = () => {
                 if (this.isOption) {
-                    return <div class="rt-price__opinion">{this.optionLabel}</div>;
+                    return <div class="rt-price__option">{this.optionLabel}</div>;
                 } else {
                     return null;
                 }
@@ -229,7 +229,7 @@
             const priceInfoRender = () => {
                 if (this.isTimeIntervalBottom) {
                     return <div>
-                        {opinionRender()}
+                        {optionRender()}
                         <div
                             class={"rt-price__value rtb-price__value" + (this.colorValue ? " color-" + this.colorValue : "")}>
                             {this.$slots.epcPrice ? this.$slots.epcPrice : this.normalizeValue}
@@ -240,7 +240,7 @@
                     </div>;
                 } else {
                     return <div>
-                        {opinionRender()}
+                        {optionRender()}
                         <div
                             class={"rt-price__value rtb-price__value" + (this.colorValue ? " color-" + this.colorValue : "")}>
                             {this.$slots.epcPrice ? this.$slots.epcPrice : this.normalizeValue}
@@ -273,7 +273,7 @@
                 </div>;
             } else {
                 return <div class={`${rtPriceClass} rt-price-without-space`}>
-                    {opinionRender()}
+                    {optionRender()}
                     {oldValueRender()}
                     <div
                         class={"rt-price__option-value rt-price__value" + (this.colorValue ? " color-" + this.colorValue : "")}>{this.normalizeValue}</div>

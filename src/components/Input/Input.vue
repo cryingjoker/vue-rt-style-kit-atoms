@@ -13,11 +13,11 @@
                 type: Array,
                 default: () => ([])
             },
-            minNumber: {
+            maxLength: {
                 type: Number,
                 default: null
             },
-            maxLength: {
+            minNumber: {
                 type: Number,
                 default: null
             },
@@ -25,17 +25,17 @@
                 type: Number,
                 default: null
             },
-            defaultValue: {
-                type: [String, Number],
-                default: null
-            },
+//            defaultValue: {
+//                type: [String, Number],
+//                default: null
+//            },
             insertLang: {
                 type: String,// [ru, en]
-                default: null
+                default: ''
             },
             insertType: {
                 type: String, //[number, string, password, tel]
-                default: null
+                default: ''
             },
             disabled: {
                 type: Boolean,
@@ -47,7 +47,7 @@
             },
             placeholder: {
                 type: String,
-                default: null
+                default: ''
             },
             hasError: {
                 type: Boolean,
@@ -59,7 +59,7 @@
             },
             errorMessage: {
                 type: String,
-                default: null
+                default: ''
             },
             value: {
                 type: String,
@@ -71,7 +71,7 @@
             },
             name: {
                 type: String,
-                default: null
+                default: ''
             },
             validate: {
                 type: Object | String,
@@ -83,15 +83,11 @@
             },
             label: {
                 type: String,
-                default: null
+                default: ''
             },
             type: {
                 type: String,
                 default: 'text'
-            },
-            passwordVisibility: {
-                type: Boolean,
-                default: false
             },
             isB2bInput: {
                 type: Boolean,
@@ -104,10 +100,6 @@
             color: {
                 type: String,
                 default: "purple"
-            },
-            technicalPossibilityHint: {
-                type: String,
-                default: ""
             },
             isHidden: {
                 type: Boolean,
@@ -149,7 +141,7 @@
                 localValue: this.value.length > 0 ? this.value : "",
                 hasInputText: this.value.length > 0,
                 hintPosition: "right",
-                passwordVisibilityLocal: this.passwordVisibility
+                passwordVisibilityLocal: false
             };
         },
 
@@ -520,7 +512,7 @@
                                 <g stroke="#575D68" stroke-width="2" fill="none" fill-rule="evenodd"
                                    stroke-linecap="round">
                                     <path d="M3.333 1C4.838 3.687 7.06 5.031 10 5.031S15.162 3.687 16.667 1M10 7.667v1.25M14.396 6.833l.572
-              1.031M5.801 6.833L5.23 7.864M17.5 4.333l.833.834M2.5 4.333l-.833.834"/>
+                1.031M5.801 6.833L5.23 7.864M17.5 4.333l.833.834M2.5 4.333l-.833.834"/>
                                 </g>
                             </svg>
                         </div>;
@@ -617,31 +609,31 @@
             const inputElementByType = (() => {
                 if (this.insertType !== 'tel') {
                     return <input
-                            onKeypress={this.keyPress}
-                            onKeyup={this.keyUp}
-                            ref="input"
-                            autocomplete={this.autocomplete}
-                            autocapitalize="off"
-                            type={this.type === 'search' ? 'text' : this.type}
-                            class="input-element"
-                            name={this.fieldName}
-                            onInput={this.inputHandler}
-                            v-validate={this.validate}
+                        onKeypress={this.keyPress}
+                        onKeyup={this.keyUp}
+                        ref="input"
+                        autocomplete={this.autocomplete}
+                        autocapitalize="off"
+                        type={this.type === 'search' ? 'text' : this.type}
+                        class="input-element"
+                        name={this.fieldName}
+                        onInput={this.inputHandler}
+                        v-validate={this.validate}
                     />;
                 } else {
                     return <input
-                            onKeypress={this.keyPress}
-                            onKeyup={this.keyUp}
-                            ref="input"
-                            autocomplete={this.autocomplete}
-                            autocapitalize="off"
-                            type={this.type}
-                            class="input-element"
-                            name={this.fieldName}
-                            onInput={this.inputHandler}
-                            v-validate={this.validate}
-                            onFocus={this.mask}
-                            onBlur={this.mask}
+                        onKeypress={this.keyPress}
+                        onKeyup={this.keyUp}
+                        ref="input"
+                        autocomplete={this.autocomplete}
+                        autocapitalize="off"
+                        type={this.type}
+                        class="input-element"
+                        name={this.fieldName}
+                        onInput={this.inputHandler}
+                        v-validate={this.validate}
+                        onFocus={this.mask}
+                        onBlur={this.mask}
                     />;
                 }
             })();

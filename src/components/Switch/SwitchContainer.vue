@@ -5,7 +5,7 @@ export default {
   props: {
     setPropsOnNotChecked: {
       type: String,
-      default: null
+      default: ''
     }
   },
   data:() => ({

@@ -13,9 +13,6 @@ class DeviceTypeStore extends StorePrototype{
     this.methodFnMap = {
       'resize': [this.debounceCheckWidth]
     }
-
-
-
   }
   getStatus = () => {
     if (isNaN(this.deviceType)) {

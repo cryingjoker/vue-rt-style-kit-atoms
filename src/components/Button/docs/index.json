@@ -2,35 +2,43 @@
   "items": [
     {
       "name": "rt-button",
-      "property": "show-as-tag",
-      "type": "Boolean",
-      "description": "Отображение как у тега",
-      "value": "false"
+      "property": ":ga",
+      "type": "Object",
+      "description": "Устанавливает google analitics",
+      "value": "",
+      "version": "0.1.68"
     },
     {
       "name": "rt-button",
-      "property": "is-block",
+      "property": ":is-block",
       "type": "Boolean",
       "description": "Задаёт кнопке блочное позиционирование. Кнопка занимает 100% доступной ширины",
       "value": "false"
     },
     {
       "name": "rt-button",
-      "property": "is-disabled",
+      "property": ":is-disabled",
       "type": "Boolean",
       "description": "Делает кнопку неактивной, так же, как атрибут `disabled`",
       "value": "false"
     },
     {
       "name": "rt-button",
-      "property": "is-fetched",
+      "property": ":is-fetched",
       "type": "Boolean",
-      "description": "Устанавливает спиннер вместо кнопки. (пока не прилетят какие-то данные?? какие??)",
+      "description": "Устанавливает спиннер вместо кнопки",
       "value": "false"
     },
     {
       "name": "rt-button",
-      "property": "checkbox-behavior",
+      "property": ":has-icon",
+      "type": "Boolean",
+      "description": "Добавляет в кнопку иконку",
+      "value": "false"
+    },
+    {
+      "name": "rt-button",
+      "property": ":checkbox-behavior",
       "type": "Boolean",
       "description": "Устанавливает кнопкам логику поведения `radiobutton`. Необходимо устанавливать на несколько кнопок для соблюдения этой логики",
       "value": "false"
@@ -58,43 +66,31 @@
     },
     {
       "name": "rt-button",
-      "property": ":ga",
-      "type": "Object",
-      "description": "Устанавливает google analitics для b2c",
-      "value": "",
-      "version": "0.1.68"
-    },
-    {
-      "name": "rt-button",
-      "property": ":ga-b2b",
-      "type": "Object",
-      "description": "Устанавливает google analitics для b2b",
-      "value": "",
-      "version": "0.1.68"
-    },
-    {
-      "name": "rt-button",
-      "property": ":is-active",
+      "property": ":show-as-tag",
       "type": "Boolean",
-      "description": "Устанавливает флаг активной кнопки для checkbox-behavior props",
-      "value": "flase",
-      "version": "0.2.17"
+      "description": "Отображение как у тега",
+      "value": "false"
     },
     {
       "name": "rt-button",
-      "property": ":active-class",
+      "property": "color",
       "type": "String",
-      "description": "Устанавливает класс для активной кнопки для checkbox-behavior props",
-      "value": "''",
-      "version": "0.2.17"
+      "description": "Задаёт цвет кнопки установкой класса `rt-button-{указанный цвет}`",
+      "value": ""
     },
     {
       "name": "rt-button",
-      "property": ":not-active-class",
+      "property": ":popup-button",
+      "type": "Boolean",
+      "description": "Флаг, указывающий, что по нажатию кнопки открывается попап",
+      "value": "false"
+    },
+    {
+      "name": "rt-button",
+      "property": "target-popup",
       "type": "String",
-      "description": "Устанавливает класс для неактивной кнопки для checkbox-behavior props",
-      "value": "''",
-      "version": "0.2.17"
+      "description": "Связывает кнопку с попапом, который должен открываться при нажатии на кнопку",
+      "value": ""
     },
     {
       "name": "rt-button",
@@ -108,8 +104,32 @@
       "name": "rt-button",
       "property": ":target",
       "type": "String",
-      "description": "Устанавливает атрибут для  кнопки-ссылки",
+      "description": "Устанавливает атрибут для кнопки-ссылки",
       "value": "_blank",
+      "version": "0.2.17"
+    },
+    {
+      "name": "rt-button",
+      "property": ":active-class",
+      "type": "String",
+      "description": "Устанавливает класс для активной кнопки для checkbox-behavior props",
+      "value": "''",
+      "version": "0.2.17"
+    },
+    {
+      "name": "rt-button",
+      "property": ":is-active",
+      "type": "Boolean",
+      "description": "Устанавливает флаг активной кнопки для checkbox-behavior props",
+      "value": "flase",
+      "version": "0.2.17"
+    },
+    {
+      "name": "rt-button",
+      "property": ":not-active-class",
+      "type": "String",
+      "description": "Устанавливает класс для неактивной кнопки для checkbox-behavior props",
+      "value": "''",
       "version": "0.2.17"
     }
   ]

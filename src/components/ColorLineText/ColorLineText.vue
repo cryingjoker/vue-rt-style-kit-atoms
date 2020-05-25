@@ -9,7 +9,6 @@
             type: String,
             default: "orange"
         },
-
         isWhiteColor: {
             type: Boolean,
             default: false
@@ -27,7 +26,6 @@
             default: false
         }
     };
-
 
     export default {
         name: "RtColorLineText",
@@ -62,13 +60,16 @@
             }
         },
         computed: {
+            wrapperClass() {
+                let className = 'color-line-wrapper';
+                className += this.customType ? " color-line-wrapper--custom" : "";
+                className += this.isAdvertise ? " color-line-wrapper--is-advertise" : "";
+
+                return className;
+            },
             colorLineIconClass() {
                 let className = ["color-line-paragraph-icon",  ...(getFillClassByProps.bind(this)({fillColor: 'colorIcon'}))];
 
-
-                if (this.customType) {
-                    className.push(" color-line-wrapper--custom");
-                }
                 return className.join(' ');
             },
             labelClass() {
@@ -176,7 +177,7 @@
                     }
                 }
             };
-            return <div class={"color-line-wrapper" + (this.isAdvertise ? " color-line-wrapper--is-advertise" : "")}>
+            return <div class={this.wrapperClass}>
                 {label()}
                 {content()}
             </div>;
