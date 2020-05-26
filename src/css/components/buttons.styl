@@ -332,6 +332,7 @@
 
 .{newAppName}-button-transparent
   border 2px solid transparent
+  background-color: transparent
   color main-color
   .{newAppName}-dark-theme &,
   &.{newAppName}-button-bright
@@ -350,7 +351,8 @@
     .{newAppName}-dark-theme &,
     &.{newAppName}-button-bright
       background-color hsl(rgba(b2c-white, .1))
-
+  .ripple-wave
+    background-color hsl(rgba(main-color, .8))
   &[disabled]
     color hsl(rgba(main-color, .5))
     background-color transparent
@@ -361,7 +363,7 @@
 
     .{newAppName}-dark-theme &,
     &.{newAppName}-button-bright
-      color hsl(rgba(b2c-white, .5))
+      color hsl(rgba(b2c-white, .4))
 
     .ripple-wave
       background-color b2c-cool-grey
