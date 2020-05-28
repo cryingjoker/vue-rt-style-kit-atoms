@@ -138,8 +138,8 @@
             return {
                 index: null,
                 localLabel: this.label,
-                localValue: this.value.length > 0 ? this.value : "",
-                hasInputText: this.value.length > 0,
+                localValue: this.value?.length > 0 ? this.value : "",
+                hasInputText: this.value?.length > 0,
                 hintPosition: "right",
                 passwordVisibilityLocal: false
             };
