@@ -9,36 +9,36 @@
     name: "RtCheckbox",
     components: componentsList,
 
-    props: {
-      isDisabled: {
-        type: Boolean,
-        default: false
-      },
-      requiredRule: {
-        type: Boolean,
-        default: true
-      },
-      checked: {
-        type: Boolean,
-        default: false
-      },
-      value: {
-        type: String,
-        default: null
-      },
-      name: {
-        type: String,
-        default: null
-      },
-      required: {
-        type:Boolean,
-	      default: false
-      },
-      uid: {
-        type: String,
-        default: ''
-      }
-    },
+        props: {
+            isDisabled: {
+                type: Boolean,
+                default: false
+            },
+            requiredRule: {
+                type: Boolean,
+                default: true
+            },
+            checked: {
+                type: Boolean,
+                default: false
+            },
+            value: {
+                type: String,
+                default: null
+            },
+            name: {
+                type: String,
+                default: null
+            },
+          required: {
+            type:Boolean,
+            default: false
+          },
+            uid: {
+                type: String,
+                default: ''
+            }
+        },
 
     data() {
       return {

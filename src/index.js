@@ -101,18 +101,20 @@ VueRtStyle = {
 const settingsKey = Global.globalSettingsKey;
 
 const version = Project.version;
-if (settingsKey) {
-    if (!window[settingsKey]) window[settingsKey] = {}
-    if (!window[settingsKey].segment) window[settingsKey].segment = Global.defaultSegment
-    window[settingsKey].version = version;
-}
+if (typeof window !== 'undefined') {
+    if (settingsKey) {
+        if (!window[settingsKey]) window[settingsKey] = {}
+        if (!window[settingsKey].segment) window[settingsKey].segment = Global.defaultSegment
+        window[settingsKey].version = version;
+    }
 
 // @Deprecated
-window.RTK_STYLE_VER = version;
-
-window.addEventListener('getVueRtStyleVersion', function () {
-    window.postMessage({from: "vue-rt-style-kit", type: "setVersion", label: "atoms", version: version}, "*");
-})
+    window.RTK_STYLE_VER = version;
+    
+    window.addEventListener('getVueRtStyleVersion', function () {
+        window.postMessage({from: "vue-rt-style-kit", type: "setVersion", label: "atoms", version: version}, "*");
+    })
+}
 VueRtStyle.version = version;
 
 export default VueRtStyle;
