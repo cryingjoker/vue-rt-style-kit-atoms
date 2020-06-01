@@ -5,6 +5,7 @@
   cursor pointer
   user-select none
   user-select none
+
 .checkbox-element
   width 0
   height 0
@@ -39,9 +40,13 @@
     &:hover
       &:before
         background-color: hsl(rgba(b2c-purple, .05))
+        .checkbox--orange &
+          background-color: hsl(rgba(b2c-orange, .1))
   &:active
     &:before
       background-color: hsl(rgba(b2c-purple, .1))
+      .checkbox--orange &
+        background-color: hsl(rgba(b2c-orange, .1))
 
 
 .checkbox-container__angle
@@ -63,25 +68,39 @@
     fill hsl(rgba(main-color, 1))
 
 
-  .{newAppName}-dark-theme &
-    stroke b2c-orange
 
 
 
 .checkbox-element:focus+checkbox-container:before,
 .checkbox:hover &:before
   border-color b2c-purple
-
   .{newAppName}-dark-theme &
     border-color b2c-orange
+  .checkbox--orange &
+    border-color  b2c-orange
 
 .checkbox-element:checked+.checkbox-container
   &:before
     border-color b2c-purple
+    .checkbox--orange &
+      border-color b2c-orange
+  @media (hover: hover)
+    &:hover
+      &:before
+        background-color: hsl(rgba(b2c-purple, .05))
+        .checkbox--orange &
+          background-color: hsl(rgba(b2c-orange, .1))
+
+  &:active
+    &:before
+      background-color: hsl(rgba(b2c-purple, .1))
+      .checkbox--orange &
+        background-color: hsl(rgba(b2c-orange, .1))
   .checkbox-container__angle
     opacity 1
     visibility visible
     stroke-dashoffset 80px
+
 
 
 .checkbox-element[disabled]+.checkbox-container
@@ -111,12 +130,15 @@
       stroke main-color
 
 
-.invalid .checkbox-container
-  &:before
-    border-color error-color
-    .{newAppName}-dark-theme &
-      border-color error-color
-  &:hover
+.invalid
+  .checkbox-element:checked+.checkbox-container,
+  .checkbox-container
+
     &:before
       border-color error-color
-      background-color: hsl(rgba(error-color, .2))
+      .{newAppName}-dark-theme &
+        border-color error-color
+    &:hover
+      &:before
+        border-color error-color
+        background-color: hsl(rgba(error-color, .2))

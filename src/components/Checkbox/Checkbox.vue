@@ -10,6 +10,10 @@
     components: componentsList,
 
         props: {
+            isOrange:{
+              type: Boolean,
+              default: false
+            },
             isDisabled: {
                 type: Boolean,
                 default: false
@@ -134,6 +138,9 @@
       checkBoxClass(){
         const classList = [];
         classList.push('checkbox')
+	      if(this.isOrange){
+          classList.push('checkbox--orange')
+	      }
         if (this.isChecked) {
           classList.push('active')
         }
@@ -165,8 +172,6 @@
               <g id="Checkbox" transform="translate(-521.000000, -911.000000)">
                 <g id="atom/checkbox/01-default" transform="translate(515.000000, 903.000000)">
                   <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
-                  <rect id="Rectangle" stroke="#FF4F12" stroke-width="2" fill-opacity="0.05" fill="#FF4F12" x="3" y="3"
-                        width="18" height="18" rx="4"></rect>
                   <path
                       d="M16.324634,8.26251729 C16.7319344,7.88952294 17.3644884,7.91733353 17.7374827,8.32463399 C18.0817852,8.70060364 18.0845734,9.26850523 17.7626122,9.64702019 L17.675366,9.73748271 L10.4652088,16.3403428 L6.34362098,12.7544313 C5.92696008,12.3919232 5.88306058,11.7602819 6.24556871,11.343621 C6.58019159,10.9590109 7.14413505,10.89202 7.55663064,11.169112 L7.65637902,11.2455687 L10.43,13.659 L16.324634,8.26251729 Z"
                       id="Stroke-4" fill-rule="nonzero"></path>
