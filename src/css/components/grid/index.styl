@@ -1,15 +1,3 @@
-
-gridRender(steps, prefix, stepGrid, needMedia, mediaWidth)
-  for $i in 1 .. steps
-    .{newAppName}-col{prefix}-{$i}
-      if (needMedia)
-        @media (max-width: mediaWidth)
-          flex 0 0 ($i * stepGrid)
-          max-width ($i * stepGrid)
-      else
-        flex 0 0 ($i * stepGrid)
-        max-width ($i * stepGrid)
-
 spaceRender(prefix, needMedia, value, mediaWidth)
   name = step
 
@@ -34,7 +22,7 @@ spaceRender(prefix, needMedia, value, mediaWidth)
       horizontalValueHalf = horizontalValueHalf + 1
     else
       horizontalValueHalf = horizontalValueHalf - 1
-      
+
   .{newAppName}{prefix}-space-top{name}-half
     if (needMedia)
       @media (max-width: mediaWidth)
@@ -134,7 +122,7 @@ spaceRender(prefix, needMedia, value, mediaWidth)
       padding-left horizontalValueUnit
       padding-right horizontalValueUnit
 
-steps = desktop-step-grid 12, tablet-step-grid 6 "td" tablet-upper-limit, mobile-step-grid 3 "md" mobile-upper-limit, 10% 10 "persent", 10% 10 "td-persent" tablet-upper-limit, 10% 10 "md-persent" mobile-upper-limit
+steps = desktop-step-grid 12, tablet-step-grid 6 "td" tablet-upper-limit, mobile-step-grid 3 "md" mobile-upper-limit
 
 
 .{newAppName}-col
@@ -166,7 +154,6 @@ for devideStep in steps
         padding-right (horizontal-space * .5)
         position relative
 
-  gridRender(devideStep[1], devicePrefix, devideStep[0], needMedia, media)
 
   for $i in 0 .. 20
     step = $i * 5
@@ -860,5 +847,6 @@ for devideStep in steps
     grid-row-start: 1;
     grid-row-start: 1;
 
+@require './gridRender.styl'
 @require './spaceRender.styl'
 @require './elementOpacity.styl'
