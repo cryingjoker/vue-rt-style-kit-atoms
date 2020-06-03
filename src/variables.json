@@ -3,6 +3,7 @@
   "b2bAppName": "rtb",
   "globalSettingsKey": "RTK_STYLE",
   "defaultSegment": "b2c",
+  "pixel-point": "4px",
   "horizontal-space": "20px",
   "vertical-space": "20px",
   "iphone8": "415px",
