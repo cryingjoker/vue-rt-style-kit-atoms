@@ -15,21 +15,21 @@ spaceRender()
       for $i in 0 .. 5
         for $j in 0 .. 4
           for $direction in 0 ..5
-            if $j > 0 or $i == 0 and $j == 0
-              if $i == 0 and $j == 0
-                className = 'sp-'+$direction_names[$direction]+'-none'
-              else
+            if $i == 0 and $j == 0
+              className = 'sp-'+$direction_names[$direction]+'-none'
+            else
+              if $j > 0
                 className = 'sp-'+$direction_names[$direction]+'-'+$i+'-'+$j
+              else
+                className = 'sp-'+$direction_names[$direction]+'-'+$i
+            if $device_types_code[$device_index]
+              className = $device_types_code[$device_index] + '-' + className
 
-              if $device_types_code[$device_index]
-                className = $device_types_code[$device_index] + '-' + className
+            $space_value = $i*pixel-point*5+$j*pixel-point
 
-              $space_value = $i*pixel-point*5+$j*pixel-point
-
-
-              .{className}
-                for $opt in $direction_props[$direction]
-                  {$opt}: $space_value
+            .{className}
+              for $opt in $direction_props[$direction]
+                {$opt}: $space_value
     if media
       @media media
         classRender()
