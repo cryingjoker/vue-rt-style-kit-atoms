@@ -9,40 +9,44 @@
     name: "RtCheckbox",
     components: componentsList,
 
-        props: {
-            isOrange:{
-              type: Boolean,
-              default: false
-            },
-            isDisabled: {
-                type: Boolean,
-                default: false
-            },
-            requiredRule: {
-                type: Boolean,
-                default: true
-            },
-            checked: {
-                type: Boolean,
-                default: false
-            },
-            value: {
-                type: String,
-                default: null
-            },
-            name: {
-                type: String,
-                default: null
-            },
-          required: {
-            type:Boolean,
-            default: false
-          },
-            uid: {
-                type: String,
-                default: ''
-            }
-        },
+    props: {
+      bright: {
+        type: Boolean,
+        default: false
+      },
+      isOrange: {
+        type: Boolean,
+        default: false
+      },
+      isDisabled: {
+        type: Boolean,
+        default: false
+      },
+      requiredRule: {
+        type: Boolean,
+        default: true
+      },
+      checked: {
+        type: Boolean,
+        default: false
+      },
+      value: {
+        type: String,
+        default: null
+      },
+      name: {
+        type: String,
+        default: null
+      },
+      required: {
+        type: Boolean,
+        default: false
+      },
+      uid: {
+        type: String,
+        default: ''
+      }
+    },
 
     data() {
       return {
@@ -135,12 +139,15 @@
       }
     },
     computed: {
-      checkBoxClass(){
+      checkBoxClass() {
         const classList = [];
         classList.push('checkbox')
-	      if(this.isOrange){
-          classList.push('checkbox--orange')
+	      if(this.bright){
+          classList.push('checkbox-bright')
 	      }
+        if (this.isOrange) {
+          classList.push('checkbox-orange')
+        }
         if (this.isChecked) {
           classList.push('active')
         }
@@ -158,7 +165,8 @@
     render(createElement, context) {
       return <label class={this.checkBoxClass}>
         <rt-ripple ref="ripple" not-render={this.isDisabled}/>
-        <input id={this.uid} checked={this.checked} ref="input" v-model={this.isChecked} disabled={this.isDisabled} name={this.name}
+        <input id={this.uid} checked={this.checked} ref="input" v-model={this.isChecked} disabled={this.isDisabled}
+               name={this.name}
                type="checkbox" class="checkbox-element" onChange={this.changeInput}/>
         <div class="checkbox-container">
 
