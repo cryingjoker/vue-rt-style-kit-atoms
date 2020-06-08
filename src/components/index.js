@@ -24,3 +24,6 @@ export {default as Annotation} from './Annotation/Annotation.vue';
 export {default as ColorLineText} from './ColorLineText/ColorLineText.vue';
 export {default as Ussd} from './Ussd/Ussd.vue';
 
+export { default as Hint } from './Hint/Hint.vue';
+export { default as HintBody } from './Hint/HintBody.vue';
+

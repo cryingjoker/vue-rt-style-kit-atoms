@@ -24,7 +24,9 @@ import {
     Ussd,
     Spinner,
     GridRow,
-    GridColumn
+    GridColumn,
+    Hint,
+    HintBody,
 } from "./components";
 
 // import 'element-closest-polyfill';
@@ -84,6 +86,8 @@ let VueRtStyle = {
             Vue.component(Ussd.name, Ussd);
             Vue.component(GridRow.name, GridRow);
             Vue.component(GridColumn.name, GridColumn);
+            Vue.component(Hint.name, Hint);
+            Vue.component(HintBody.name, HintBody);
             Vue.RtStyleAtoms = true;
         }
     }
@@ -142,6 +146,9 @@ export {
     Spinner,
     GridRow,
     GridColumn,
+    Hint,
+    HintBody,
+
 
     // mixins
     fontColorPropsNames,

@@ -26,7 +26,7 @@ class ViewportPositionStore extends StorePrototype {
         return false
     }
     getElPosition = (id) => {
-      return this.$els[id].position
+      return this.$els[id]?.position
     }
 
     addWatchEl = (id, $el) => {

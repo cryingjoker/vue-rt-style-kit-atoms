@@ -1,0 +1,47 @@
+$device_types = 'laptop-upper-limit' ''  'tablet-upper-limit'  'mobile-upper-limit'
+$device_types_code = 'lg' '' 'td' 'md'
+$postfixes = '' 'persent'
+$steps = (12 12 6 3)(10 10 10 10)
+$unitsType = '%' '%'
+
+.rt-col
+  width 100%
+  padding-left (horizontal-space * .5)
+  padding-right (horizontal-space * .5)
+  position relative
+
+gridRender()
+  for $device_index in 0 .. 3
+    media = ''
+    if $device_types_code[$device_index]
+      if $device_types_code[$device_index] == 'lg'
+        media = '(min-width: '+lookup($device_types[$device_index])+')'
+      else
+        media = '(max-width: '+lookup($device_types[$device_index])+')'
+    gridClassRender()
+      for $postfixIndex in 0 .. 1
+
+        for $i in 1 .. $steps[$postfixIndex][$device_index]
+          className = 'rt-col'
+
+          if $device_types_code[$device_index]
+            className = className + '-'+$device_types_code[$device_index]
+          if $postfixes[$postfixIndex]
+            className = className +'-'+ $postfixes[$postfixIndex]
+          className = className + '-'+$i
+          $value = ceil(unit( $i/$steps[$postfixIndex][$device_index]*100  , $unitsType[$postfixIndex]),4)
+          .{className}
+            flex 0 0 $value
+            max-width $value
+            width 100%
+            padding-left (horizontal-space * .5)
+            padding-right (horizontal-space * .5)
+            position relative
+    if media
+      @media media
+        gridClassRender()
+    else
+      gridClassRender()
+
+
+gridRender()
