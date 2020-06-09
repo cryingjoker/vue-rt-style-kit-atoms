@@ -11,7 +11,7 @@
       "name": "rt-radio-button",
       "property": ":is-orange",
       "type": "Boolean",
-      "description": "Делает чекбокс ораньжевым",
+      "description": "Делает radio ораньжевым",
       "value": "false",
       "version": "0.3.24"
     },
@@ -19,7 +19,7 @@
       "name": "rt-radio-button",
       "property": ":bright",
       "type": "Boolean",
-      "description": "Отображает чекбокс как в темной теме",
+      "description": "Отображает radio как в темной теме",
       "value": "false",
       "version": "0.3.24"
     },
