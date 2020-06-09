@@ -7,6 +7,7 @@
   user-select none
   &.disabled
     cursor: default;
+
 .checkbox-bright
   color b2c-white
 
@@ -88,7 +89,7 @@
     border-color b2c-purple
   .checkbox-orange:hover &:before
     border-color b2c-orange
-.checkbox.checkbox .ripple-wave
+.checkbox .ripple-wave
   background-color: b2c-purple
   .{newAppName}-dark-theme &
     background-color: b2c-purple
@@ -153,7 +154,8 @@
       &:before
         background-color: hsl(rgba(error-color, .4))
 
-
+.checkbox.invalid .ripple-wave
+  background-color: error-color
 
 .checkbox, .checkbox.checkbox-orange
   .checkbox-element[disabled]+.checkbox-container

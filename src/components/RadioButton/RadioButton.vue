@@ -1,23 +1,6 @@
-<template>
-    <label class="radio-button">
-        <rt-ripple ref="ripple" :not-bind-click="true" :not-render="isDisabled"/>
-        <input
-                ref="input"
-                :name="name"
-                :disabled="isDisabled"
-                :checked="isChecked"
-                type="radio"
-                class="radio-button-element"
-                :value="value"
-                @change="changeModel"
-        />
-        <div class="radio-button-container">
-            <slot/>
-        </div>
-    </label>
-</template>
 
-<script>
+
+<script type="text/jsx">
     import {default as RippleComponent} from "../Ripple/Ripple.vue";
 
     const componentsList = {};
@@ -29,6 +12,18 @@
             name: {
                 type: String,
                 default: ''
+            },
+            hasError:{
+                type: Boolean,
+                default: false
+            },
+            isOrange:{
+              type: Boolean,
+              default: false
+            },
+            bright: {
+                type: Boolean,
+                default: false
             },
             checked: {
                 type: Boolean,
@@ -43,6 +38,10 @@
                 default: null
             },
             isDisabled: {
+                type: Boolean,
+                default: false
+            },
+            disabled: {
                 type: Boolean,
                 default: false
             }
@@ -110,6 +109,33 @@
                 });
                 this.showWave();
             }
+        },
+        computed:{
+          radioButtonClasses(){
+              const classList = ['radio-button']
+              if(this.isOrange){
+                  classList.push('radio-button-orange')
+              }
+              if(this.bright){
+                  classList.push('radio-button-bright')
+              }
+              if(this.hasError){
+                  classList.push('radio-button-error')
+              }
+              if(this.isDisabled || this.disabled){
+                  classList.push('radio-button-disabled')
+              }
+              return classList.join(' ')
+          }
+        },
+        render() {
+            return <label class={this.radioButtonClasses}>
+                    <rt-ripple ref="ripple" not-bind-click={true} not-render={this.isDisabled || this.disabled}/>
+                <input ref="input" name={this.name} disabled={this.disabled} checked={this.isChecked} type="radio" class="radio-button-element" value={this.value} onChange={this.changeModel}
+            /><div class="radio-button-container">
+                {this.$slots.default}
+            </div>
+        </label>
         }
     };
 </script>

@@ -9,6 +9,22 @@
     },
     {
       "name": "rt-radio-button",
+      "property": ":is-orange",
+      "type": "Boolean",
+      "description": "Делает чекбокс ораньжевым",
+      "value": "false",
+      "version": "0.3.24"
+    },
+    {
+      "name": "rt-radio-button",
+      "property": ":bright",
+      "type": "Boolean",
+      "description": "Отображает чекбокс как в темной теме",
+      "value": "false",
+      "version": "0.3.24"
+    },
+    {
+      "name": "rt-radio-button",
       "property":":checked",
       "type": "Boolean",
       "description":"Предустанавливает выбранное состояние переключателю (атрибут `checked`)",
@@ -23,7 +39,7 @@
     },
     {
       "name": "rt-radio-button",
-      "property":":is-disabled",
+      "property":":disabled",
       "type": "Boolean",
       "description":"Флаг установки неактивного состояния для переключателя",
       "value" :"false"
