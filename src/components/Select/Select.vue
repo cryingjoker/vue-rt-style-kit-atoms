@@ -140,6 +140,13 @@
             return {RtSelect};
         },
         watch: {
+            text(){
+              this.localValue = this.text;
+              this.RtSelect.selectedValue = this.text;
+              if(this.text){
+                this.hasSelected = true;
+              }
+            },
             localValue(val) {
                 this.$emit("input", val);
             }
