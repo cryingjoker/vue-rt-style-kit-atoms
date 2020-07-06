@@ -54,7 +54,6 @@
     methods: {
       getClassName(name, value) {
         let classNameArray = ['rt', 'col'];
-        console.info('value',value)
         if (value > 0) {
           switch (true) {
             case name.search(/mobile/i) >= 0:
@@ -79,7 +78,6 @@
           classNameArray.push('d')
           classNameArray.push('none')
         }
-        console.info(classNameArray.join('-'))
         return classNameArray.join('-');
       }
     },

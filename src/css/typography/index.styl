@@ -391,9 +391,13 @@ a
 .{newAppName}-numeric-list__item
   padding-left horizontal-space * 1.5
   position relative
+  .{newAppName}-ordered-list--boolet &
+    padding-left: 18px
+    &:before
+      left: 0
 
   &+&
-    margin-top 15px
+    margin-top 12px
 
     @media (max-width: mobile-upper-limit)
       margin-top 10px
