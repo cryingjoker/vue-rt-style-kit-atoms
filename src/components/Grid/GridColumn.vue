@@ -29,7 +29,12 @@
     },
 
     mounted() {
+      this.bindEvents()
     },
+    beforeDestroy() {
+      this.unbindEvents()
+    },
+
     computed: {
       rowClassName() {
         const classNamesArray = [...spacesParamsNames.map((name) => {
@@ -79,6 +84,26 @@
           classNameArray.push('none')
         }
         return classNameArray.join('-');
+      },
+      bindEvents() {
+        if (this["_events"]) {
+          Object.keys(this["_events"]).map(eventName => {
+            const that = this;
+            that["_events"][eventName].forEach((fn) => {
+              this.$refs.row.addEventListener(eventName, fn)
+            });
+          });
+        }
+      },
+      unbindEvents() {
+        if (this["_events"]) {
+          Object.keys(this["_events"]).map(eventName => {
+            this.$refs.input.removeEventListener(
+                eventName,
+                this["_events"][eventName]
+            );
+          });
+        }
       }
     },
     render(h) {
