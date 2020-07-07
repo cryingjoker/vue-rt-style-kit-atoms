@@ -244,29 +244,27 @@ for devideStep in steps
   @media (min-width: tablet-lower-limit) and (max-width: tablet-upper-limit)
     overflow-y hidden
 
-.d-none
-  display none
+$device_media = '(max-width: '+lookup('desktop-lower-limit')+')' '' lookup('retina-media') '(max-width: '+lookup('tablet-upper-limit')+')'   '(max-width: '+lookup('mobile-upper-limit')+')'
+$device_types_code =  'lg' '' 'x2' 'td' 'md'
+displayProps = 'none' 'inline' 'inline-block' 'block' 'table' 'table-row' 'table-cell' 'flex' 'inline-flex' 'static' 'none'
 
-.d-inline
-  display inline
+for $device_index in 0 .. 4
+  classRender($i)
+    for props in displayProps
+      className = $device_types_code[$i]
+      if $device_types_code[$i]
+        className = className + '-'
+      className = className + 'd-'
 
-.d-inline-block
-  display inline-block
-
-.d-block
-  display block
-
-.d-table
-  display table
-
-.d-table-row
-  display table-row
-
-.d-table-cell
-  display table-cell
-
-.d-flex
-  display flex
+      className = className + s(props)
+      .{className}
+        display s(props)
+  media = $device_media[$device_index]
+  if media
+    @media media
+      classRender($device_index)
+  else
+    classRender($device_index)
 
 .flex-end-center
   display flex
@@ -316,9 +314,26 @@ for devideStep in steps
   &-end
     align-items: flex-end
 
-.d-inline-flex
-  display -ms-inline-flexbox
-  display inline-flex
+$device_media = '(max-width: '+lookup('desktop-lower-limit')+')' '' '(max-width: '+lookup('tablet-upper-limit')+')'   '(max-width: '+lookup('mobile-upper-limit')+')'
+$device_types_code =  'lg' '' 'td' 'md'
+alignProps = (start flex-start) (center center) (end flex-end)
+
+for $device_index in 0 .. 3
+  classRender($i)
+    for props in alignProps
+      className = ''
+      if $device_types_code[$i]
+        className = $device_types_code[$i] +'-'
+      className = className+'align-'
+      className = className + s(props[0])
+      .{className}
+        align-items: props[1]
+  media = $device_media[$device_index]
+  if media
+    @media media
+      classRender($device_index)
+  else
+    classRender($device_index)
 
 .d-space-between
   justify-content space-between
@@ -336,25 +351,15 @@ for devideStep in steps
   @media (max-width: mobile-upper-limit)
     justify-content center
 
-.d-static
-  display static
-
 .d-stretch
   display flex
   align-items stretch
 
-.md-inline-flex
-  @media (max-width: mobile-upper-limit)
-    display -ms-inline-flexbox
-    display inline-flex
 
 .md-space-between
   @media (max-width: mobile-upper-limit)
     justify-content space-between
 
-.md-static
-  @media (max-width: mobile-upper-limit)
-    display static
 
 .md-stretch
   @media (max-width: mobile-upper-limit)
@@ -363,32 +368,6 @@ for devideStep in steps
 
 .td
   @media (max-width: tablet-upper-limit)
-    &-d-none
-      display none !important
-
-    &-d-inline
-      display inline !important
-
-    &-d-inline-block
-      display inline-block !important
-
-    &-d-block
-      display block !important
-
-    &-d-table
-      display table !important
-
-    &-d-table-row
-      display table-row !important
-
-    &-d-table-cell
-      display table-cell !important
-
-    &-d-flex
-      display flex !important
-
-    &-d-inline-flex
-      display inline-flex !important
 
     &-flex-end-center
       display flex
@@ -427,32 +406,6 @@ for devideStep in steps
 
 .md
   @media (max-width: mobile-upper-limit)
-    &-d-none
-      display none !important
-
-    &-d-inline
-      display inline !important
-
-    &-d-inline-block
-      display inline-block !important
-
-    &-d-block
-      display block !important
-
-    &-d-table
-      display table !important
-
-    &-d-table-row
-      display table-row !important
-
-    &-d-table-cell
-      display table-cell !important
-
-    &-d-flex
-      display flex !important
-
-    &-d-inline-flex
-      display inline-flex !important
 
     &-flex-end-center
       display flex

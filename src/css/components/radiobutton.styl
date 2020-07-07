@@ -3,64 +3,143 @@
   position relative
   cursor pointer
   user-select none
+  @media (hover: hover)
+    &:hover
+      .radio-button-container:before
+        border-color b2c-purple
+        background-color: hsl(rgba(b2c-purple, .05))
+  .ripple .ripple-wave
+    background-color: b2c-purple
+  &:active
+    .radio-button-container:before
+      border-color b2c-purple
+      background-color: hsl(rgba(b2c-purple, .1))
 
-  &-element
-    display none
 
-  &-container
-    padding-left 29px
-    position relative
-    user-select none
+.radio-button-orange
+  .ripple .ripple-wave
+    background-color: b2c-orange
+  @media (hover: hover)
+    &:hover
+      .radio-button-container:before
+        border-color b2c-orange
+        background-color: hsl(rgba(b2c-orange, .05))
+  &:active
+      .radio-button-container:before
+        border-color b2c-orange
+        background-color: hsl(rgba(b2c-orange, .1))
+
+.radio-button-bright
+  color b2c-white
+  .radio-button-container
+    &:before
+      border-color hsl(rgba(b2c-white, .6))
+    &:after
+      background-color: b2c-white
+
+.radio-button.radio-button-error
+  .ripple .ripple-wave
+    background-color: error-color
+  .radio-button-element:checked+.radio-button-container
+    &:before
+      border-color error-color
+  .radio-button-container
+    &:before
+      border-color error-color
+.radio-button-element
+  display none
+
+.radio-button-container
+  padding-left 32px
+  position relative
+  user-select none
+
+  &:before
+    content ""
+    width 20px
+    height 20px
+    box-sizing border-box
+    background-color transparent
+    border 2px solid hsl(rgba(main-color, .3))
+    border-radius 50%
+    position absolute
+    top 0.25rem
+    left 0
+    transform translateY(-0.25rem)
+    transition-timing-function ease-in-out
+    transition-duration .2s
+    transition-property border, background-color
+    .{newAppName}-dark-theme &
+      border-color hsl(rgba(b2c-white, .6))
+
+
+  &:after
+    content ""
+    width 8px
+    height 8px
+    box-sizing border-box
+    border-radius 50%
+    position absolute
+    top -2px
+    left 6px
+    transform translateY(0.5rem)
+    opacity: 0
+    background-color: main-color
+    transition-timing-function ease-in-out
+    transition-duration .2s
+    transition-property opacity
+    .{newAppName}-dark-theme &
+      background-color: b2c-white
+
+.radio-button .radio-button-element:checked+.radio-button-container
+  &:after
+    opacity 1
+  &:before
+    border-color b2c-purple
+
+.radio-button-orange .radio-button-element:checked+.radio-button-container
+  &:after
+    opacity 1
+  &:before
+    border-color b2c-orange
+
+
+.radio-button,.radio-button.radio-button-error
+  .radio-button-element[disabled]+.radio-button-container
+    cursor default
+
 
     &:before
-      content ""
-      width 20px
-      height 20px
-      box-sizing border-box
-      background-color white
-      border 2px solid b2c-cool-grey
-      border-radius 50%
-      position absolute
-      top 50%
-      left 0
-      transform translateY(-50%)
+      border-color hsl(rgba(main-color, .1))
+      background-color: hsl(rgba(main-color, .05))
+      .{newAppName}-dark-theme &
+        border-color hsl(rgba(b2c-white, .1))
+        background-color: hsl(rgba(b2c-white, .05))
 
     &:after
-      content ""
-      width 10px
-      height 10px
-      box-sizing border-box
-      border-radius 50%
-      position absolute
-      top 50%
-      transform translateY(-50%)
-      left 5px
-      transition-timing-function ease-in-out
-      transition-duration .2s
-      transition-property background, opacity, visibility
-
-    .radio-button-element:checked+&
-      &:after
-        background-color b2c-purple
-        opacity 1
-        visibility visible
-
-        .{newAppName}-dark-theme &
-          background-color b2c-orange
-
-    .radio-button-element[disabled]+&
-      cursor default
+      background-color hsl(rgba(main-color, .1))
 
       .{newAppName}-dark-theme &
-        opacity .4
+        background-color hsl(rgba(b2c-white, .1))
 
-      &:before
-        border-color b2c-cool-grey05
+    color hsl(rgba(main-color, .5))
+    .{newAppName}-dark-theme &
+      color hsl(rgba(b2c-white, .5))
+.radio-button-bright.radio-button, .radio-button-bright.radio-button.radio-button-error
+  .radio-button-element[disabled]+.radio-button-container
+    &:before
+      border-color hsl(rgba(b2c-white, .1))
+      background-color: hsl(rgba(b2c-white, .05))
 
-      &:after
-        background-color b2c-cool-grey
 
-        .{newAppName}-dark-theme &
-          background-color main-color
+    &:after
+      background-color hsl(rgba(b2c-white, .1))
+    color hsl(rgba(b2c-white, .5))
 
-      color b2c-cool-grey
+.radio-button-disabled
+  cursor: default
+  color hsl(rgba(main-color, .5))
+  .{newAppName}-dark-theme &
+    color hsl(rgba(b2c-white, .5))
+.radio-button-bright.radio-button-disabled
+  color hsl(rgba(b2c-white, .5))

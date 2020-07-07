@@ -1,11 +1,13 @@
 .{newAppName}-link
-  font-size 16px
   line-height 24px
   cursor: pointer
   cursor pointer
   transition-timing-function ease-in-out
   transition-duration .2s
   transition-property opacity
+  color b2c-purple
+  .{newAppName}-dark-theme &
+    color b2c-orange
   @media (max-width: mobile-upper-limit)
     font-size 14px
     line-height 20px
@@ -30,10 +32,7 @@
   .{newAppName}-dark-theme &
     color b2c-purple
 
-.{newAppName}-link--purple
-  color b2c-purple
-  .{newAppName}-dark-theme &
-    color b2c-orange
+
 
 .{newAppName}-link--blue
   color b2c-light-blue-low
