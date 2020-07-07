@@ -1,5 +1,5 @@
 <script type="text/jsx">
-  import VeeValidate from "vee-validate";
+  import { extend, ValidationProvider  } from 'vee-validate';
   import variables from "../../variables.json";
 
   export default {
@@ -191,7 +191,11 @@
 
     mounted() {
       this.disabledLocal = this.disabled;
-      this.customRules.forEach(({nameRule, rule}) => VeeValidate.Validator.extend(nameRule, {validate: rule}));
+      let indexLastEl = this.customRules.length - 1
+      this.customRules.forEach(({nameRule, rule}, index) => {
+        extend(nameRule, {validate: rule})
+      });
+      
       this.setValue();
       this.setDisabled();
       this.bindEvents();
@@ -614,33 +618,37 @@
 
       const inputElementByType = (() => {
         if (this.insertType !== 'tel') {
-          return <input
-              onKeypress={this.keyPress}
-              onKeyup={this.keyUp}
-              ref="input"
-              autocomplete={this.autocomplete}
-              autocapitalize="off"
-              type={this.type === 'search' ? 'text' : this.type}
-              class="input-element"
-              name={this.fieldName}
-              onInput={this.inputHandler}
-              v-validate={this.validate}
-          />;
+          return 
+          <ValidationProvider rules={this.validate} v-slot="{ errors }">
+            <input
+                onKeypress={this.keyPress}
+                onKeyup={this.keyUp}
+                ref="input"
+                autocomplete={this.autocomplete}
+                autocapitalize="off"
+                type={this.type === 'search' ? 'text' : this.type}
+                class="input-element"
+                name={this.fieldName}
+                onInput={this.inputHandler}
+            />
+          </ValidationProvider>;
         } else {
-          return <input
-              onKeypress={this.keyPress}
-              onKeyup={this.keyUp}
-              ref="input"
-              autocomplete={this.autocomplete}
-              autocapitalize="off"
-              type={this.type}
-              class="input-element"
-              name={this.fieldName}
-              onInput={this.inputHandler}
-              v-validate={this.validate}
-              onFocus={this.mask}
-              onBlur={this.mask}
-          />;
+          return
+          <ValidationProvider rules={this.validate} v-slot="{ errors }">
+            <input
+                onKeypress={this.keyPress}
+                onKeyup={this.keyUp}
+                ref="input"
+                autocomplete={this.autocomplete}
+                autocapitalize="off"
+                type={this.type}
+                class="input-element"
+                name={this.fieldName}
+                onInput={this.inputHandler}
+                onFocus={this.mask}
+                onBlur={this.mask}
+              />
+          </ValidationProvider>
         }
       })();
 
