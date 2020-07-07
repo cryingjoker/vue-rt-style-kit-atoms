@@ -50,7 +50,7 @@
   display none
 
 .radio-button-container
-  padding-left 29px
+  padding-left 32px
   position relative
   user-select none
 
@@ -122,7 +122,9 @@
       .{newAppName}-dark-theme &
         background-color hsl(rgba(b2c-white, .1))
 
-    color b2c-cool-grey
+    color hsl(rgba(main-color, .5))
+    .{newAppName}-dark-theme &
+      color hsl(rgba(b2c-white, .5))
 .radio-button-bright.radio-button, .radio-button-bright.radio-button.radio-button-error
   .radio-button-element[disabled]+.radio-button-container
     &:before
@@ -132,11 +134,12 @@
 
     &:after
       background-color hsl(rgba(b2c-white, .1))
+    color hsl(rgba(b2c-white, .5))
 
 .radio-button-disabled
   cursor: default
-  color hsl(rgba(main-color, .15))
+  color hsl(rgba(main-color, .5))
   .{newAppName}-dark-theme &
-    color hsl(rgba(b2c-white, .15))
+    color hsl(rgba(b2c-white, .5))
 .radio-button-bright.radio-button-disabled
-  color hsl(rgba(b2c-white, .15))
+  color hsl(rgba(b2c-white, .5))
