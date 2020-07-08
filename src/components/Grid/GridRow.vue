@@ -43,7 +43,7 @@
       unbindEvents() {
         if (this["_events"]) {
           Object.keys(this["_events"]).map(eventName => {
-            this.$refs.input.removeEventListener(
+            this.$refs.row.removeEventListener(
                 eventName,
                 this["_events"][eventName]
             );

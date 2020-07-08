@@ -90,7 +90,7 @@
           Object.keys(this["_events"]).map(eventName => {
             const that = this;
             that["_events"][eventName].forEach((fn) => {
-              this.$refs.row.addEventListener(eventName, fn)
+              this.$refs.column.addEventListener(eventName, fn)
             });
           });
         }
@@ -98,7 +98,7 @@
       unbindEvents() {
         if (this["_events"]) {
           Object.keys(this["_events"]).map(eventName => {
-            this.$refs.input.removeEventListener(
+            this.$refs.column.removeEventListener(
                 eventName,
                 this["_events"][eventName]
             );
@@ -107,7 +107,7 @@
       }
     },
     render(h) {
-      return <div class={this.rowClassName}>{this.$slots.default}</div>
+      return <div ref="column" class={this.rowClassName}>{this.$slots.default}</div>
     }
 
   };
