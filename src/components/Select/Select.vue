@@ -79,31 +79,29 @@
         computed: {
             selectClasses() {
                 let selectClasses = ['select', 'text-field'];
-                switch (true) {
-                    case this.hasError:
-                        selectClasses.push("select--error text-field--error");
-                        break;
-                    case this.isOpen:
-                        selectClasses.push("select--is-open");
-                        break;
-                    case this.resetWrapperWidth:
-                        selectClasses.push("select--is-reset-width");
-                        break;
-                    case Boolean(this.disabled):
-                        selectClasses.push("select--disabled");
-                        break;
-                    case this.isOpenListOnTop:
-                        selectClasses.push("select--invert-open-list");
-                        break;
-                    case this.isB2bSelect:
-                        selectClasses.push("rtb-select");
-                        break;
-                    case this.outlined:
-                        selectClasses.push("rtb-select--outlined");
-                        break;
-                    case this.multi:
-                        selectClasses.push("rtb-select--multi");
-                        break;
+                if (this.hasError) {
+                    selectClasses.push("select--error text-field--error");
+                }
+                if (this.isOpen) {
+                    selectClasses.push("select--is-open");
+                }
+                if (this.resetWrapperWidth) {
+                    selectClasses.push("select--is-reset-width");
+                }
+                if (this.disabled) {
+                    selectClasses.push("select--disabled");
+                }
+                if (this.isOpenListOnTop) {
+                    selectClasses.push("select--invert-open-list");
+                }
+                if (this.isB2bSelect) {
+                    selectClasses.push("rtb-select");
+                }
+                if (this.outlined) {
+                    selectClasses.push("rtb-select--outlined");
+                }
+                if (this.multi) {
+                    selectClasses.push("rtb-select--multi");
                 }
                 if(this.hasContentText) {
                     selectClasses.push("rt-select--has-content")
