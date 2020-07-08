@@ -2,7 +2,6 @@ export {default as Button} from './Button/Button.vue';
 export {default as Checkbox} from './Checkbox/Checkbox.vue';
 export {default as CheckboxContainer} from './Checkbox/CheckboxContainer.vue';
 export {default as Input} from './Input/Input.vue';
-export {default as InputWithoutJs} from './Input/InputWithoutJs.vue';
 export {default as Price} from './Price/Price.vue';
 export {default as RadioButton} from './RadioButton/RadioButton.vue';
 export {default as RadioButtonContainer} from './RadioButton/RadioButtonContainer.vue';

@@ -9,6 +9,10 @@
       event: 'input'
     },
     props: {
+      newRender: {
+        type: Boolean,
+        default: false
+      },
       customRules: {
         type: Array,
         default: () => ([])
@@ -136,6 +140,8 @@
     },
     data() {
       return {
+        isNew: false,
+        isFocus: false,
         disabledLocal: null,
         index: null,
         localLabel: this.label,
@@ -156,20 +162,58 @@
         }
       },
       inputClass() {
-        let className = "input-wrapper";
-        if (this.outlined) {
-          className += " input-wrapper--outlined";
+        let className = ["input-wrapper"];
+        if (this.isNew) {
+          className.push("input_v2")
         }
-        if (this.isB2bInput) {
-          className += " rtb-input color-block--white";
+        if (this.disabledLocal) {
+          className.push("input-disabled")
+        }
+        if (this.outlined) {
+          className.push("input-wrapper--outlined");
+        }
+        if (this.isB2bInput && !this.isNew) {
+          className.push("rtb-input color-block--white");
         }
         if (this.isHidden) {
-          className += " rtb-input--hidden";
+          className.push("rtb-input--hidden");
         }
         if (this.approved) {
-          className += " rtb-input--approved";
+          className.push("rtb-input--approved");
         }
         return className;
+      },
+      inputContainerClass() {
+        let inputClass = ["input", "text-field"];
+        // this.isNew
+        if (this.isFocus) {
+          inputClass.push("input--focus")
+        }
+        if (this.isInvalid) {
+          inputClass.push("text-field--error");
+        }
+        if (this.showNumbersButtons && this.insertType && this.insertType === "number") {
+          inputClass.push("input--with-button");
+        }
+        if (this.isWhite) {
+          inputClass.push("rt-input--white");
+        }
+        if (this.type && this.type === "password") {
+          inputClass.push("rt-input--password");
+        }
+        if (this.color === "orange") {
+          inputClass.push("text-field--orange");
+        } else {
+          inputClass.push("text-field--purple");
+        }
+        return inputClass.join(' ')
+      },
+      inputElementClass() {
+        const classList = ['input-element']
+        if (this.hasInputText) {
+          classList.push('input-element--n-emp')
+        }
+        return classList.join(' ')
       }
     },
     watch: {
@@ -185,11 +229,12 @@
       },
       disabled() {
         this.disabledLocal = this.disabled
-	      this.setDisabled()
+        this.setDisabled()
       }
     },
 
     mounted() {
+      this.setNewRender();
       this.disabledLocal = this.disabled;
       this.customRules.forEach(({nameRule, rule}) => VeeValidate.Validator.extend(nameRule, {validate: rule}));
       this.setValue();
@@ -209,6 +254,24 @@
       this.unbindEvents();
     },
     methods: {
+      setNewRender(){
+        if(this.newRender){
+          this.isNew = true
+        }
+        else {
+          if (document.cookie) {
+            if (document.cookie.split('; ').find(i => i.split('=')[0] == 'new_design')) {
+              this.isNew = true;
+            }
+          }
+        }
+      },
+      focus() {
+        this.isFocus = true
+      },
+      blur() {
+        this.isFocus = false
+      },
       bindEvents() {
         if (this["_events"]) {
           Object.keys(this["_events"]).map(eventName => {
@@ -454,27 +517,10 @@
       },
       focusInput() {
         this.$refs.input.focus()
-      }
+      },
     },
     render() {
-      let inputClass = "input text-field";
-      if (this.isInvalid) {
-        inputClass += " text-field--error";
-      }
-      if (this.showNumbersButtons && this.insertType && this.insertType === "number") {
-        inputClass += " input--with-button";
-      }
-      if (this.isWhite) {
-        inputClass += " rt-input--white";
-      }
-      if (this.type && this.type === "password") {
-        inputClass += " rt-input--password";
-      }
-      if (this.color === "orange") {
-        inputClass += " text-field--orange";
-      } else {
-        inputClass += " text-field--purple";
-      }
+
 
       const placeholder = (() => {
         if (this.placeholder) {
@@ -492,14 +538,14 @@
       const clearButton = (() => {
         const buttonClass = (() => {
           let clearButtonClassNames = "input-clear";
-          if (this.isB2bInput) {
+          if (this.isB2bInput && !this.isNew) {
             clearButtonClassNames += " rtb-input-clear";
           }
           return clearButtonClassNames;
         })();
         if (!this.showNumbersButtons && !this.disabledLocal && this.hasInputText && this.type != "password") {
           return <div class={buttonClass} onClick={this.clearInput}>
-            <svg class="input-clear__icon" viewBox="0 0 14 14" width="13" height="13"
+            <svg class="input-clear__icon" viewBox="0 0 14 14" width="12" height="12"
                  xmlns="http://www.w3.org/2000/svg">
               <path d="M14 1.4L12.6 0 7 5.6 1.4 0 0 1.4 5.6 7 0 12.6 1.4 14 7 8.4l5.6 5.6 1.4-1.4L8.4 7z"
                     fill-rule="evenodd"/>
@@ -562,12 +608,12 @@
           if (this.label) {
             errorMessageClass += " text-field__error-message--has-label";
           }
-          if (this.isB2bInput) {
+          if (this.isB2bInput && !this.isNew) {
             errorMessageClass += " rtb-text-field__error-message rt-col-rt-col-3";
           }
-          if (this.hintPosition === "right") {
+          if (this.hintPosition === "right" && !this.isNew) {
             errorMessageClass += " rtb-text-field__error-message--on-the-right";
-          } else if (this.hintPosition === "left") {
+          } else if (this.hintPosition === "left" && !this.isNew) {
             errorMessageClass += " rtb-text-field__error-message--on-the-left";
           }
 
@@ -585,24 +631,26 @@
       const arithmeticButtons = (() => {
         if (this.showNumbersButtons && this.insertType && this.insertType === "number") {
           return <div class="input-arithmetic">
-            <button class="input-arithmetic__button input-arithmetic__minus" onClick={this.subtractNumber}>
-              <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
-                <g fill="none" fill-rule="evenodd">
-                  <path d="M0 10c0 5.5 4.5 10 10 10s10-4.5 10-10S15.5 0 10 0 0 4.5 0 10z"
-                        fill="#E3E8EC"/>
-                  <path d="M15 10H5" stroke="#101828" stroke-width="2"/>
-                </g>
-              </svg>
-            </button>
-            <button class="input-arithmetic__button input-arithmetic__plus" onClick={this.addNumber}>
-              <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
-                <g fill="none" fill-rule="evenodd">
-                  <path d="M0 10c0 5.5 4.5 10 10 10s10-4.5 10-10S15.5 0 10 0 0 4.5 0 10z"
-                        fill="#E3E8EC"/>
-                  <path d="M10 10V5v5h5-5zm0 0v5-5H5h5z" stroke="#101828" stroke-width="2"/>
-                </g>
-              </svg>
-            </button>
+            <div class="d-flex">
+              <button class="input-arithmetic__button input-arithmetic__minus" onClick={this.subtractNumber}>
+                <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+                  <g fill="none" fill-rule="evenodd">
+                    <path d="M0 10c0 5.5 4.5 10 10 10s10-4.5 10-10S15.5 0 10 0 0 4.5 0 10z"
+                          fill="#E3E8EC"/>
+                    <path d="M15 10H5" stroke="#101828" stroke-width="2"/>
+                  </g>
+                </svg>
+              </button>
+              <button class="input-arithmetic__button input-arithmetic__plus" onClick={this.addNumber}>
+                <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+                  <g fill="none" fill-rule="evenodd">
+                    <path d="M0 10c0 5.5 4.5 10 10 10s10-4.5 10-10S15.5 0 10 0 0 4.5 0 10z"
+                          fill="#E3E8EC"/>
+                    <path d="M10 10V5v5h5-5zm0 0v5-5H5h5z" stroke="#101828" stroke-width="2"/>
+                  </g>
+                </svg>
+              </button>
+            </div>
           </div>;
         }
       })();
@@ -617,11 +665,13 @@
           return <input
               onKeypress={this.keyPress}
               onKeyup={this.keyUp}
+              onFocus={this.focus}
+              onBlur={this.blur}
               ref="input"
               autocomplete={this.autocomplete}
               autocapitalize="off"
               type={this.type === 'search' ? 'text' : this.type}
-              class="input-element"
+              class={this.inputElementClass}
               name={this.fieldName}
               onInput={this.inputHandler}
               v-validate={this.validate}
@@ -634,7 +684,7 @@
               autocomplete={this.autocomplete}
               autocapitalize="off"
               type={this.type}
-              class="input-element"
+              class={this.inputElementClass}
               name={this.fieldName}
               onInput={this.inputHandler}
               v-validate={this.validate}
@@ -643,11 +693,47 @@
           />;
         }
       })();
+      const inputLine = () => {
+        if (this.isNew) {
+          return null
+        }
+        if (this.outlined) {
+          return <div class="text-field__border"/>
+        } else {
+          return <div class="text-field__line"/>
+        }
+      }
+			const renderButton = ()=>{
+        if(this.inputButton) {
 
+          if (this.isNew) {
+            return <rt-button class="rt-button-transparent-purple rt-button-small"
+                                            onClick={this.getCode}>{this.inputButtonText}</rt-button>
+          } else {
+            return <rt-button class="rt-button-transparent-purple rt-button-small"
+                              onClick={this.getCode}>{this.inputButtonText}</rt-button>
+          }
+        }
+        return null
+
+			}
+			const renderTimer= () =>{
+        if(this.hasTimer){
+          if(this.isNew){
+            return <div class="input-timer">
+            <rt-countdown-timer duration={this.timerDuration}/>
+            </div>
+          }else{
+            return <rt-countdown-timer duration={this.timerDuration}/>
+          }
+        }
+        return null
+
+	    }
       return <div class={this.inputClass}>
-        <div class="input text-field" class={inputClass}>
+        <div class={this.inputContainerClass}>
           {inputElementByType}
-          {this.outlined ? <div class="text-field__border"/> : <div class="text-field__line"/>}
+          {inputLine()}
           {placeholder}
           {this.inputButton ? null : clearButton}
           {passwordIcon}
@@ -655,11 +741,11 @@
           {errorMessage}
           {arithmeticButtons}
           {this.$slots.default}
-          {this.hasTimer ? <rt-countdown-timer duration={this.timerDuration}/> : null}
+	        {renderTimer()}
         </div>
         {inputLabel}
-        {this.inputButton ? <rt-button class="rt-button-transparent-purple rt-button-small"
-                                       onClick={this.getCode}>{this.inputButtonText}</rt-button> : null}
+
+	      {renderButton()}
       </div>;
     }
   };
