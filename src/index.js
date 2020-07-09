@@ -51,6 +51,7 @@ import {
 
 import {deviceTypeStore} from "./stores/deviceTypeStoreMixin.js";
 import {viewportPositionStore} from "./stores/viewportPositionStoreMixin";
+import {StorePrototype} from './stores/storePrototype.class'
 import {
     backgroundColorPropsNames,
     backgroundColorProps,
@@ -176,8 +177,8 @@ export {
     backgroundColorProps,
     getBackgroundClassByProps,
     getBackgroundClass,
-
-
+    
+    StorePrototype,
     viewportPositionStore,
     deviceTypeStore,
     getVariable,

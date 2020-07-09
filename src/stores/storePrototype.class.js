@@ -1,4 +1,4 @@
-class StorePrototype {
+export class StorePrototype {
 
     constructor(){
         this.watchers = {}
@@ -51,4 +51,3 @@ class StorePrototype {
     };
 
 }
-export default StorePrototype;

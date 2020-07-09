@@ -1,7 +1,7 @@
 import getVariable from '../mixins/variablesMixin';
 import Vue from 'vue';
 import debounce from 'debounce';
-import StorePrototype from "./storePrototype.class";
+import {StorePrototype} from "./storePrototype.class";
 
 class DeviceTypeStore extends StorePrototype{
   constructor() {
