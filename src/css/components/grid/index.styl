@@ -457,10 +457,13 @@ for $device_index in 0 .. 3
   transition-timing-function ease-in-out
   transition-duration 3s
   transition-property opacity, visibility
-  @media (max-width: laptop-upper-limit)
-    padding-left horizontal-space * 1.5
-    padding-right horizontal-space * 1.5
 
+  @media (max-width: container-device-limit)
+    padding-left horizontal-space * 2
+    padding-right horizontal-space * 2
+  @media (max-width: tablet-upper-limit)
+    padding-left horizontal-space * .5
+    padding-right horizontal-space * .5
   @media (max-width: mobile-upper-limit)
     padding-left horizontal-space * .5
     padding-right horizontal-space * .5

@@ -17,6 +17,7 @@
   "laptop-upper-limit": "1279px",
   "desktop-lower-limit": "1280px",
   "desktop-upper-limit": "1400px",
+  "container-device-limit" : "1459px",
   "large-desktop-lower-limit": "1401px",
   "container-upper-limit": "1480px",
   "retina-media": "(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)"
