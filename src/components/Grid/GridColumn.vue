@@ -16,6 +16,22 @@
     mobileSize: {
       type: [Number, String],
       default: -1
+    },
+    hide: {
+      type: Boolean,
+      default: false
+    },
+    mHide: {
+      type: Boolean,
+      default: false
+    },
+    tHide: {
+      type: Boolean,
+      default: false
+    },
+    lgHide: {
+      type: Boolean,
+      default: false
     }
   }
   const componentsList = {};
@@ -29,12 +45,7 @@
     },
 
     mounted() {
-      this.bindEvents()
     },
-    beforeDestroy() {
-      this.unbindEvents()
-    },
-
     computed: {
       rowClassName() {
         const classNamesArray = [...spacesParamsNames.map((name) => {
@@ -51,14 +62,31 @@
           }
         })
         ].filter((i) => i && i.length > 0);
-
+        if (this.hide || this.lgHide || this.tHide || this.mHide) {
+          ['hide', 'lgHide', 'tHide', 'mHide'].forEach((key) => {
+            const prefix = hideClass.unshift(key.replace(/hide/gi, ''));
+            if (this[key]) {
+              let hideClass = ['d', 'none']
+              if (prefix.length > 0) {
+                hideClass.unshift(prefix)
+              }
+              classNamesArray.push(hideClass.join('-'))
+            } else {
+              let hideClass = ['d', 'block']
+              if (prefix.length > 0) {
+                hideClass.unshift(prefix)
+              }
+              classNamesArray.push(hideClass.join('-'))
+            }
+          })
+        }
 
         return classNamesArray.join(' ');
       }
     },
     methods: {
       getClassName(name, value) {
-        let classNameArray = ['rt', 'col'];
+        const classNameArray = ['rt', 'col'];
         if (value > 0) {
           switch (true) {
             case name.search(/mobile/i) >= 0:
@@ -70,44 +98,11 @@
           }
           classNameArray.push(value.toString());
         }
-        if (value == 0) {
-          classNameArray = [];
-          switch (true) {
-            case name.search(/mobile/i) >= 0:
-              classNameArray.push('md');
-              break;
-            case name.search(/tablet/i) >= 0:
-              classNameArray.push('td');
-              break;
-          }
-          classNameArray.push('d')
-          classNameArray.push('none')
-        }
         return classNameArray.join('-');
-      },
-      bindEvents() {
-        if (this["_events"]) {
-          Object.keys(this["_events"]).map(eventName => {
-            const that = this;
-            that["_events"][eventName].forEach((fn) => {
-              this.$refs.column.addEventListener(eventName, fn)
-            });
-          });
-        }
-      },
-      unbindEvents() {
-        if (this["_events"]) {
-          Object.keys(this["_events"]).map(eventName => {
-            this.$refs.column.removeEventListener(
-                eventName,
-                this["_events"][eventName]
-            );
-          });
-        }
       }
     },
     render(h) {
-      return <div ref="column" class={this.rowClassName}>{this.$slots.default}</div>
+      return <div class={this.rowClassName}>{this.$slots.default}</div>
     }
 
   };
