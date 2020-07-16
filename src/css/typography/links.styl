@@ -9,8 +9,9 @@
   @media (max-width: mobile-upper-limit)
     font-size 14px
     line-height 20px
-  &:hover
-    opacity .65
+  @media (hover:hover)
+    &:hover
+      color b2c-purple-button-hover
 
   &-back
     color main-color
@@ -29,11 +30,17 @@
   color b2c-orange
   .{newAppName}-dark-theme &
     color b2c-purple
+    @media (hover:hover)
+      &:hover
+        color b2c-purple-button-hover
+  @media (hover:hover)
+    &:hover
+      color b2c-orange-button-hover
 
 
 
 .{newAppName}-link--blue
   color b2c-light-blue-low
-
-  &:hover
-    color rgba(b2c-light-blue-low, .7)
+  @media (hover:hover)
+    &:hover
+      color rgba(b2c-light-blue-low, .7)
