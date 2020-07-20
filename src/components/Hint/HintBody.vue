@@ -8,7 +8,7 @@
     props: {},
     data() {
       return {
-        active: true,
+        active: false,
         styleWidth: '',
         isSmall: false,
         posBottom: false,
