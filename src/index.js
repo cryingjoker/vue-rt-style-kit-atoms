@@ -1,7 +1,8 @@
 import  "./css/vue-rt-style-atoms.styl";
 import Global from "./variables.json";
 import Project from "@projectAtoms";
-
+import ofi from './polyfills/ofi.min'
+console.info('ofi',ofi)
 import {
     Button,
     Checkbox,

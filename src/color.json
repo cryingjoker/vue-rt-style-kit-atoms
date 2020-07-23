@@ -9,7 +9,7 @@
   "b2c-red": "#BC104B",
   "b2c-red-low": "#910046",
   "b2c-red-high": "#E22E65",
-
+  "b2c-gray": "#F3F3F4",
   "b2c-dark-blue": "#273A64",
   "b2c-dark-blue-low": "#001C45",
   "b2c-dark-blue-high": "#275392",
@@ -27,6 +27,8 @@
   "b2c-orange-button-active": "#B12F01",
   "b2c-orange-low": "#D33706",
   "b2c-orange-high": "#FF8218",
+  "b2c-orange-super": "#FE5013",
+
 
   "b2c-pink": "#FFBFC3",
   "b2c-pink-low": "#FFA0A7",
