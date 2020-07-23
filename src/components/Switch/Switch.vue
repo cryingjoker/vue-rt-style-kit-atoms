@@ -1,5 +1,5 @@
 <template>
-  <label class="switch">
+  <label :class="containerClasses">
     <input
       ref="input"
       :disabled="isDisabled"
@@ -50,6 +50,10 @@ export default {
     checked: {
       type: Boolean,
       default: false
+    },
+    isOrange: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
@@ -58,6 +62,13 @@ export default {
   computed: {
     fieldName() {
       return this.name || "input-field__" + this._uid;
+    },
+    containerClasses() {
+      let classList = 'switch';
+      if(this.isOrange) {
+        classList += ' switch--orange';
+      }
+      return classList;
     }
   },
   mounted: function() {
