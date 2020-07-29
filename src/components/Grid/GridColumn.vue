@@ -64,7 +64,7 @@
         ].filter((i) => i && i.length > 0);
         if (this.hide || this.lgHide || this.tHide || this.mHide) {
           ['hide', 'lgHide', 'tHide', 'mHide'].forEach((key) => {
-            const prefix = hideClass.unshift(key.replace(/hide/gi, ''));
+            const prefix = key.replace(/hide/gi, '');
             if (this[key]) {
               let hideClass = ['d', 'none']
               if (prefix.length > 0) {
