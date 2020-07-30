@@ -64,12 +64,16 @@
         ].filter((i) => i && i.length > 0);
         if (this.hide || this.lgHide || this.tHide || this.mHide) {
           ['hide', 'lgHide', 'tHide', 'mHide'].forEach((key) => {
-            const prefix = key.replace(/hide/gi, '');
+            let prefix = key.replace(/hide/gi, '');
             if (this[key]) {
               let hideClass = ['d', 'none']
-              if (prefix.length > 0) {
+              if(prefix == 'm'){
+                prefix += 'd'
+              }
+	            if (prefix.length > 0) {
                 hideClass.unshift(prefix)
               }
+
               classNamesArray.push(hideClass.join('-'))
             } else {
               let hideClass = ['d', 'block']
