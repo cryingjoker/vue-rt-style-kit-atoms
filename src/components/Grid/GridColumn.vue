@@ -67,7 +67,7 @@
             let prefix = key.replace(/hide/gi, '');
             if (this[key]) {
               let hideClass = ['d', 'none']
-              if(prefix == 'm'){
+              if(prefix == 'm' || prefix == 't'){
                 prefix += 'd'
               }
 	            if (prefix.length > 0) {
