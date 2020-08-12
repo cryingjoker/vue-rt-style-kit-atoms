@@ -248,23 +248,6 @@ $device_media = '(max-width: '+lookup('desktop-lower-limit')+')' '' lookup('reti
 $device_types_code =  'lg' '' 'x2' 'td' 'md'
 displayProps = 'none' 'inline' 'inline-block' 'block' 'table' 'table-row' 'table-cell' 'flex' 'inline-flex' 'static' 'none'
 
-for $device_index in 0 .. 4
-  classRender($i)
-    for props in displayProps
-      className = $device_types_code[$i]
-      if $device_types_code[$i]
-        className = className + '-'
-      className = className + 'd-'
-
-      className = className + s(props)
-      .{className}
-        display s(props)
-  media = $device_media[$device_index]
-  if media
-    @media media
-      classRender($device_index)
-  else
-    classRender($device_index)
 
 .flex-end-center
   display flex
@@ -802,6 +785,24 @@ for $device_index in 0 .. 3
     grid-column-end: 1;
     grid-row-start: 1;
     grid-row-start: 1;
+
+for $device_index in 0 .. 4
+  classRender($i)
+    for props in displayProps
+      className = $device_types_code[$i]
+      if $device_types_code[$i]
+        className = className + '-'
+      className = className + 'd-'
+
+      className = className + s(props)
+      .{className}
+        display s(props)
+  media = $device_media[$device_index]
+  if media
+    @media media
+      classRender($device_index)
+  else
+    classRender($device_index)
 
 @require './gridRender.styl'
 @require './spaceRender.styl'
