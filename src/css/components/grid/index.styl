@@ -244,9 +244,6 @@ for devideStep in steps
   @media (min-width: tablet-lower-limit) and (max-width: tablet-upper-limit)
     overflow-y hidden
 
-$device_media = '(max-width: '+lookup('desktop-lower-limit')+')' '' lookup('retina-media') '(max-width: '+lookup('tablet-upper-limit')+')'   '(max-width: '+lookup('mobile-upper-limit')+')'
-$device_types_code =  'lg' '' 'x2' 'td' 'md'
-displayProps = 'none' 'inline' 'inline-block' 'block' 'table' 'table-row' 'table-cell' 'flex' 'inline-flex' 'static' 'none'
 
 
 .flex-end-center
@@ -785,6 +782,9 @@ for $device_index in 0 .. 3
     grid-column-end: 1;
     grid-row-start: 1;
     grid-row-start: 1;
+$device_media = '(max-width: '+lookup('desktop-lower-limit')+')' '' lookup('retina-media') '(max-width: '+lookup('tablet-upper-limit')+')'   '(max-width: '+lookup('mobile-upper-limit')+')'
+$device_types_code =  'lg' '' 'x2' 'td' 'md'
+displayProps = 'none' 'inline' 'inline-block' 'block' 'table' 'table-row' 'table-cell' 'flex' 'inline-flex' 'static' 'none'
 
 for $device_index in 0 .. 4
   classRender($i)
@@ -803,7 +803,6 @@ for $device_index in 0 .. 4
       classRender($device_index)
   else
     classRender($device_index)
-
 @require './gridRender.styl'
 @require './spaceRender.styl'
 @require './elementOpacity.styl'
