@@ -304,7 +304,7 @@ for $device_index in 0 .. 3
       className = ''
       if $device_types_code[$i]
         className = $device_types_code[$i] +'-'
-      className = className+'align-'
+      className = className+'flex-v-'
       className = className + s(props[0])
       .{className}
         align-items: props[1]
