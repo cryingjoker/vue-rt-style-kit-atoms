@@ -613,6 +613,11 @@ for $device_index in 0 .. 3
 .height-fill
   min-height 100%
 
+:root .height-fill:after
+  content:''
+  min-height:inherit
+  font-size:0
+
 .flex-md-start
   @media (max-width: mobile-upper-limit)
     display flex
