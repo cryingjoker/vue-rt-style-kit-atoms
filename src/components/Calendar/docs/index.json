@@ -1,0 +1,25 @@
+{
+	"items": [
+    {
+			"name": "rt-calendar",
+			"property": "label",
+			"type": "String",
+			"description": "Подпись над полем",
+			"value": ""
+		},
+		{
+			"name": "rt-calendar",
+			"property": "placeholder",
+			"type": "String",
+			"description": "Текст внутри поля",
+			"value": "Выберите дату"
+		},
+		{
+			"name": "rt-calendar",
+			"property": ":calendarProps",
+			"type": "Object",
+			"description": "Задать специфические св-ва для календаря",
+			"value": "null"
+		}
+	]
+}

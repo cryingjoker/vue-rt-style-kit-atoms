@@ -4,6 +4,7 @@ import Project from "@projectAtoms";
 import ofi from './polyfills/ofi.min'
 import {
     Button,
+    Calendar,
     Checkbox,
     CheckboxContainer,
     Input,
@@ -65,6 +66,7 @@ let VueRtStyle = {
     install(Vue, config) {
         if (!Vue.RtStyleAtoms) {
             Vue.component(Button.name, Button);
+            Vue.component(Calendar.name, Calendar);
             Vue.component(Checkbox.name, Checkbox);
             Vue.component(CheckboxContainer.name, CheckboxContainer);
             Vue.component(Input.name, Input);
@@ -124,6 +126,7 @@ export default VueRtStyle;
 
 export {
     Button,
+    Calendar,
     Checkbox,
     CheckboxContainer,
     Input,
