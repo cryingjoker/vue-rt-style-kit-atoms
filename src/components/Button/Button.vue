@@ -16,13 +16,13 @@
                 default: null
             },
             bright:{
-              type: Boolean,
+                type: Boolean,
 	            default: false
             },
-		        small:{
-	              type: Boolean,
-			          default: false
-		        },
+            small:{
+                type: Boolean,
+                default: false
+            },
             isBlock: {
                 type: Boolean,
                 default: false

@@ -26,3 +26,5 @@ export {default as Ussd} from './Ussd/Ussd.vue';
 export { default as Hint } from './Hint/Hint.vue';
 export { default as HintBody } from './Hint/HintBody.vue';
 
+export { default as VideoPlayer } from './VideoPlayer/VideoPlayer.vue';
+

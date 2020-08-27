@@ -26,6 +26,7 @@ import {
     GridColumn,
     Hint,
     HintBody,
+    VideoPlayer
 } from "./components";
 
 // import 'element-closest-polyfill';
@@ -87,6 +88,7 @@ let VueRtStyle = {
             Vue.component(GridColumn.name, GridColumn);
             Vue.component(Hint.name, Hint);
             Vue.component(HintBody.name, HintBody);
+            Vue.component(VideoPlayer.name, VideoPlayer);
             Vue.RtStyleAtoms = true;
         }
     }
@@ -146,6 +148,7 @@ export {
     GridColumn,
     Hint,
     HintBody,
+    VideoPlayer,
 
 
     // mixins
