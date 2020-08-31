@@ -1,5 +1,4 @@
 <script type="text/jsx">
-  import VeeValidate from "vee-validate";
   import variables from "../../variables.json";
 
   export default {
@@ -13,10 +12,7 @@
         type: Boolean,
         default: false
       },
-      customRules: {
-        type: Array,
-        default: () => ([])
-      },
+
       maxLength: {
         type: Number,
         default: null
@@ -76,10 +72,6 @@
       name: {
         type: String,
         default: ''
-      },
-      validate: {
-        type: Object | String,
-        default: null
       },
       showNumbersButtons: {
         type: Boolean,
@@ -157,7 +149,7 @@
         return this.name || "input-field__" + this._uid;
       },
       isInvalid() {
-        if (this.validate || this.hasError) {
+        if (this.hasError) {
           return this.hasError || this.errors && this.errors.has(this.scope ? this.scope + '.' + this.fieldName : this.fieldName);
         }
       },
@@ -236,7 +228,6 @@
     mounted() {
       this.setNewRender();
       this.disabledLocal = this.disabled;
-      this.customRules.forEach(({nameRule, rule}) => VeeValidate.Validator.extend(nameRule, {validate: rule}));
       this.setValue();
       this.setDisabled();
       this.bindEvents();
@@ -674,7 +665,6 @@
               class={this.inputElementClass}
               name={this.fieldName}
               onInput={this.inputHandler}
-              v-validate={this.validate}
           />;
         } else {
           return <input
@@ -687,7 +677,6 @@
               class={this.inputElementClass}
               name={this.fieldName}
               onInput={this.inputHandler}
-              v-validate={this.validate}
               onFocus={this.mask}
               onBlur={this.mask}
           />;

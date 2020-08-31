@@ -15,7 +15,7 @@
                 default: false
             },
             errorMessage: {
-                default: String,
+                type: String,
                 default: ""
             },
             value: {

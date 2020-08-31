@@ -44,7 +44,6 @@ const builds = {
         env: 'production',
         sourcemap: true,
         banner,
-        external: ['vee-validate'],
         assetPath: resolve('lib'),
 
     },
@@ -57,7 +56,6 @@ const builds = {
         env: 'production',
         sourcemap: true,
         banner,
-        external: ['vee-validate'],
         assetPath: resolve('lib'),
 
     },
@@ -79,7 +77,6 @@ function genConfig(name = 'web-full-prod') {
             externals({
                 include: [
                     'vue',
-                    'vue-validate'
                 ],
                 exclude:[
                     'debounce'
@@ -116,8 +113,7 @@ function genConfig(name = 'web-full-prod') {
     
     
             node.default({
-                jsnext: true,
-                skip: ['vee-validate']
+                jsnext: true
             }),
 
             terser(),

@@ -1,6 +1,5 @@
 <script type="text/jsx">
   import Vue from "vue";
-  import VeeValidate from "vee-validate";
   import {default as RippleComponent} from "../Ripple/Ripple.vue";
 
   const componentsList = {};
@@ -21,10 +20,6 @@
       isDisabled: {
         type: Boolean,
         default: false
-      },
-      requiredRule: {
-        type: Boolean,
-        default: true
       },
       checked: {
         type: Boolean,
