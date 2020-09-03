@@ -1,4 +1,5 @@
 export {default as Button} from './Button/Button.vue';
+export {default as Calendar} from './Calendar/Calendar.vue';
 export {default as Checkbox} from './Checkbox/Checkbox.vue';
 export {default as CheckboxContainer} from './Checkbox/CheckboxContainer.vue';
 export {default as Input} from './Input/Input.vue';
