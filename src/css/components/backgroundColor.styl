@@ -1,0 +1,40 @@
+use("./plugins/readJsonKeys.js")
+use("./plugins/search.js")
+use("./plugins/replace.js")
+use("./plugins/callVariable.js")
+colors = readJsonKeys('../../../color.json')
+
+renderColorClass(classname, var, media)
+  if media == 'desktop'
+    .{classname}
+      background-color lookup(var)
+    .{replace(classname, 'background-','dark-theme-background-')}
+      .{newAppName}-dark-theme &
+        background-color lookup(var)
+  if media == 'tablet'
+    @media (max-width: tablet-upper-limit)
+      .{replace(classname, 'background-','background-td-')}
+        background-color lookup(var)
+      .{replace(classname, 'background-','dark-theme-background-td-')}
+        .{newAppName}-dark-theme &
+          background-color lookup(var)
+  if media == 'mobile'
+    @media (max-width: mobile-upper-limit)
+      .{replace(classname, 'background-','background-md-')}
+        background-color lookup(var)
+      .{replace(classname, 'background-','dark-theme-background-md-')}
+        .{newAppName}-dark-theme &
+          background-color lookup(var)
+for $type in ('desktop' 'tablet' 'mobile')
+  for $i in colors
+    if search($i,'b2c') >= 0
+      className = 'background-'+replace($i,'b2c-','')
+      renderColorClass(className, $i, $type)
+
+    else
+      if search($i,'main-') == 0
+        className = 'background-'+replace($i,'-background','')
+        renderColorClass(className, $i, $type)
+
+
+

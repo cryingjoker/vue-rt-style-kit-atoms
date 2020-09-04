@@ -1,0 +1,148 @@
+.input_v2
+  .text-field
+    height: auto
+  .input
+    padding-left: 12px
+    padding-right: 12px
+    padding-top: 0
+    padding-bottom: 0
+    min-height 48px
+    border 1px solid main-color003-no-opacity
+    border-radius 4px
+    transition-timing-function ease-in-out
+    transition-duration .2s
+    transition-property border
+  &.rtb-input--approved:after
+    top: 0
+    bottom: 0
+    right: 12px
+    margin-top auto
+    margin-bottom auto
+  &.rtb-input--approved
+    .input-clear
+      right: 28px
+  .input-element
+    padding-top: 12px
+    padding-bottom: 12px
+    padding-right: 0
+    padding-left: 0
+    transition-timing-function ease-in-out
+    transition-duration .2s
+    transition-property padding
+    .text-field--error &
+      color inherit
+      placeholder(color main-color05,)
+  .floating-placeholder
+    top: 12px
+    font-size 16px
+    transition-timing-function ease-in-out
+    transition-duration .2s
+    transition-property top, font-size, color
+
+  .error-message-text-content
+    text-overflow ellipsis
+    overflow: hidden
+    white-space nowrap
+    max-width 100%
+    display: block
+  .input-label,
+  .text-field__error-message
+    margin-top: 0
+    padding-top: 8px
+    padding-left: 12px
+    max-width 100%
+
+  .rt-button
+    position absolute
+    bottom 0px
+    top: 0
+    margin-top: auto
+    margin-bottom: auto
+    right 12px
+    z-index 9
+
+  &:hover
+    @media(hover: hover)
+      .input
+        border-color main-color03-no-opacity
+      .input--focus
+        border-color b2c-purple
+  .text-field--error
+    border-color error-color
+    &.input--focus
+      border-color error-color
+    @media(hover: hover)
+      &:hover
+        border-color error-color
+  .input-element:focus+.floating-placeholder,
+  .floating-placeholder--go-top
+    top: 3px
+    font-size 12px
+  .input-element:focus,
+  .input-element--n-emp
+    padding-top: 20px
+    padding-bottom: 4px
+    &+.input-clear,
+    &+.floating-placeholder+.input-clear
+      opacity: 1
+  .password-icon,
+  .input-clear,
+  .input-arithmetic
+    padding-left: 12px
+    padding-right 12px
+    top: 0
+    bottom: 0
+    margin-top: auto
+    margin-bottom: auto
+    height 100%
+    box-sizing content-box
+    display: flex
+    align-items center
+    position: absolute;
+    right: 0
+  .password-icon
+    width: 20px
+  .password-icon__icon
+    position: relative;
+    display: block
+
+    .input-clear__icon
+      display: block
+      fill main-color05-no-opacity
+  .input--focus
+    border-color b2c-purple
+  .input-timer
+    position: absolute
+    top: 0
+    bottom: 0
+    right -70px
+    box-sizing content-box
+    display flex
+    align-items center
+
+  .rt-timer
+    position relative
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+.input-disabled.input_v2 .input
+  border none
+  background-color: b2c-gray
+  .input-label
+    color hsl(main-color03)
+  @media(hover: hover)
+    &:hover
+      border none
+
+//.{b2bAppName}-input
+//  .input-element:focus + .text-field__line + .floating-placeholder,
+//  .input-element:focus + .text-field__border + .floating-placeholder,
+//  .input-element:focus+.floating-placeholder,
+//  .textarea-element:focus + .text-field__line + .floating-placeholder,
+//  .textarea-element:focus + .text-field__border + .floating-placeholder,
+//  .textarea-element:focus + .floating-placeholder,
+//  .floating-placeholder--go-top
+//    font-size 14px
+//    top 10px
+//F3F3F4

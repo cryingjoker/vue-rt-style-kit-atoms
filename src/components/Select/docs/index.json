@@ -1,0 +1,116 @@
+{
+  "items": [
+    {
+      "name": "rt-select",
+      "property":":has-error",
+      "type": "Boolean",
+      "description": "Флаг ошибки",
+      "value": "false"
+    },
+    {
+      "name": "rt-select",
+      "property":"label",
+      "type": "String",
+      "description": "Задаёт текст для <label/>, связанный с компонентом",
+      "value": ""
+    },
+    {
+      "name": "rt-select",
+      "property": "value",
+      "type": "String",
+      "description": "Значение передаваемое при отправке формы, с предустановленным выбранным вариантом из списка",
+      "value": ""
+    },
+    {
+      "name": "rt-select",
+      "property":"text",
+      "type": "String",
+      "description":"Предустановленное значение из выпадающего списка. Используется совместно с `value`",
+      "value" :""
+    },
+    {
+      "name": "rt-select",
+      "property":":disabled",
+      "type": "Boolean",
+      "description":"Флаг установки неактивного состояния для выпадающего списка",
+      "value" :"false"
+    },
+    {
+      "name": "rt-select",
+      "property":"error-message",
+      "type": "String",
+      "description":"Сообщение выводимое при ошибке",
+      "value" :""
+    },
+    {
+      "name": "rt-select",
+      "property":"dropdown-min-width",
+      "type": "String | Number",
+      "description":"Задаёт значение минимальной ширины для выпадающего списка",
+      "value" :"null"
+    },
+    {
+      "name": "rt-select",
+      "property":"reset-wrapper-width",
+      "type": "Boolean",
+      "description":"Устанавливает для компонента значение ширины `auto`",
+      "value" :"false"
+    },
+    {
+      "name": "rt-select",
+      "property":":is-b2b-select",
+      "type": "Boolean",
+      "description":"Флаг добавляющий стили сегмента b2b для отображения",
+      "value" :"false"
+    },
+    {
+      "name": "rt-select",
+      "property":":outlined",
+      "type": "Boolean",
+      "description":"Устанавливает обводку(границы) вокруг выпадающего списка",
+      "value" :"false"
+    },
+    {
+      "name": "rt-select",
+      "property":":auto-complete",
+      "type": "Boolean",
+      "description":"Флаг для включения поля ввода и автозаполнения значениями из выпадающего списка",
+      "value" :"false"
+    },
+    {
+      "name": "rt-select",
+      "property":":multi",
+      "type": "Boolean",
+      "description":"Флаг утсановки возможности множественного выбора",
+      "value" :"false"
+    },
+    {
+      "name": "rt-select",
+      "property":"field-id",
+      "type": "String",
+      "description":"Задаёт идентификатор выпадающему списку",
+      "value" :""
+    },
+    {
+      "name": "rt-select",
+      "property":":has-content-text",
+      "type": "Boolean",
+      "description":"Убирает обводку(подчёркивание) выпадающего списка, указывает, что под значением имеется пояснение",
+      "value" :"false"
+    },
+    {
+      "name": "rt-select-option",
+      "property":"value",
+      "type": "String",
+      "description":"Задаёт значение, которое передаётся, при выборе данного пункта, при отправке формы",
+      "value" :""
+    },
+    {
+      "name": "rt-select-option",
+      "property":":selected",
+      "type": "Boolean",
+      "description":"Устанавливает данный пункт выпадающего списка, как выбранный по умолчанию",
+      "value" :"false"
+    }
+  ]
+}

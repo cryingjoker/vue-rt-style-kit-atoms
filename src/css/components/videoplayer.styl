@@ -1,0 +1,28 @@
+.{newAppName}-video-player
+  width 100%
+  position relative
+  z-index 1
+  border-radius 8px
+  display block
+  &-wrapper
+    position relative
+    overflow hidden
+    border-radius 8px
+  &__poster
+    position absolute
+    top 0
+    left 0
+    right 0
+    bottom 0
+    z-index 2
+    background-size cover
+    opacity 1
+    transition opacity .2s linear, z-index .2s linear
+    &--hidden
+      opacity 0
+      z-index 0
+  &__play-button
+    position absolute
+    top 50%
+    left 50%
+    transform translateY(-50%) translateX(-50%)

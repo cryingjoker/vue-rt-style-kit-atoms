@@ -1,0 +1,207 @@
+.text-field
+  display inline-block
+  width 100%
+  height 49px
+  box-sizing border-box
+  padding-top 22px
+  position relative
+
+  &__line
+    width 100%
+    height 2px
+    background-color b2c-cool-grey05-no-opacity
+    position absolute
+    bottom 0
+    left 0
+    right 0
+    z-index 1
+    transition-timing-function ease-in-out
+    transition-duration .2s
+    transition-property background, height
+    pointer-events none
+    -webkit-appearance none
+    appearance none
+    -moz-appearance none
+
+    &--transparent
+      background-color transparent
+
+    .textarea &
+      position relative
+
+    &:before
+      content ""
+      width 0
+      height 100%
+      background b2c-purple
+      position absolute
+      transition-timing-function ease-in-out
+      transition-duration .4s
+      transition-property background, width
+
+      .{newAppName}-dark-theme &
+        background b2c-orange
+
+    .select__inner:focus+&,
+    .select:hover &,
+    .select--is-open &,
+    .input-element:hover+&,
+    .input-element:focus+&,
+    .textarea-element:hover+&,
+    .textarea-element:focus+&
+      &:before
+        width 100%
+
+
+    .select--disabled &,
+    .input-element[disabled]+&,
+    .textarea--disabled &
+      height 2px
+      background-color transparent
+      border-bottom 2px main-color03 dashed
+
+      .{newAppName}-dark-theme &
+        border-bottom 2px b2c-white03 dashed
+
+      &:before
+        width 0
+        height 0
+
+    .text-field--error &
+      height 2px
+
+      &:before
+        width 100%
+        background-color error-color !important
+
+  &__error-message
+    color error-color
+    font-size 12px
+    line-height 16px
+    opacity 0
+    visibility hidden
+    position absolute
+    transform translateY(100%)
+    bottom: 0
+    left 0
+    transition-timing-function ease-in-out
+    transition-duration .4s
+    transition-property opacity, visibility
+
+
+    .text-field--error &
+      opacity 1
+      visibility visible
+
+.password-icon
+  position absolute
+  top 22px
+  bottom: 0
+  margin-top: auto
+  margin-bottom: auto
+  height: 10px
+  width: 20px
+  right 0
+  z-index 2
+  cursor pointer
+
+
+.{b2bAppName}-input
+  .text-field
+    height 60px
+    padding 29px 20px 0
+
+    @media (max-width: tablet-upper-limit)
+      height auto
+
+  .{b2bAppName}-text-field__error-message
+    display inline-block
+    // transform translateY(-50%)
+    width auto
+    max-width 270px
+    height auto
+    box-sizing border-box
+    color b2c-white
+    background-color error-color
+    padding 10px
+    position relative
+    top -30px
+    bottom auto
+    z-index 3
+
+    &:before
+      content ""
+      width 0
+      height 0
+      position absolute
+      top 50%
+      transform translateY(-50%)
+
+    @media (max-width: tablet-upper-limit)
+      max-width none
+
+    &--on-the-right
+      left calc(100% + 35px)
+      transform translateY(-50%)
+
+      &:before
+        border-width 7px 7px 7px 0
+        border-style solid
+        border-color transparent error-color transparent transparent
+        left -7px
+
+      @media (max-width: tablet-upper-limit)
+        width calc(100% + 42px)
+        min-height auto
+        padding 5px 20px
+        position relative
+        top auto
+        bottom 0
+        left -21px
+        right -21px
+        transform none
+
+        &:before
+          border none
+
+    &--on-the-left
+      // right calc(100% + 35px)
+      // left auto
+      transform translate(calc(-100% - 35px), -50%)
+
+      &:before
+        border-width 7px 0 7px 7px
+        border-style solid
+        border-color transparent transparent transparent error-color
+        right -7px
+
+      @media (max-width: mobile-upper-limit)
+        width calc(100% + 42px)
+        min-height auto
+        padding 5px 20px
+        position relative
+        top auto
+        bottom 0
+        left -21px
+        right -21px
+        transform none
+
+        &:before
+          border none
+
+  .input-element[disabled] + .text-field__line
+    border 1px solid rgba(b2c-cool-grey, .5)
+
+.text-field--orange
+  .text-field__line:before
+    background-color b2c-orange
+
+  .input-element:focus + .text-field__border
+    border-color b2c-orange
+
+.text-field--purple
+  .text-field__line:before
+    background-color b2c-purple
+
+  .input-element:focus + .text-field__border
+    border-color b2c-purple

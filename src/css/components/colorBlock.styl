@@ -1,0 +1,37 @@
+colors = readJsonKeys('../../../color.json')
+renderColorClass(classname, var, media)
+  .{classname}
+    background-color lookup(var)
+    .{b2bAppName}-product__triangle-image
+      fill lookup(var)
+
+for $i in colors
+  if search($i,'b2c') >= 0
+    className = 'color-block--'+replace($i,'b2c-','')
+    renderColorClass(className, $i, $type)
+
+.color-block
+
+  &--black
+
+    background-color main-color
+
+    .{b2bAppName}-product__triangle-image
+      fill main-color
+
+.color-block--main-color
+  background-color main-color
+
+  .{b2bAppName}-product__triangle-image
+      fill main-color
+
+.color-block--light-grey
+  background-color light-grey
+
+  .{b2bAppName}-product__triangle-image
+      fill light-grey
+
+
+  .{b2bAppName}-product__triangle-image
+      fill #272F3D
+

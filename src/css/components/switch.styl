@@ -1,0 +1,83 @@
+.switch
+  display inline-block
+  cursor pointer
+  user-select none
+
+  .ripple-wave
+    background-color b2c-purple-low
+
+    .switch--orange &
+      background-color b2c-orange-low
+
+  &-element
+    display none
+
+  &-container
+    padding-top 4px
+    padding-left 49px
+    position relative
+    user-select none
+
+    &:before
+      content ""
+      width 40px
+      height 25px
+      background-color rgba(main-color, .2)
+      border-radius 19px
+      position absolute
+      top 0
+      left 0
+      transition-timing-function ease-in-out
+      transition-duration .1s
+      transition-property background-color
+
+      .{newAppName}-dark-theme &
+        background-color rgba(b2c-cool-grey, .2)
+
+    &__circle
+      content ""
+      width 19px
+      height 19px
+      background-color rgba(main-color, .5)
+      border-radius 50%
+      position absolute
+      top 3px
+      left 3px
+      transition-timing-function cubic-bezier(1, .22, .9, .65)
+      transition-duration .1s
+      transition-property margin, background-color
+
+      .{newAppName}-dark-theme &
+        background-color b2c-cool-grey
+
+    .switch-element:checked+&
+      &:before
+        background-color b2c-purple-high05
+
+        .switch--orange &
+          background-color b2c-orange03
+
+          .{newAppName}-dark-theme &
+            background-color b2c-orange-high02
+
+        .{newAppName}-dark-theme &
+          background-color b2c-purple02
+
+      .switch-container__circle
+        background-color b2c-purple
+        margin-left 15px
+
+        .switch--orange &
+          background-color b2c-orange
+
+    .switch-element[disabled]+&
+      color disable-button-color
+
+      .{newAppName}-dark-theme &
+        opacity .3
+
+      &:before
+        background-color b2c-cool-grey
+
+      &__circle
+        background-color b2c-cool-grey

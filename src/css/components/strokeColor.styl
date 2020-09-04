@@ -1,0 +1,150 @@
+use("./plugins/readJsonKeys.js")
+use("./plugins/search.js")
+use("./plugins/replace.js")
+use("./plugins/callVariable.js")
+colors = readJsonKeys('../../../color.json')
+
+renderColorClass(classname, var, media)
+  if media == 'desktop'
+    .{classname}
+      stroke lookup(var)
+    .{replace(classname, 'stroke-color-','dark-theme-stroke-color-')}
+      .{newAppName}-dark-theme &
+        stroke lookup(var)
+  if media == 'tablet'
+    @media (max-width: tablet-upper-limit)
+      .{replace(classname, 'stroke-color-','stroke-color-td-')}
+        stroke lookup(var)
+      .{replace(classname, 'stroke-color-','dark-theme-stroke-color-td-')}
+        .{newAppName}-dark-theme &
+          stroke lookup(var)
+  if media == 'mobile'
+    @media (max-width: mobile-upper-limit)
+      .{replace(classname, 'stroke-color-','stroke-color-md-')}
+        stroke lookup(var)
+      .{replace(classname, 'stroke-color-','dark-theme-stroke-color-md-')}
+        .{newAppName}-dark-theme &
+          stroke lookup(var)
+for $type in ('desktop' 'tablet' 'mobile')
+  for $i in colors
+    if search($i,'b2c') >= 0
+      className = 'stroke-color-'+replace($i,'b2c-','')
+      renderColorClass(className, $i, $type)
+
+    else
+      if search($i,'main-') == 0
+        className = 'stroke-color-'+replace($i,'-color','')
+        renderColorClass(className, $i, $type)
+
+
+//.color-main
+//  color main-color
+//
+//.dark-theme-color-main
+//  .{newAppName}-dark-theme &
+//    color main-color
+//
+//.color-main09
+//  color main-color09
+//
+//.dark-theme-color-main09
+//  .{newAppName}-dark-theme &
+//    color main-color09
+//
+//.color-main07
+//  color main-color07
+//
+//.dark-theme-color-main07
+//  .{newAppName}-dark-theme &
+//    color main-color07
+//
+//.color-main05
+//  color main-color05
+//
+//.color-main025
+//  color rgba(main-color, .25)
+//
+//.color-white07
+//  color b2c-white07
+//
+//.dark-theme-color-main05
+//  .{newAppName}-dark-theme &
+//    color main-color05
+//
+//.color-main03
+//  color main-color03
+//
+//.dark-theme-color-main03
+//  .{newAppName}-dark-theme &
+//    color main-color03
+//
+//.color-white
+//  color b2c-white
+//
+//.dark-theme-color-white
+//  .{newAppName}-dark-theme &
+//    color b2c-white
+//
+//
+//
+//.dark-theme-color-white07
+//  .{newAppName}-dark-theme &
+//    color b2c-white07
+//
+//.color-white05
+//  color b2c-white05
+//
+//.dark-theme-color-white05
+//  .{newAppName}-dark-theme &
+//    color b2c-white05
+//
+//.dark-theme-color-white03
+//  .{newAppName}-dark-theme &
+//    color b2c-white03
+//
+//
+//
+//
+//
+//.color-main07
+//  color main-color07
+//
+//
+//.color-main06
+//  color main-color06
+//
+//
+//.color-orange
+//  color b2c-orange
+//
+//.dark-theme-color-orange
+//  .{newAppName}-dark-theme &
+//    color b2c-orange
+//
+//.color-purple
+//  color b2c-purple
+//
+//.dark-theme-color-purple
+//  .{newAppName}-dark-theme &
+//    color b2c-purple
+//
+//.color-orange
+//  color b2c-orange
+//
+//.dark-theme-color-orange
+//  .{newAppName}-dark-theme &
+//    color b2c-orange
+//
+//.color-red
+//  color b2c-red
+//
+.color-main-md-white
+  color main-color
+  @media(max-width mobile-upper-limit)
+    color b2c-white
+
+.color-white-md-main
+  color b2c-white
+  @media(max-width mobile-upper-limit)
+    color main-color
+

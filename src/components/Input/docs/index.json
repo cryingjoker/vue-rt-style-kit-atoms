@@ -1,0 +1,214 @@
+{
+  "items": [
+    {
+      "name": "rt-input",
+      "property": "custom-rules",
+      "type": "Array",
+      "description": "Задаваемые правила валидации",
+      "value": "[]"
+    },
+    {
+      "name": "rt-input",
+      "property": "max-length",
+      "type": "Number",
+      "description": "Ограничение длины сообщения",
+      "value": "null"
+    },
+    {
+      "name": "rt-input",
+      "property": "min-number",
+      "type": "Number",
+      "description": "Ограничение числового значения(нижний порог)",
+      "value": "null"
+    },
+    {
+      "name": "rt-input",
+      "property": "max-number",
+      "type": "Number",
+      "description": "Ограничение числового значения(верхний порог)",
+      "value": "null"
+    },
+    {
+      "name": "rt-input",
+      "property": "insert-lang",
+      "type": "String",
+      "description": "Разрешение на ввод определённого языка. Поддерживаемые значения: `ru, en`",
+      "value": ""
+    },
+    {
+      "name": "rt-input",
+      "property": "insert-type",
+      "type": "String",
+      "description": "Указывает тип(предназначение) поля ввода. Поддерживаемые значения: `number, string, password, tel`",
+      "value": ""
+    },
+    {
+      "name": "rt-input",
+      "property": ":disabled",
+      "type": "Boolean",
+      "description": "Устанавливает неактивное состояние инпута. Аналагично атрибуту disabled",
+      "value": "false"
+    },
+    {
+      "name": "rt-input",
+      "property": "autocomplete",
+      "type": "String",
+      "description": "Флаг, отвечающий за автозаполнение",
+      "value": "disable,false,off,none"
+    },
+    {
+      "name": "rt-input",
+      "property": "placeholder",
+      "type": "String",
+      "description": "Устанавливает текст выводимый в поле до начала ввода",
+      "value": ""
+    },
+    {
+      "name": "rt-input",
+      "property": ":has-error",
+      "type": "Boolean",
+      "description": "Флаг ошибки",
+      "value": "false"
+    },
+    {
+      "name": "rt-input",
+      "property": ":error-message-func",
+      "type": "Function",
+      "description": "Задаёт функцию выполняемую при ошибке",
+      "value": "null"
+    },
+    {
+      "name": "rt-input",
+      "property": "error-message",
+      "type": "String",
+      "description": "Устанавливает сообщение, выводимое при ошибке",
+      "value": ""
+    },
+    {
+      "name": "rt-input",
+      "property": "value",
+      "type": "String",
+      "description": "Устанавливает значение атрибута `value`",
+      "value": ""
+    },
+    {
+      "name": "rt-input",
+      "property": ":is-white",
+      "type": "Boolean",
+      "description": "Флаг белого цвета шрифта и иконки очистки поля",
+      "value": "false"
+    },
+    {
+      "name": "rt-input",
+      "property": "name",
+      "type": "String",
+      "description": "Устанавливает значение атрибута `name`",
+      "value": ""
+    },
+    {
+      "name": "rt-input",
+      "property": "validate",
+      "type": "Object | String",
+      "description": "Установка правил для `v-validate`",
+      "value": "null"
+    },
+    {
+      "name": "rt-input",
+      "property": ":show-numbers-buttons",
+      "type": "Boolean",
+      "description": "Флаг устанавливающий наличие кнопок `+/-` при вводе цифр",
+      "value": "false"
+    },
+    {
+      "name": "rt-input",
+      "property": "label",
+      "type": "String",
+      "description": "Устанавливает `<label/>` для поля ввода",
+      "value": "null"
+    },
+    {
+      "name": "rt-input",
+      "property": "type",
+      "type": "String",
+      "description": "Устанавливает атрибут `type`. (Аналог `insert-type`)",
+      "value": "text"
+    },
+    {
+      "name": "rt-input",
+      "property": ":is-b2b-input",
+      "type": "Boolean",
+      "description": "Устанавливает стили отображения сегмента b2b для поля ввода",
+      "value": "false"
+    },
+    {
+      "name": "rt-input",
+      "property": ":outlined",
+      "type": "Boolean",
+      "description": "Устанавливает обводку(границы) вокруг поля ввода",
+      "value": "false"
+    },
+    {
+      "name": "rt-input",
+      "property": "color",
+      "type": "String",
+      "description": "Задаёт цвет элементам поля ввода. Возможные значения `orange и purple`",
+      "value": "purple"
+    },
+    {
+      "name": "rt-input",
+      "property": ":is-hidden",
+      "type": "Boolean",
+      "description": "Скрывает поле ввода",
+      "value": "false"
+    },
+    {
+      "name": "rt-input",
+      "property": ":approved",
+      "type": "Boolean",
+      "description": "Флаг отображения подтверждения введённых данных",
+      "value": "false"
+    },
+    {
+      "name": "rt-input",
+      "property": ":has-timer",
+      "type": "Boolean",
+      "description": "Добавляет таймер обратного отсчёта рядом с полем ввода",
+      "value": "false"
+    },
+    {
+      "name": "rt-input",
+      "property": "timer-duration",
+      "type": "String",
+      "description": "Задаёт длительность обратного отсчёта",
+      "value": ""
+    },
+    {
+      "name": "rt-input",
+      "property": "input-button",
+      "type": "Boolean",
+      "description": "Флаг отображения кнопки в инпуте",
+      "value": "false"
+    },
+    {
+      "name": "rt-input",
+      "property": "input-button-text",
+      "type": "String",
+      "description": "Устанавливает текст в кнопке, описанной выше",
+      "value": ""
+    },
+    {
+      "name": "rt-input",
+      "property": "scope",
+      "type": "String",
+      "description": "Задаёт `scope` при использовании `vee-validate`",
+      "value": ""
+    },
+    {
+      "name": "rt-input",
+      "property": ":is-integer",
+      "type": "Boolean",
+      "description": "Флаг запрещающий ввод дробных чисел для `type='number'`",
+      "value": "false"
+    }
+  ]
+}

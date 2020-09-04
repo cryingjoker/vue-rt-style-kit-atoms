@@ -1,0 +1,46 @@
+.{newAppName}-link
+  cursor pointer
+  transition-timing-function ease-in-out
+  transition-duration .2s
+  transition-property opacity
+  color b2c-purple
+  .{newAppName}-dark-theme &
+    color b2c-orange
+  @media (max-width: mobile-upper-limit)
+    font-size 14px
+    line-height 20px
+  @media (hover:hover)
+    &:hover
+      color b2c-purple-button-hover
+
+  &-back
+    color main-color
+    position relative
+    &-wrapper
+      display inline-block
+      &:hover
+        .rt-link-arrow
+          left -5px
+  &-arrow
+    position relative
+    transition left .3s ease-in
+
+
+.{newAppName}-link--orange
+  color b2c-orange
+  .{newAppName}-dark-theme &
+    color b2c-purple
+    @media (hover:hover)
+      &:hover
+        color b2c-purple-button-hover
+  @media (hover:hover)
+    &:hover
+      color b2c-orange-button-hover
+
+
+
+.{newAppName}-link--blue
+  color b2c-light-blue-low
+  @media (hover:hover)
+    &:hover
+      color rgba(b2c-light-blue-low, .7)

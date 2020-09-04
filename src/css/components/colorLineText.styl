@@ -1,0 +1,175 @@
+.color-line
+  display inline
+  word-break break-word
+  position relative
+  left 15px
+
+  &-label-single
+    display inline-block
+
+  &-wrapper
+    //max-width calc(100vw - 70px)
+    padding-bottom 20px
+    padding-right 29px
+    &--custom
+      .color-line-label
+        display none
+      @media (max-width: mobile-upper-limit)
+        .rt-font-banner-label
+          display: none
+        .rt-price
+          color b2c-white
+
+  &--is-paragraph
+    display flex
+    flex-wrap wrap
+    padding-right horizontal-space * .75
+    position relative
+
+    &:before,
+    &:after
+      content ""
+      order 1
+      width 100%
+
+    @media (max-width: mobile-upper-limit)
+      margin-right horizontal-space * 1.5
+      left 0
+
+
+  &-paragraph-icon
+    width 40px
+    height 20px
+    overflow visible
+    position absolute
+    bottom -19px
+    right -20px
+    @media (max-width: laptop-upper-limit)
+      height 20px
+      bottom -18px
+      right -20px
+    @media (max-width: tablet-upper-limit)
+      height 19px
+      bottom -18px
+      right -22px
+    @media (max-width: mobile-upper-limit)
+      width: 39px
+      position: relative
+      margin-left: -41.5px
+      bottom: -29px
+      right -21px
+      overflow: hidden
+    .color-line-label-single &
+      width: 39px
+      position: relative;
+      margin-left: -41.5px
+      bottom: -37px
+      overflow: hidden;
+      @media (max-width: laptop-upper-limit)
+        bottom -34px
+        right -20px
+      @media (max-width: tablet-upper-limit)
+        bottom: -31px
+        right -21px
+      @media (max-width: mobile-upper-limit)
+        bottom: -29px
+        right -21px
+
+
+  &-text
+    border-right 2px solid white
+    position relative
+    display inline
+    background-color #fff
+    box-decoration-break clone
+    box-shadow 15px 0 0 #fff, -15px 0 0 #fff
+    .color-line-paragraph-icon__background
+      fill white
+    //@media (max-width: mobile-upper-limit) //todo зачем эта фигня?
+    //  border-top-right-radius 4px
+    .color-line--is-paragraph &
+      @media (max-width: mobile-upper-limit)
+        box-shadow none!important
+        background-color: transparent!important
+        border-right-color transparent!important
+
+    //br
+    //  @media (max-width: mobile-upper-limit)
+    //    display none
+
+    .color-line--is-paragraph &
+      border-radius 0 5px 0 0
+      padding-top vertical-space * .25
+      padding-bottom vertical-space * .25
+      @media (max-width: mobile-upper-limit)
+        padding vertical-space 0 0
+
+    colors = 'dark-state' 'purple' 'purple-low' 'purple-high' 'red' 'red-low' 'red-high' 'dark-blue' 'dark-blue-low' 'dark-blue-high' 'light-blue' 'light-blue-high' 'light-blue-low' 'yellow' 'yellow-high' 'yellow-low' 'orange' 'orange-high' 'orange-low' 'pink' 'pink-high' 'pink-low' 'green' 'green-high' 'green-low'
+    for $color in colors
+      &--{$color}
+        background-color (b2c- + $color)
+        border-right 2px solid (b2c- + $color)
+        box-decoration-break clone
+        box-shadow horizontal-space * .75 0 0 (b2c- + $color), -1 * horizontal-space * .75 0 0 (b2c- + $color)
+        .color-line-paragraph-icon__background
+          fill (b2c- + $color)
+        &+.color-line-paragraph-icon
+          .color-line-paragraph-icon__background
+            fill (b2c- + $color)
+
+    &--black
+      background-color main-color
+      border-right 2px solid main-color
+      box-decoration-break clone
+      box-shadow horizontal-space * .75 0 0 main-color, -1 * horizontal-space * .75 0 0 main-color
+      .color-line-paragraph-icon__background
+        fill main-color
+
+.banner-page__content .banner-page__before-title
+  display none
+
+.banner-page__content .promo__title .wrap
+  font-size 48px !important
+  line-height 60px !important
+  margin 0
+  padding 0
+
+.banner-page__content .wrap
+  border none !important
+  box-shadow -15px 0 0 #fff
+
+.banner-page__content .text
+  box-shadow 15px 0 0 #fff
+  margin 0
+  padding 0
+
+.banner-page__content .promo__desc
+  padding-top 0 !important
+  padding-bottom 5px !important
+
+.banner-page__content .promo__desc .text
+  border-radius 0 5px 0 0 !important
+  padding-top 5px !important
+  padding-bottom 5px !important
+
+.banner-page__content .banner-promo__tonque
+  right -15px !important
+
+@media (max-width: mobile-upper-limit)
+  .color-line--is-paragraph
+    color main-color
+
+.color-line-wrapper--is-advertise
+  .{newAppName}-font-banner-label
+    font-size 28px
+    line-height 34px
+    font-weight 300
+  .color-line-paragraph-icon
+    bottom -21px
+    margin-left -32px
+    height 12px
+    width 24px
+  .color-line-text
+    box-shadow 10px 0 0 #70f, -10px 0 0 #70f
+  .color-line
+    left 10px

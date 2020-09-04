@@ -1,0 +1,109 @@
+{
+  "items": [
+    {
+      "name": "rt-price",
+      "property":":value",
+      "type": "Number | String",
+      "description": "`Обязательное поле` Значение ценника",
+      "value": "0"
+    },
+    {
+      "name": "rt-price",
+      "property":":old-value",
+      "type": "Number | String",
+      "description": "Старое значение цены",
+      "value": "0"
+    },
+    {
+      "name": "rt-price",
+      "property": ":option-label",
+      "type": "String",
+      "description": "Текст перед значением ценника",
+      "value": "от"
+    },
+    {
+      "name": "rt-price",
+      "property":":show-float",
+      "type": "Boolean",
+      "description":"Флаг отображения целого/дробного числа",
+      "value" :"false"
+    },
+    {
+      "name": "rt-price",
+      "property":":color-value",
+      "type": "String",
+      "description":"Устанавливает цвет шрифта",
+      "value" :""
+    },
+    {
+      "name": "rt-price",
+      "property":"currency",
+      "type": "String",
+      "description":"Устанавливает валюту ценника",
+      "value" :"руб"
+    },
+    {
+      "name": "rt-price",
+      "property":"time-interval",
+      "type": "String",
+      "description":"Значение временного интервала ('мес' 'день' и т.п.)",
+      "value" :"мес."
+    },
+    {
+      "name": "rt-price",
+      "property":":is-option",
+      "type": "Boolean",
+      "description":"Флаг, указывающий на наличие тескта перед ценником ('от', 'до' и т.п.)",
+      "value" :"false"
+    },
+    {
+      "name": "rt-price",
+      "property":":only-price",
+      "type": "Boolean",
+      "description":"Отображение только ценника в валюте без временного интервала",
+      "value" :"false"
+    },
+    {
+      "name": "rt-price",
+      "property":":for-game",
+      "type": "Boolean",
+      "description":"Флаг для отображения кастомных стилей промо 4game",
+      "value" :"false"
+    },
+    {
+      "name": "rt-price",
+      "property":":bold-option",
+      "type": "Boolean",
+      "description":"Флаг установки жирного начертания шрифта во временном интервале",
+      "value" :"false"
+    },
+    {
+      "name": "rt-price",
+      "property":":b2b-price",
+      "type": "Boolean",
+      "description":"Флаг установки стилей сегмента b2b для компонента",
+      "value" :"false"
+    },
+    {
+      "name": "rt-price",
+      "property":"old-price-color",
+      "type": "String",
+      "description":"Задаёт цвет шрифта для 'старой'(перечёркнутой) цены",
+      "value" :""
+    },
+    {
+      "name": "rt-price",
+      "property":":is-time-interval-bottom",
+      "type": "Boolean",
+      "description":"Флаг для отображения временного интервала под значением цены",
+      "value" :"false"
+    },
+    {
+      "name": "rt-price",
+      "property":":trim-hundredth",
+      "type": "Boolean",
+      "description":"Флаг указывающий на то, что необходимо отображать значение до сотых долей, включительно `10,5 --> 10,50`",
+      "value" :"false"
+    }
+  ]
+}

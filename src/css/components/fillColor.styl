@@ -1,0 +1,38 @@
+use("./plugins/readJsonKeys.js")
+use("./plugins/search.js")
+use("./plugins/replace.js")
+use("./plugins/callVariable.js")
+colors = readJsonKeys('../../../color.json')
+
+renderColorClass(classname, var, media)
+  if media == 'desktop'
+    .{classname}
+      fill lookup(var)
+    .{replace(classname, 'fill-color-','dark-theme-fill-color-')}
+      .{newAppName}-dark-theme &
+        fill lookup(var)
+  if media == 'tablet'
+    @media (max-width: tablet-upper-limit)
+      .{replace(classname, 'fill-color-','fill-color-td-')}
+        fill lookup(var)
+      .{replace(classname, 'fill-color-','dark-theme-fill-color-td-')}
+        .{newAppName}-dark-theme &
+          fill lookup(var)
+  if media == 'mobile'
+    @media (max-width: mobile-upper-limit)
+      .{replace(classname, 'fill-color-','fill-color-md-')}
+        fill lookup(var)
+      .{replace(classname, 'fill-color-','dark-theme-fill-color-md-')}
+        .{newAppName}-dark-theme &
+          fill lookup(var)
+for $type in ('desktop' 'tablet' 'mobile')
+  for $i in colors
+    if search($i,'b2c') >= 0
+      className = 'fill-color-'+replace($i,'b2c-','')
+      renderColorClass(className, $i, $type)
+
+    else
+      if search($i,'main-') == 0
+        className = 'fill-color-'+replace($i,'-color','')
+        renderColorClass(className, $i, $type)
+

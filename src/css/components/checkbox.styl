@@ -1,0 +1,227 @@
+.checkbox
+  display inline-block
+  position relative
+  cursor pointer
+  user-select none
+  &.disabled
+    cursor: default;
+
+.checkbox-bright
+  color b2c-white
+
+.checkbox-element
+  width 0
+  height 0
+  border-width 0
+  outline none
+  opacity 0
+  position absolute
+
+.checkbox-container
+  padding-left 32px
+  position relative
+  user-select none
+
+
+  &:before
+    content ""
+    width 20px
+    height 20px
+    box-sizing border-box
+    background-color transparent
+    border 2px solid main-color03
+    border-radius 4px
+    position absolute
+    top 0
+    left 0
+    z-index 2
+    transition-timing-function cubic-bezier(.11, .34, .97, .33)
+    transition-duration .3s
+    transition-property background, border
+
+    .{newAppName}-dark-theme &,
+    .checkbox-bright &
+      background-color transparent
+      border-color hsl(rgba(b2c-white, .6))
+  @media (hover: hover)
+    &:hover
+      &:before
+        background-color: hsl(rgba(b2c-purple, .05))
+        .checkbox-orange &
+          background-color: hsl(rgba(b2c-orange, .2))
+  &:active
+    &:before
+      background-color: hsl(rgba(b2c-purple, .1))
+      .checkbox-orange &
+        background-color: hsl(rgba(b2c-orange, .2))
+
+
+.checkbox-container__angle
+  width 12px
+  height 10px
+  opacity 0
+  visibility hidden
+  position absolute
+  top 6px
+  left 4px
+  z-index 3
+  transition-timing-function ease-in-out
+  transition-duration .3s
+  transition-property stroke, opacity, visibility, stroke-dashoffset, stroke-dasharray
+  stroke b2c-purple
+  stroke-dashoffset 100px
+  stroke-dasharray 20px
+  path
+    fill hsl(rgba(main-color, 1))
+  .{newAppName}-dark-theme &,
+  .checkbox-bright &
+    path
+      fill b2c-white
+
+
+
+
+
+.checkbox-element:focus+checkbox-container:before
+  border-color b2c-purple
+@media (hover: hover)
+  .checkbox:hover &:before
+    border-color b2c-purple
+  .checkbox-orange:hover &:before
+    border-color b2c-orange
+.checkbox .ripple-wave
+  background-color: b2c-purple
+  .{newAppName}-dark-theme &
+    background-color: b2c-purple
+
+.checkbox.checkbox-orange .ripple-wave
+  background-color: b2c-orange
+  .{newAppName}-dark-theme &
+    background-color: b2c-orange
+.checkbox-element:checked+.checkbox-container
+  &:before
+    border-color b2c-purple
+    .checkbox-orange &
+      border-color b2c-orange
+  @media (hover: hover)
+    &:hover
+      &:before
+        background-color: hsl(rgba(b2c-purple, .05))
+        .{newAppName}-dark-theme &,
+        .checkbox-bright &
+          background-color: hsl(rgba(b2c-purple, .4))
+        .checkbox-orange &
+          background-color: hsl(rgba(b2c-orange, .1))
+          .{newAppName}-dark-theme &,
+          .checkbox-bright &
+            background-color: hsl(rgba(b2c-orange, .4))
+
+  &:active
+    &:before
+      background-color: hsl(rgba(b2c-purple, .1))
+      .{newAppName}-dark-theme &,
+      .checkbox-bright &
+        background-color: hsl(rgba(b2c-purple, .4))
+      .checkbox-orange &
+        background-color: hsl(rgba(b2c-orange, .1))
+        .{newAppName}-dark-theme &,
+        .checkbox-bright &
+          background-color: hsl(rgba(b2c-orange, .4))
+  .checkbox-container__angle
+    opacity 1
+    visibility visible
+    stroke-dashoffset 80px
+
+
+
+
+
+.invalid,
+.invalid.checkbox-orange
+  .checkbox-element:checked+.checkbox-container,
+  .checkbox-container
+
+    &:before
+      border-color error-color
+      .{newAppName}-dark-theme &
+      .checkbox-bright &
+        border-color error-color
+    &:hover
+      &:before
+        border-color error-color
+        background-color: hsl(rgba(error-color, .2))
+    &:active
+      &:before
+        background-color: hsl(rgba(error-color, .4))
+
+.checkbox.invalid .ripple-wave
+  background-color: error-color
+
+.checkbox, .checkbox.checkbox-orange
+  .checkbox-element[disabled]+.checkbox-container
+    cursor default
+    &:before
+      border-color hsl(rgba(main-color, .10))
+      background-color: hsl(rgba(main-color, .05))
+      .{newAppName}-dark-theme &
+        border-color hsl(rgba(b2c-white, .10))
+        background-color: hsl(rgba(b2c-white, .05))
+      @media (hover: hover)
+        border-color hsl(rgba(main-color, .10))
+        background-color: hsl(rgba(main-color, .05))
+        .{newAppName}-dark-theme &
+          @media (hover: hover)
+            border-color hsl(rgba(b2c-white, .10))
+            background-color: hsl(rgba(b2c-white, .05))
+
+
+
+    color hsl(rgba(main-color, .5))
+    .{newAppName}-dark-theme &
+      color hsl(rgba(b2c-white, .5))
+
+    .checkbox-container__angle
+      path
+        fill hsl(rgba(main-color, .1))
+        .{newAppName}-dark-theme &
+          fill hsl(rgba(b2c-white, .1))
+    &:before
+      opacity 1
+      visibility visible
+
+    .checkbox-container__angle
+      visibility visible
+      stroke main-color
+      .{newAppName}-dark-theme &
+        stroke b2c-white
+
+
+.checkbox-bright.checkbox, .checkbox-bright.checkbox.checkbox-orange
+  .checkbox-element[disabled]+.checkbox-container
+    cursor default
+    &:before
+      border-color hsl(rgba(b2c-white, .10))
+      background-color: hsl(rgba(b2c-white, .05))
+
+      @media (hover: hover)
+        border-color hsl(rgba(b2c-white, .10))
+        background-color: hsl(rgba(b2c-white, .05))
+
+
+
+
+    color hsl(rgba(b2c-white, .5))
+
+    .checkbox-container__angle
+      path
+        fill hsl(rgba(b2c-white, .1))
+
+
+    &:before
+      opacity 1
+      visibility visible
+
+    .checkbox-container__angle
+      visibility visible
+      stroke b2c-white
+

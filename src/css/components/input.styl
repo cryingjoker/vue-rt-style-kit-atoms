@@ -1,0 +1,239 @@
+
+.input-element
+  width 100%
+  color main-color
+  background-color transparent
+  border none
+  outline none
+  padding-bottom 7px
+  padding-right 23px
+  position relative
+  z-index 2
+  appearance field
+  placeholder(color main-color05, )
+
+  .input--with-button &
+    padding-right horizontal-space * 3
+
+  &[disabled]
+    color main-color03
+    placeholder(color main-color03, )
+
+  .{newAppName}-input--white &,
+  .{newAppName}-card--has-white-color &
+    color white
+
+    .{newAppName}-dark-theme &
+      color white
+
+  .{newAppName}-dark-theme &
+    color #fff
+
+  .{newAppName}-card &
+    color main-color
+
+.input-clear
+  position absolute
+  top 25px
+  right 5px
+  z-index 2
+  cursor pointer
+  opacity: 0
+  transition-timing-function ease-in-out
+  transition-duration .4s
+  transition-property opacity, visibility
+  .input-element:hover+.text-field__line+.floating-placeholder+&,
+  .input-element:focus+.text-field__line+.floating-placeholder+&,
+  .input-element:focus+.text-field__border+.floating-placeholder+&,
+  .input-element:hover+.text-field__border+.floating-placeholder+&
+    opacity: 1
+    visibility: visible
+
+
+
+.input-clear__icon
+  fill main-color07-no-opacity
+
+  .{newAppName}-dark-theme &,
+  .{newAppName}-input--white &
+    fill white
+
+  .{newAppName}-card &
+    fill main-color
+
+  .{newAppName}-card--has-white-color &
+    fill white
+
+.{b2bAppName}-input-clear
+  top 23px
+  right 20px
+
+.password-icon__icon
+  position: absolute
+  width: 20px
+  height: 10px
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  margin: auto
+
+.password-icon__icon-show
+  height: 12px
+
+
+.{b2bAppName}-input
+  .floating-placeholder
+    top 18px
+  .input-element
+    padding-bottom 10px
+
+  .text-field--error
+    .input-clear__icon
+      fill error-color
+
+  .password-icon
+    right 20px
+    position: absolute
+
+  &--hidden
+    display none
+
+  &--approved
+    position relative
+    &:after
+      position absolute
+      content ''
+      top 25px
+      margin-top: auto
+      margin-bottom: auto
+      right 16px
+      width 20px
+      height 20px
+      background-image url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48Y2lyY2xlIGZpbGw9IiM1N0Q5QjciIGN4PSIxMCIgY3k9IjEwIiByPSIxMCIvPjxwYXRoIHN0cm9rZT0iI0ZGRiIgc3Ryb2tlLXdpZHRoPSIyIiBkPSJNNSAxMGwzLjc5MyAzTDE2IDciLz48L2c+PC9zdmc+')
+      z-index 10
+
+  //.text-field__line
+  //  background-color transparent
+
+.text-field--error
+  .{b2bAppName}-input-clear
+    .input-clear__icon
+      display block
+      fill error-color
+
+.input-arithmetic
+  position absolute
+  top 25px
+  right 0
+  z-index 2
+
+.input-arithmetic__button
+  cursor pointer
+  opacity: 0.5
+  transition-timing-function ease-in-out
+  transition-duration .4s
+  transition-property opacity
+  &:hover
+    opacity: 1
+  &+&
+    margin-left horizontal-space * .25
+
+.input-arithmetic__button-icon
+  transition-timing-function ease-in-out
+  transition-duration .4s
+  transition-property stroke
+  stroke main-color
+
+  .{newAppName}-dark-theme &
+    stroke b2c-white
+
+.input-label
+  color main-color05
+  font-size 12px
+  line-height 16px
+  margin-top 3px
+
+  .{newAppName}-dark-theme
+    &
+      color b2c-white05
+
+    .{newAppName}-card &
+      color main-color05
+
+  .text-field--error + &
+    display none
+
+.input-wrapper
+  position: relative
+  &+&
+    margin-top 5px
+
+  &--outlined
+    .text-field
+      position relative
+
+      &__border
+        max-height 60px
+        border 1px solid rgba(b2c-cool-grey, .9)
+        position absolute
+        top 0
+        bottom 0
+        left 0
+        right 0
+        transition border-color .3s linear
+
+    &:hover
+      .text-field--orange
+        .text-field__border
+          border-color b2c-orange
+
+      .text-field--purple
+        .text-field__border
+          border-color b2c-purple
+
+    // .text-field--error
+    // border 1px solid error-color
+    // &:hover,
+    // &:focus
+    // border 1px solid error-color
+    .{b2bAppName}-text-field__error-message
+      position relative
+      top auto
+      bottom 0
+      left -21px
+      right -21px
+      transform none
+      padding 5px 20px
+      width calc(100% + 42px)
+      min-height auto
+      &:before
+        border none
+    .input-element[disabled]+.text-field__border
+        border 1px solid rgba(b2c-cool-grey, .9)!important
+
+  .{newAppName}-button
+    position absolute
+    bottom 10px
+    right 0
+    z-index 9
+
+.rt-col .rt-input+&
+  margin-top 20px
+
+.input+.{b2bAppName}-card__hint
+  position absolute
+  right -40px
+  top: 50%
+  transform translateY(-50%)
+
+input::-webkit-inner-spin-button
+  display none
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button
+  -webkit-appearance: none
+  margin: 0
+
+input[type=number]
+  -moz-appearance:textfield
