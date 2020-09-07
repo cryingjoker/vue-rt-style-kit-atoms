@@ -54,8 +54,8 @@ export default {
 
     },
     allowHeight() {
-      if(this.isOpen) {
-        return (parseInt(getComputedStyle(this.$refs.contentHeightResolver).height, 10) + 10) + 'px'
+      if(this.$refs.contentHeightResolver && this.isOpen) {
+          return (parseInt(getComputedStyle(this.$refs.contentHeightResolver).height, 10) + 10) + 'px'
       }
       return null
 
@@ -74,7 +74,7 @@ export default {
           this.isOpen = true
           setTimeout(()=> {
             window.scrollTo(0, this.$el.offsetTop)
-          },this.scrollTimeout);
+          },this.scrollTimeout-0);
         }
 
       }
