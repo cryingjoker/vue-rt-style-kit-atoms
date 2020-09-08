@@ -45,6 +45,16 @@
             this.tel = tel;
             this.hasHtml = true;
           }
+          if (this.$el && this.$el.querySelector && this.$el.querySelector("a")) {
+            this.telHtml = this.$el.querySelector("a").innerHTML;
+            if(this.telHtml.endsWith('#')) {
+              tel = "tel:" + this.telHtml.replace(/#$/gm, '%23');
+            }else{
+              tel = "tel:" + this.telHtml
+            }
+            this.tel = tel;
+            this.hasHtml = true;
+          }
 
         }
       }
