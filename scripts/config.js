@@ -44,7 +44,7 @@ const builds = {
         env: 'production',
         sourcemap: true,
         banner,
-        external: ['vue2-datepicker'],
+        external: ['vee-validate','vue2-datepicker'],
     
         assetPath: resolve('lib'),
 
@@ -58,7 +58,7 @@ const builds = {
         env: 'production',
         sourcemap: true,
         banner,
-        external: ['vue2-datepicker'],
+        external: ['vee-validate','vue2-datepicker'],
     
         assetPath: resolve('lib'),
 

@@ -1,6 +1,7 @@
 <script type="text/jsx">
   import Vue from "vue";
   import {default as RippleComponent} from "../Ripple/Ripple.vue";
+  import VeeValidate from "vee-validate";
 
   const componentsList = {};
   componentsList[RippleComponent.name] = RippleComponent;
@@ -16,6 +17,10 @@
       isOrange: {
         type: Boolean,
         default: false
+      },
+      requiredRule: {
+        type: Boolean,
+        default: true
       },
       isDisabled: {
         type: Boolean,
