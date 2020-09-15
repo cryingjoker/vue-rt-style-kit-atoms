@@ -23,6 +23,14 @@
                 type: Boolean,
                 default: false
             },
+            tabletSmall:{
+                type: Boolean,
+                default: false
+            },
+            mobileSmall:{
+                type: Boolean,
+                default: false
+            },
             isBlock: {
                 type: Boolean,
                 default: false
@@ -127,6 +135,12 @@
 
                 if(this.small){
                   className.push('rt-button-small');
+                }
+                if(this.tabletSmall){
+                  className.push('rt-button-td-small');
+                }
+                if(this.mobileSmall){
+                  className.push('rt-button-md-small');
                 }
 
                 className = className.concat(this.buttonClassList.split(' '));
