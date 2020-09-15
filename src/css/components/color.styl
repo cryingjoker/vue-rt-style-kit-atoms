@@ -27,13 +27,14 @@ renderColorClass(classname, var, media)
           color lookup(var)
 for $type in ('desktop' 'tablet' 'mobile')
   for $i in colors
-    if search($i,'b2c') >= 0
+    if search($i,'b2c')   >= 0
       className = 'color-'+replace($i,'b2c-','')
       renderColorClass(className, $i, $type)
 
     else
       if search($i,'main-') == 0
         className = 'color-'+replace($i,'-color','')
+        p(className)
         renderColorClass(className, $i, $type)
 .color-error
   color error-color

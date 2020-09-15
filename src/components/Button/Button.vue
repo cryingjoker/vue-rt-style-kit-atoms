@@ -16,7 +16,7 @@
                 default: null
             },
             bright:{
-                type: Boolean,
+              type: Boolean,
 	            default: false
             },
             small:{

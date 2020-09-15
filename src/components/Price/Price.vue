@@ -2,6 +2,10 @@
   export default {
     name: "RtPrice",
     props: {
+      bright:{
+        type: Boolean,
+        default: false
+      },
       value: {
         type: [Number, String],
         default: 0
@@ -186,10 +190,20 @@
 
 
     },
-
+    computed:{
+      priceClass(){
+        const rtPriceClass = ['rt-price','rt-price-without-space']
+        if(this.forGame){
+          rtPriceClass.push('rt-price-game')
+        }
+        if(this.bright){
+          rtPriceClass.push('rt-price-bright')
+        }
+        return rtPriceClass.join(' ')
+      }
+    },
     render(h) {
 
-      const rtPriceClass = "rt-price" + (this.forGame ? " rt-price-game" : "");
       const rtPriceInfoClass = "rt-price__info" + (this.boldOption ? " rt-price__info--bold-font" : "");
       const timeIntervalRender = () => {
         if (this.normalizeTimeInterval && !this.onlyPrice) {
@@ -271,7 +285,7 @@
           {priceInfoRender()}
         </div>;
       } else {
-        return <div class={`${rtPriceClass} rt-price-without-space`}>
+        return <div class={this.priceClass}>
           {optionRender()}
           {oldValueRender()}
           <div

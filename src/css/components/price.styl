@@ -1,4 +1,4 @@
-.{newAppName}-price
+.rt-price
   color main-color07
   font-weight 400
   white-space nowrap
@@ -29,7 +29,8 @@
         bottom 0
         left 0
 
-  .{newAppName}-dark-theme &
+  .rt-dark-theme &,
+  &.rt-price-bright
     color b2c-white07
 
     .color-orange &
@@ -38,67 +39,121 @@
     .color-white &
       color b2c-white
 
-  .{newAppName}-card &
+  .rt-card &
     color inherit
 
-  .{newAppName}-card--has-white-color &
+  .rt-card--has-white-color &
     color white
     opacity .9
 
-  &__option
+.rt-price__option
+  display inline-block
+  font-size 24px
+  line-height 31px
+  vertical-align baseline
+
+  @media (max-width: mobile-upper-limit)
+    font-size 16px
+
+.rt-price__old-value
+  display inline-block
+  font-size 24px
+  line-height 31px
+  margin-right 10px
+  opacity .7
+  position relative
+  vertical-align baseline
+
+  @media (max-width: mobile-upper-limit)
+    font-size 16px
+
+  &:before
+    content ""
     display inline-block
-    font-size 24px
-    line-height 31px
-    vertical-align baseline
+    width 100%
+    height 1px
+    border-bottom 1px solid main-color
+    margin-top auto
+    margin-bottom auto
+    position absolute
+    top 0
+    bottom 0
+    transition-timing-function ease-in-out
+    transition-duration .4s
+    transition-property background
 
-    @media (max-width: mobile-upper-limit)
-      font-size 16px
+    .rt-dark-theme &,
+    .rt-price-bright &
+      border-bottom-color b2c-white07
 
-  &__old-value
-    display inline-block
-    font-size 24px
-    line-height 31px
-    margin-right 10px
-    opacity .7
-    position relative
-    vertical-align baseline
+    .rt-card &
+      border-bottom-color main-color07
 
-    @media (max-width: mobile-upper-limit)
-      font-size 16px
-
-    &:before
-      content ""
-      display inline-block
-      width 100%
-      height 1px
-      border-bottom 1px solid main-color
-      margin-top auto
-      margin-bottom auto
-      position absolute
-      top 0
-      bottom 0
-      transition-timing-function ease-in-out
-      transition-duration .4s
-      transition-property background
-
-      .{newAppName}-dark-theme &
-        background-color b2c-white07
-
-      .{newAppName}-card &
-        background-color main-color07
-
-      //.{newAppName}-card--has-white-color &
+      //.rt-card--has-white-color &
       //  background-color b2c-white07
 
-  &__option-value
-    display inline-block
-    color main-color09
-    font-size 50px
-    line-height 45px
-    font-weight 400
-    padding-left 5px
-    padding-right 5px
-    vertical-align baseline
+.rt-price__option-value
+  display inline-block
+  color main-color09
+  font-size 50px
+  line-height 45px
+  font-weight 400
+  padding-left 5px
+  padding-right 5px
+  vertical-align baseline
+
+  .color-orange &
+    color b2c-orange
+
+  .color-white &
+    color b2c-white
+
+  .rt-price-game &
+    padding-left 0
+
+  .rt-price-game &
+    font-size 68px
+    font-weight 100
+
+  .rt-dark-theme &,
+  .rt-price-bright &
+    color b2c-white06
+
+  .rt-dark-theme .color-orange &,
+  .rt-price-bright .color-orange &
+
+    color b2c-orange
+
+  .rt-dark-theme .color-white &,
+  .rt-price-bright .color-white &
+    color b2c-white
+
+  @media (max-width: mobile-upper-limit)
+    font-size 42px
+
+.rt-price__value
+  display inline-block
+  height 42px
+  //color main-color09
+  font-size 54px
+  line-height 47px
+  font-weight 400
+  //padding-left 5px
+  padding-right 5px
+  vertical-align baseline
+  transition-timing-function ease-in-out
+  transition-duration .3s
+  transition-property color
+
+  @media (max-width: mobile-upper-limit)
+    font-size 42px
+
+  .rt-price-without-space &
+    margin-top 0
+
+  .rt-dark-theme &,
+  .rt-price-bright &
+    color b2c-white07
 
     .color-orange &
       color b2c-orange
@@ -106,61 +161,13 @@
     .color-white &
       color b2c-white
 
-    .rt-price-game &
-      padding-left 0
-
-    .{newAppName}-price-game &
-      font-size 68px
-      font-weight 100
-
-    .{newAppName}-dark-theme &
-      color b2c-white06
-
-    .{newAppName}-dark-theme .color-orange &
-      color b2c-orange
-
-    .{newAppName}-dark-theme .color-white &
-      color b2c-white
-
-    @media (max-width: mobile-upper-limit)
-      font-size 42px
-
-  &__value
-    display inline-block
-    height 42px
-    //color main-color09
-    font-size 54px
-    line-height 47px
-    font-weight 400
-    //padding-left 5px
-    padding-right 5px
-    vertical-align baseline
-    transition-timing-function ease-in-out
-    transition-duration .3s
-    transition-property color
-
-    @media (max-width: mobile-upper-limit)
-      font-size 42px
-
-    .{newAppName}-price-without-space &
-      margin-top 0
-
-    .{newAppName}-dark-theme &
-      color b2c-white07
-
-      .color-orange &
-        color b2c-orange
-
-      .color-white &
-        color b2c-white
-
-    //.{newAppName}-card &
+    //.rt-card &
     //  color main-color09
 
-    //.{newAppName}-card--has-white-color &
+    //.rt-card--has-white-color &
     //  color b2c-white07
 
-.{newAppName}-price__info
+.rt-price__info
   font-size 14px
   text-align center
   vertical-align baseline
@@ -180,10 +187,10 @@
   &--bold-font
     font-weight 500
 
-.{newAppName}-price__info
+.rt-price__info
   display inline-block
 
-.{newAppName}-price__info-item
+.rt-price__info-item
   .rt-price-game &
     display inline-block
     font-weight 200
@@ -197,16 +204,17 @@
     transition-duration .4s
     transition-property border
 
-    .{newAppName}-card--has-white-color &
+    .rt-card--has-white-color &
       border-top-color white
 
-    .{newAppName}-dark-theme &
+    .rt-dark-theme &,
+    .rt-price-bright &
       border-color b2c-white07
 
-    .{newAppName}-card &
+    .rt-card &
       border-color main-color07
 
-    .{newAppName}-card--has-white-color &
+    .rt-card--has-white-color &
       border-color b2c-white07
 
 .{b2bAppName}-price
@@ -240,7 +248,7 @@
     line-height 26px
     padding 0 5px
 
-    &.{newAppName}-price__old-value
+    &.rt-price__old-value
       opacity 1
 
       &:before
@@ -256,16 +264,16 @@
       &__info
         font-size inherit
 
-  .{newAppName}-price__option
+  .rt-price__option
     font-size 18px
     line-height 26px
     margin-right 5px
 
-.{newAppName}-price-game
-  .{newAppName}-price__info-item
+.rt-price-game
+  .rt-price__info-item
     display inline-block
     border-top 0
 
-  .{newAppName}-price__info-item+.{newAppName}-price__info-item
+  .rt-price__info-item+.rt-price__info-item
     &:before
       content "/"
