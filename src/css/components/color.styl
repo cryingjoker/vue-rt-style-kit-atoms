@@ -35,7 +35,8 @@ for $type in ('desktop' 'tablet' 'mobile')
       if search($i,'main-') == 0
         className = 'color-'+replace($i,'-color','')
         renderColorClass(className, $i, $type)
-
+.color-error
+  color error-color
 
 //.color-main
 //  color main-color
