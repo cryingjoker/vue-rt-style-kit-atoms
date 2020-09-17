@@ -162,7 +162,7 @@
         if (!this.multi) {
           this.localValue = text;
         } else {
-          if (text !== null) {
+          if (text !== null && text.length > 0) {
             if (!this.multiLocalValue.includes(text)) {
               this.multiLocalValue.push(text)
             } else {
