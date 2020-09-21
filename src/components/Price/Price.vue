@@ -35,7 +35,7 @@ export default {
     },
     currency: {
       type: String,
-      default: 'руб'
+      default: 'руб.'
     },
     timeInterval: {
       type: String,
