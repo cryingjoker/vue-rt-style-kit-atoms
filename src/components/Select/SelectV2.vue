@@ -1,8 +1,11 @@
 <script type="text/jsx">
 import {SelectStore} from './SelectStore.js'
-
+import SelectV2VirtualOption from './SelectV2VirtualOption.vue'
+const components = {};
+components[SelectV2VirtualOption.name] = SelectV2VirtualOption
 export default {
   name: "RtSelectV2",
+  components: components,
   props: {
     type: {
       type: String,
@@ -65,7 +68,12 @@ export default {
       default: false
     },
     name: {
-      type: String
+      type: String,
+      default: ''
+    },
+    setFirstActive:{
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
@@ -74,22 +82,27 @@ export default {
   }),
   methods: {
     getSelectOptions() {
-      this.selectOptions = SelectStore.getSelectorOptions(this.name);
+      this.selectOptions = [...SelectStore.getSelectorOptions(this.name)];
     },
     getActiveValue() {
-      this.selectActiveValue = SelectStore.getActiveValue(this.name);
+      this.selectActiveValue = [...SelectStore.getActiveValue(this.name)];
     },
     getSelectType() {
       this.selectorType = SelectStore.getSelectorType(this.name, this.type);
-    }
+    },
   },
   mounted() {
-    SelectStore.addWatcher(this.name, this.getSelectOptions)
-    SelectStore.addWatcher(this.name, this.getSelectType)
+    if(this.setFirstActive){
+      SelectStore.setFirstActive(this.name);
+    }
     SelectStore.setSelectorType(this.name, this.type);
-    this.getSelectOptions()
+    SelectStore.addWatcher(this.name, this.getSelectOptions)
+    SelectStore.addWatcher(this.name, this.getActiveValue)
+    SelectStore.addWatcher(this.name, this.getSelectType)
     this.getSelectType();
+    this.getSelectOptions()
     this.getActiveValue();
+
   },
   beforeDestroy() {
     SelectStore.removeWatcher(this.name)
@@ -99,14 +112,16 @@ export default {
     renderSelectOption() {
       return this.selectOptions.map((item) => {
         const index = this.selectActiveValue.indexOf(item.value);
-
-        return <p>{JSON.stringify(item)} {index}</p>
+        const isActive = index >= 0;
+        console.info('isActive',isActive)
+        return <rt-select-v2-virtual-option select-name={this.name} is-active={isActive} value={item.value} label={item.label} ></rt-select-v2-virtual-option>
       })
     }
   },
   render(h) {
     return <div class="rt-select-v2">
       {this.$slots.default}
+      {JSON.stringify(this.selectActiveValue)}
       {this.renderSelectOption}
     </div>
   }

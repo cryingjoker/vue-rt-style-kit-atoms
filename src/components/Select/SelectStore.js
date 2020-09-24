@@ -10,10 +10,20 @@ class SelectStoreClass extends StorePrototype {
     this.selectorsTypes = {};
     this.selectorsValue = {};
     this.selectorsActiveValue = {};
+    this.isFirstActive = {};
+    this.defaultValue = {};
   }
   setSelectorType(id,type){
+    
     this.selectorsTypes[id] = type;
     this.runWatchersById(id);
+    if(type == 'simple'){
+      if(this.selectorsActiveValue[id]?.length > 1){
+        const firstValue = this.selectorsActiveValue[id][0];
+        this.removeAllActiveValue(id);
+        this.setActiveValue(id,firstValue);
+      }
+    }
   }
   clear(id){
     delete this.selectors[id];
@@ -28,14 +38,18 @@ class SelectStoreClass extends StorePrototype {
     return this.selectors[id]
   }
   setActiveValue(id,value){
-    console.info('this.selectorsActiveValue',this.selectorsActiveValue,id);
+    
     if(this.selectorsActiveValue[id].indexOf(value) < 0){
+      if(this.selectorsTypes[id] == 'simple'){
+        this.removeAllActiveValue(id)
+      }
       this.selectorsActiveValue[id].push(value)
+      console.info('this.selectorsActiveValue',this.selectorsActiveValue);
       this.runWatchersById(id);
-      console.info('setActiveValue',id,value)
     }
   }
   removeActiveValue(id,value){
+    console.info('removeActiveValue',id,value)
     const index = this.selectorsActiveValue[id].indexOf(value);
     if(index >=0){
       this.selectorsActiveValue[id].splice(index,1)
@@ -54,11 +68,13 @@ class SelectStoreClass extends StorePrototype {
       this.selectors[id] = [];
       this.selectorsValue[id] = {};
       this.selectorsActiveValue[id] = [];
-      console.info('set this.selectorsActiveValue',this.selectorsActiveValue);
     }
     if(!this.selectorsValue[id][data.value]){
       this.selectorsValue[id][data.value] = 1
       this.selectors[id].push(data)
+      if(this.selectors[id].length == 1 && this.isFirstActive[id]){
+        this.setActiveValue(id,data.value)
+      }
     }
     this.runWatchersById(id);
   }
@@ -70,6 +86,16 @@ class SelectStoreClass extends StorePrototype {
       this.runWatchersById(id);
       this.removeActiveValue(data.value);
     }
+  }
+  setFirstActive(id){
+    this.isFirstActive[id] = true;
+    
+    if(this.selectorsValue[id].length > 0 && !(this.selectorsActiveValue[id]?.length > 0)){
+      this.setActiveValue(id,this.selectorsValue[id][0]);
+    }
+  }
+  setDefaultValue(id, data){
+    this.defaultValue = {label: data.label, value: data.value}
   }
   
 }

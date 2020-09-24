@@ -16,6 +16,10 @@ export default {
     isActive:{
       type: Boolean,
       default: false
+    },
+    default:{
+      type: Boolean,
+      default: false
     }
   },
   // data() {
@@ -40,6 +44,9 @@ export default {
     SelectStore.setSelectorOption(this.selectName,{ value: this.value, label: label});
     if(this.isActive){
       SelectStore.setActiveValue(this.selectName, this.value)
+    }
+    if(this.default){
+      SelectStore.setDefaultValue(this.selectName, {value:this.value, label: this.label})
     }
   },
   render(h) {
