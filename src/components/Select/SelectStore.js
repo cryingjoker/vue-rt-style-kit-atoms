@@ -12,6 +12,18 @@ class SelectStoreClass extends StorePrototype {
     this.selectorsActiveValue = {};
     this.isFirstActive = {};
     this.defaultValue = {};
+    this.selectorsOpenStatus = {}
+  }
+  setOpen(id){
+    this.selectorsOpenStatus[id] = true;
+    this.runWatchersById(id);
+  }
+  setClose(id){
+    this.selectorsOpenStatus[id] = false;
+    this.runWatchersById(id);
+  }
+  getOpenStatus(id){
+    return this.selectorsOpenStatus[id]
   }
   setSelectorType(id,type){
     
@@ -30,6 +42,7 @@ class SelectStoreClass extends StorePrototype {
     delete this.selectorsTypes[id];
     delete this.selectorsValue[id];
     delete this.selectorsActiveValue[id];
+    delete this.selectorsOpenStatus[id];
   }
   getSelectorType(id,type){
     this.selectorsTypes[id] = type;
@@ -38,18 +51,17 @@ class SelectStoreClass extends StorePrototype {
     return this.selectors[id]
   }
   setActiveValue(id,value){
-    
     if(this.selectorsActiveValue[id].indexOf(value) < 0){
+      console.info('this.selectorsTypes[id]',this.selectorsTypes[id]);
       if(this.selectorsTypes[id] == 'simple'){
         this.removeAllActiveValue(id)
+        this.setClose(id)
       }
       this.selectorsActiveValue[id].push(value)
-      console.info('this.selectorsActiveValue',this.selectorsActiveValue);
       this.runWatchersById(id);
     }
   }
   removeActiveValue(id,value){
-    console.info('removeActiveValue',id,value)
     const index = this.selectorsActiveValue[id].indexOf(value);
     if(index >=0){
       this.selectorsActiveValue[id].splice(index,1)
@@ -57,10 +69,18 @@ class SelectStoreClass extends StorePrototype {
     }
   }
   removeAllActiveValue(id){
-    this.selectorsActiveValue[id] = []
-    this.runWatchersById(id);
+      this.selectorsActiveValue[id] = []
+      this.runWatchersById(id);
   }
   getActiveValue(id){
+    return this.selectorsActiveValue[id]
+  }
+  getActiveLabels(id){
+    if(this.selectorsActiveValue[id]?.length > 0){
+      return this.selectorsActiveValue[id].map((value)=>{
+         return this.selectors[id].find((item)=>item.value == value).label
+      }).filter(i => i)
+    }
     return this.selectorsActiveValue[id]
   }
   setSelectorOption(id,data){
@@ -68,6 +88,7 @@ class SelectStoreClass extends StorePrototype {
       this.selectors[id] = [];
       this.selectorsValue[id] = {};
       this.selectorsActiveValue[id] = [];
+      this.selectorsOpenStatus[id] = false;
     }
     if(!this.selectorsValue[id][data.value]){
       this.selectorsValue[id][data.value] = 1

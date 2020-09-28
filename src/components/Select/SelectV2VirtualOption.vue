@@ -25,18 +25,22 @@ export default {
   },
   computed:{
     selectClass(){
-      const classList = ["rt-select-v2-option"];
+      const classList = ["select-option","d-block"];
       if(this.isActive){
-        classList.push("rt-select-v2-option--active");
+        classList.push("select-option--select");
       }
       return classList.join(' ')
-
-
     },
   },
   methods:{
+    setFocus(){
+      if(this.isActive){
+        this.$refs.button.focus()
+      }
+    },
     onClickFire(){
       console.info('onClickFire')
+      console.info('!!!',this.value,this.label)
       if(this.isActive){
         SelectStore.removeActiveValue(this.selectName, this.value)
       }else{
@@ -46,9 +50,11 @@ export default {
   },
   render(h) {
     if(this.label.length>0) {
-      return <div class={this.selectClass} onClick={this.onClickFire}>
+      return <button ref="button" class={this.selectClass} onClick={this.onClickFire}>
+        <div class="select-option__inner">
         !{this.label}! {this.isActive ? 1 : 2}
-      </div>
+        </div>
+      </button>
     }
     return null
   }

@@ -78,18 +78,31 @@ export default {
   },
   data: () => ({
     selectOptions: [],
-    selectActiveValue: []
+    selectActiveValue: [],
+    selectActiveLabels: [],
+    selectOpenStatus: false
   }),
   methods: {
     getSelectOptions() {
       this.selectOptions = [...SelectStore.getSelectorOptions(this.name)];
     },
     getActiveValue() {
+
       this.selectActiveValue = [...SelectStore.getActiveValue(this.name)];
+      this.selectActiveLabels = [...SelectStore.getActiveLabels(this.name)];
+      console.info('selectActiveValue',this.selectActiveValue)
+      console.info('this.selectActiveLabelsselectActiveValue',this.selectActiveLabels)
     },
     getSelectType() {
       this.selectorType = SelectStore.getSelectorType(this.name, this.type);
     },
+    getSelectOpenStatus() {
+      this.selectOpenStatus = SelectStore.getOpenStatus(this.name);
+      console.info('this.selectorOpenStatus !!',this.selectOpenStatus)
+    },
+    toggleOpen(){
+      SelectStore.setOpen(this.name)
+    }
   },
   mounted() {
     if (this.setFirstActive) {
@@ -99,6 +112,7 @@ export default {
     SelectStore.addWatcher(this.name, this.getSelectOptions)
     SelectStore.addWatcher(this.name, this.getActiveValue)
     SelectStore.addWatcher(this.name, this.getSelectType)
+    SelectStore.addWatcher(this.name, this.getSelectOpenStatus)
     this.getSelectType();
     this.getSelectOptions()
     this.getActiveValue();
@@ -109,7 +123,23 @@ export default {
     SelectStore.clear(this.name)
   },
   computed: {
+    renderSelectLine(){
+      let borderClass = '';
+      borderClass += this.selectOpenStatus ? 'text-field__border' : 'text-field__line';
+      borderClass += (this.outlined && this.hasError) ? ' text-field__border--error' : '';
+      return <div class={borderClass}></div>
+    },
+    renderSelectList() {
+      return <div class="select-list">
+        {this.renderSelectOption}
+      </div>
+    },
     renderSelectOption() {
+      console.info('render not')
+      if(!this.selectOpenStatus){
+        return null
+      }
+      console.info('render')
       return this.selectOptions.map((item) => {
         const index = this.selectActiveValue.indexOf(item.value);
         const isActive = index >= 0;
@@ -117,6 +147,7 @@ export default {
                                             label={item.label}></rt-select-v2-virtual-option>
       })
     },
+
     renderLabel() {
 
       const classList = [];
@@ -127,13 +158,13 @@ export default {
       return <label ref="placeholder" class={classList.join(' ')}>{this.label}</label>
     },
     selectClasses() {
-      let selectClasses = ['rt-select-v2','select', 'text-field'];
+      let selectClasses = ['rt-select','select', 'text-field'];
       // if (this.hasError) {
       //   selectClasses.push("select--error text-field--error");
       // }
-      // if (this.isOpen) {
+      if (this.selectOpenStatus) {
         selectClasses.push("select--is-open");
-      // }
+      }
       // if (this.resetWrapperWidth) {
       //   selectClasses.push("select--is-reset-width");
       // }
@@ -157,13 +188,35 @@ export default {
       // }
       return selectClasses.join(' ');
     },
+    renderValue(){
+      return <p class="select-input">{this.selectActiveLabels.join(', ')}</p>
+    }
   },
   render(h) {
     return <div class={this.selectClasses}>
+      <div class="select__inner">
+      <div class="select-inner-container">
+        <button disabled={this.disabled} class="select__inner" onClick={this.toggleOpen}>
+          <div class="select-value">
+            {this.renderValue}
+          </div>
       {this.renderLabel}
       {this.$slots.default}
-      {JSON.stringify(this.selectActiveValue)}
-      {this.renderSelectOption}
+          {this.renderSelectLine}
+
+        </button>
+        <div class="select-arrow">
+          <svg class="select-arrow__icon" width="13" height="7">
+            <path d="M.705 1.704l5.999 6 6-6L11.295.295h-.002l-4.59 4.58L2.115.294h-.002z"
+                  fill="#575D68" fill-rule="evenodd"/>
+          </svg>
+        </div>
+      </div>
+        {this.renderSelectList}
+
+      </div>
+
+
     </div>
   }
 };

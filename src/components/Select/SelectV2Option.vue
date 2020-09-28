@@ -46,7 +46,7 @@ export default {
       SelectStore.setActiveValue(this.selectName, this.value)
     }
     if(this.default){
-      SelectStore.setDefaultValue(this.selectName, {value:this.value, label: this.label})
+      SelectStore.setDefaultValue(this.selectName, {value:this.value, label: label})
     }
   },
   render(h) {
