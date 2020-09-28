@@ -52,7 +52,6 @@ class SelectStoreClass extends StorePrototype {
   }
   setActiveValue(id,value){
     if(this.selectorsActiveValue[id].indexOf(value) < 0){
-      console.info('this.selectorsTypes[id]',this.selectorsTypes[id]);
       if(this.selectorsTypes[id] == 'simple'){
         this.removeAllActiveValue(id)
         this.setClose(id)
@@ -82,6 +81,12 @@ class SelectStoreClass extends StorePrototype {
       }).filter(i => i)
     }
     return this.selectorsActiveValue[id]
+  }
+  getActiveIndex(id){
+    if(this.selectorsTypes[id] == 'simple'){
+      return this.selectors[id].findIndex((i)=>i.value == this.selectorsActiveValue[id][0])
+    }
+    return 0
   }
   setSelectorOption(id,data){
     if(!this.selectors[id]){

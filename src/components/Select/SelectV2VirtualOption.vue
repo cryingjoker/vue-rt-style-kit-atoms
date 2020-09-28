@@ -21,6 +21,10 @@ export default {
     },
     value:{
       type: String
+    },
+    isFocus:{
+      type: Boolean,
+      defaut: false
     }
   },
   computed:{
@@ -29,18 +33,14 @@ export default {
       if(this.isActive){
         classList.push("select-option--select");
       }
+      if(this.isFocus){
+        classList.push("select-option--focus");
+      }
       return classList.join(' ')
     },
   },
   methods:{
-    setFocus(){
-      if(this.isActive){
-        this.$refs.button.focus()
-      }
-    },
     onClickFire(){
-      console.info('onClickFire')
-      console.info('!!!',this.value,this.label)
       if(this.isActive){
         SelectStore.removeActiveValue(this.selectName, this.value)
       }else{
@@ -51,9 +51,7 @@ export default {
   render(h) {
     if(this.label.length>0) {
       return <button ref="button" class={this.selectClass} onClick={this.onClickFire}>
-        <div class="select-option__inner">
-        !{this.label}! {this.isActive ? 1 : 2}
-        </div>
+        <div class="select-option__inner">{this.label}</div>
       </button>
     }
     return null
