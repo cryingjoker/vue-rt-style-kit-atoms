@@ -71,7 +71,7 @@ export default {
       type: String,
       default: ''
     },
-    setFirstActive:{
+    setFirstActive: {
       type: Boolean,
       default: false
     }
@@ -92,7 +92,7 @@ export default {
     },
   },
   mounted() {
-    if(this.setFirstActive){
+    if (this.setFirstActive) {
       SelectStore.setFirstActive(this.name);
     }
     SelectStore.setSelectorType(this.name, this.type);
@@ -113,13 +113,54 @@ export default {
       return this.selectOptions.map((item) => {
         const index = this.selectActiveValue.indexOf(item.value);
         const isActive = index >= 0;
-        console.info('isActive',isActive)
-        return <rt-select-v2-virtual-option select-name={this.name} is-active={isActive} value={item.value} label={item.label} ></rt-select-v2-virtual-option>
+        return <rt-select-v2-virtual-option select-name={this.name} is-active={isActive} value={item.value}
+                                            label={item.label}></rt-select-v2-virtual-option>
       })
-    }
+    },
+    renderLabel() {
+
+      const classList = [];
+      classList.push('floating-placeholder')
+      if (this.selectActiveValue.length > 0) {
+        classList.push('floating-placeholder--go-top')
+      }
+      return <label ref="placeholder" class={classList.join(' ')}>{this.label}</label>
+    },
+    selectClasses() {
+      let selectClasses = ['rt-select-v2','select', 'text-field'];
+      // if (this.hasError) {
+      //   selectClasses.push("select--error text-field--error");
+      // }
+      // if (this.isOpen) {
+        selectClasses.push("select--is-open");
+      // }
+      // if (this.resetWrapperWidth) {
+      //   selectClasses.push("select--is-reset-width");
+      // }
+      // if (this.disabled) {
+      //   selectClasses.push("select--disabled");
+      // }
+      // if (this.isOpenListOnTop) {
+      //   selectClasses.push("select--invert-open-list");
+      // }
+      // if (this.isB2bSelect) {
+      //   selectClasses.push("rtb-select");
+      // }
+      // if (this.outlined) {
+      //   selectClasses.push("rtb-select--outlined");
+      // }
+      // if (this.multi) {
+      //   selectClasses.push("rtb-select--multi");
+      // }
+      // if (this.hasContentText) {
+      //   selectClasses.push("rt-select--has-content")
+      // }
+      return selectClasses.join(' ');
+    },
   },
   render(h) {
-    return <div class="rt-select-v2">
+    return <div class={this.selectClasses}>
+      {this.renderLabel}
       {this.$slots.default}
       {JSON.stringify(this.selectActiveValue)}
       {this.renderSelectOption}
