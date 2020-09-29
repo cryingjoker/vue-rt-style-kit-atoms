@@ -96,6 +96,7 @@
       },
       changeInput($event) {
         this.$emit("update:checked", this.isChecked);
+        this.isChecked = this.$refs['input'].checked
         this.$emit("changecheckbox", {
           name: this.name,
           value: this.value,
@@ -165,7 +166,7 @@
     render(createElement, context) {
       return <label class={this.checkBoxClass}>
         <rt-ripple ref="ripple" not-render={this.isDisabled}/>
-        <input id={this.uid} checked={this.checked} ref="input" v-model={this.isChecked} disabled={this.isDisabled}
+        <input id={this.uid} checked={this.checked} ref="input" disabled={this.isDisabled}
                name={this.name}
                type="checkbox" class="checkbox-element" onChange={this.changeInput}/>
         <div class="checkbox-container">
