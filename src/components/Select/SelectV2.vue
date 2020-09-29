@@ -21,7 +21,7 @@ export default {
       default: ""
     },
     value: {
-      type: String,
+      type: String|Array,
       default: ''
     },
     text: {
@@ -93,7 +93,7 @@ export default {
       this.selectActiveValue = [...SelectStore.getActiveValue(this.name)];
       this.selectActiveLabels = [...SelectStore.getActiveLabels(this.name)];
       this.activeIndex = SelectStore.getActiveIndex(this.name)
-      this.focusIndex = this.activeIndex;
+      this.focusIndex = SelectStore.getFocusIndex(this.name)
     },
     getSelectType() {
       this.selectorType = SelectStore.getSelectorType(this.name, this.type);
@@ -118,12 +118,12 @@ export default {
     },
     keydownFn(e) {
       if (e.keyCode == 40) {
-        this.setNextFocus()
+        SelectStore.setNextFocus(this.name)
         e.preventDefault()
         e.stopPropagation()
       }
       if (e.keyCode == 38) {
-        this.setPreviewFocus()
+        SelectStore.setPreviewFocus(this.name)
         e.preventDefault()
         e.stopPropagation()
       }
@@ -181,6 +181,7 @@ export default {
     SelectStore.addWatcher(this.name, this.getActiveValue)
     SelectStore.addWatcher(this.name, this.getSelectType)
     SelectStore.addWatcher(this.name, this.getSelectOpenStatus)
+    SelectStore.setActiveValue(this.name, this.value)
     this.getSelectType();
     this.getSelectOptions()
     this.getActiveValue();
@@ -223,7 +224,7 @@ export default {
         return null
       }
       return this.selectOptions.map((item, index) => {
-        const isActive = index == this.activeIndex;
+        const isActive = this.activeIndex[index] > 0;
         const isFocus = index == this.focusIndex;
         return <rt-select-v2-virtual-option ref={'select-item-' + index} select-name={this.name} is-active={isActive}
                                             value={item.value}
