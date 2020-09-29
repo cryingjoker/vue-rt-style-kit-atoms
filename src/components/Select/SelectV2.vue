@@ -207,6 +207,11 @@ export default {
         SelectStore.addJson(this.name,this.json)
       }
     },
+    selectActiveValue(newVal, oldVal){
+      if(JSON.stringify(newVal) != JSON.stringify(oldVal)) {
+        this.$emit('change', newVal)
+      }
+    },
     selectOpenStatus(newVal, oldVal) {
       if (newVal && !oldVal) {
         this.mouseenterFn();
