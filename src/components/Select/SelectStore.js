@@ -150,7 +150,11 @@ class SelectStoreClass extends StorePrototype {
   setActiveFocusEl(id) {
     this.setFocusIndex(id, this.selectors[id].findIndex(i => i.value == this.selectorsActiveValue[id][0]))
   }
-  
+  addJson(id, json){
+    json.forEach((obj)=>{
+      this.setSelectorOption(id,obj)
+    })
+  }
   setSelectorOption(id, data) {
     if (!this.selectors[id]) {
       this.selectors[id] = [];

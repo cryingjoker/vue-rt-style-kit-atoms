@@ -8,6 +8,12 @@ export default {
   name: "RtSelectV2",
   components: components,
   props: {
+    json:{
+      type: Array,
+      default: () => {
+        return []
+      }
+    },
     type: {
       type: String,
       default: 'simple'
@@ -173,9 +179,13 @@ export default {
     }
   },
   mounted() {
+    if(Object.keys(this.json).length > 0){
+      SelectStore.addJson(this.name,this.json)
+    }
     if (this.setFirstActive) {
       SelectStore.setFirstActive(this.name);
     }
+
     SelectStore.setSelectorType(this.name, this.type);
     SelectStore.addWatcher(this.name, this.getSelectOptions)
     SelectStore.addWatcher(this.name, this.getActiveValue)
@@ -192,6 +202,11 @@ export default {
     SelectStore.clear(this.name)
   },
   watch: {
+    json(newVal,oldVal){
+      if(JSON.stringify(newVal) != JSON.stringify(oldVal)){
+        SelectStore.addJson(this.name,this.json)
+      }
+    },
     selectOpenStatus(newVal, oldVal) {
       if (newVal && !oldVal) {
         this.mouseenterFn();
