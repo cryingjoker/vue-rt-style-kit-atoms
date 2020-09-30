@@ -232,7 +232,7 @@ export default {
     },
     selectActiveValue(newVal, oldVal) {
       if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
-        this.$emit('change', newVal)
+        this.$emit('change', newVal.filter(i=>i))
       }
     },
     selectOpenStatus(newVal, oldVal) {
