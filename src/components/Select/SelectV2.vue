@@ -93,7 +93,8 @@ export default {
     selectActiveLabels: [],
     selectOpenStatus: false,
     focusIndex: 0,
-    activeIndex: 0
+    activeIndex: 0,
+    verticalOrientation: 'bottom'
   }),
   methods: {
     getSelectOptions() {
@@ -111,9 +112,25 @@ export default {
     getSelectOpenStatus() {
       this.selectOpenStatus = SelectStore.getOpenStatus(this.name);
     },
+    setVerticalOrientation(){
+      if(window.innerHeight + window.screenTop - this.$el.getBoundingClientRect().top < 200){
+        if(this.$el.getBoundingClientRect().top < 200){
+          this.verticalOrientation = 'bottom'
+        }else {
+          this.verticalOrientation = 'top'
+        }
+      }else{
+        this.verticalOrientation = 'bottom'
+      }
+    },
     toggleOpen() {
       if(!this.disabled) {
-        SelectStore.setOpen(this.name)
+        if(!this.selectOpenStatus) {
+          SelectStore.setOpen(this.name)
+          this.setVerticalOrientation()
+        }else{
+          SelectStore.setClose(this.name)
+        }
       }
     },
     bindClickOutside() {
@@ -280,6 +297,9 @@ export default {
         }
         if (this.selectOpenStatus) {
           selectClasses.push("select--is-open");
+          if(this.verticalOrientation == 'top'){
+            selectClasses.push("select--invert-open-list");
+          }
         }
       }
 
