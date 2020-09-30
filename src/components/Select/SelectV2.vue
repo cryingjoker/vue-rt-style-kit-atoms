@@ -8,7 +8,7 @@ export default {
   name: "RtSelectV2",
   components: components,
   props: {
-    json:{
+    json: {
       type: Array,
       default: () => {
         return []
@@ -27,7 +27,7 @@ export default {
       default: ""
     },
     value: {
-      type: String|Array,
+      type: String | Array,
       default: ''
     },
     text: {
@@ -81,6 +81,10 @@ export default {
     setFirstActive: {
       type: Boolean,
       default: false
+    },
+    v2: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
@@ -108,7 +112,9 @@ export default {
       this.selectOpenStatus = SelectStore.getOpenStatus(this.name);
     },
     toggleOpen() {
-      SelectStore.setOpen(this.name)
+      if(!this.disabled) {
+        SelectStore.setOpen(this.name)
+      }
     },
     bindClickOutside() {
       window.addEventListener('click', this.clickOutsideFn)
@@ -179,8 +185,8 @@ export default {
     }
   },
   mounted() {
-    if(Object.keys(this.json).length > 0){
-      SelectStore.addJson(this.name,this.json)
+    if (Object.keys(this.json).length > 0) {
+      SelectStore.addJson(this.name, this.json)
     }
     if (this.setFirstActive) {
       SelectStore.setFirstActive(this.name);
@@ -202,13 +208,13 @@ export default {
     SelectStore.clear(this.name)
   },
   watch: {
-    json(newVal,oldVal){
-      if(JSON.stringify(newVal) != JSON.stringify(oldVal)){
-        SelectStore.addJson(this.name,this.json)
+    json(newVal, oldVal) {
+      if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
+        SelectStore.addJson(this.name, this.json)
       }
     },
-    selectActiveValue(newVal, oldVal){
-      if(JSON.stringify(newVal) != JSON.stringify(oldVal)) {
+    selectActiveValue(newVal, oldVal) {
+      if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
         this.$emit('change', newVal)
       }
     },
@@ -248,6 +254,7 @@ export default {
         const isFocus = index == this.focusIndex;
         return <rt-select-v2-virtual-option ref={'select-item-' + index} select-name={this.name} is-active={isActive}
                                             value={item.value}
+                                            sublabel={item.sublabel}
                                             is-focus={isFocus}
                                             label={item.label}></rt-select-v2-virtual-option>
       })
@@ -263,19 +270,25 @@ export default {
       return <label ref="placeholder" class={classList.join(' ')}>{this.label}</label>
     },
     selectClasses() {
-      let selectClasses = ['rt-select', 'select', 'text-field'];
-      // if (this.hasError) {
-      //   selectClasses.push("select--error text-field--error");
-      // }
-      if (this.selectOpenStatus) {
-        selectClasses.push("select--is-open");
+      let selectClasses = [];
+      if (this.v2) {
+        selectClasses.push('rt-select-v2')
+      } else {
+        selectClasses.push('rt-select', 'select', 'text-field')
+        if (this.hasError) {
+          selectClasses.push("select--error text-field--error");
+        }
+        if (this.selectOpenStatus) {
+          selectClasses.push("select--is-open");
+        }
       }
+
       // if (this.resetWrapperWidth) {
       //   selectClasses.push("select--is-reset-width");
       // }
-      // if (this.disabled) {
-      //   selectClasses.push("select--disabled");
-      // }
+      if (this.disabled) {
+        selectClasses.push("select--disabled");
+      }
       // if (this.isOpenListOnTop) {
       //   selectClasses.push("select--invert-open-list");
       // }
@@ -294,10 +307,22 @@ export default {
       return selectClasses.join(' ');
     },
     renderValue() {
-      return <p class="select-input">{this.selectActiveLabels.join(', ')}</p>
+      if (this.autoComplete) {
+        //todo доделать автокомплит
+        <rt-input value={"this.selectActiveLabels.join(', ')"}></rt-input>
+      } else {
+        return <p class="select-input">{this.selectActiveLabels.join(', ')}</p>
+      }
     }
   },
   render(h) {
+    if(this.v2){
+      return <div class={this.selectClasses} ref="select">
+        {this.$slots.default}
+        new select
+      </div>
+    }
+
     return <div class={this.selectClasses} ref="select">
       <div class="select__inner">
         <div class="select-inner-container">

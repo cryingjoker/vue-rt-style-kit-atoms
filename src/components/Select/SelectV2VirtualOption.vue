@@ -25,6 +25,10 @@ export default {
     isFocus:{
       type: Boolean,
       defaut: false
+    },
+    sublabel: {
+      type: String,
+      default: ''
     }
   },
   computed:{
@@ -38,6 +42,12 @@ export default {
       }
       return classList.join(' ')
     },
+    renderSublabel(){
+      if(this.sublabel.length > 0){
+
+      }
+      return null
+    }
   },
   methods:{
     onClickFire(){
@@ -52,6 +62,7 @@ export default {
     if(this.label.length>0) {
       return <button ref="button" class={this.selectClass} onClick={this.onClickFire}>
         <div class="select-option__inner">{this.label}</div>
+        {this.renderSublabel}
       </button>
     }
     return null

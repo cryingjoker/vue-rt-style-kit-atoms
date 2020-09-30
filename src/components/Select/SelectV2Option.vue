@@ -20,6 +20,10 @@ export default {
     default:{
       type: Boolean,
       default: false
+    },
+    sublabel:{
+      type:String,
+      default: ''
     }
   },
   // data() {
@@ -40,8 +44,11 @@ export default {
         label = this.$slots.default[0].text
       }
     }
-
-    SelectStore.setSelectorOption(this.selectName,{ value: this.value, label: label});
+    const data = { value: this.value, label: label};
+    if(this.sublabel.length > 0){
+      data.sublabel = this.sublabel
+    }
+    SelectStore.setSelectorOption(this.selectName,data);
     if(this.isActive){
       SelectStore.setActiveValue(this.selectName, this.value)
     }
