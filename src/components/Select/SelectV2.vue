@@ -346,7 +346,7 @@ export default {
     return <div class={this.selectClasses} ref="select">
       <div class="select__inner">
         <div class="select-inner-container">
-          <button disabled={this.disabled} class="select__inner" onClick={this.toggleOpen}>
+          <button type="button" disabled={this.disabled} class="select__inner" onClick={this.toggleOpen}>
             <div class="select-value">
               {this.renderValue}
             </div>

@@ -60,7 +60,7 @@ export default {
   },
   render(h) {
     if(this.label.length>0) {
-      return <button ref="button" class={this.selectClass} onClick={this.onClickFire}>
+      return <button type="button" ref="button" class={this.selectClass} onClick={this.onClickFire}>
         <div class="select-option__inner">{this.label}</div>
         {this.renderSublabel}
       </button>
