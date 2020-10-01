@@ -1,5 +1,9 @@
-export const displayParamsNames  = ["display", "tabletDisplay", "mobileDisplay"];
+export const displayParamsNames  = ["largeDisplay","display", "tabletDisplay", "mobileDisplay"];
 export const displayParamsProps  = {
+    largeDisplay: {
+        type: String,
+        default: null
+    },
     display: {
         type: String,
         default: null
@@ -18,6 +22,9 @@ export function getDisplayClass(name, value) {
 
     const classNamesParts = [];
     switch(true){
+        case name.search(/large/i)>=0:
+            classNamesParts.push('lg');
+            break;
         case name.search(/tablet/i)>=0:
             classNamesParts.push('td');
             break;
