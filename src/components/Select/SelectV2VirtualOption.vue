@@ -47,9 +47,32 @@ export default {
 
       }
       return null
+    },
+  },
+  watch:{
+    isFocus(newVal,oldVal){
+      if(newVal && newVal!=oldVal){
+        this.$refs.button.focus()
+      }
     }
   },
+  mounted() {
+    this.setFocus()
+  },
   methods:{
+    scrollToEl(){
+      const el = this.$el;
+      const parentEl = el.parentElement;
+      if(parentEl.classList.contains('select-list')){
+        parentEl.scrollTop = el.getBoundingClientRect().top - parentEl.getBoundingClientRect().top
+      }
+    },
+    setFocus(){
+      if(this.isActive){
+        this.$refs.button.focus()
+        this.scrollToEl()
+      }
+    },
     onClickFire(){
       if(this.isActive){
         SelectStore.removeActiveValue(this.selectName, this.value)
