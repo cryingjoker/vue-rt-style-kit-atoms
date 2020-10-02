@@ -5,6 +5,21 @@
     "value": "#7700FF"
   },
   {
+    "code_variable_name": "b2c-purple-button-hover",
+    "label": "",
+    "value": "#5B09C0"
+  },
+  {
+    "code_variable_name": "b2c-purple-button-active",
+    "label": "",
+    "value": "#3F028C"
+  },
+  {
+    "code_variable_name": "b2c-purple01",
+    "label": "",
+    "value": "rgba(119,0,255,0.1)"
+  },
+  {
     "code_variable_name": "b2c-purple-low",
     "label": "Rostelecom Purple Low",
     "value": "#6605C6"
