@@ -37,6 +37,10 @@
             fieldId: {
                 type: String,
                 default: ''
+            },
+            autoResize: {
+                type: Boolean,
+                default: true
             }
         },
         data: () => ({
@@ -67,6 +71,7 @@
                 if (this.color === "purple") {
                     classes.push("text-field--purple")
                 }
+                classes.push(`text-field--${this.autoResize ? 'autoresized' : 'scrollable'}`)
                 return classes.join(' ')
             },
             placeholderClasses() {
@@ -115,9 +120,11 @@
                 this.setValueLength();
             },
             calculateHeight() {
-                const textarea = this.$el.querySelector(".textarea-element");
-                textarea.style.height = "";
-                textarea.style.height = textarea.scrollHeight + 'px';
+                if (this.autoResize) {
+                    const textarea = this.$el.querySelector(".textarea-element");
+                    textarea.style.height = "";
+                    textarea.style.height = textarea.scrollHeight + 'px';
+                }
             },
             clearInput() {
               this.$refs.textarea.value = ''
