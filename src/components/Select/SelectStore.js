@@ -64,7 +64,7 @@ class SelectStoreClass extends StorePrototype {
     if (Array.isArray(value)) {
       value.forEach(val => this.setActiveValue(id, val))
     } else {
-      if (this.selectorsActiveValue[id].indexOf(value) < 0) {
+      if (this.selectorsActiveValue[id]?.indexOf(value) < 0) {
         if (this.selectorsTypes[id] == 'simple') {
           this.removeAllActiveValue(id)
           this.setClose(id)
@@ -85,7 +85,7 @@ class SelectStoreClass extends StorePrototype {
   }
   
   removeActiveValue(id, value) {
-    const index = this.selectorsActiveValue[id].indexOf(value);
+    const index = this.selectorsActiveValue[id]?.indexOf(value);
     if (index >= 0) {
       this.selectorsActiveValue[id].splice(index, 1)
       this.runWatchersById(id);
@@ -103,7 +103,7 @@ class SelectStoreClass extends StorePrototype {
   
   getActiveLabels(id) {
     if (this.selectorsActiveValue[id]?.length > 0) {
-      return this.selectorsActiveValue[id].map((value) => {
+      return this.selectorsActiveValue[id]?.map((value) => {
         return this.selectors[id].find((item) => item.value == value)?.label
       }).filter(i => i)
     }
@@ -116,7 +116,7 @@ class SelectStoreClass extends StorePrototype {
       activeIndexes[this.selectors[id].findIndex((i) => i.value == this.selectorsActiveValue[id][0])] = 1
     }
     if (this.selectorsTypes[id] == 'multiselect') {
-      this.selectorsActiveValue[id].map((activeVal) => {
+      this.selectorsActiveValue[id]?.map((activeVal) => {
         return this.selectors[id].findIndex((i) => i.value == activeVal)
       }).forEach((activeKey) => {
         activeIndexes[activeKey] = 1
@@ -176,7 +176,7 @@ class SelectStoreClass extends StorePrototype {
   removeSelectorOption(id, data) {
     if (this.selectors[id]) {
       delete this.selectorsValue[id][data.value]
-      let index = this.selectors[id].indexOf(data);
+      let index = this.selectors[id]?.indexOf(data);
       this.selectors[id].splice(index, 1)
       this.runWatchersById(id);
       this.removeActiveValue(data.value);

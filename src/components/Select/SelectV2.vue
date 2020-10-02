@@ -98,11 +98,20 @@ export default {
   }),
   methods: {
     getSelectOptions() {
-      this.selectOptions = [...SelectStore.getSelectorOptions(this.name)];
+      const selectorOptions = SelectStore.getSelectorOptions(this.name);
+      if (selectorOptions) {
+        this.selectOptions = [...selectorOptions];
+      }
     },
     getActiveValue() {
-      this.selectActiveValue = [...SelectStore.getActiveValue(this.name)];
-      this.selectActiveLabels = [...SelectStore.getActiveLabels(this.name)];
+      const selectActiveValue = SelectStore.getActiveValue(this.name)
+      const selectActiveLabels = SelectStore.getActiveLabels(this.name)
+      if (selectActiveValue) {
+        this.selectActiveValue = [...selectActiveValue];
+      }
+      if (selectActiveLabels) {
+        this.selectActiveLabels = [...selectActiveLabels];
+      }
       this.activeIndex = SelectStore.getActiveIndex(this.name)
       this.focusIndex = SelectStore.getFocusIndex(this.name)
     },
@@ -112,23 +121,23 @@ export default {
     getSelectOpenStatus() {
       this.selectOpenStatus = SelectStore.getOpenStatus(this.name);
     },
-    setVerticalOrientation(){
-      if(window.innerHeight + window.screenTop - this.$el.getBoundingClientRect().top < 200){
-        if(this.$el.getBoundingClientRect().top < 200){
+    setVerticalOrientation() {
+      if (window.innerHeight + window.screenTop - this.$el.getBoundingClientRect().top < 200) {
+        if (this.$el.getBoundingClientRect().top < 200) {
           this.verticalOrientation = 'bottom'
-        }else {
+        } else {
           this.verticalOrientation = 'top'
         }
-      }else{
+      } else {
         this.verticalOrientation = 'bottom'
       }
     },
     toggleOpen() {
-      if(!this.disabled) {
-        if(!this.selectOpenStatus) {
+      if (!this.disabled) {
+        if (!this.selectOpenStatus) {
           SelectStore.setOpen(this.name)
           this.setVerticalOrientation()
-        }else{
+        } else {
           SelectStore.setClose(this.name)
         }
       }
@@ -202,7 +211,7 @@ export default {
     }
   },
   mounted() {
-    if (Object.keys(this.json).length > 0) {
+    if (Object.keys(this.json)?.length > 0) {
       SelectStore.addJson(this.name, this.json)
     }
     if (this.setFirstActive) {
@@ -225,14 +234,33 @@ export default {
     SelectStore.clear(this.name)
   },
   watch: {
-    json(newVal, oldVal) {
-      if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
-        SelectStore.addJson(this.name, this.json)
+
+    value: {
+      deep: true,
+      handler(newVal, oldVal) {
+        if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
+          SelectStore.setActiveValue(this.name, newVal)
+          this.getSelectType();
+          this.getSelectOptions()
+          this.getActiveValue();
+        }
+      }
+    },
+    json: {
+      deep: true,
+      handler(newVal, oldVal) {
+        if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
+          SelectStore.addJson(this.name, newVal)
+          this.getSelectType();
+          this.getSelectOptions()
+          this.getActiveValue();
+
+        }
       }
     },
     selectActiveValue(newVal, oldVal) {
       if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
-        this.$emit('change', newVal.filter(i=>i))
+        this.$emit('change', newVal.filter(i => i))
       }
     },
     selectOpenStatus(newVal, oldVal) {
@@ -297,7 +325,7 @@ export default {
         }
         if (this.selectOpenStatus) {
           selectClasses.push("select--is-open");
-          if(this.verticalOrientation == 'top'){
+          if (this.verticalOrientation == 'top') {
             selectClasses.push("select--invert-open-list");
           }
         }
@@ -336,7 +364,7 @@ export default {
     }
   },
   render(h) {
-    if(this.v2){
+    if (this.v2) {
       return <div class={this.selectClasses} ref="select">
         {this.$slots.default}
         new select
