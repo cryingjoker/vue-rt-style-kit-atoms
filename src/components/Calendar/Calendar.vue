@@ -24,6 +24,7 @@
         :clearable="clearable"
         :input-class="inputClass"
         :placeholder="placeholder"
+        :append-to-body="appendToBody"
         v-bind="calendarProps"
         v-model="inputVal"
         @confirm="val => $emit('confirm', val, `${className}--${_uid}`)"
@@ -66,6 +67,10 @@ export default {
     },
     label: {
       type: String
+    },
+    appendToBody: {
+      type: Boolean,
+      default: true
     },
     value: null,
     inputClass: {
