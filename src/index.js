@@ -29,7 +29,8 @@ import {
     GridColumn,
     Hint,
     HintBody,
-    VideoPlayer
+    VideoPlayer,
+    SystemIcons
 } from "./components";
 
 // import 'element-closest-polyfill';
@@ -94,6 +95,7 @@ let VueRtStyle = {
             Vue.component(GridColumn.name, GridColumn);
             Vue.component(Hint.name, Hint);
             Vue.component(HintBody.name, HintBody);
+            Vue.component(SystemIcons.name, SystemIcons);
             Vue.component(VideoPlayer.name, VideoPlayer);
             Vue.RtStyleAtoms = true;
         }
