@@ -43,10 +43,13 @@
                 default: true
             }
         },
-        data: () => ({
-            inputText: "",
-            hasInputText: false
-        }),
+        data () {
+            return {
+                localValue: this.value?.length > 0 ? this.value : "",
+                inputText: "",
+                hasInputText: false
+            }
+        },
         computed: {
             textareaClasses() {
                 const classes = ['text-field', 'textarea'];
@@ -85,15 +88,15 @@
         },
         watch: {
             localValue(val) {
-                this.$emit("change", val);
+                this.$emit("input", val);
+                setTimeout(()=>{
+                   this.calculateHeight();
+                   this.setValueLength();
+                }, 0);
             },
             value(val,a){
               if(val != this.localValue){
                 this.localValue = val;
-                setTimeout(()=>{
-                  this.calculateHeight()
-	                this.setValueLength()
-                },0)
               }
             }
         },
@@ -101,9 +104,6 @@
             this.localValue = this.value;
             this.setValueLength();
             this.setDisabled();
-            if(this.localValue?.length > 0){
-              this.calculateHeight()
-            }
         },
         methods: {
 
@@ -150,10 +150,8 @@
             }
             return <div class={this.textareaClasses}>
                     <textarea class="textarea-element" rows="1"
-
-                              onChange={this.inputHandler}
-                              onKeyup={this.calculateHeight}
-                              onInput={this.calculateHeight}
+                              ref="textarea"
+                              onInput={this.inputHandler}
                               id={this.fieldId}
                     >{this.value}</textarea>
                 {renderLine()}
