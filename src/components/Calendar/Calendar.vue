@@ -72,7 +72,7 @@ export default {
     },
     appendToBody: {
       type: Boolean,
-      default: true
+      default: false
     },
     value: null,
     inputClass: {
