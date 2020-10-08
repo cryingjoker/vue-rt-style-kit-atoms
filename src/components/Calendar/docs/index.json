@@ -19,7 +19,7 @@
 			"property": "append-to-body",
 			"type": "Boolean",
 			"description": "Монтировать попап в body элемент для улучшения визуального отображения",
-			"value": "true"
+			"value": "false"
 		},
 		{
 			"name": "rt-calendar",
