@@ -16,14 +16,19 @@ export default {
     }
   },
   data: () => ({
-    optios: {}
+    optios: {},
+    localName: null
   }),
+    watch: {
+      name(newVal, oldVal) {
+          this.localName = newVal
+      }
+    },
   created() {
-    if(this.name in systemIconsData) {
-
-      this.optios = systemIconsData[this.name]
+    this.localName = this.name;
+    if(this.localName in systemIconsData) {
+      this.optios = systemIconsData[this.localName]
       let html = this.optios.html;
-
       html = html.replace(/@fr/g,'fill-rule')
       html = html.replace(/@cr/g,'clip-rule')
       html = html.replace(/@sw/g,'stroke-width')
@@ -41,13 +46,25 @@ export default {
         classList.push('rt-sys-icon--'+this.color)
       }
       return classList.join(' ')
+    },
+    localHTML() {
+        if(this.localName in systemIconsData) {
+            this.optios = systemIconsData[this.localName]
+            let html = this.optios.html;
+            html = html.replace(/@fr/g,'fill-rule')
+            html = html.replace(/@cr/g,'clip-rule')
+            html = html.replace(/@sw/g,'stroke-width')
+            html = html.replace(/@edd/g,'evenodd')
+            this.optios.html = html;
+            return html
+        }
     }
   },
 
   render() {
 
     if(this.optios.html) {
-      return <svg class={this.iconClass} width={this.optios.width} height={this.optios.height} viewBox={"0 0 "+this.optios.width+" "+this.optios.height} fill="none" xmlns="http://www.w3.org/2000/svg" domPropsInnerHTML={this.optios.html}></svg>
+      return <svg class={this.iconClass} width={this.optios.width} height={this.optios.height} viewBox={"0 0 "+this.optios.width+" "+this.optios.height} fill="none" xmlns="http://www.w3.org/2000/svg" domPropsInnerHTML={this.localHTML}></svg>
     }else{
       console.info('alll not',this.name)
     }
