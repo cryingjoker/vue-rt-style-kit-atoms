@@ -1,0 +1,298 @@
+[
+	{
+		"name": "add large",
+		"label": "Плюс большой (добавить)"
+	},
+	{
+		"name": "add small",
+		"label": "Плюс малый (добавить)"
+	},
+	{
+		"name": "arrow down",
+		"label": "Стрелка вниз"
+	},
+	{
+		"name": "arrow left down",
+		"label": "Стрелка влево-вниз"
+	},
+	{
+		"name": "arrow left",
+		"label": "Стрелка влево"
+	},
+	{
+		"name": "arrow right up",
+		"label": "Стрелка вправо-вверх"
+	},
+	{
+		"name": "arrow right",
+		"label": "Стрелка вправо"
+	},
+	{
+		"name": "arrow up",
+		"label": "Стрелка вверх"
+	},
+	{
+		"name": "check large",
+		"label": "Галочка большая"
+	},
+	{
+		"name": "check small",
+		"label": "Галочка малая"
+	},
+	{
+		"name": "checklist",
+		"label": "Выбрано, добавлено"
+	},
+	{
+		"name": "chevron down",
+		"label": "Шеврон вниз"
+	},
+	{
+		"name": "chevron left",
+		"label": "Шеврон влево"
+	},
+	{
+		"name": "chevron right",
+		"label": "Шеврон вправо"
+	},
+	{
+		"name": "chevron sort",
+		"label": "Шеврон сортировка"
+	},
+	{
+		"name": "chevron up",
+		"label": "Шеврон вверх"
+	},
+	{
+		"name": "close large",
+		"label": "Крестик большой (закрыть)"
+	},
+	{
+		"name": "close small",
+		"label": "Крестик малый (закрыть)"
+	},
+	{
+		"name": "copy",
+		"label": "Дублировать"
+	},
+	{
+		"name": "download",
+		"label": "Загрузить"
+	},
+	{
+		"name": "fast forward 10s",
+		"label": "Перемотка вперед на 10 секунд"
+	},
+	{
+		"name": "fast forward 15s",
+		"label": "Перемотка вперед на 15 секунд"
+	},
+	{
+		"name": "fast forward 30s",
+		"label": "Перемотка вперед на 30 секунд"
+	},
+	{
+		"name": "fast forward 5s",
+		"label": "Перемотка вперед на 5 секунд"
+	},
+	{
+		"name": "fast forward",
+		"label": "Быстрая перемотка вперед"
+	},
+	{
+		"name": "fast rewind 10s",
+		"label": "Перемотка назад на 10 секунд"
+	},
+	{
+		"name": "fast rewind 15s",
+		"label": "Перемотка назад на 15 секунд"
+	},
+	{
+		"name": "fast rewind 30s",
+		"label": "Перемотка назад на 30 секунд"
+	},
+	{
+		"name": "fast rewind 5s",
+		"label": "Перемотка назад на 5 секунд"
+	},
+	{
+		"name": "fast rewind",
+		"label": "Быстрая перемотка назад"
+	},
+	{
+		"name": "folder add",
+		"label": "Добавить папку"
+	},
+	{
+		"name": "folder details",
+		"label": "Информация о папке"
+	},
+	{
+		"name": "folder shared",
+		"label": "Дать доступ к папке"
+	},
+	{
+		"name": "folder",
+		"label": "Папка"
+	},
+	{
+		"name": "geolocation small",
+		"label": "Геолокация малая"
+	},
+	{
+		"name": "geolocation",
+		"label": "Геолокация"
+	},
+	{
+		"name": "home",
+		"label": "Домой"
+	},
+	{
+		"name": "link native",
+		"label": "Ссылка коренная"
+	},
+	{
+		"name": "link",
+		"label": "Ссылка"
+	},
+	{
+		"name": "map",
+		"label": "Карта"
+	},
+	{
+		"name": "maximize",
+		"label": "Увеличить, развернуть"
+	},
+	{
+		"name": "menu + bullets",
+		"label": "Меню + буллеты"
+	},
+	{
+		"name": "menu kebab",
+		"label": "Кебаб-меню"
+	},
+	{
+		"name": "menu",
+		"label": "Бургер-меню"
+	},
+	{
+		"name": "minimize",
+		"label": "Уменьшить, свернуть"
+	},
+	{
+		"name": "more",
+		"label": "Еще"
+	},
+	{
+		"name": "overview 1 screen",
+		"label": "Обзор 1 экран"
+	},
+	{
+		"name": "overview 2 screen",
+		"label": "Обзор 2 экрана"
+	},
+	{
+		"name": "overview 4 screen",
+		"label": "Обзор 4 экрана"
+	},
+	{
+		"name": "overview 6 screen",
+		"label": "Обзор 6 экранов"
+	},
+	{
+		"name": "pause",
+		"label": "Остановить, пауза"
+	},
+	{
+		"name": "pin fill",
+		"label": "Местоположение c заливкой"
+	},
+	{
+		"name": "pin",
+		"label": "Местоположение"
+	},
+	{
+		"name": "play next",
+		"label": "Воспроизвести следующее"
+	},
+	{
+		"name": "play previous",
+		"label": "Воспроизвести предыдущий"
+	},
+	{
+		"name": "play",
+		"label": "Воспроизвести"
+	},
+	{
+		"name": "progress download",
+		"label": "Прогресс загрузки"
+	},
+	{
+		"name": "redo",
+		"label": "Стрелка вперед (повторить)"
+	},
+	{
+		"name": "remove small",
+		"label": "Минус малый (удалить)"
+	},
+	{
+		"name": "search",
+		"label": "Поиск, лупа"
+	},
+	{
+		"name": "settings",
+		"label": "Настройки, шестеренка"
+	},
+	{
+		"name": "speed 1x",
+		"label": "Скорость видео 1х"
+	},
+	{
+		"name": "speed 2x",
+		"label": "Скорость видео 2х"
+	},
+	{
+		"name": "speed 4x",
+		"label": "Скорость видео 4х"
+	},
+	{
+		"name": "speed 6x",
+		"label": "Скорость видео 6х"
+	},
+	{
+		"name": "speed 8x",
+		"label": "Скорость видео 8х"
+	},
+	{
+		"name": "speed playback",
+		"label": "Скорость воспроизведения"
+	},
+	{
+		"name": "subtitles fill",
+		"label": "Субтитры с заливкой"
+	},
+	{
+		"name": "subtitles",
+		"label": "Субтитры"
+	},
+	{
+		"name": "trash",
+		"label": "Корзина (удалить)"
+	},
+	{
+		"name": "undo",
+		"label": "Стрелка назад (отменить)"
+	},
+	{
+		"name": "upload",
+		"label": "Загрузить"
+	},
+	{
+		"name": "zoom in",
+		"label": "Приблизить, увеличить"
+	},
+	{
+		"name": "zoom out",
+		"label": "Отдалить, уменьшить"
+	}
+]

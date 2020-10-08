@@ -9,13 +9,16 @@ export default {
     name: {
       default: '',
       type: String
+    },
+    color:{
+      default: '',
+      type: String
     }
   },
   data: () => ({
     optios: {}
   }),
   created() {
-
     if(this.name in systemIconsData) {
 
       this.optios = systemIconsData[this.name]
@@ -31,13 +34,22 @@ export default {
   mounted() {
 
   },
+  computed:{
+    iconClass(){
+      const classList = ['rt-sys-icon'];
+      if(this.color.length > 0){
+        classList.push('rt-sys-icon--'+this.color)
+      }
+      return classList.join(' ')
+    }
+  },
 
   render() {
 
     if(this.optios.html) {
-      return <svg class="rt-sys-icon" width={this.optios.width} height={this.optios.height} viewBox={"0 0 "+this.optios.width+" "+this.optios.height} fill="none" xmlns="http://www.w3.org/2000/svg" domPropsInnerHTML={this.optios.html}></svg>
+      return <svg class={this.iconClass} width={this.optios.width} height={this.optios.height} viewBox={"0 0 "+this.optios.width+" "+this.optios.height} fill="none" xmlns="http://www.w3.org/2000/svg" domPropsInnerHTML={this.optios.html}></svg>
     }else{
-      console.info('alll not')
+      console.info('alll not',this.name)
     }
     return null
   }
