@@ -4,8 +4,7 @@
   position relative
   left 15px
 
-  &-label-single
-    display inline-block
+
 
   &-wrapper
     //max-width calc(100vw - 70px)
@@ -40,40 +39,45 @@
   &-paragraph-icon
     width 40px
     height 20px
-    overflow visible
+    overflow hidden
     position absolute
-    bottom -19px
-    right -20px
+    bottom -20px
+    right  23px
+    transform: translateX(100%);
+
+
     @media (max-width: laptop-upper-limit)
       height 20px
-      bottom -18px
-      right -20px
+      bottom -20px
+      right  23px
     @media (max-width: tablet-upper-limit)
       height 19px
-      bottom -18px
-      right -22px
+      bottom -19px
+      right: 21.5px
     @media (max-width: mobile-upper-limit)
       width: 39px
       position: relative
       margin-left: -41.5px
       bottom: -29px
-      right -21px
+      right: 21.5px
       overflow: hidden
     .color-line-label-single &
       width: 39px
       position: relative;
-      margin-left: -41.5px
-      bottom: -37px
+      margin-left: -20px
+      left: -23px
+      bottom: -17.5px
       overflow: hidden;
+      transform: translateY(100%) translateX(100%);
       @media (max-width: laptop-upper-limit)
-        bottom -34px
-        right -20px
+        bottom -15.5px
+        left -22.5px
       @media (max-width: tablet-upper-limit)
-        bottom: -31px
-        right -21px
+        bottom: -12.5px
+        left -21px
       @media (max-width: mobile-upper-limit)
-        bottom: -29px
-        right -21px
+        bottom: -10px
+        left -21px
 
 
   &-text
@@ -158,17 +162,20 @@
 @media (max-width: mobile-upper-limit)
   .color-line--is-paragraph
     color main-color
-
+*{
+  -webkit-backface-visibility: hidden;
+}
 .color-line-wrapper--is-advertise
   .{newAppName}-font-banner-label
     font-size 28px
     line-height 34px
     font-weight 300
   .color-line-paragraph-icon
-    bottom -21px
-    margin-left -32px
     height 12px
     width 24px
+    left: -12px
+    margin-left -24px
+    bottom: -10px
   .color-line-text
     box-shadow 10px 0 0 #70f, -10px 0 0 #70f
   .color-line
