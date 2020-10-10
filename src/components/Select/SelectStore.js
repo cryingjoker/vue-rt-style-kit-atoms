@@ -112,15 +112,17 @@ class SelectStoreClass extends StorePrototype {
   
   getActiveIndex(id) {
     const activeIndexes = {}
-    if (this.selectorsTypes[id] == 'simple') {
-      activeIndexes[this.selectors[id].findIndex((i) => i.value == this.selectorsActiveValue[id][0])] = 1
-    }
-    if (this.selectorsTypes[id] == 'multiselect') {
-      this.selectorsActiveValue[id]?.map((activeVal) => {
-        return this.selectors[id].findIndex((i) => i.value == activeVal)
-      }).forEach((activeKey) => {
-        activeIndexes[activeKey] = 1
-      })
+    if(this.selectorsTypes[id] && this.selectors[id]) {
+      if (this.selectorsTypes[id] == 'simple') {
+        activeIndexes[this.selectors[id].findIndex((i) => i.value == this.selectorsActiveValue[id][0])] = 1
+      }
+      if (this.selectorsTypes[id] == 'multiselect') {
+        this.selectorsActiveValue[id]?.map((activeVal) => {
+          return this.selectors[id].findIndex((i) => i.value == activeVal)
+        }).forEach((activeKey) => {
+          activeIndexes[activeKey] = 1
+        })
+      }
     }
     return activeIndexes
   }
