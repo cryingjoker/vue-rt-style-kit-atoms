@@ -20,7 +20,7 @@
             },
             value: {
                 type: String,
-                default: null
+                default: ''
             },
             isB2bTextarea: {
                 type: Boolean,
@@ -45,12 +45,15 @@
         },
         data () {
             return {
-                localValue: this.value?.length > 0 ? this.value : "",
+                localValue: "",
                 inputText: "",
                 hasInputText: false
             }
         },
-        computed: {
+      created() {
+          this.localValue = this.value
+      },
+      computed: {
             textareaClasses() {
                 const classes = ['text-field', 'textarea'];
                 if (this.disabled) {
@@ -108,7 +111,7 @@
         methods: {
 
             setDisabled() {
-                this.$el.querySelector(".textarea-element").disabled = Boolean(
+                this.$refs.textarea.disabled = Boolean(
                     this.disabled
                 );
             },
@@ -116,14 +119,16 @@
                 this.hasInputText = this.localValue ? this.localValue.length > 0 : false;
             },
             inputHandler() {
-                this.localValue = this.$el.querySelector(".textarea-element").value;
+                this.localValue = this.$refs.textarea.value;
                 this.setValueLength();
             },
             calculateHeight() {
                 if (this.autoResize) {
-                    const textarea = this.$el.querySelector(".textarea-element");
-                    textarea.style.height = "";
-                    textarea.style.height = textarea.scrollHeight + 'px';
+                    const textarea = this.$refs.textarea;
+                    if(this?.localValue?.length > 0) {
+                      textarea.style.height = "";
+                      textarea.style.height = textarea.scrollHeight + 'px';
+                    }
                 }
             },
             clearInput() {
