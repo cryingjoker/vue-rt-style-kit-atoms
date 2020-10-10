@@ -47,13 +47,16 @@
             return {
                 localValue: "",
                 inputText: "",
-                hasInputText: false
+                hasInputText: false,
             }
         },
       created() {
           this.localValue = this.value
       },
       computed: {
+        roundStyle() {
+          return {strokeDashoffset: 45 - 45 * this.step / 100}
+        },
             textareaClasses() {
                 const classes = ['text-field', 'textarea'];
                 if (this.disabled) {
@@ -77,7 +80,12 @@
                 if (this.color === "purple") {
                     classes.push("text-field--purple")
                 }
-                classes.push(`text-field--${this.autoResize ? 'autoresized' : 'scrollable'}`)
+                console.info('this.autoResize',this.autoResize);
+                if(this.autoResize) {
+                  classes.push('text-field--autoresized')
+                }else{
+                  classes.push('text-field--scrollable')
+                }
                 return classes.join(' ')
             },
             placeholderClasses() {
@@ -90,16 +98,20 @@
             }
         },
         watch: {
-            localValue(val) {
-                this.$emit("input", val);
-                setTimeout(()=>{
-                   this.calculateHeight();
-                   this.setValueLength();
+            localValue(newVal,oldVal) {
+              if(newVal != oldVal) {
+                this.$emit("input", newVal);
+                setTimeout(() => {
+                  this.setValueLength();
+                  this.calculateHeight();
                 }, 0);
+              }
             },
-            value(val,a){
-              if(val != this.localValue){
-                this.localValue = val;
+            value(newVal,oldVal){
+              if(newVal != oldVal) {
+                if (newVal != oldVal) {
+                  this.localValue = newVal;
+                }
               }
             }
         },
@@ -109,7 +121,6 @@
             this.setDisabled();
         },
         methods: {
-
             setDisabled() {
                 this.$refs.textarea.disabled = Boolean(
                     this.disabled
@@ -125,10 +136,15 @@
             calculateHeight() {
                 if (this.autoResize) {
                     const textarea = this.$refs.textarea;
+
+                    textarea.style.height = 'auto';
                     if(this?.localValue?.length > 0) {
-                      textarea.style.height = "";
-                      textarea.style.height = textarea.scrollHeight + 'px';
+                      textarea.style.height = textarea.scrollHeight + 'px'
+                    }else{
+                      textarea.style.height = 'auto'
                     }
+                }else{
+                  textarea.style.height = 'auto'
                 }
             },
             clearInput() {
@@ -156,6 +172,7 @@
             return <div class={this.textareaClasses}>
                     <textarea class="textarea-element" rows="1"
                               ref="textarea"
+
                               onInput={this.inputHandler}
                               id={this.fieldId}
                     >{this.value}</textarea>
