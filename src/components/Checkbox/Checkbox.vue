@@ -95,6 +95,7 @@
         }
       },
       changeInput($event) {
+        this.$emit("change", this.isChecked);
         this.$emit("update:checked", this.isChecked);
         this.isChecked = this.$refs['input'].checked
         this.$emit("changecheckbox", {
