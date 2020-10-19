@@ -62,10 +62,6 @@
       this.bindEvents();
     },
 
-    updated() {
-      this.unbindEvents();
-      this.bindEvents();
-    },
     beforeDestroy() {
       this.unbindEvents();
     },
@@ -95,7 +91,6 @@
         }
       },
       changeInput($event) {
-        this.$emit("change", this.isChecked);
         this.$emit("update:checked", this.isChecked);
         this.isChecked = this.$refs['input'].checked
         this.$emit("changecheckbox", {
@@ -108,6 +103,7 @@
         this.showWave();
       },
       bindEvents() {
+
         if (this["_events"]) {
           Object.keys(this["_events"]).map(eventName => {
             this["_events"][eventName].forEach((fn) => {
