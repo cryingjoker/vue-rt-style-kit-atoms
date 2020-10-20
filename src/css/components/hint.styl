@@ -38,8 +38,10 @@
       right auto
       bottom auto
     &--top
+      -ms-transform translateX(-50%) translateX(10px) translateY(-100%) translateY(-10px)
       transform translateX(calc(-50% + 10px)) translateY(calc(-100% - 10px))
       @media (max-width: mobile-upper-limit)
+        -ms-transform translateX(0) translateY(-100%) translateY(-10px)
         transform translateX(0) translateY(calc(-100% - 10px))
       .rtb-hint__text-triangle
         border-width 10px 10px 0 10px
@@ -49,6 +51,7 @@
         bottom -9px
         right calc(50% - 10px)
     &--bottom
+      -ms-transform translateX(-50%) ranslateX(10px) translateY(30px)
       transform translateX(calc(-50% + 10px)) translateY(30px)
       @media (max-width: mobile-upper-limit)
         transform translateX(0) translateY(30px)
@@ -60,6 +63,7 @@
         top -9px
         right calc(50% - 10px)
     &--top-left
+      -ms-transform translateX(-100%) translateX(40px) translateY(-100%) translateY(10px)
       transform translateX(calc(-100% + 40px)) translateY(calc(-100% - 10px))
       .rtb-hint__text-triangle
         border-width 10px 10px 0 10px
@@ -69,6 +73,7 @@
         bottom -9px
         right 20px
     &--top-right
+      -ms-transform translateX(-20px) translateY(-100%) translateY(-10px)
       transform translateX(-20px) translateY(-100% - 10px)
       .rtb-hint__text-triangle
         border-width 10px 10px 0 10px
@@ -78,6 +83,7 @@
         bottom -9px
         left 20px
     &--bottom-left
+      -ms-transform translateX(-100%) translateX(40px) translateY(30px)
       transform translateX(calc(-100% + 40px)) translateY(30px)
       .rtb-hint__text-triangle
         border-width 0 10px 10px 10px
@@ -97,8 +103,10 @@
         left 20px
     &--small
       &.{b2bAppName}-hint__text--top
+        -ms-transform translateX(-50%) translateX(10px) translateY(-100%) translateY(10px)
         transform translateX(calc(-50% + 10px)) translateY(calc(-100% - 10px))
       &.{b2bAppName}-hint__text--bottom
+        -ms-transform translateX(-50%) translateX(10px) translateY(30px)
         transform translateX(calc(-50% + 10px)) translateY(30px)
   &--tooltip
     color main-color
