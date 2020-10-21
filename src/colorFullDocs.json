@@ -185,6 +185,11 @@
     "value": "rgba(16,24,40,0.1)"
   },
   {
+    "code_variable_name": "main-color005",
+    "label": "Rostelecom Black 5%",
+    "value": "rgba(16,24,40,0.05)"
+  },
+  {
     "code_variable_name": "main-color003",
     "label": "Rostelecom Black 3%",
     "value": "rgba(16,24,40,0.03)"
@@ -213,6 +218,11 @@
     "code_variable_name": "main-color01-no-opacity",
     "label": "Rostelecom Black 10%",
     "value": "#B8B9C0"
+  },
+  {
+    "code_variable_name": "main-color005-no-opacity",
+    "label": "Rostelecom Black 3%",
+    "value": "#101828"
   },
   {
     "code_variable_name": "main-color003-no-opacity",
