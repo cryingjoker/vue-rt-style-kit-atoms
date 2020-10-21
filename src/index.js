@@ -30,7 +30,8 @@ import {
     Hint,
     HintBody,
     VideoPlayer,
-    SystemIcons
+    SystemIcons,
+    ArrowAnchor
 } from "./components";
 
 // import 'element-closest-polyfill';
@@ -97,6 +98,7 @@ let VueRtStyle = {
             Vue.component(HintBody.name, HintBody);
             Vue.component(SystemIcons.name, SystemIcons);
             Vue.component(VideoPlayer.name, VideoPlayer);
+            Vue.component(ArrowAnchor.name, ArrowAnchor);
             Vue.RtStyleAtoms = true;
         }
     }
@@ -160,6 +162,7 @@ export {
     Hint,
     HintBody,
     VideoPlayer,
+    ArrowAnchor,
 
 
     // mixins

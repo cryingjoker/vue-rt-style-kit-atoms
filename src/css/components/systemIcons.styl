@@ -9,15 +9,19 @@ colors = readJsonKeys('../../../color.json')
   transition-duration .3s
   transition-property fill
 
-renderColorClass(classname, classNameHover, var)
+renderColorClass(classname, classNameHover,classNameFocus, var)
   .{classname}
     fill lookup(var)
-  .{classNameHover}
-    fill lookup(var)
+  @media(hover: hover)
+    .{classNameHover}
+      fill lookup(var)
+  .{classNameFocus}
+      fill lookup(var)
 
 for $i in colors
   if search($i,'b2c') >= 0 || search($i,'main-color') >= 0
     className = 'rt-sys-icon--'+replace($i,'b2c-','')
     classNameHover = 'rt-sys-icon-hover--'+replace($i,'b2c-','')+':hover .rt-sys-icon'
-    renderColorClass(className, classNameHover, $i)
+    classNameFocus = 'rt-sys-icon-hover--'+replace($i,'b2c-','')+':focus .rt-sys-icon'
+    renderColorClass(className, classNameHover,classNameFocus, $i)
 

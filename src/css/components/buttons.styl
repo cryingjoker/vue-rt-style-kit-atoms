@@ -93,7 +93,8 @@
   &:hover
     @media (hover hover)
       background-color b2c-orange-button-hover
-
+  &:focus
+    background-color b2c-orange-button-hover
   &:active
     background-color b2c-orange-button-active
 
@@ -123,6 +124,11 @@
       .rt-dark-theme &,
       &.rt-button-bright
         background-color hsl(rgba(b2c-white, .05))
+  &:focus
+    background-color main-color005
+    .rt-dark-theme &,
+    &.rt-button-bright
+      background-color hsl(rgba(b2c-white, .05))
 
   &:active
     background-color main-color01
@@ -138,6 +144,8 @@
     &:hover
       @media (hover hover)
         background-color transparent
+    &:focus
+      background-color transparent
 
     .rt-dark-theme &,
     &.rt-button-bright
@@ -148,6 +156,8 @@
       &:hover
         @media (hover hover)
           background-color transparent
+      &:focus
+        background-color transparent
 
   .ripple-wave
     background-color main-color05
@@ -163,7 +173,8 @@
   &:hover
     @media (hover hover)
       background-color hsl(rgba(b2c-white, .05))
-
+  &:focus
+    background-color hsl(rgba(b2c-white, .05))
   &:active
     background-color hsl(rgba(b2c-white, .1))
 
@@ -175,6 +186,8 @@
     &:hover
       @media (hover hover)
         background-color transparent
+    &:focus
+      background-color transparent
 
   .ripple-wave
     background-color hsl(rgba(b2c-white, .5))
@@ -193,7 +206,12 @@
       .rt-dark-theme &,
       &.rt-button-bright
         background-color rgba(b2c-orange, .2)
+  &:focus
+    background-color rgba(b2c-orange, .05)
 
+    .rt-dark-theme &,
+    &.rt-button-bright
+      background-color rgba(b2c-orange, .2)
   &:active
     background-color rgba(b2c-orange, .1)
 
@@ -230,7 +248,13 @@
     .rt-dark-theme &,
     &.rt-button-bright
       background-color b2c-white01
+  &:focus
+    background-color b2c-cool-grey05
+    opacity .7
 
+    .rt-dark-theme &,
+    &.rt-button-bright
+      background-color b2c-white01
   &:active
     background-color transparent
 
@@ -248,7 +272,8 @@
     &:hover
       @media (hover hover)
         background-color transparent
-
+    &:focus
+      background-color transparent
     .ripple-wave
       background-color b2c-cool-grey
 
@@ -263,12 +288,14 @@
   &:hover
     @media (hover hover)
       background-color hsl(rgba(main-color, .05))
-
+      .rt-dark-theme &,
+      &.rt-button-bright
+        background-color main-color003-no-opacity
+  &:focus
+    background-color hsl(rgba(main-color, .05))
     .rt-dark-theme &,
     &.rt-button-bright
-
-      @media (hover hover)
-        background-color main-color003-no-opacity
+      background-color main-color003-no-opacity
 
   &:active
     background-color hsl(rgba(main-color, .1))
@@ -292,6 +319,8 @@
   &:hover
     @media (hover hover)
       background-color b2c-purple-button-hover
+  &:focus
+    background-color b2c-purple-button-hover
 
   &:active
     background-color b2c-purple-button-active
@@ -326,6 +355,12 @@
       .rt-dark-theme &,
       &.rt-button-bright
         background-color hsl(rgba(b2c-purple, .2))
+  &:focus
+    background-color hsl(rgba(b2c-purple, .05))
+
+    .rt-dark-theme &,
+    &.rt-button-bright
+      background-color hsl(rgba(b2c-purple, .2))
 
   &:active
     background-color hsl(rgba(b2c-purple, .1))
@@ -353,6 +388,8 @@
       @media (hover hover)
         &:hover
           background-color transparent
+      &:focus
+        background-color transparent
 
 .rt-button-transparent
   border 2px solid transparent
@@ -368,6 +405,12 @@
       .rt-dark-theme &,
       &.rt-button-bright
         background-color hsl(rgba(b2c-white, .05))
+  &:focus
+    background-color hsl(rgba(main-color, .05))
+
+    .rt-dark-theme &,
+    &.rt-button-bright
+      background-color hsl(rgba(b2c-white, .05))
 
   &:active
     background-color hsl(rgba(main-color, .1))
@@ -384,6 +427,8 @@
     &:hover
       @media (hover hover)
         background-color transparent
+    &:focus
+      background-color transparent
 
     .rt-dark-theme &,
     &.rt-button-bright
@@ -422,6 +467,14 @@
     @media (hover hover)
       background-color b2c-cool-grey05
       opacity .7
+
+    .rt-dark-theme &,
+    &.rt-button-bright
+      @media (hover hover)
+        background-color b2c-white01
+  &:focus
+    background-color b2c-cool-grey05
+    opacity .7
 
     .rt-dark-theme &,
     &.rt-button-bright
