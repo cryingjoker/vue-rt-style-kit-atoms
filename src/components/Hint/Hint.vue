@@ -60,10 +60,7 @@
         if(hintStore.getHintData().hovered && $event.type === 'click') {
           this.hideHint();
         } else {
-          this.pushCoords();
-          setTimeout(() => {
-            this.pushCoords();
-          }, 25)
+          this.$nextTick(this.pushCoords());
         }
       },
       hideHint() {
@@ -72,8 +69,8 @@
       pushCoords(){
         let coords = {};
         let el = this.$el;
-        coords.x = el.getBoundingClientRect().x;
-        coords.y = el.getBoundingClientRect().y;
+        coords.x = el.getBoundingClientRect().left;
+        coords.y = el.getBoundingClientRect().top;
         hintStore.setActive(this._uid, coords, true)
       },
       determineDeviceType() {
