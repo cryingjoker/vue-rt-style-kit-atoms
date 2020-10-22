@@ -80,7 +80,7 @@
                 if (this.color === "purple") {
                     classes.push("text-field--purple")
                 }
-                console.info('this.autoResize',this.autoResize);
+                // console.info('this.autoResize',this.autoResize);
                 if(this.autoResize) {
                   classes.push('text-field--autoresized')
                 }else{
