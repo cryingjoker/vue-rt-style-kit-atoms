@@ -191,6 +191,8 @@
             this.scrollToSelected();
             if (window.innerHeight - e.clientY < 200 && e.clientY > 200) {
               this.isOpenListOnTop = true;
+            }else{
+              this.isOpenListOnTop = false;
             }
             setTimeout(() => {
               this.bindEvents();
