@@ -4,6 +4,11 @@
       "name": ".rt-sys-icon-hover--{colorName}",
       "description":"colorName - название цвета <br/> при наведении на данный элемент все дочерние .rt-sys-icon изменят свой цвет на {colorName}",
       "version": "0.3.30"
+    },
+    {
+      "name": ".rt-sys-icon-focus--{colorName}",
+      "description":"colorName - название цвета <br/> при фокусе на данный элемент все дочерние .rt-sys-icon изменят свой цвет на {colorName}",
+      "version": "0.3.30"
     }
   ]
 }
