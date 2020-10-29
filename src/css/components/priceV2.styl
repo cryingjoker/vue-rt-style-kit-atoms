@@ -4,6 +4,9 @@
   &.rt-price-v2-bright,
   .rt-dark-theme &
     color: b2c-white
+  @media (max-width: tablet-upper-limit)
+    .rt-font-control
+      line-height: 16px
   @media (max-width: mobile-upper-limit)
     .rt-font-control
       line-height: 14px
@@ -26,6 +29,8 @@
 .rt-price-v2__info-item+.rt-price-v2__info-item
   margin-top: 8px
   position: relative;
+  @media (max-width: tablet-upper-limit)
+    margin-top: 5px
   @media (max-width: mobile-upper-limit)
     margin-top: 2px
   &:before
@@ -38,6 +43,8 @@
     .rt-price-v2-bright &,
     .rt-dark-theme &
       background-color: b2c-white07
+    @media (max-width: tablet-upper-limit)
+      top: -1px
     @media (max-width: mobile-upper-limit)
       top: -1px
 
