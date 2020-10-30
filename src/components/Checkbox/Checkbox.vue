@@ -1,6 +1,7 @@
 <script type="text/jsx">
   import Vue from "vue";
   import {default as RippleComponent} from "../Ripple/Ripple.vue";
+  import VeeValidate from "vee-validate";
 
   const componentsList = {};
   componentsList[RippleComponent.name] = RippleComponent;
@@ -16,6 +17,10 @@
       isOrange: {
         type: Boolean,
         default: false
+      },
+      requiredRule: {
+        type: Boolean,
+        default: true
       },
       isDisabled: {
         type: Boolean,
@@ -57,10 +62,6 @@
       this.bindEvents();
     },
 
-    updated() {
-      this.unbindEvents();
-      this.bindEvents();
-    },
     beforeDestroy() {
       this.unbindEvents();
     },
@@ -91,6 +92,7 @@
       },
       changeInput($event) {
         this.$emit("update:checked", this.isChecked);
+        this.isChecked = this.$refs['input'].checked
         this.$emit("changecheckbox", {
           name: this.name,
           value: this.value,
@@ -101,6 +103,7 @@
         this.showWave();
       },
       bindEvents() {
+
         if (this["_events"]) {
           Object.keys(this["_events"]).map(eventName => {
             this["_events"][eventName].forEach((fn) => {
@@ -160,7 +163,7 @@
     render(createElement, context) {
       return <label class={this.checkBoxClass}>
         <rt-ripple ref="ripple" not-render={this.isDisabled}/>
-        <input id={this.uid} checked={this.checked} ref="input" v-model={this.isChecked} disabled={this.isDisabled}
+        <input id={this.uid} checked={this.checked} ref="input" disabled={this.isDisabled}
                name={this.name}
                type="checkbox" class="checkbox-element" onChange={this.changeInput}/>
         <div class="checkbox-container">

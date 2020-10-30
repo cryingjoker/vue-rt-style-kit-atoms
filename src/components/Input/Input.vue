@@ -1,5 +1,6 @@
 <script type="text/jsx">
   import variables from "../../variables.json";
+  import VeeValidate from "vee-validate";
 
   export default {
     name: "RtInput",
@@ -11,6 +12,14 @@
       newRender: {
         type: Boolean,
         default: false
+      },
+      customRules: {
+        type: Array,
+        default: () => ([])
+      },
+      validate: {
+        type: Object | String,
+        default: null
       },
 
       maxLength: {
@@ -149,7 +158,8 @@
         return this.name || "input-field__" + this._uid;
       },
       isInvalid() {
-        if (this.hasError) {
+        if (this.validate || this.hasError) {
+
           return this.hasError || this.errors && this.errors.has(this.scope ? this.scope + '.' + this.fieldName : this.fieldName);
         }
       },
@@ -228,6 +238,8 @@
     mounted() {
       this.setNewRender();
       this.disabledLocal = this.disabled;
+      this.customRules.forEach(({nameRule, rule}) => VeeValidate.Validator.extend(nameRule, {validate: rule}));
+
       this.setValue();
       this.setDisabled();
       this.bindEvents();
@@ -662,6 +674,7 @@
               autocomplete={this.autocomplete}
               autocapitalize="off"
               type={this.type === 'search' ? 'text' : this.type}
+              v-validate={this.validate}
               class={this.inputElementClass}
               name={this.fieldName}
               onInput={this.inputHandler}
@@ -674,6 +687,7 @@
               autocomplete={this.autocomplete}
               autocapitalize="off"
               type={this.type}
+              v-validate={this.validate}
               class={this.inputElementClass}
               name={this.fieldName}
               onInput={this.inputHandler}

@@ -1,0 +1,12 @@
+{
+  "items": [
+    {
+      "name": "rt-system-icons",
+      "property":"color",
+      "type": "String",
+      "description":"Название цвета иконки",
+      "value" :"''",
+      "version": "0.3.30"
+    }
+  ]
+}

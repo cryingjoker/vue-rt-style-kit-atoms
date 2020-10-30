@@ -10,9 +10,13 @@ export {default as Ripple} from './Ripple/Ripple.vue';
 export {default as RippleWihoutJs} from './Ripple/RippleWihoutJs.vue';
 export {default as Select} from './Select/Select.vue';
 export {default as SelectOption} from './Select/SelectOption.vue';
+export {default as SelectV2} from './Select/SelectV2.vue';
+export {default as SelectV2Option} from './Select/SelectV2Option.vue';
 export {default as Spinner} from './Spinner/Spinner.vue';
 export {default as GridRow} from './Grid/GridRow.vue';
 export {default as GridColumn} from './Grid/GridColumn.vue';
+export {default as SystemIcons} from './SystemIcons/SystemIcons.vue';
+export {default as ArrowAnchor} from './ArrowAnchor/ArrowAnchor.vue';
 
 
 export {default as Switch} from './Switch/Switch.vue';

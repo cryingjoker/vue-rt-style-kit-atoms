@@ -212,7 +212,7 @@ for devideStep in steps
 
 .row-td-reverse
   @media (max-width: tablet-upper-limit)
-    flex-direction row-reverse
+    flex-direction: row-reverse
     flex-wrap: wrap-reverse
 
 
@@ -432,8 +432,8 @@ for $device_index in 0 .. 3
   max-width container-upper-limit
   margin-left auto
   margin-right auto
-  padding-left horizontal-space * 3
-  padding-right horizontal-space * 3
+  padding-left horizontal-space * 3.5
+  padding-right horizontal-space * 3.5
   transition-timing-function ease-in-out
   transition-duration 3s
   transition-property opacity, visibility
@@ -442,6 +442,9 @@ for $device_index in 0 .. 3
     padding-left horizontal-space * 1.5
     padding-right horizontal-space * 1.5
   @media (max-width: tablet-upper-limit)
+    padding-left horizontal-space * .5
+    padding-right horizontal-space * .5
+  @media (max-width: desktop-lower-limit)
     padding-left horizontal-space * .5
     padding-right horizontal-space * .5
   @media (max-width: mobile-upper-limit)

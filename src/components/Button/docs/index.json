@@ -2,6 +2,38 @@
 	"items": [
 		{
 			"name": "rt-button",
+			"property": ":small",
+			"type": "Boolean",
+			"description": "Делает small button на desktop, tablet и mobile",
+			"value": "",
+			"version": "0.2"
+		},
+		{
+			"name": "rt-button",
+			"property": ":tablet-small",
+			"type": "Boolean",
+			"description": "Делает small button на tablet и mobile",
+			"value": "",
+			"version": "0.3.35"
+		},
+		{
+			"name": "rt-button",
+			"property": ":mobile-small",
+			"type": "Boolean",
+			"description": "Делает small button на mobile",
+			"value": "",
+			"version": "0.3.35"
+		},
+		{
+			"name": "rt-button",
+			"property": ":ga",
+			"type": "Object",
+			"description": "Устанавливает google analitics",
+			"value": "",
+			"version": "0.1.68"
+		},
+		{
+			"name": "rt-button",
 			"property": ":ga",
 			"type": "Object",
 			"description": "Устанавливает google analitics",

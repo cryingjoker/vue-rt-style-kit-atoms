@@ -120,7 +120,7 @@
                     return null
                 }
 
-                return <svg viewBox="0 0 39 23" class={this.colorLineIconClass}>
+                return <svg viewBox="-0.39999 1 32 23" class={this.colorLineIconClass}>
                     <g id="Page-1" fill-rule="evenodd">
                         <g id="001-bw" >
                             <path class="color-line-paragraph-icon__background" d="M33,-1.13686838e-13 L34.2595405,7.93519842 C36.9076879,7.78627681 38.2488174,3.85720464 38.2488174,1.20487316 L38.2488174,-1.13686838e-13 L33,-1.13686838e-13 Z" id="Path" fill="#FFFFFF" transform={this.topPartTransform}></path>
@@ -131,7 +131,7 @@
                 return <svg class={this.colorLineIconClass}
                             width="38"
                             height="23"
-                            viewBox="0 0 38 23">
+                            viewBox="-0.39999 1 32 23">
                     <path class="color-line-paragraph-icon__background"
                         d="M33-1.0172375h-45V.04327594l43.7946512.04908113v7.93806336l1.4849033-.08350525c2.6481474-.14892161 4.7192255-2.33971054 4.7192629-4.99204202L38-0.0172375c.0000389-2.7614238-2.2385058-5.0000315-4.9999296-5.0000704H33z"
                         transform={this.topPartTransform}/>
@@ -147,14 +147,18 @@
                         <span class={this.labelClass}>{this.$slots.label}</span>
                     </p>;
                 } else {
-                    if(!this.$slots.content){
-                        labelClasses.push('color-line-label-single');
-                    }
+                  if (!this.$slots.content) {
+                    labelClasses.push('color-line-label-single');
                     return <p class={labelClasses.join(' ')}>
-                        <span class={this.labelClass}>{this.$slots.label}</span>
-                        {icon()}
+                      <span class={this.labelClass}>{this.$slots.label}{icon()}</span>
                     </p>;
+                  }
+                  return <p class={labelClasses.join(' ')}>
+                    <span class={this.labelClass}>{this.$slots.label}</span>
+                    {icon()}
+                  </p>;
                 }
+
             };
 
             const content = () => {

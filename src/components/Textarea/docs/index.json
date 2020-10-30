@@ -9,6 +9,13 @@
     },
     {
       "name": "rt-textarea",
+      "property":":auto-resize",
+      "type": "Boolean",
+      "description": "Увеличивает высоту поля по мере ввода",
+      "value": "true"
+    },
+    {
+      "name": "rt-textarea",
       "property": "placeholder",
       "type": "String",
       "description": "Устанавливает текст выводимый в поле до начала ввода",

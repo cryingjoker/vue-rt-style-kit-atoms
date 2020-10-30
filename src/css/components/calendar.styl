@@ -3,7 +3,8 @@
   width 100%
 
   & .rt-calendar__cmp
-    padding-bottom 2px
+    padding 0 0 2px
+    z-index auto
 
   &__wrap
     box-sizing border-box
@@ -14,10 +15,17 @@
     height 49px
 
   &__input
+    background transparent
     border none
+    color: main-color
     cursor pointer
     outline none
     width 100%
+    z-index 21
+
+.{newAppName}-dark-theme
+  .rt-calendar__input
+    color #fff
 
 .mx
   &-date-row
