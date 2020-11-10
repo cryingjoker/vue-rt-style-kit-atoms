@@ -13,7 +13,6 @@ let genConfig = require('./config')
 // filter builds via command line arg
 const keysBuild = ['web-es-full-prod','web-full-prod'];
 function build(buildIndex = 0) {
-
     if(buildIndex < keysBuild.length) {
         const next = () => {
             build(buildIndex + 1)
@@ -26,28 +25,12 @@ function build(buildIndex = 0) {
 
 }
 build();
-// buildEntry(config)
-
-// function build (builds) {
-//     let built = 0
-//     // const total = builds.length
-//     buildEntry(build())
-//     const next = () => {
-//         // console.info('builds',build)
-//         buildEntry(build())
-//         // buildEntry(builds[built]).then(() => {
-//         //     built++
-//         //     if (built < total) {
-//         //         next()
-//         //     }
-//         // }).catch(logError)
-//     }
-//
-//     // next()
-// }
 
 function buildEntry (configData) {
     const config = configData.config;
+    if(process.env.NODE_ENV) {
+        config.env = process.env.NODE_ENV
+    }
     const opts = configData.opts;
     const output = config.output
 
