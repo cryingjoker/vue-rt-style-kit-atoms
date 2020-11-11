@@ -38,9 +38,11 @@
       right auto
       bottom auto
     &--top
-      transform translateX(-50%) translateX(10px) translateY(-100%) translateY(-10px)
+      transform translateX(calc(-50% + 10px)) translateY(calc(-100% - 10px))
+      -ms-transform translateX(-50%) translateX(10px) translateY(-100%) translateY(-10px)
       @media (max-width: mobile-upper-limit)
-        transform translateX(0) translateY(-100%) translateY(-10px))
+        transform translateX(0) translateY(calc(-100% - 10px))
+        -ms-transform translateX(0) translateY(-100%) translateY(-10px))
       .rtb-hint__text-triangle
         border-width 10px 10px 0 10px
         border-style solid
@@ -49,7 +51,8 @@
         bottom -9px
         right calc(50% - 10px)
     &--bottom
-      transform translateX(-50%) translateX(10px) translateY(30px)
+      transform translateX(calc(-50% + 10px)) translateY(30px)
+      -ms-transform translateX(-50%) translateX(10px) translateY(30px)
       @media (max-width: mobile-upper-limit)
         transform translateX(0) translateY(30px)
       .rtb-hint__text-triangle
@@ -60,7 +63,8 @@
         top -9px
         right calc(50% - 10px)
     &--top-left
-      transform translateX(-100%) translateX(40px) translateY(-100%) translateY(-10px)
+      transform translateX(calc(-100% + 40px)) translateY(calc(-100% - 10px))
+      -ms-transform translateX(-100%) translateX(40px) translateY(-100%) translateY(-10px)
       .rtb-hint__text-triangle
         border-width 10px 10px 0 10px
         border-style solid
@@ -69,7 +73,8 @@
         bottom -9px
         right 20px
     &--top-right
-      transform translateX(-20px) translateY(-100% - 10px)
+      transform translateX(-20px) translateY(calc(-100% - 10px))
+      -ms-transform translateX(-20px) translateY(-100%) translateY(-10px)
       .rtb-hint__text-triangle
         border-width 10px 10px 0 10px
         border-style solid
@@ -78,7 +83,8 @@
         bottom -9px
         left 20px
     &--bottom-left
-      transform translateX(-100%) translateX(40px) translateY(30px)
+      transform translateX(calc(-100% + 40px)) translateY(30px)
+      -ms-transform translateX(-100%) translateX(40px) translateY(30px)
       .rtb-hint__text-triangle
         border-width 0 10px 10px 10px
         border-style solid
@@ -97,9 +103,11 @@
         left 20px
     &--small
       &.{b2bAppName}-hint__text--top
-        transform translateX(-50%) translateX(10px) translateY(-100%) translateY(-10px)
+        transform translateX(calc(-50% + 10px)) translateY(calc(-100% - 10px))
+        -ms-transform translateX(-50%) translateX(10px) translateY(-100%) translateY(-10px)
       &.{b2bAppName}-hint__text--bottom
-        transform translateX(-50%) translateX(10px)  translateY(30px)
+        transform translateX(calc(-50% + 10px)) translateY(30px)
+        -ms-transform translateX(-50%) translateX(10px)  translateY(30px)
   &--tooltip
     color main-color
     text-align center
