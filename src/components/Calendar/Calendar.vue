@@ -24,10 +24,13 @@
         :clearable="clearable"
         :input-class="inputClass"
         :placeholder="placeholder"
+        :append-to-body="appendToBody"
         v-bind="calendarProps"
         v-model="inputVal"
         @confirm="val => $emit('confirm', val, `${className}--${_uid}`)"
-      ></date-picker>
+      >
+        <slot></slot>
+      </date-picker>
       <div class="text-field__line"></div>
       <div
         class="floating-placeholder floating-placeholder--go-top"
@@ -66,6 +69,10 @@ export default {
     },
     label: {
       type: String
+    },
+    appendToBody: {
+      type: Boolean,
+      default: false
     },
     value: null,
     inputClass: {

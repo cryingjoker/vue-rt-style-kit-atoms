@@ -15,6 +15,8 @@ import {
     RippleWihoutJs,
     Select,
     SelectOption,
+    SelectV2,
+    SelectV2Option,
     Switch,
     SwitchContainer,
     Textarea,
@@ -27,7 +29,9 @@ import {
     GridColumn,
     Hint,
     HintBody,
-    VideoPlayer
+    VideoPlayer,
+    SystemIcons,
+    ArrowAnchor
 } from "./components";
 
 // import 'element-closest-polyfill';
@@ -78,6 +82,8 @@ let VueRtStyle = {
             Vue.component(RippleWihoutJs.name, RippleWihoutJs);
             Vue.component(Select.name, Select);
             Vue.component(SelectOption.name, SelectOption);
+            Vue.component(SelectV2.name, SelectV2);
+            Vue.component(SelectV2Option.name, SelectV2Option);
             Vue.component(Switch.name, Switch);
             Vue.component(SwitchContainer.name, SwitchContainer);
             Vue.component(Spinner.name, Spinner);
@@ -90,7 +96,9 @@ let VueRtStyle = {
             Vue.component(GridColumn.name, GridColumn);
             Vue.component(Hint.name, Hint);
             Vue.component(HintBody.name, HintBody);
+            Vue.component(SystemIcons.name, SystemIcons);
             Vue.component(VideoPlayer.name, VideoPlayer);
+            Vue.component(ArrowAnchor.name, ArrowAnchor);
             Vue.RtStyleAtoms = true;
         }
     }
@@ -139,6 +147,8 @@ export {
     RippleWihoutJs,
     Select,
     SelectOption,
+    SelectV2,
+    SelectV2Option,
     Switch,
     SwitchContainer,
     Textarea,
@@ -152,6 +162,7 @@ export {
     Hint,
     HintBody,
     VideoPlayer,
+    ArrowAnchor,
 
 
     // mixins

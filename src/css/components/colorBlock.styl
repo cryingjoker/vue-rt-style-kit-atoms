@@ -6,7 +6,7 @@ renderColorClass(classname, var, media)
       fill lookup(var)
 
 for $i in colors
-  if search($i,'b2c') >= 0
+  if search($i,'b2c') >= 0 || search($i,'main') >= 0
     className = 'color-block--'+replace($i,'b2c-','')
     renderColorClass(className, $i, $type)
 

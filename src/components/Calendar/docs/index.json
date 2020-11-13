@@ -16,6 +16,13 @@
 		},
 		{
 			"name": "rt-calendar",
+			"property": "append-to-body",
+			"type": "Boolean",
+			"description": "Монтировать попап в body элемент для улучшения визуального отображения",
+			"value": "false"
+		},
+		{
+			"name": "rt-calendar",
 			"property": ":calendarProps",
 			"type": "Object",
 			"description": "Задать специфические св-ва для календаря",

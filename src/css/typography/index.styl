@@ -199,8 +199,16 @@ b,
 
 .{newAppName}-font-light
   font-weight 200
+.{newAppName}-font-h5
+  @media (max-width: laptop-upper-limit)
+    font-size 16px
+    line-height 20px
+    &.{newAppName}-font-bold
+      line-height 20px
 
-.p1,
+//.{newAppName}-card &
+//  font-size 16px
+//  line-height 20px
 .{newAppName}-font-paragraph
   font-size 18px
   line-height 28px
@@ -209,7 +217,7 @@ b,
 
   @media (max-width: laptop-upper-limit)
     font-size 16px
-    line-height 20px
+    line-height 24px
     &.{newAppName}-font-bold
       line-height 20px
   //.{newAppName}-card &
@@ -255,6 +263,7 @@ b,
 .{newAppName}-font-control
   font-size 14px
   line-height 20px
+
   &.{newAppName}-font-bold
     line-height 16px
 
@@ -275,6 +284,9 @@ b,
     line-height 16px
     &.{newAppName}-font-bold
       line-height 16px
+    .rt-arrow-achor &
+      font-size 14px
+      line-height 20px
   .rt-n-banner &
     @media (max-width tablet-upper-limit)
       font-size 12px

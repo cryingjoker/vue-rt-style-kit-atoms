@@ -162,7 +162,7 @@
         if (!this.multi) {
           this.localValue = text;
         } else {
-          if (text !== null) {
+          if (text !== null && text.length > 0) {
             if (!this.multiLocalValue.includes(text)) {
               this.multiLocalValue.push(text)
             } else {
@@ -191,6 +191,8 @@
             this.scrollToSelected();
             if (window.innerHeight - e.clientY < 200 && e.clientY > 200) {
               this.isOpenListOnTop = true;
+            }else{
+              this.isOpenListOnTop = false;
             }
             setTimeout(() => {
               this.bindEvents();

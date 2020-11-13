@@ -1,0 +1,28 @@
+use("./plugins/readJsonKeys.js")
+use("./plugins/search.js")
+use("./plugins/replace.js")
+use("./plugins/callVariable.js")
+colors = readJsonKeys('../../../color.json')
+.rt-sys-icon
+  min-width 24px
+  fill main-color
+  transition-timing-function ease-in-out
+  transition-duration .3s
+  transition-property fill
+
+renderColorClass(classname, classNameHover,classNameFocus, var)
+  .{classname}
+    fill lookup(var)
+  @media(hover: hover)
+    .{classNameHover}
+      fill lookup(var)
+  .{classNameFocus}
+      fill lookup(var)
+
+for $i in colors
+  if search($i,'b2c') >= 0 || search($i,'main-color') >= 0
+    className = 'rt-sys-icon--'+replace($i,'b2c-','')
+    classNameHover = 'rt-sys-icon-hover--'+replace($i,'b2c-','')+':hover .rt-sys-icon'
+    classNameFocus = 'rt-sys-icon-focus--'+replace($i,'b2c-','')+':focus .rt-sys-icon'
+    renderColorClass(className, classNameHover,classNameFocus, $i)
+

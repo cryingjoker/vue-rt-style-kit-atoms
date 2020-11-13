@@ -20,7 +20,7 @@
             },
             value: {
                 type: String,
-                default: null
+                default: ''
             },
             isB2bTextarea: {
                 type: Boolean,
@@ -37,13 +37,26 @@
             fieldId: {
                 type: String,
                 default: ''
+            },
+            autoResize: {
+                type: Boolean,
+                default: true
             }
         },
-        data: () => ({
-            inputText: "",
-            hasInputText: false
-        }),
-        computed: {
+        data () {
+            return {
+                localValue: "",
+                inputText: "",
+                hasInputText: false,
+            }
+        },
+      created() {
+          this.localValue = this.value
+      },
+      computed: {
+        roundStyle() {
+          return {strokeDashoffset: 45 - 45 * this.step / 100}
+        },
             textareaClasses() {
                 const classes = ['text-field', 'textarea'];
                 if (this.disabled) {
@@ -67,6 +80,12 @@
                 if (this.color === "purple") {
                     classes.push("text-field--purple")
                 }
+                // console.info('this.autoResize',this.autoResize);
+                if(this.autoResize) {
+                  classes.push('text-field--autoresized')
+                }else{
+                  classes.push('text-field--scrollable')
+                }
                 return classes.join(' ')
             },
             placeholderClasses() {
@@ -79,16 +98,20 @@
             }
         },
         watch: {
-            localValue(val) {
-                this.$emit("change", val);
+            localValue(newVal,oldVal) {
+              if(newVal != oldVal) {
+                this.$emit("input", newVal);
+                setTimeout(() => {
+                  this.setValueLength();
+                  this.calculateHeight();
+                }, 0);
+              }
             },
-            value(val,a){
-              if(val != this.localValue){
-                this.localValue = val;
-                setTimeout(()=>{
-                  this.calculateHeight()
-	                this.setValueLength()
-                },0)
+            value(newVal,oldVal){
+              if(newVal != oldVal) {
+                if (newVal != oldVal) {
+                  this.localValue = newVal;
+                }
               }
             }
         },
@@ -96,14 +119,10 @@
             this.localValue = this.value;
             this.setValueLength();
             this.setDisabled();
-            if(this.localValue?.length > 0){
-              this.calculateHeight()
-            }
         },
         methods: {
-
             setDisabled() {
-                this.$el.querySelector(".textarea-element").disabled = Boolean(
+                this.$refs.textarea.disabled = Boolean(
                     this.disabled
                 );
             },
@@ -111,13 +130,22 @@
                 this.hasInputText = this.localValue ? this.localValue.length > 0 : false;
             },
             inputHandler() {
-                this.localValue = this.$el.querySelector(".textarea-element").value;
+                this.localValue = this.$refs.textarea.value;
                 this.setValueLength();
             },
             calculateHeight() {
-                const textarea = this.$el.querySelector(".textarea-element");
-                textarea.style.height = "";
-                textarea.style.height = textarea.scrollHeight + 'px';
+                if (this.autoResize) {
+                    const textarea = this.$refs.textarea;
+
+                    textarea.style.height = 'auto';
+                    if(this?.localValue?.length > 0) {
+                      textarea.style.height = textarea.scrollHeight + 'px'
+                    }else{
+                      textarea.style.height = 'auto'
+                    }
+                }else{
+                  textarea.style.height = 'auto'
+                }
             },
             clearInput() {
               this.$refs.textarea.value = ''
@@ -143,10 +171,9 @@
             }
             return <div class={this.textareaClasses}>
                     <textarea class="textarea-element" rows="1"
+                              ref="textarea"
 
-                              onChange={this.inputHandler}
-                              onKeyup={this.calculateHeight}
-                              onInput={this.calculateHeight}
+                              onInput={this.inputHandler}
                               id={this.fieldId}
                     >{this.value}</textarea>
                 {renderLine()}

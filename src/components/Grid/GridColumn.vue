@@ -5,6 +5,10 @@
   import {getDisplayClass, displayParamsNames, displayParamsProps} from "../../mixins/displayClassMixin.js";
 
   const componentProps = {
+    largeSize: {
+      type: [Number, String],
+      default: 0
+    },
     size: {
       type: [Number, String],
       default: 0
@@ -40,7 +44,7 @@
     props: {...componentProps, ...spacesParamsProps, ...displayParamsProps},
     data() {
       return {
-        sizeParams: ['size', 'mobileSize', 'tabletSize'],
+        sizeParams: ['largeSize','size', 'mobileSize', 'tabletSize'],
       }
     },
 
@@ -93,6 +97,9 @@
         const classNameArray = ['rt', 'col'];
         if (value > 0) {
           switch (true) {
+            case name.search(/large/i) >=0:
+              classNameArray.push('lg');
+              break;
             case name.search(/mobile/i) >= 0:
               classNameArray.push('md');
               break;

@@ -1,4 +1,4 @@
-.{newAppName}-button
+.rt-button
   display inline-block
   height 52px
   box-sizing border-box
@@ -27,28 +27,28 @@
       .ripple
         padding 0 20px !important
 
-.{newAppName}-button + .{newAppName}-button
+.rt-button + .rt-button
   margin-left horizontal-space
 
-.{newAppName}-button-vertical
+.rt-button-vertical
     display table
     & + &
       margin-top vertical-space
       margin-left 0
 
-.{newAppName}-button--is-fitched
+.rt-button--is-fitched
   color transparent !important
 
-.{newAppName}-button--is-block
+.rt-button--is-block
   display block
   min-width 100%
 
-.{newAppName}-button-td--is-block
+.rt-button-td--is-block
   @media (max-width tablet-upper-limit)
     display block
     min-width 100%
 
-.{newAppName}-button-md--is-block
+.rt-button-md--is-block
   @media (max-width mobile-upper-limit)
     display block
     min-width 100%
@@ -56,35 +56,45 @@
 .ripple-wave
   background-color default-wive-color
 
-.{newAppName}-button-with-ripple
+.rt-button-with-ripple
   overflow hidden
   padding-left 0
   padding-right 0
 
-.{newAppName}-button-small
+.rt-button-small
   height 36px
   font-size 14px
 
   .ripple
     padding 0 20px !important
 
-.{newAppName}-button-md-small
-  @media (max-width 767px)
-    height 34px
+.rt-button-td-small
+  @media (max-width tablet-upper-limit)
+    height 36px
     font-size 14px
+    .ripple
+      padding 0 20px
+
+.rt-button-md-small
+  @media (max-width mobile-upper-limit)
+    height 36px
+    font-size 14px
+    .ripple
+      padding 0 20px
 
   &:before
     display none
     opacity 0
 
-.{newAppName}-button-orange
+.rt-button-orange
   color #fff
   background-color b2c-orange
 
   &:hover
     @media (hover hover)
       background-color b2c-orange-button-hover
-
+  &:focus
+    background-color b2c-orange-button-hover
   &:active
     background-color b2c-orange-button-active
 
@@ -92,34 +102,39 @@
     color main-color05
     background-color main-color005
 
-    .{newAppName}-dark-theme &,
-    &.{newAppName}-button-bright
+    .rt-dark-theme &,
+    &.rt-button-bright
       color b2c-white05
       background-color b2c-white005
 
   .ripple-wave
     background-color b2c-white
 
-.{newAppName}-button-gray
+.rt-button-gray
   background-color transparent
   border 2px solid main-color003-no-opacity
   color main-color
-  .{newAppName}-dark-theme &,
-  &.{newAppName}-button-bright
+  .rt-dark-theme &,
+  &.rt-button-bright
     color b2c-white
   &:hover
     @media (hover hover)
       background-color main-color005
 
-      .{newAppName}-dark-theme &,
-      &.{newAppName}-button-bright
+      .rt-dark-theme &,
+      &.rt-button-bright
         background-color hsl(rgba(b2c-white, .05))
+  &:focus
+    background-color main-color005
+    .rt-dark-theme &,
+    &.rt-button-bright
+      background-color hsl(rgba(b2c-white, .05))
 
   &:active
     background-color main-color01
 
-    .{newAppName}-dark-theme &,
-    &.{newAppName}-button-bright
+    .rt-dark-theme &,
+    &.rt-button-bright
       background-color hsl(rgba(b2c-white, .1))
 
   &[disabled]
@@ -129,9 +144,11 @@
     &:hover
       @media (hover hover)
         background-color transparent
+    &:focus
+      background-color transparent
 
-    .{newAppName}-dark-theme &,
-    &.{newAppName}-button-bright
+    .rt-dark-theme &,
+    &.rt-button-bright
       color b2c-white05
       background-color transparent
       border-color b2c-white01
@@ -139,22 +156,25 @@
       &:hover
         @media (hover hover)
           background-color transparent
+      &:focus
+        background-color transparent
 
   .ripple-wave
     background-color main-color05
 
-    .{newAppName}-dark-theme &,
-    &.{newAppName}-button-bright
+    .rt-dark-theme &,
+    &.rt-button-bright
       background-color hsl(rgba(b2c-white, .5))
 
-.{newAppName}-button-white
+.rt-button-white
   background-color transparent
   border 2px solid main-color003-no-opacity
   color b2c-white
   &:hover
     @media (hover hover)
       background-color hsl(rgba(b2c-white, .05))
-
+  &:focus
+    background-color hsl(rgba(b2c-white, .05))
   &:active
     background-color hsl(rgba(b2c-white, .1))
 
@@ -166,30 +186,37 @@
     &:hover
       @media (hover hover)
         background-color transparent
+    &:focus
+      background-color transparent
 
   .ripple-wave
     background-color hsl(rgba(b2c-white, .5))
 
 
-.{newAppName}-button-orange-border
+.rt-button-orange-border
   border 2px solid b2c-orange
   color main-color
-  .{newAppName}-dark-theme &,
-  &.{newAppName}-button-bright
+  .rt-dark-theme &,
+  &.rt-button-bright
     color b2c-white
   &:hover
     @media (hover hover)
       background-color rgba(b2c-orange, .05)
 
-      .{newAppName}-dark-theme &,
-      &.{newAppName}-button-bright
+      .rt-dark-theme &,
+      &.rt-button-bright
         background-color rgba(b2c-orange, .2)
+  &:focus
+    background-color rgba(b2c-orange, .05)
 
+    .rt-dark-theme &,
+    &.rt-button-bright
+      background-color rgba(b2c-orange, .2)
   &:active
     background-color rgba(b2c-orange, .1)
 
-    .{newAppName}-dark-theme &,
-    &.{newAppName}-button-bright
+    .rt-dark-theme &,
+    &.rt-button-bright
       background-color rgba(b2c-orange, .4)
 
   &[disabled]
@@ -197,8 +224,8 @@
     background-color transparent
     border-color main-color01
 
-    .{newAppName}-dark-theme &,
-    &.{newAppName}-button-bright
+    .rt-dark-theme &,
+    &.rt-button-bright
       color b2c-white05
       background-color transparent
       border-color b2c-white01
@@ -206,11 +233,11 @@
   .ripple-wave
     background-color b2c-orange-low
 
-    .{newAppName}-dark-theme &,
-    &.{newAppName}-button-bright
+    .rt-dark-theme &,
+    &.rt-button-bright
       background-color main-color
 
-.{newAppName}-button-white
+.rt-button-white
   border 2px solid white
 
   &:hover
@@ -218,10 +245,16 @@
       background-color b2c-cool-grey05
       opacity .7
 
-    .{newAppName}-dark-theme &,
-    &.{newAppName}-button-bright
+    .rt-dark-theme &,
+    &.rt-button-bright
       background-color b2c-white01
+  &:focus
+    background-color b2c-cool-grey05
+    opacity .7
 
+    .rt-dark-theme &,
+    &.rt-button-bright
+      background-color b2c-white01
   &:active
     background-color transparent
 
@@ -230,8 +263,8 @@
     background-color transparent
     opacity 1
 
-    .{newAppName}-dark-theme &,
-    &.{newAppName}-button-bright
+    .rt-dark-theme &,
+    &.rt-button-bright
       color b2c-white05
       background-color transparent
       border-color b2c-white01
@@ -239,12 +272,13 @@
     &:hover
       @media (hover hover)
         background-color transparent
-
+    &:focus
+      background-color transparent
     .ripple-wave
       background-color b2c-cool-grey
 
 
-.{newAppName}-button-full-white
+.rt-button-full-white
   color main-color
   background-color white
 
@@ -254,18 +288,20 @@
   &:hover
     @media (hover hover)
       background-color hsl(rgba(main-color, .05))
-
-    .{newAppName}-dark-theme &,
-    &.{newAppName}-button-bright
-
-      @media (hover hover)
+      .rt-dark-theme &,
+      &.rt-button-bright
         background-color main-color003-no-opacity
+  &:focus
+    background-color hsl(rgba(main-color, .05))
+    .rt-dark-theme &,
+    &.rt-button-bright
+      background-color main-color003-no-opacity
 
   &:active
     background-color hsl(rgba(main-color, .1))
 
-    .{newAppName}-dark-theme &,
-    &.{newAppName}-button-bright
+    .rt-dark-theme &,
+    &.rt-button-bright
       background-color main-color03-no-opacity
 
   &[disabled]
@@ -276,13 +312,15 @@
       @media (hover hover)
         background-color b2c-white005
 
-.{newAppName}-button-purple
+.rt-button-purple
   color #fff
   background-color b2c-purple
 
   &:hover
     @media (hover hover)
       background-color b2c-purple-button-hover
+  &:focus
+    background-color b2c-purple-button-hover
 
   &:active
     background-color b2c-purple-button-active
@@ -291,45 +329,51 @@
     color main-color05
     background-color main-color005
 
-    .{newAppName}-dark-theme &,
-    &.{newAppName}-button-bright
+    .rt-dark-theme &,
+    &.rt-button-bright
       color b2c-white05
       background-color b2c-white005
 
   .ripple-wave
     background-color b2c-white
 
-.{newAppName}-button-purple-border
+.rt-button-purple-border
   color main-color
   background-color transparent
   border 2px solid b2c-purple
-  .{newAppName}-dark-theme &
-  &.{newAppName}-button-bright
+  .rt-dark-theme &
+  &.rt-button-bright
     color b2c-white
 
 
-.{newAppName}-button-purple-border,
-.{newAppName}-button-transparent-purple
+.rt-button-purple-border,
+.rt-button-transparent-purple
   &:hover
     @media (hover hover)
       background-color hsl(rgba(b2c-purple, .05))
 
-      .{newAppName}-dark-theme &,
-      &.{newAppName}-button-bright
+      .rt-dark-theme &,
+      &.rt-button-bright
         background-color hsl(rgba(b2c-purple, .2))
+  &:focus
+    background-color hsl(rgba(b2c-purple, .05))
+
+    .rt-dark-theme &,
+    &.rt-button-bright
+      background-color hsl(rgba(b2c-purple, .2))
 
   &:active
     background-color hsl(rgba(b2c-purple, .1))
 
-    .{newAppName}-dark-theme &,
-    &.{newAppName}-button-bright
+    .rt-dark-theme &,
+    &.rt-button-bright
       background-color hsl(rgba(b2c-purple, .4))
 
   .ripple-wave
     background-color b2c-purple-low
 
-    .{newAppName}-dark-theme &,
-    &.{newAppName}-button-bright
+    .rt-dark-theme &,
+    &.rt-button-bright
       background-color main-color
 
   &[disabled]
@@ -337,34 +381,42 @@
     background-color transparent
     border-color main-color01
 
-    .{newAppName}-dark-theme &,
-    &.{newAppName}-button-bright
+    .rt-dark-theme &,
+    &.rt-button-bright
       color b2c-white05
       border-color b2c-white01
       @media (hover hover)
         &:hover
           background-color transparent
+      &:focus
+        background-color transparent
 
-.{newAppName}-button-transparent
+.rt-button-transparent
   border 2px solid transparent
   background-color: transparent
   color main-color
-  .{newAppName}-dark-theme &,
-  &.{newAppName}-button-bright
+  .rt-dark-theme &,
+  &.rt-button-bright
     color b2c-white
   &:hover
     @media (hover hover)
       background-color hsl(rgba(main-color, .05))
 
-      .{newAppName}-dark-theme &,
-      &.{newAppName}-button-bright
+      .rt-dark-theme &,
+      &.rt-button-bright
         background-color hsl(rgba(b2c-white, .05))
+  &:focus
+    background-color hsl(rgba(main-color, .05))
+
+    .rt-dark-theme &,
+    &.rt-button-bright
+      background-color hsl(rgba(b2c-white, .05))
 
   &:active
     background-color hsl(rgba(main-color, .1))
 
-    .{newAppName}-dark-theme &,
-    &.{newAppName}-button-bright
+    .rt-dark-theme &,
+    &.rt-button-bright
       background-color hsl(rgba(b2c-white, .1))
   .ripple-wave
     background-color hsl(rgba(main-color, .8))
@@ -375,15 +427,17 @@
     &:hover
       @media (hover hover)
         background-color transparent
+    &:focus
+      background-color transparent
 
-    .{newAppName}-dark-theme &,
-    &.{newAppName}-button-bright
+    .rt-dark-theme &,
+    &.rt-button-bright
       color hsl(rgba(b2c-white, .4))
 
     .ripple-wave
       background-color b2c-cool-grey
 
-.{newAppName}-button--as-tag
+.rt-button--as-tag
   width auto
   min-width auto
   height auto
@@ -400,13 +454,13 @@
     width auto
     padding 0
 
-.{newAppName}-button--td-as-text
+.rt-button--td-as-text
   @media (max-width tablet-upper-limit)
     color b2c-purple-high
     background-color transparent
     padding 0
 
-.{newAppName}-button-cool-grey-border
+.rt-button-cool-grey-border
   border 2px solid b2c-cool-grey
 
   &:hover
@@ -414,12 +468,20 @@
       background-color b2c-cool-grey05
       opacity .7
 
-    .{newAppName}-dark-theme &,
-    &.{newAppName}-button-bright
+    .rt-dark-theme &,
+    &.rt-button-bright
+      @media (hover hover)
+        background-color b2c-white01
+  &:focus
+    background-color b2c-cool-grey05
+    opacity .7
+
+    .rt-dark-theme &,
+    &.rt-button-bright
       @media (hover hover)
         background-color b2c-white01
 
-.{newAppName}-button-transparent-purple
+.rt-button-transparent-purple
   color b2c-purple
 
 .fake-radiobutton-for-button
@@ -431,5 +493,8 @@
 .checked-text
   display none
 
-.{newAppName}-button__icon
+.rt-button__icon
   width 22px
+
+.rt-button-black
+  background-color: #000

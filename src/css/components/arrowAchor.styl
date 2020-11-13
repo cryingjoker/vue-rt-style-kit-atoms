@@ -1,0 +1,24 @@
+.rt-arrow-achor
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.3s;
+  transition-property: color;
+  cursor: pointer;
+  text-align: left
+
+  @media(hover: hover)
+    &:hover
+      color b2c-orange
+      .rt-arrow-achor-icon
+        left 4px
+  &:focus
+    color b2c-orange-button-active
+    .rt-arrow-achor-icon
+      left 4px
+.rt-arrow-achor-icon
+  position: relative;
+  top: -2px
+  left: 0
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.3s;
+  transition-property: left, fill, stroke ;
+
