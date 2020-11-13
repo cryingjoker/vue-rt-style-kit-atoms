@@ -174,7 +174,14 @@
             triggerClick($event) {
                 if (this.popupButton && this.targetPopup) {
                     let target = [this.$el, this.targetPopup];
-                    document.querySelector('body').dispatchEvent(new CustomEvent("open-popup", {'detail': target}));
+                    let event;
+                    if(typeof(Event) === 'function') {
+                        event = new CustomEvent('open-popup', {'detail': target});
+                    }else{
+                        event = document.createEvent('Event');
+                        event.initCustomEvent('open-popup', true, true, {'detail': target});
+                    }
+                    document.querySelector('body').dispatchEvent(event);
                     this.$emit("click", $event);
                 } else {
                     this.$emit("click", $event);
