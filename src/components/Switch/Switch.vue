@@ -1,28 +1,5 @@
-<template>
-  <label :class="containerClasses">
-    <input
-      ref="input"
-      :disabled="isDisabled"
-      :name="fieldName"
-      type="checkbox"
-      class="switch-element"
-      @change="inputHandler"
-    />
-    <div class="switch-container">
-      <div class="switch-container__circle">
-        <rt-ripple
-          ref="ripple"
-          :not-bind-click="true"
-          :not-render="isDisabled"
-        />
-      </div>
-      <slot />
-    </div>
-  </label>
-</template>
-
-<script>
-import { default as RippleComponent } from "../Ripple/Ripple.vue";
+<script type="text/jsx">
+import {default as RippleComponent} from "../Ripple/Ripple.vue";
 
 const componentsList = {};
 componentsList[RippleComponent.name] = RippleComponent;
@@ -57,7 +34,9 @@ export default {
     }
   },
   data: () => ({
-    isChecked: false
+    isChecked: false,
+    localChecked: false,
+    localDisabled: false
   }),
   computed: {
     fieldName() {
@@ -65,13 +44,25 @@ export default {
     },
     containerClasses() {
       let classList = 'switch';
-      if(this.isOrange) {
+      if (this.isOrange) {
         classList += ' switch--orange';
       }
       return classList;
     }
   },
-  mounted: function() {
+  watch:{
+    checked(newVal, oldVal){
+      if(newVal!= oldVal){
+        this.localChecked = newVal
+      }
+    },
+    isDisabled(newVal, oldVal){
+      if(newVal!= oldVal){
+        this.isDisabled = newVal
+      }
+    }
+  },
+  mounted: function () {
     setTimeout(() => {
       this.setValue();
     }, 0);
@@ -94,15 +85,15 @@ export default {
       if (this["$listeners"]) {
         Object.keys(this["$listeners"]).map(eventName => {
           this.$refs.input.addEventListener(
-            eventName,
-            this["$listeners"][eventName]
+              eventName,
+              this["$listeners"][eventName]
           );
         });
       }
       this.$on("emittoswitcher", data => {
         if (data && data[this._uid]) {
           this.$el.querySelector(".switch-element").checked =
-            data[this._uid]["checked"];
+              data[this._uid]["checked"];
         }
       });
     },
@@ -129,24 +120,24 @@ export default {
       if (this["_events"]) {
         Object.keys(this["_events"]).map(eventName => {
           this.$refs.input.removeEventListener(
-            eventName,
-            this["_events"][eventName]
+              eventName,
+              this["_events"][eventName]
           );
         });
       }
       this.$refs.input.removeEventListener("change", this.eventChangeListener);
     },
     setValue() {
-      this.$refs.input.checked = Boolean(this.checked);
+      this.localDisabled = Boolean(this.isDisabled)
+      this.localChecked = Boolean(this.checked)
     },
     inputHandler() {
       this.showWave();
-
-      const isChecked = Boolean(this.$refs.input.checked);
+      this.localChecked = Boolean(this.$refs.input.checked);
       this.$emit("changeswitcher", {
         name: this.fieldName,
         value: this.value,
-        checked: isChecked,
+        checked: this.localChecked,
         _uid: this._uid
       });
     },
@@ -156,6 +147,23 @@ export default {
         offsetY: 10
       });
     }
+  },
+  render(h) {
+    return <label class={this.containerClasses}>
+      <input ref="input"
+             disabled={this.localDisabled}
+             checked={this.localChecked}
+             name={this.fieldName}
+             type="checkbox"
+             class="switch-element"
+             onChange={this.inputHandler}/>
+      <div class="switch-container">
+        <div class="switch-container__circle">
+          <rt-ripple ref="ripple" not-bind-click={true} not-render={this.isDisabled}/>
+        </div>
+        {this.$slots.default}
+      </div>
+    </label>
   }
 };
 </script>
