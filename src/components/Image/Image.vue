@@ -22,6 +22,10 @@ export default {
       type: String,
       default: ''
     },
+    lgSrc: {
+      type: String,
+      default: ''
+    },
     x2LgSrc: {
       type: String,
       default: ''
