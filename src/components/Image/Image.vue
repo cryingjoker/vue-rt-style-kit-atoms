@@ -6,23 +6,23 @@ const componentsList = {};
 export default {
   name: "RtImg",
   props: {
-    image: {
+    src: {
       type: String,
       default: ''
     },
-    x2Image: {
+    x2Src: {
       type: String,
       default: ''
     },
-    tdImage: {
+    tdSrc: {
       type: String,
       default: ''
     },
-    mdImage: {
+    mdSrc: {
       type: String,
       default: ''
     },
-    x2LgImage: {
+    x2LgSrc: {
       type: String,
       default: ''
     },
@@ -37,53 +37,73 @@ export default {
     }
   },
   beforeUpdate() {
-    deviceTypeStore.removeWatcher(this._uid, this.calculateMobileOptions);
+    deviceTypeStore.removeWatcher(this._uid, this.calculateTypepOtions);
   },
   updated() {
-    deviceTypeStore.addWatcher(this._uid, this.calculateMobileOptions);
+    deviceTypeStore.removeWatcher(this._uid, this.calculateTypepOtions);
+    deviceTypeStore.addWatcher(this._uid, this.calculateTypepOtions);
   },
   beforeDestroy() {
-    deviceTypeStore.removeWatcher(this._uid, this.calculateMobileOptions);
+    deviceTypeStore.removeWatcher(this._uid, this.calculateTypepOtions);
+  },
+  computed: {
+    image() {
+      let image = '';
+
+      if (this.type == 'desktop-large' && this.lgSrc) {
+        if (this.x2LgSrc && window.devicePixelRatio && window.devicePixelRatio > 1) {
+          image = this.x2LgSrc
+        } else {
+          image = this.lgSrc
+        }
+      }
+      if (this.type == 'tablet' && this.tdSrc) {
+        image = this.tdSrc
+      }
+      if (this.type == 'mobile' && this.mdSrc)
+        image = this.mdSrc
+
+      if (image.length == 0) {
+        if (this.x2Src && window.devicePixelRatio && window.devicePixelRatio > 1) {
+          image = this.x2Src
+        } else {
+          image = this.src
+        }
+      }
+      if (this.backgroundMode) {
+        image = 'url(' + image + ')';
+      }
+      return image
+    }
   },
   mounted() {
-    deviceTypeStore.addWatcher(this._uid, this.calculateMobileOptions);
-    this.calculateMobileOptions();
+    deviceTypeStore.addWatcher(this._uid, this.calculateTypepOtions);
+    this.calculateTypepOtions();
+  }
+  ,
+  methods: {
+    calculateTypepOtions() {
+      this.type = deviceTypeStore.getStatus()
+    },
   },
-  computed: {},
-  calculateMobileOptions() {
-    this.type = deviceTypeStore.getStatus()
+  watch: {
+    type(oldVal, newVal) {
+      if (oldVal != newVal) {
+        this.$forceUpdate()
+      }
+    }
   },
   render(h) {
-
-    let image = '';
-    switch (true) {
-      case this.type == 'desktop-large' && this.lgImage:
-        if (this.x2LgImage && window.devicePixelRatio && window.devicePixelRatio > 1) {
-          image = this.x2LgImage
-        }else {
-          image = this.lgImage
-        }
-        break;
-      case this.type == 'tablet' && this.tdImage:
-        image = this.tdImage
-        break;
-      case this.type == 'mobile' && this.mdImage:
-        image = this.mdImage
-        break;
-      default:
-        if (this.x2Image && window.devicePixelRatio && window.devicePixelRatio > 1) {
-          image = this.x2Image
-        } else {
-          image = this.image
-        }
+    if (this.type) {
+      if (this.backgroundMode) {
+        return <div class="rt-img-container" style={{backgroundImage: this.image}}></div>
+      } else {
+        return <div class="rt-img-container">
+          <img class="rt-img d-block" src={this.image} alt=""/>
+        </div>
+      }
     }
-    if (this.backgroundMode) {
-      return <div class="rt-img-container" style={{backgroundImage: 'url('+image+')'}}></div>
-    }else{
-      <div class="rt-img-container">
-        <img class="rt-img d-block" src={image} alt=""/>
-      </div>
-    }
+    return null
   }
 };
 </script>
