@@ -5,6 +5,7 @@ import ofi from './polyfills/ofi.min'
 import {
     Button,
     Calendar,
+    Image,
     Checkbox,
     CheckboxContainer,
     Input,
@@ -74,6 +75,7 @@ let VueRtStyle = {
             Vue.component(Calendar.name, Calendar);
             Vue.component(Checkbox.name, Checkbox);
             Vue.component(CheckboxContainer.name, CheckboxContainer);
+            Vue.component(Image.name, Image);
             Vue.component(Input.name, Input);
             Vue.component(Price.name, Price);
             Vue.component(RadioButton.name, RadioButton);
@@ -163,7 +165,7 @@ export {
     HintBody,
     VideoPlayer,
     ArrowAnchor,
-
+    Image,
 
     // mixins
     fontColorPropsNames,

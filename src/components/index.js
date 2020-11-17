@@ -17,6 +17,7 @@ export {default as GridRow} from './Grid/GridRow.vue';
 export {default as GridColumn} from './Grid/GridColumn.vue';
 export {default as SystemIcons} from './SystemIcons/SystemIcons.vue';
 export {default as ArrowAnchor} from './ArrowAnchor/ArrowAnchor.vue';
+export {default as Image} from './Image/Image.vue';
 
 
 export {default as Switch} from './Switch/Switch.vue';
