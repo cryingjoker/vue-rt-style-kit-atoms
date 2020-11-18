@@ -1,12 +1,30 @@
 <script type="text/jsx">
 
 import {deviceTypeStore} from "../../index";
-async function WebpIsSupported() {
-  if (!self.createImageBitmap) return false;
-  const webpData = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=';
-  const blob = await fetch(webpData).then(r => r.blob());
-  return createImageBitmap(blob).then(() => true, () => false);
+
+function WebpIsSupported(callback) {
+  // If the browser doesn't has the method createImageBitmap, you can't display webp format
+  if (!window.createImageBitmap) {
+    callback(false);
+    return;
+  }
+
+  // Base64 representation of a white point image
+  var webpdata = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=';
+
+  // Retrieve the Image in Blob Format
+  fetch(webpdata).then(function (response) {
+    return response.blob();
+  }).then(function (blob) {
+    // If the createImageBitmap method succeeds, return true, otherwise false
+    createImageBitmap(blob).then(function () {
+      callback(true);
+    }, function () {
+      callback(false);
+    });
+  });
 }
+
 const componentsList = {};
 export default {
   name: "RtImg",
@@ -67,6 +85,7 @@ export default {
   data() {
     return {
       type: '',
+      supportWebP: false
     }
   },
   beforeUpdate() {
@@ -81,48 +100,48 @@ export default {
   },
   computed: {
     image() {
-      let image = '';
 
+      let image = '';
       if (this.type == 'desktop-large' && this.lgSrc) {
         if (this.x2LgSrc && window.devicePixelRatio && window.devicePixelRatio > 1) {
-          if(this.supportWebP && this.webpX2LgSrc){
+          if (this.supportWebP && this.webpX2LgSrc) {
             image = this.webpX2LgSrc
-          }else {
+          } else {
             image = this.x2LgSrc
           }
         } else {
-          if(this.supportWebP && this.webpLgSrc) {
+          if (this.supportWebP && this.webpLgSrc) {
             image = this.webpLgSrc
-          }else{
+          } else {
             image = this.lgSrc
           }
         }
       }
       if (this.type == 'tablet' && this.tdSrc) {
-        if(this.supportWebP && this.webpTdSrc) {
+        if (this.supportWebP && this.webpTdSrc) {
           image = this.webpTdSrc
-        }else{
+        } else {
           image = this.tdSrc
         }
       }
       if (this.type == 'mobile' && this.mdSrc)
-        if(this.supportWebP && this.webpMdSrc) {
+        if (this.supportWebP && this.webpMdSrc) {
           image = this.webpMdSrc
-        }else {
+        } else {
           image = this.mdSrc
         }
 
       if (image.length == 0) {
         if (this.x2Src && window.devicePixelRatio && window.devicePixelRatio > 1) {
-          if(this.supportWebP && this.webpX2Src) {
+          if (this.supportWebP && this.webpX2Src) {
             image = this.webpX2Src
-          }else{
+          } else {
             image = this.x2Src
           }
         } else {
-          if(this.supportWebP && this.webpSrc) {
+          if (this.supportWebP && this.webpSrc) {
             image = this.webpSrc
-          }else{
+          } else {
             image = this.src
           }
         }
@@ -134,8 +153,10 @@ export default {
     }
   },
   mounted() {
-    WebpIsSupported().then(()=>{
-      this.supportWebP = true
+    WebpIsSupported((isSupported) => {
+      if (isSupported) {
+        this.supportWebP = isSupported
+      }
     })
     deviceTypeStore.addWatcher(this._uid, this.calculateTypepOtions);
     this.calculateTypepOtions();
