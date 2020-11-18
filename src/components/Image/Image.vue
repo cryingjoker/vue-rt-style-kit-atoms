@@ -1,7 +1,12 @@
 <script type="text/jsx">
 
 import {deviceTypeStore} from "../../index";
-
+async function WebpIsSupported() {
+  if (!self.createImageBitmap) return false;
+  const webpData = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=';
+  const blob = await fetch(webpData).then(r => r.blob());
+  return createImageBitmap(blob).then(() => true, () => false);
+}
 const componentsList = {};
 export default {
   name: "RtImg",
@@ -27,6 +32,30 @@ export default {
       default: ''
     },
     x2LgSrc: {
+      type: String,
+      default: ''
+    },
+    webpSrc: {
+      type: String,
+      default: ''
+    },
+    webpX2Src: {
+      type: String,
+      default: ''
+    },
+    webpTdSrc: {
+      type: String,
+      default: ''
+    },
+    webpMdSrc: {
+      type: String,
+      default: ''
+    },
+    webpLgSrc: {
+      type: String,
+      default: ''
+    },
+    webpX2LgSrc: {
       type: String,
       default: ''
     },
@@ -56,22 +85,46 @@ export default {
 
       if (this.type == 'desktop-large' && this.lgSrc) {
         if (this.x2LgSrc && window.devicePixelRatio && window.devicePixelRatio > 1) {
-          image = this.x2LgSrc
+          if(this.supportWebP && this.webpX2LgSrc){
+            image = this.webpX2LgSrc
+          }else {
+            image = this.x2LgSrc
+          }
         } else {
-          image = this.lgSrc
+          if(this.supportWebP && this.webpLgSrc) {
+            image = this.webpLgSrc
+          }else{
+            image = this.lgSrc
+          }
         }
       }
       if (this.type == 'tablet' && this.tdSrc) {
-        image = this.tdSrc
+        if(this.supportWebP && this.webpTdSrc) {
+          image = this.webpTdSrc
+        }else{
+          image = this.tdSrc
+        }
       }
       if (this.type == 'mobile' && this.mdSrc)
-        image = this.mdSrc
+        if(this.supportWebP && this.webpMdSrc) {
+          image = this.webpMdSrc
+        }else {
+          image = this.mdSrc
+        }
 
       if (image.length == 0) {
         if (this.x2Src && window.devicePixelRatio && window.devicePixelRatio > 1) {
-          image = this.x2Src
+          if(this.supportWebP && this.webpX2Src) {
+            image = this.webpX2Src
+          }else{
+            image = this.x2Src
+          }
         } else {
-          image = this.src
+          if(this.supportWebP && this.webpSrc) {
+            image = this.webpSrc
+          }else{
+            image = this.src
+          }
         }
       }
       if (this.backgroundMode) {
@@ -81,10 +134,12 @@ export default {
     }
   },
   mounted() {
+    WebpIsSupported().then(()=>{
+      this.supportWebP = true
+    })
     deviceTypeStore.addWatcher(this._uid, this.calculateTypepOtions);
     this.calculateTypepOtions();
-  }
-  ,
+  },
   methods: {
     calculateTypepOtions() {
       this.type = deviceTypeStore.getStatus()
