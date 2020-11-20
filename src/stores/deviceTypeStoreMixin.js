@@ -6,8 +6,10 @@ import {StorePrototype} from "./storePrototype.class";
 class DeviceTypeStore extends StorePrototype{
   constructor() {
     super();
-    this.possibleTypes = ['desktop', 'tablet', 'mobile']
+    this.possibleTypes = ['desktop-large','desktop', 'tablet', 'mobile']
+    this.laptopUpperLimit = getVariable('laptopUpperLimit')
     this.tabletUpperLimit = getVariable('tabletUpperLimit')
+    this.mobileUpperLimit = getVariable('mobileUpperLimit')
     this.mobileUpperLimit = getVariable('mobileUpperLimit')
     this.deviceType = NaN;
     this.methodFnMap = {
@@ -25,14 +27,17 @@ class DeviceTypeStore extends StorePrototype{
 
     let newDeviceType;
     switch (true) {
-      case width > this.tabletUpperLimit:
+      case width > this.laptopUpperLimit:
         newDeviceType = 0;
         break;
-      case width > this.mobileUpperLimit:
+      case width > this.tabletUpperLimit:
         newDeviceType = 1;
         break;
-      default:
+      case width > this.mobileUpperLimit:
         newDeviceType = 2;
+        break;
+      default:
+        newDeviceType = 3;
     }
     if (newDeviceType != this.deviceType) {
       this.deviceType = newDeviceType;

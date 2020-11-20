@@ -25,6 +25,16 @@ renderColorClass(classname, var, media)
       .{replace(classname, 'color-','dark-theme-color-md-')}
         .{newAppName}-dark-theme &
           color lookup(var)
+
+renderHoverColorClass(classname, var)
+        .{classname}
+            &:hover
+              color lookup(var)
+
+renderFocusColorClass(classname, var)
+  .{classname}
+    &:focus
+      color lookup(var)
 for $type in ('desktop' 'tablet' 'mobile')
   for $i in colors
     if search($i,'b2c')   >= 0
@@ -35,6 +45,32 @@ for $type in ('desktop' 'tablet' 'mobile')
       if search($i,'main-') == 0
         className = 'color-'+replace($i,'-color','')
         renderColorClass(className, $i, $type)
+
+@media (hover: hover)
+  for $i in colors
+    if search($i,'b2c')   >= 0
+      className = 'color-'+replace($i,'b2c-','')
+      renderHoverColorClass('h-'+className, $i)
+
+
+    else
+      if search($i,'main-') == 0
+        className = 'color-'+replace($i,'-color','')
+        renderHoverColorClass('h-'className, $i)
+
+for $i in colors
+  if search($i,'b2c')   >= 0
+    className = 'color-'+replace($i,'b2c-','')
+    renderFocusColorClass('f-'+className, $i)
+  else
+    if search($i,'main-') == 0
+      className = 'color-'+replace($i,'-color','')
+      renderFocusColorClass('f-'+className, $i)
+
+.color-animate
+  transition-timing-function ease-in-out
+  transition-duration .4s
+  transition-property color
 .color-error
   color error-color
 

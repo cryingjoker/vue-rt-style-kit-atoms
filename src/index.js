@@ -5,6 +5,7 @@ import ofi from './polyfills/ofi.min'
 import {
     Button,
     Calendar,
+    Image,
     Checkbox,
     CheckboxContainer,
     Input,
@@ -33,7 +34,6 @@ import {
     SystemIcons,
     ArrowAnchor
 } from "./components";
-
 // import 'element-closest-polyfill';
 // import 'nodelist-foreach-polyfill';
 // import 'element-remove';
@@ -65,6 +65,7 @@ import {
     getBackgroundClass
 } from "./mixins/backgroundColorTextClassMixin.js";
 import getVariable from "./mixins/variablesMixin.js";
+import {LazySrcDirective} from "./directives/lazySrc/LazySrc";
 
 
 let VueRtStyle = {
@@ -74,6 +75,7 @@ let VueRtStyle = {
             Vue.component(Calendar.name, Calendar);
             Vue.component(Checkbox.name, Checkbox);
             Vue.component(CheckboxContainer.name, CheckboxContainer);
+            Vue.component(Image.name, Image);
             Vue.component(Input.name, Input);
             Vue.component(Price.name, Price);
             Vue.component(RadioButton.name, RadioButton);
@@ -99,6 +101,9 @@ let VueRtStyle = {
             Vue.component(SystemIcons.name, SystemIcons);
             Vue.component(VideoPlayer.name, VideoPlayer);
             Vue.component(ArrowAnchor.name, ArrowAnchor);
+            
+            Vue.directive(LazySrcDirective.name, LazySrcDirective);
+            
             Vue.RtStyleAtoms = true;
         }
     }
@@ -163,7 +168,7 @@ export {
     HintBody,
     VideoPlayer,
     ArrowAnchor,
-
+    Image,
 
     // mixins
     fontColorPropsNames,
