@@ -34,7 +34,6 @@ import {
     SystemIcons,
     ArrowAnchor
 } from "./components";
-
 // import 'element-closest-polyfill';
 // import 'nodelist-foreach-polyfill';
 // import 'element-remove';
@@ -66,6 +65,7 @@ import {
     getBackgroundClass
 } from "./mixins/backgroundColorTextClassMixin.js";
 import getVariable from "./mixins/variablesMixin.js";
+import {LazySrcDirective} from "./directives/lazySrc/LazySrc";
 
 
 let VueRtStyle = {
@@ -101,6 +101,9 @@ let VueRtStyle = {
             Vue.component(SystemIcons.name, SystemIcons);
             Vue.component(VideoPlayer.name, VideoPlayer);
             Vue.component(ArrowAnchor.name, ArrowAnchor);
+            
+            Vue.directive(LazySrcDirective.name, LazySrcDirective);
+            
             Vue.RtStyleAtoms = true;
         }
     }

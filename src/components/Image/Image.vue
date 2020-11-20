@@ -77,6 +77,22 @@ export default {
       type: String,
       default: ''
     },
+    lazySrc: {
+      type: String,
+      default: ''
+    },
+    lazyTdSrc: {
+      type: String,
+      default: ''
+    },
+    lazyMdSrc: {
+      type: String,
+      default: ''
+    },
+    lazyLgSrc: {
+      type: String,
+      default: ''
+    },
     backgroundMode: {
       type: Boolean,
       default: false
@@ -85,7 +101,8 @@ export default {
   data() {
     return {
       type: '',
-      supportWebP: false
+      supportWebP: false,
+      lazyReady: false
     }
   },
   beforeUpdate() {
@@ -100,7 +117,6 @@ export default {
   },
   computed: {
     image() {
-
       let image = '';
       if (this.type == 'desktop-large' && this.lgSrc) {
         if (this.x2LgSrc && window.devicePixelRatio && window.devicePixelRatio > 1) {
@@ -150,6 +166,25 @@ export default {
         image = 'url(' + image + ')';
       }
       return image
+    },
+    lazy(){
+      let lazyImage = '';
+
+
+      if (this.type == 'desktop-large' && this.lazyLgSrc) {
+        lazyImage = this.lazyLgSrc
+      }
+      if (this.type == 'tablet' && this.lazyTdSrc) {
+        lazyImage = this.lazyTdSrc
+      }
+      if (this.type == 'mobile' && this.lazyMdSrc){
+        lazyImage = this.lazyMdSrc
+      }
+
+      if (lazyImage.length == 0 && this.lazySrc) {
+        lazyImage = this.lazySrc
+      }
+      return lazyImage
     }
   },
   mounted() {
@@ -160,6 +195,7 @@ export default {
     })
     deviceTypeStore.addWatcher(this._uid, this.calculateTypepOtions);
     this.calculateTypepOtions();
+
   },
   methods: {
     calculateTypepOtions() {
@@ -178,9 +214,15 @@ export default {
       if (this.backgroundMode) {
         return <div class="rt-img-container" style={{backgroundImage: this.image}}></div>
       } else {
-        return <div class="rt-img-container">
-          <img class="rt-img d-block" src={this.image} alt=""/>
-        </div>
+        if(this.lazySrc){
+          return <div class="rt-img-container">
+            <img ref="img" v-lazy-src={this.image} class="rt-img d-block" src={this.lazy} alt=""/>
+          </div>
+        }else {
+          return <div class="rt-img-container">
+            <img ref="img" class="rt-img d-block" src={this.image} alt=""/>
+          </div>
+        }
       }
     }
     return null
