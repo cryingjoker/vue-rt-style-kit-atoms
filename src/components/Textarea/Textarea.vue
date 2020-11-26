@@ -109,9 +109,7 @@
             },
             value(newVal,oldVal){
               if(newVal != oldVal) {
-                if (newVal != oldVal) {
                   this.localValue = newVal;
-                }
               }
             }
         },
@@ -172,10 +170,10 @@
             return <div class={this.textareaClasses}>
                     <textarea class="textarea-element" rows="1"
                               ref="textarea"
-
                               onInput={this.inputHandler}
                               id={this.fieldId}
-                    >{this.localValue}</textarea>
+                              value={this.localValue}
+                    ></textarea>
                 {renderLine()}
                 {renderPlaceholder()}
                 <p class="text-field__error-message">
