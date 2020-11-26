@@ -175,7 +175,7 @@
 
                               onInput={this.inputHandler}
                               id={this.fieldId}
-                    >{this.value}</textarea>
+                    >{this.localValue}</textarea>
                 {renderLine()}
                 {renderPlaceholder()}
                 <p class="text-field__error-message">
