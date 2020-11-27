@@ -132,9 +132,8 @@
                 this.setValueLength();
             },
             calculateHeight() {
+                const textarea = this.$refs.textarea;
                 if (this.autoResize) {
-                    const textarea = this.$refs.textarea;
-
                     textarea.style.height = 'auto';
                     if(this?.localValue?.length > 0) {
                       textarea.style.height = textarea.scrollHeight + 'px'
@@ -142,7 +141,7 @@
                       textarea.style.height = 'auto'
                     }
                 }else{
-                  textarea.style.height = 'auto'
+                    textarea.style.height = 'auto'
                 }
             },
             clearInput() {
