@@ -23,13 +23,7 @@
 			"value": "false",
 			"version": "0.3.24"
 		},
-		{
-			"name": "rt-checkbox",
-			"property": ":required-rule",
-			"type": "Boolean",
-			"description": "Задаёт правила валидации(v-validate)",
-			"value": "true"
-		},
+
 		{
 			"name": "rt-checkbox",
 			"property": ":checked",
