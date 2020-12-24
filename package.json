@@ -91,7 +91,7 @@
     "rollup-plugin-typescript2": "^0.27.1",
     "rollup-plugin-vue": "^5.1.9",
     "style-loader": "^1.2.1",
-    "stylus": "^0.54.7",
+    "stylus": "^0.54.8",
     "stylus-loader": "^3.0.2",
     "stylus-supremacy": "^2.14.5",
     "terser": "^4.8.0",

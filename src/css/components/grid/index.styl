@@ -161,6 +161,8 @@ for devideStep in steps
 
 .relative
   position relative
+.static
+  position static
 
 .row
   display flex
@@ -796,7 +798,7 @@ for $device_index in 0 .. 3
 
 $device_media = '(max-width: '+lookup('desktop-lower-limit')+')' '' lookup('retina-media')  '(max-width: '+lookup('tablet-upper-limit')+')' '(max-width: '+lookup('mobile-upper-limit')+')'
 $device_types_code =  'lg' '' 'x2' 'td' 'md'
-displayProps = 'none' 'inline' 'inline-block' 'block' 'table' 'table-row' 'table-cell' 'flex' 'inline-flex' 'static' 'none'
+displayProps = 'none' 'inline' 'inline-block' 'block' 'table' 'table-row' 'table-cell' 'flex' 'inline-flex' 'none'
 
 for $device_index in 0 .. 4
   classRender($i)
