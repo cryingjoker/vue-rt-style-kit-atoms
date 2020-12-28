@@ -9,15 +9,23 @@ colors = readJsonKeys('../../../color.json')
   transition-timing-function ease-in-out
   transition-duration .3s
   transition-property fill
+  .rt-dark-theme &
+    fill white
 
 renderColorClass(classname, classNameHover,classNameFocus, var)
   .{classname}
     fill lookup(var)
+    .rt-dark-theme &
+      fill lookup(var)
   @media(hover: hover)
     .{classNameHover}
       fill lookup(var)
+      .rt-dark-theme &
+        fill lookup(var)
   .{classNameFocus}
       fill lookup(var)
+      .rt-dark-theme &
+        fill lookup(var)
 
 for $i in colors
   if search($i,'b2c') >= 0 || search($i,'main-color') >= 0

@@ -45,6 +45,9 @@ export default {
     },
 
   },
+  mounted() {
+    this.bindEvent();
+  },
   methods: {
     setOptions() {
       if (this.localName in systemIconsData) {
@@ -56,12 +59,30 @@ export default {
         html = html.replace(/@edd/g, 'evenodd')
         this.optios.html = html;
       }
+    },
+    bindEvent(){
+      Object.keys(this["_events"]).map(eventName => {
+        this["_events"][eventName].forEach((fn)=>{
+          this.$refs?.icon?.addEventListener(eventName, fn)
+        })
+      })
+    },
+    unbindEvent(){
+      Object.keys(this["_events"]).map(eventName => {
+        this["_events"][eventName].forEach((fn)=>{
+          this.$refs?.icon?.removeEventListener(eventName, fn)
+        })
+      })
     }
+  },
+  beforeDestroy() {
+    this.unbindEvent()
   },
   render() {
 
     if (this.optios.html) {
       return <svg class={this.iconClass} width={this.optios.width} height={this.optios.height}
+                  ref="icon"
                   viewBox={"0 0 " + this.optios.width + " " + this.optios.height} fill="none"
                   xmlns="http://www.w3.org/2000/svg" domPropsInnerHTML={this.optios.html}></svg>
     } else {
