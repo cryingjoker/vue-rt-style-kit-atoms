@@ -1,6 +1,6 @@
 {
   "name": "vue-rt-style-kit-atoms",
-  "version": "0.3.46.1",
+  "version": "0.3.47-without-validate",
   "description": "",
   "main": "lib/vue-rt-style-kit-atoms.js",
   "style": "lib/vue-rt-style-kit-atoms.css",
@@ -99,7 +99,6 @@
     "typescript": "^3.9.6",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^4.1.0",
-    "vee-validate": "^3.3.7",
     "vue": "^2.6.11",
     "vue-loader": "^15.9.3",
     "vue-property-decorator": "^9.0.0",

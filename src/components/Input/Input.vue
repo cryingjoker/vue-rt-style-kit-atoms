@@ -13,15 +13,6 @@ export default {
   },
   props: {
 
-    customRules: {
-      type: Array,
-      default: () => ([])
-    },
-    validate: {
-      type: Object | String,
-      default: null
-    },
-
     maxLength: {
       type: Number,
       default: null
@@ -131,10 +122,6 @@ export default {
       type: String,
       default: ''
     },
-    scope: {
-      type: String,
-      default: ''
-    },
     isInteger: {
       type: Boolean,
       default: false
@@ -158,9 +145,9 @@ export default {
       return this.name || "input-field__" + this._uid;
     },
     isInvalid() {
-      if (this.validate || this.hasError) {
+      if (this.hasError) {
 
-        return this.hasError || this.errors && this.errors.has(this.scope ? this.scope + '.' + this.fieldName : this.fieldName);
+        return this.hasError || this.errors && this.errors.has(this.fieldName);
       }
     },
     inputClass() {
@@ -232,10 +219,10 @@ export default {
     }
   },
 
-  mounted() {
-    this.setNewRender();
-    this.disabledLocal = this.disabled;
-    this.customRules.forEach(({nameRule, rule}) => VeeValidate.Validator.extend(nameRule, {validate: rule}));
+    mounted() {
+      this.setNewRender();
+      this.disabledLocal = this.disabled;
+
 
     this.setValue();
     this.setDisabled();
