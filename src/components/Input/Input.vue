@@ -1,6 +1,5 @@
 <script type="text/jsx">
 import variables from "../../variables.json";
-import VeeValidate from "vee-validate";
 import InputV2 from "./InputV2.vue";
 const components = {}
 components[InputV2.name] = InputV2
@@ -11,8 +10,12 @@ export default {
     prop: 'value',
     event: 'input'
   },
-  props: {
 
+  props: {
+    bright: {
+      type: Boolean,
+      default: false
+    },
     maxLength: {
       type: Number,
       default: null
@@ -83,6 +86,10 @@ export default {
       default: ''
     },
     type: {
+      type: String,
+      default: 'text'
+    },
+    inputType: {
       type: String,
       default: 'text'
     },
@@ -264,10 +271,14 @@ export default {
     bindEvents() {
       if (this["_events"] ) {
         Object.keys(this["_events"]).map(eventName => {
-          const that = this;
-          that["_events"][eventName].forEach((fn) => {
+
+          this["_events"][eventName].forEach((fn) => {
 
             if(this.$refs.component){
+
+              Object.keys(this.$slots).forEach((slotKey)=>{
+                this.$refs.component.$slots = this.$slots[slotKey]
+              })
               if(!this.$refs.component['_events'][eventName]){
                 this.$refs.component['_events'][eventName] = []
               }
@@ -278,9 +289,9 @@ export default {
               } else if (eventName != 'input') {
                 this.$refs.input.addEventListener(
                     eventName,
-                    function () {
-                      if (that["_events"] && that["_events"][eventName] && that["_events"][eventName][0] && typeof that["_events"][eventName][0] === 'function') {
-                        that["_events"][eventName][0](arguments[0]);
+                     ()=> {
+                      if (this["_events"] && this["_events"][eventName] && this["_events"][eventName][0] && typeof this["_events"][eventName][0] === 'function') {
+                        this["_events"][eventName][0](arguments[0]);
                       }
                     }
                 );
@@ -531,8 +542,15 @@ export default {
   },
   render() {
     if(this.version == 2){
+      const renderSlots = Object.keys(this.$slots).map((key)=>{
+        return this.$slots[key].map((slot)=>{
+         return <template slot={key}>{slot}</template>
+        })
+      })
       return <rt-input-v2
           ref="component"
+          bright={this.bright}
+          inputType={this.inputType}
           maxLength={this.maxLength}
           minNumber={this.minNumber}
           maxNumber={this.maxNumber}
@@ -561,7 +579,7 @@ export default {
           inputButtonText={this.inputButtonText}
           scope={this.scope}
           isInteger={this.isInteger}
-      ></rt-input-v2>
+      >{renderSlots}</rt-input-v2>
     }
 
     const placeholder = (() => {
@@ -713,7 +731,6 @@ export default {
             autocomplete={this.autocomplete}
             autocapitalize="off"
             type={this.type === 'search' ? 'text' : this.type}
-            v-validate={this.validate}
             class={this.inputElementClass}
             name={this.fieldName}
             onInput={this.inputHandler}
@@ -726,7 +743,6 @@ export default {
             autocomplete={this.autocomplete}
             autocapitalize="off"
             type={this.type}
-            v-validate={this.validate}
             class={this.inputElementClass}
             name={this.fieldName}
             onInput={this.inputHandler}

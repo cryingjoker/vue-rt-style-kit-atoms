@@ -1,13 +1,17 @@
 <script type="text/jsx">
-import variables from "../../variables.json";
-import VeeValidate from "vee-validate";
-import InputV2Icon from "./InputV2Icon.vue";
+import InputV2Atom from "./InputV2Atom.vue";
+import InputV2Password from "./InputV2Password.vue";
+
 const components = {}
-components[InputV2Icon.name] = InputV2Icon
+components[InputV2Atom.name] = InputV2Atom
 export default {
   name: "RtInputV2",
-  components:components,
+  components: components,
   props: {
+    bright: {
+      type: Boolean,
+      default: false
+    },
     maxLength: {
       type: Number,
       default: null
@@ -24,22 +28,9 @@ export default {
       type: Number,
       default: null
     },
-
-    insertLang: {
-      type: String,// [ru, en]
-      default: ''
-    },
-    insertType: {
-      type: String, //[number, string, password, tel]
-      default: ''
-    },
     disabled: {
       type: Boolean,
       default: false
-    },
-    autocomplete: {
-      type: String,
-      default: 'disable,false,off,none'
     },
     placeholder: {
       type: String,
@@ -48,10 +39,6 @@ export default {
     hasError: {
       type: Boolean,
       default: false
-    },
-    errorMessageFunc: {
-      type: Function,
-      default: null
     },
     errorMessage: {
       type: String,
@@ -78,6 +65,10 @@ export default {
       default: ''
     },
     type: {
+      type: String,
+      default: 'text'
+    },
+    inputType: {
       type: String,
       default: 'text'
     },
@@ -126,78 +117,79 @@ export default {
       default: false
     }
   },
-  data() {
-    return {
-      isNew: false,
-      isFocus: false,
-      disabledLocal: null,
-      index: null,
-      localLabel: this.label,
-      localValue: this.value,
-      hasInputText: this.value?.length > 0,
-      hintPosition: "right",
-      passwordVisibilityLocal: false
-    };
+
+  methods: {
+    onInput(e) {
+      this.$emit('input', e)
+      this.$emit('change', e)
+    },
+    renderIcons(createElement) {
+      if (this.$slots.icon) {
+        return createElement(
+            'template',
+            {slot: 'icon'},
+            [this.$slots.icon],
+        );
+      }
+      return null
+    },
+    bindEvents() {
+      if (this["_events"]) {
+        Object.keys(this["_events"]).map(eventName => {
+          this["_events"][eventName].forEach((fn) => {
+            this.$refs.input.addEventListener(
+                eventName,
+                fn
+            );
+          })
+
+        });
+      }
+    },
+    unbindEvents() {
+      if (this["_events"]) {
+        Object.keys(this["_events"]).map(eventName => {
+          this["_events"][eventName].forEach((fn) => {
+            this.$refs.input.removeEventListener(
+                eventName,
+                fn
+            );
+          })
+
+        });
+      }
+    },
+
   },
-
-  computed: {},
-
-
   mounted() {
-  },
-  updated() {
-
+    this.bindEvents();
   },
   beforeDestroy() {
+    this.unbindEvents();
   },
-  methods: {
-    changeValue() {
-      this.localValue = this.$refs.input.value;
-      this.$emit('input', this.localValue)
-    },
-    clearInput(){
-      this.$refs.input.value = ''
-      this.changeValue()
+  render(createElement) {
+    const componentStack = [];
+    componentStack.push(this.renderIcons(createElement))
+
+    if (this.inputType == 'password') {
+      return createElement(InputV2Password, {
+        props: this._props, ref: 'input', on: {
+          input: this.onInput
+        }
+      }, componentStack)
     }
 
-  },
-  watch: {
-    value(newValue, oldValue) {
-      if (newValue != oldValue && newValue != this.localValue) {
-        this.localValue = newValue;
+    return createElement(InputV2Atom, {
+      props: this._props, ref: 'input', scopedSlots: {
+        icon: () => {
+          componentStack
+        }
+      },
+      on: {
+        input: this.onInput
       }
-    },
-    localValue(val) {
-      this.$emit("change", val);
-    }
 
-  },
-  render() {
-
-    const renderIcon = ()=>{
-      if(this.$slots.icon?.length > 0){
-        return <span class="rt-input-v2-icon">
-          {this.$slots.icon}
-        </span>
-      }
-      return <span class="rt-input-v2-icon">
-          <span class="rt-input-v2-clear" onClick={this.clearInput}><rt-system-icons
-              name="close large"></rt-system-icons></span>
-        </span>
-    }
-    return <div class="rt-input-v2">
-      <label class="rt-input-v2-label">
-        <input class="rt-input-v2__input" value={this.localValue} onInput={this.changeValue} type="text" ref="input"
-               placeholder={this.label || this.placeholder}/>
-        <span class="rt-input-v2-placeholder">{this.label || this.placeholder}</span>
-        <span class="rt-input-v2__line"></span>
-        <rt-input-v2-icon onClick={this.clearInput}>
-          {this.$slots.icon ? <template slot="icon">{this.$slots.icon[0]}</template> : null}
-        </rt-input-v2-icon>
-      </label>
-      <span class="rt-input-v2-error sp-t-0-2 rt-font-label">Текст ошибки</span>
-      {this.localValue}
-    </div>
+    }, componentStack)
   }
 };
 </script>
