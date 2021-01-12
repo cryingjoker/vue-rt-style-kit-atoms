@@ -37,6 +37,9 @@
       window.addEventListener('resize', debounce(this.calcWidth, 35));
       window.addEventListener('resize', debounce(this.countTextPos, 35));
       window.addEventListener('scroll', this.hideHint);
+      if (!this.isDesktop) {
+        window.addEventListener('touchmove', this.hideHint, false);
+      }
     },
     created() {},
 
