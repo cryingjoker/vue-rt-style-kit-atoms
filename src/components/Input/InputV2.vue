@@ -1,6 +1,7 @@
 <script type="text/jsx">
 import InputV2Atom from "./InputV2Atom.vue";
 import InputV2Password from "./InputV2Password.vue";
+import InputV2Number from "./InputV2Number.vue";
 
 const components = {}
 components[InputV2Atom.name] = InputV2Atom
@@ -45,7 +46,7 @@ export default {
       default: ''
     },
     value: {
-      type: String,
+      type: String|Number,
       default: ""
     },
     isWhite: {
@@ -112,6 +113,10 @@ export default {
       type: String,
       default: ''
     },
+    step:{
+      type: Number,
+      default: 1
+    },
     isInteger: {
       type: Boolean,
       default: false
@@ -170,15 +175,24 @@ export default {
   render(createElement) {
     const componentStack = [];
     componentStack.push(this.renderIcons(createElement))
-
-    if (this.inputType == 'password') {
-      return createElement(InputV2Password, {
-        props: this._props, ref: 'input', on: {
+    const props = {...this._props}
+    if(this.inputType === "number"){
+      return createElement(InputV2Number, {
+        props: props, ref: 'input', on: {
           input: this.onInput
         }
       }, componentStack)
     }
-
+    if(typeof props.value == 'number') {
+      props.value = props.value.toString()
+    }
+    if (this.inputType == 'password') {
+      return createElement(InputV2Password, {
+        props: props, ref: 'input', on: {
+          input: this.onInput
+        }
+      }, componentStack)
+    }
     return createElement(InputV2Atom, {
       props: this._props, ref: 'input', scopedSlots: {
         icon: () => {

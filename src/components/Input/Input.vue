@@ -20,13 +20,18 @@ export default {
       type: Number,
       default: null
     },
-    minNumber: {
-      type: Number,
-      default: null
-    },
+
     version:{
       type: Number,
       default: 1
+    },
+    step:{
+      type: Number,
+      default: 1
+    },
+    minNumber: {
+      type: Number,
+      default: null
     },
     maxNumber: {
       type: Number,
@@ -66,7 +71,7 @@ export default {
       default: ''
     },
     value: {
-      type: String,
+      type: String|Number,
       default: ""
     },
     isWhite: {
@@ -568,6 +573,7 @@ export default {
           showNumbersButtons={this.showNumbersButtons}
           label={this.label}
           type={this.type}
+          step={this.step}
           isB2bInput={this.isB2bInput}
           outlined={this.outlined}
           color={this.color}

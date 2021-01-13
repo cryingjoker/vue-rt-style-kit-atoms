@@ -44,7 +44,7 @@ export default {
       default: ''
     },
     value: {
-      type: String,
+      type: String|Number,
       default: ""
     },
     isWhite: {
@@ -110,6 +110,10 @@ export default {
     isInteger: {
       type: Boolean,
       default: false
+    },
+    step:{
+      type: Number,
+      default: 1
     }
   },
   data() {
@@ -146,8 +150,15 @@ export default {
   beforeDestroy() {
   },
   methods: {
-    changeValue() {
-      this.localValue = this.$refs.input.value;
+    changeValue(e) {
+      if(this.type === 'number'){
+        this.localValue = this.$refs.input.valueAsNumber
+        if(e.inputType?.search(/delete/gi)>=0 && isNaN(this.localValue)){
+          this.localValue = ''
+        }
+      }else {
+        this.localValue = this.$refs.input.value + '';
+      }
       this.$emit('input', this.localValue)
     },
     clearInput() {
@@ -184,10 +195,22 @@ export default {
       }
       return null
     }
+    const inputComponent = ()=>{
+      if(this.type == 'number'){
+        return <input class="rt-input-v2__input" value={this.localValue} onInput={this.changeValue} type={this.type}
+                      ref="input"
+                      min={this.minNumber}
+                      max={this.maxNumber}
+                      step={this.step}
+                      placeholder={this.placeholder}/>
+      }
+      return <input class="rt-input-v2__input" value={this.localValue} onInput={this.changeValue} type={this.type}
+                    ref="input"
+                    placeholder={this.placeholder}/>
+    }
     return <div class={this.inputClass}>
       <label class="rt-input-v2-wrapper">
-        <input class="rt-input-v2__input" value={this.localValue} onInput={this.changeValue} type={this.type} ref="input"
-               placeholder={this.placeholder}/>
+        {inputComponent()}
         <span class="rt-input-v2-placeholder">{this.label || this.placeholder}</span>
         <span class="rt-input-v2__line"></span>
         <rt-input-v2-icon onClick={this.clearInput} color={this.isWhite ? 'white' : 'main'}>

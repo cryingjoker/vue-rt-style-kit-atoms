@@ -90,14 +90,18 @@ rt-input-v2,
   right: 0
 
 .rt-input-v2-icon-item
-  opacity: 0.5
   cursor: pointer
-  transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
-  transition-duration 0.25s
-  transition-property opacity
+  margin-left: 12px
+  path
+    opacity: 0.5
+    transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
+    transition-duration 0.25s
+    transition-property opacity, color
   &:hover
     @media (hover:hover)
-      opacity: 1
+      path
+        opacity: 1
+
 .rt-input-v2-clear
   cursor: pointer
   opacity: 0
@@ -127,3 +131,20 @@ rt-input-v2,
   .rt-input-v2-placeholder
     color: error-color
 
+.input-number-icon.rt-sys-icon
+  background-color: main-color01
+  border-radius 50%
+  transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
+  transition-duration 0.25s
+  transition-property background-color, fill
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+  .rt-dark-theme &
+    background-color white-color01
+  &:hover
+    @media (hover:hover)
+      background-color: main-color03
+      .rt-dark-theme &
+        background-color b2c-white03
