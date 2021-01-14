@@ -66,6 +66,11 @@ export default {
     step: {
       type: Number,
       default: 1
+    },
+    isInteger:{
+      type: Boolean,
+      default: false
+
     }
   },
 
@@ -93,7 +98,6 @@ export default {
       let min = typeof this.minNumber == 'number' ? this.minNumber : 0
       let step = 0
       if (this.value == '') {
-
           step = min;
         if(min < 0){
           step += this.step
@@ -101,7 +105,6 @@ export default {
         if(typeof this.minNumber != 'number') {
           step = this.step
         }
-
       } else {
         step = this.step - this.value % this.step;
         step += Math.abs(min)

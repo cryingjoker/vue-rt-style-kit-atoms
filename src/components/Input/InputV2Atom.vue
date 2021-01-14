@@ -44,7 +44,7 @@ export default {
       default: ''
     },
     value: {
-      type: String|Number,
+      type: String | Number,
       default: ""
     },
     isWhite: {
@@ -111,10 +111,10 @@ export default {
       type: Boolean,
       default: false
     },
-    step:{
+    step: {
       type: Number,
       default: 1
-    }
+    },
   },
   data() {
     return {
@@ -130,12 +130,12 @@ export default {
     };
   },
   computed: {
-    inputClass(){
-      const inputClassName =  ["rt-input-v2"]
-      if(this.bright){
+    inputClass() {
+      const inputClassName = ["rt-input-v2"]
+      if (this.bright) {
         inputClassName.push("rt-input-v2--bright")
       }
-      if(this.hasError){
+      if (this.hasError) {
         inputClassName.push('rt-input-v2--error')
       }
       return inputClassName.join(' ')
@@ -150,14 +150,27 @@ export default {
   beforeDestroy() {
   },
   methods: {
-    changeValue(e) {
-      if(this.type === 'number'){
-        this.localValue = this.$refs.input.valueAsNumber
-        if(e.inputType?.search(/delete/gi)>=0 && isNaN(this.localValue)){
-          this.localValue = ''
+
+    changeValue(e = null) {
+      const input = this.$refs.input;
+      if (this.type === 'number') {
+        if(!this.isInteger && input.value.search(/[,.]$/) >= 0){
+          this.localValue = input.value
+        }else {
+          if ('valueAsNumber' in input) {
+            this.localValue = input.valueAsNumber
+          } else {
+            this.localValue = input.value - 0
+          }
+          if(this.isInteger){
+            this.localValue = parseInt(this.localValue);
+          }
+          if (e && e.inputType?.search(/delete/gi) >= 0 && isNaN(this.localValue)) {
+            this.localValue = ''
+          }
         }
-      }else {
-        this.localValue = this.$refs.input.value + '';
+      } else {
+        this.localValue = input.value + '';
       }
       this.$emit('input', this.localValue)
     },
@@ -183,20 +196,20 @@ export default {
         return <template slot="icon">{icon}</template>
       })
     }
-    const renderLabel = ()=>{
-      if(this.hasError){
-        if(this.errorMessage?.length > 0){
+    const renderLabel = () => {
+      if (this.hasError) {
+        if (this.errorMessage?.length > 0) {
           return <span class="rt-input-v2-error sp-t-0-2 rt-font-label">{this.errorMessage}</span>
         }
         return null
       }
-      if(this.label?.length > 0){
+      if (this.label?.length > 0) {
         return <span class="rt-input-v2-label sp-t-0-2 rt-font-label">{this.label}</span>
       }
       return null
     }
-    const inputComponent = ()=>{
-      if(this.type == 'number'){
+    const inputComponent = () => {
+      if (this.type == 'number') {
         return <input class="rt-input-v2__input" value={this.localValue} onInput={this.changeValue} type={this.type}
                       ref="input"
                       min={this.minNumber}
@@ -211,7 +224,7 @@ export default {
     return <div class={this.inputClass}>
       <label class="rt-input-v2-wrapper">
         {inputComponent()}
-        <span class="rt-input-v2-placeholder">{this.label || this.placeholder}</span>
+        <span class="rt-input-v2-placeholder">{this.placeholder||this.label}</span>
         <span class="rt-input-v2__line"></span>
         <rt-input-v2-icon onClick={this.clearInput} color={this.isWhite ? 'white' : 'main'}>
           {icons()}
