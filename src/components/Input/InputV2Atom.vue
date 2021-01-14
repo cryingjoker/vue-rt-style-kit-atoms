@@ -133,7 +133,7 @@ export default {
     inputClass() {
       const inputClassName = ["rt-input-v2"]
       if (this.bright) {
-        inputClassName.push("rt-input-v2--bright")
+        inputClassName.push("rt-input-v2-bright")
       }
       if (this.hasError) {
         inputClassName.push('rt-input-v2--error')

@@ -19,6 +19,10 @@ export default {
     color: {
       default: '',
       type: String
+    },
+    bright:{
+      default: false,
+      type: Boolean
     }
   },
   data: () => ({
@@ -38,6 +42,9 @@ export default {
   computed: {
     iconClass() {
       const classList = ['rt-sys-icon'];
+      if(this.bright){
+        classList.push('rt-sys-icon-bright')
+      }
       if (this.color.length > 0) {
         classList.push('rt-sys-icon--' + this.color)
       }

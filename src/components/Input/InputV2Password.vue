@@ -70,14 +70,14 @@ export default {
       let icon = ''
       if (this.localType == 'password') {
         icon = createElement('rt-system-icons', {
-              props: {name: "password hide"}, on: {
+              props: {name: "password hide", bright:this.bright}, on: {
                 click: this.changeLocalType
               }
             },
         )
       } else {
         icon = createElement('rt-system-icons', {
-              props: {name: "password show"}, on: {
+              props: {name: "password show", bright:this.bright}, on: {
                 click: this.changeLocalType
               }
             },

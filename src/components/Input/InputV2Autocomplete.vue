@@ -4,7 +4,7 @@ import InputV2Atom from "./InputV2Atom.vue";
 const components = {}
 components[InputV2Atom.name] = InputV2Atom
 export default {
-  name: "RtInputV2Number",
+  name: "RtInputV2Dro",
   components: components,
   props: {
     bright: {
@@ -175,21 +175,18 @@ export default {
     },
     renderIcons(createElement) {
       let icons = []
-      let iconClass = 'input-number-icon'
-      if(this.bright){
-        iconClass+=' input-number-icon-bright'
-      }
+
       icons.push(createElement('rt-system-icons', {
-            class: iconClass,
-            props: {name: "add small",bright:this.bright}, on: {
+            class: 'input-number-icon',
+            props: {name: "add small"}, on: {
               click: this.addNumber
             }
           },
       ))
 
       icons.push(createElement('rt-system-icons', {
-            class: iconClass,
-            props: {name: "remove small",bright:this.bright}, on: {
+            class: 'input-number-icon',
+            props: {name: "remove small"}, on: {
               click: this.subtractNumber
             }
           },
