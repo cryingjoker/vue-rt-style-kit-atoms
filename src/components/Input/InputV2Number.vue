@@ -75,7 +75,37 @@ export default {
   },
 
   methods: {
+    onBlur(e){
+      if(!isNaN(e)){
+        if(typeof this.minNumber == 'number' && e < this.minNumber){
+          this.$refs['input'].localValue = this.minNumber
+          this.$emit('input', this.minNumber)
+        }
+        if(typeof this.maxNumber == 'number' && e > this.maxNumber){
+          this.$refs['input'].localValue = this.maxNumber
+          this.$emit('input', this.maxNumber)
+        }
+      }
+    },
+    onPaste(e){
+      let paste = (e.clipboardData || window.clipboardData).getData('text') - 0;
+      if(!isNaN(paste)){
+        if(typeof this.minNumber == 'number' && paste < this.minNumber){
+          this.$nextTick(()=> {
+            this.$refs['input'].localValue = this.minNumber;
+            this.$emit('input', this.minNumber)
+          })
+        }
+        if(typeof this.maxNumber == 'number' && paste > this.maxNumber){
+          this.$nextTick(()=> {
+            this.$refs['input'].localValue = this.maxNumber;
+            this.$emit('input', this.maxNumber)
+          })
+        }
+      }
+    },
     onInput(e) {
+
       if (isNaN(e)) {
         e = this.value
         this.$refs['input'].value = e;
@@ -84,10 +114,6 @@ export default {
         if (typeof e == 'number') {
           if (typeof this.maxNumber == 'number' && e > this.maxNumber) {
             e = this.maxNumber
-            this.$refs['input'].localValue = e;
-          }
-          if (typeof this.minNumber == 'number' && e < this.minNumber) {
-            e = this.minNumber
             this.$refs['input'].localValue = e;
           }
         }
@@ -106,9 +132,17 @@ export default {
           step = this.step
         }
       } else {
-        step = this.step - this.value % this.step;
-        step += Math.abs(min)
+
+        if(this.step%1 == 0) {
+          step = this.step - (this.value - 0) % this.step;
+          if(this.step >= 90) {
+            step += Math.abs(min)
+          }
+        }else{
+          step = this.step
+        }
       }
+
       this.changeInput(step)
     },
     subtractNumber() {
@@ -120,7 +154,7 @@ export default {
             step += this.step;
           }
       }else {
-        step = -((this.value - this.step - min) % this.step);
+        step = -(((this.value - 0) - this.step - min) % this.step);
         if (step >= 0) {
           step = -this.step;
         }
@@ -128,15 +162,13 @@ export default {
       this.changeInput(step)
     },
     changeInput(delta) {
-      let value = this.$refs['input'].value
+      let value = this.$refs['input'].value - 0
       if (value.length == 0) {
         value = 0
       } else {
         value = value - 0
       }
       this.onInput((value + delta));
-
-
     },
     changeLocalType() {
       this.localType = this.localType == 'password' ? 'text' : 'password';
@@ -172,7 +204,7 @@ export default {
     const componentStack = [];
     componentStack.push(this.renderIcons(createElement))
     const props = {...this._props}
-    return createElement(InputV2Atom, {props: props, on: {input: this.onInput}, ref: 'input'}, componentStack)
+    return createElement(InputV2Atom, {props: props, on: {input: this.onInput, blur: this.onBlur, paste: this.onPaste}, ref: 'input'}, componentStack)
   }
 };
 </script>

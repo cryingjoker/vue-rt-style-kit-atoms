@@ -150,8 +150,7 @@ export default {
   beforeDestroy() {
   },
   methods: {
-
-    changeValue(e = null) {
+    changeValue(e) {
       const input = this.$refs.input;
       if (this.type === 'number') {
         if(!this.isInteger && input.value.search(/[,.]$/) >= 0){
@@ -165,9 +164,9 @@ export default {
           if(this.isInteger){
             this.localValue = parseInt(this.localValue);
           }
-          if (e && e.inputType?.search(/delete/gi) >= 0 && isNaN(this.localValue)) {
-            this.localValue = ''
-          }
+        }
+        if (e && e.inputType?.search(/delete/gi) >= 0 && isNaN(this.localValue) && input.value.length < 2) {
+          this.localValue = ''
         }
       } else {
         this.localValue = input.value + '';
@@ -177,6 +176,12 @@ export default {
     clearInput() {
       this.$refs.input.value = ''
       this.changeValue()
+    },
+    onBlur(){
+      this.$emit('blur',this.localValue)
+    },
+    onPaste(e){
+      this.$emit('paste',e)
     }
   },
   watch: {
@@ -212,12 +217,16 @@ export default {
       if (this.type == 'number') {
         return <input class="rt-input-v2__input" value={this.localValue} onInput={this.changeValue} type={this.type}
                       ref="input"
+                      onBlur={this.onBlur}
                       min={this.minNumber}
                       max={this.maxNumber}
+                      onPaste={this.onPaste}
                       step={this.step}
                       placeholder={this.placeholder}/>
       }
       return <input class="rt-input-v2__input" value={this.localValue} onInput={this.changeValue} type={this.type}
+                    onBlur={this.onBlur}
+                    onPaste={this.onPaste}
                     ref="input"
                     placeholder={this.placeholder}/>
     }
