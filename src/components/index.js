@@ -26,6 +26,7 @@ export {default as Textarea} from './Textarea/Textarea.vue';
 export {default as TextareaStatic} from './Textarea/TextareaStatic.vue';
 
 export {default as Annotation} from './Annotation/Annotation.vue';
+export {default as AnnotationV2} from './Annotation/AnnotationV2.vue';
 export {default as ColorLineText} from './ColorLineText/ColorLineText.vue';
 export {default as Ussd} from './Ussd/Ussd.vue';
 

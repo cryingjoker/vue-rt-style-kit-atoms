@@ -23,11 +23,8 @@
     text-decoration none
 
 .{newAppName}-annotation__arrow
-  margin-top auto
-  margin-bottom auto
   position absolute
-  top 0
-  bottom 0
+  top .6em
   left 0
   transition-timing-function ease-in-out
   transition-duration .3s
@@ -57,7 +54,6 @@
     color b2c-white05
 
   .{newAppName}-annotation--is-open > &
-    max-height 400vh
     padding-top 10px
 
 .{newAppName}-annotation-item
@@ -67,3 +63,25 @@
   color main-color
   .{newAppName}-dark-theme &
     color b2c-white07
+
+.{newAppName}-annotation-v2
+  padding 20px 0
+  &__title
+    padding-left 36px
+    transition color .2s linear
+    display block
+    .{newAppName}-annotation--is-open &
+      color b2c-orange
+      .{newAppName}-annotation__arrow
+        fill b2c-orange
+    @media (hover: hover)
+      &:hover
+        color b2c-orange
+        .{newAppName}-annotation__arrow
+          fill b2c-orange
+  .{newAppName}-annotation__arrow
+    left 6px
+    transition fill .2s linear, transform .2s linear
+  &.{newAppName}-annotation--is-open
+    .{newAppName}-annotation__content
+      padding-top 20px

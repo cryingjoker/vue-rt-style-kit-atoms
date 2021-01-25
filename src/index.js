@@ -23,6 +23,7 @@ import {
     Textarea,
     TextareaStatic,
     Annotation,
+    AnnotationV2,
     ColorLineText,
     Ussd,
     Spinner,
@@ -92,6 +93,7 @@ let VueRtStyle = {
             Vue.component(Textarea.name, Textarea);
             Vue.component(TextareaStatic.name, TextareaStatic);
             Vue.component(Annotation.name, Annotation);
+            Vue.component(AnnotationV2.name, AnnotationV2);
             Vue.component(ColorLineText.name, ColorLineText);
             Vue.component(Ussd.name, Ussd);
             Vue.component(GridRow.name, GridRow);
@@ -159,6 +161,7 @@ export {
     Textarea,
     TextareaStatic,
     Annotation,
+    AnnotationV2,
     ColorLineText,
     Ussd,
     Spinner,
