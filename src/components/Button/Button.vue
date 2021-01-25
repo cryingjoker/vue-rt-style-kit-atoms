@@ -178,8 +178,8 @@
                     if(typeof(Event) === 'function') {
                         event = new CustomEvent('open-popup', {'detail': target});
                     }else{
-                        event = document.createEvent('Event');
-                        event.initCustomEvent('open-popup', true, true, {'detail': target});
+                        event = document.createEvent('CustomEvent');
+                        event.initEvent('open-popup', true, true, {'detail': target});
                     }
                     document.querySelector('body').dispatchEvent(event);
                     this.$emit("click", $event);

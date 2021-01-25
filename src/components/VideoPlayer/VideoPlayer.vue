@@ -75,7 +75,6 @@
                 // }, false);
             },
             togglePlay() {
-                console.log(this.isPlaying);
                 if(!this.isPlaying) {
                     setTimeout(() => {
                         this.$refs.video.play()
@@ -88,7 +87,6 @@
                 this.isPlaying = !this.isPlaying;
             },
             paused() {
-                console.log(this.isPlaying)
                 this.isPlaying = false;
             },
             checkPosition() {

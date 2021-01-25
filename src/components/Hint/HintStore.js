@@ -9,7 +9,7 @@ const initStore = (uid, textContent) => {
 };
 
 const setActive = (uid, coords, hovered) => {
-  if (activeHint.id === uid && activeHint.hovered === hovered) return
+  if (activeHint.id === uid && activeHint.hovered === hovered) return;
   activeHint.id = uid;
   activeHint.coords = coords;
   activeHint.hovered = hovered;
