@@ -419,13 +419,19 @@ a
 
     .{newAppName}-dark-theme &
       background-color b2c-white05
+  &--orange
+    &:before
+      background-color b2c-orange
+  &--purple
+    &:before
+      background-color b2c-purple
 
 .{newAppName}-numeric-list__item
   counter-increment step-counter
 
   &:before
     content counter(step-counter) "."
-    min-width 20px
+    min-width 28px
     color main-color
     position absolute
     left 0
@@ -434,26 +440,43 @@ a
       color b2c-white
 
 .{newAppName}-ordered-list__item,
-.{newAppName}-numeric-list__item
-  padding-left horizontal-space * 1.5
+.{newAppName}-numeric-list__item,
+.{newAppName}-checked-list__item
+  padding-left 32px
   position relative
-  .{newAppName}-ordered-list--boolet &
+  .{newAppName}-ordered-list--bullet &
     padding-left: 18px
     &:before
       left: 0
 
   &+&
-    margin-top 12px
-
+    margin-top 16px
     @media (max-width: mobile-upper-limit)
-      margin-top 10px
+      margin-top 12px
 
-  &:before
-    text-align center
+  //&:before
+  //  text-align center
 
 .{newAppName}-ordered-list__item+.{newAppName}-numeric-list__item,
 .{newAppName}-numeric-list__item+.{newAppName}-ordered-list__item
-  margin-top 15px
+  margin-top 16px
+
+.{newAppName}-checked-list__item
+  &:before
+    content ''
+    background-image url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTQgMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTMuMDMwNCAyLjAzMDMzTDYuMDMwMzkgOS4wMzAzM0M1LjczNzQ5IDkuMzIzMjIgNS4yNjI2MiA5LjMyMzIyIDQuOTY5NzMgOS4wMzAzM0wwLjk2OTcyNyA1LjAzMDMzTDIuMDMwMzkgMy45Njk2N0w1LjUwMDA2IDcuNDM5MzRMMTEuOTY5NyAwLjk2OTY2NkwxMy4wMzA0IDIuMDMwMzNaIiBmaWxsPSIjMTAxODI4Ii8+Cjwvc3ZnPg==')
+    position absolute
+    top .5em
+    width .7em
+    height .6em
+    left .4em
+    background-repeat no-repeat
+  &--purple
+    &:before
+      background-image url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTQgMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTMuMDMwNCAyLjAzMDMzTDYuMDMwMzkgOS4wMzAzM0M1LjczNzQ5IDkuMzIzMjIgNS4yNjI2MiA5LjMyMzIyIDQuOTY5NzMgOS4wMzAzM0wwLjk2OTcyNyA1LjAzMDMzTDIuMDMwMzkgMy45Njk2N0w1LjUwMDA2IDcuNDM5MzRMMTEuOTY5NyAwLjk2OTY2NkwxMy4wMzA0IDIuMDMwMzNaIiBmaWxsPSIjNzcwMGZmIi8+Cjwvc3ZnPg==')
+  &--orange
+    &:before
+      background-image url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTQgMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTMuMDMwNCAyLjAzMDMzTDYuMDMwMzkgOS4wMzAzM0M1LjczNzQ5IDkuMzIzMjIgNS4yNjI2MiA5LjMyMzIyIDQuOTY5NzMgOS4wMzAzM0wwLjk2OTcyNyA1LjAzMDMzTDIuMDMwMzkgMy45Njk2N0w1LjUwMDA2IDcuNDM5MzRMMTEuOTY5NyAwLjk2OTY2NkwxMy4wMzA0IDIuMDMwMzNaIiBmaWxsPSIjZmY0ZjEyIi8+Cjwvc3ZnPg==')
 
 .{b2bAppName}-faq-unordered-list
   &__item
