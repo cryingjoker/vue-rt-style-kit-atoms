@@ -416,6 +416,8 @@ a
     position absolute
     top .5em
     left 7px
+    @media(max-width mobile-upper-limit)
+      left 6px
 
     .{newAppName}-dark-theme &
       background-color b2c-white05
@@ -442,8 +444,8 @@ a
 .{newAppName}-ordered-list__item,
 .{newAppName}-numeric-list__item,
 .{newAppName}-checked-list__item
-  padding-left 32px
   position relative
+  padding-left 32px
   .{newAppName}-ordered-list--bullet &
     padding-left: 18px
     &:before
@@ -461,8 +463,14 @@ a
       .{newAppName}-checked-list__item
         margin-left 0
 
-  //&:before
-  //  text-align center
+.{newAppName}-numeric-list__item
+  &.rt-font-paragraph
+    @media(max-width laptop-upper-limit)
+      padding-left 28px
+  &.rt-font-small-paragraph
+    padding-left 28px
+    @media(max-width mobile-upper-limit)
+      padding-left 24px
 
 .{newAppName}-ordered-list__item+.{newAppName}-numeric-list__item,
 .{newAppName}-numeric-list__item+.{newAppName}-ordered-list__item
