@@ -22,6 +22,10 @@ export default {
     value:{
       type: String
     },
+    multiple:{
+      type: Boolean,
+      default: false
+    },
     isFocus:{
       type: Boolean,
       defaut: false
@@ -33,12 +37,12 @@ export default {
   },
   computed:{
     selectClass(){
-      const classList = ["select-option","d-block"];
-      if(this.isActive){
-        classList.push("select-option--select");
+      const classList = ["select-v2-option","d-block"];
+      if(this.isActive && !this.multiple){
+        classList.push("select-v2-option--select");
       }
       if(this.isFocus){
-        classList.push("select-option--focus");
+        classList.push("select-v2-option--focus");
       }
       return classList.join(' ')
     },
@@ -75,6 +79,7 @@ export default {
     },
     onClickFire(){
       if(this.isActive){
+
         SelectStore.removeActiveValue(this.selectName, this.value)
       }else{
         SelectStore.setActiveValue(this.selectName, this.value)
@@ -83,8 +88,15 @@ export default {
   },
   render(h) {
     if(this.label.length>0) {
+      if(this.multiple){
+        return <button type="button" ref="button" class={this.selectClass} onClick={this.onClickFire}>
+          <rt-checkbox is-orange={true} checked={this.isActive}></rt-checkbox>
+          <div class="select-v2-option__inner">{this.label}</div>
+          {this.renderSublabel}
+        </button>
+      }
       return <button type="button" ref="button" class={this.selectClass} onClick={this.onClickFire}>
-        <div class="select-option__inner">{this.label}</div>
+        <div class="select-v2-option__inner">{this.label}</div>
         {this.renderSublabel}
       </button>
     }

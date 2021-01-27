@@ -46,23 +46,13 @@ export default {
       type: [String, Number],
       default: null
     },
-    resetWrapperWidth: {
-      type: Boolean,
-      default: false
-    },
-    isB2bSelect: {
-      type: Boolean,
-      default: false
-    },
-    outlined: {
-      type: Boolean,
-      default: false
-    },
+
+
     autoComplete: {
       type: Boolean,
       default: false
     },
-    multi: {
+    multiple: {
       type: Boolean,
       default: false
     },
@@ -70,10 +60,7 @@ export default {
       type: String,
       default: ''
     },
-    hasContentText: {
-      type: Boolean,
-      default: false
-    },
+
     name: {
       type: String,
       default: ''
@@ -104,8 +91,8 @@ export default {
       }
     },
     getActiveValue() {
-      const selectActiveValue = SelectStore.getActiveValue(this.name)
-      const selectActiveLabels = SelectStore.getActiveLabels(this.name)
+      let selectActiveValue = SelectStore.getActiveValue(this.name)
+      let selectActiveLabels = SelectStore.getActiveLabels(this.name)
       if (selectActiveValue) {
         this.selectActiveValue = [...selectActiveValue];
       }
@@ -116,7 +103,8 @@ export default {
       this.focusIndex = SelectStore.getFocusIndex(this.name)
     },
     getSelectType() {
-      this.selectorType = SelectStore.getSelectorType(this.name, this.type);
+
+      this.selectorType = SelectStore.getSelectorType(this.name, this.type, this.multiple);
     },
     getSelectOpenStatus() {
       this.selectOpenStatus = SelectStore.getOpenStatus(this.name);
@@ -279,15 +267,25 @@ export default {
     }
   },
   computed: {
-    renderSelectLine() {
-      let borderClass = '';
-      borderClass += this.selectOpenStatus ? 'text-field__border' : 'text-field__line';
-      borderClass += (this.outlined && this.hasError) ? ' text-field__border--error' : '';
-      return <div class={borderClass}></div>
-    },
     renderSelectList() {
-      return <div class="select-list">
-        {this.renderSelectOption}
+      const renderShadowUp = () => {
+        if (this.selectOptions.length > 6) {
+          return <div class="select-v2-list-shadow-up"></div>
+        }
+        return null
+      }
+      const renderShadowDown = () => {
+        if (this.selectOptions.length > 6 ) {
+          return <div class="select-v2-list-shadow-down"></div>
+        }
+        return null
+      }
+      return <div class="select-v2-list">
+        <div class="select-v2-list-inner">
+          {renderShadowUp()}
+          {renderShadowDown()}
+          {this.renderSelectOption}
+        </div>
       </div>
     },
     renderSelectOption() {
@@ -299,6 +297,7 @@ export default {
         const isFocus = index == this.focusIndex;
         return <rt-select-v2-virtual-option ref={'select-item-' + index} select-name={this.name} is-active={isActive}
                                             value={item.value}
+                                            multiple={this.multiple}
                                             sublabel={item.sublabel}
                                             is-focus={isFocus}
                                             label={item.label}></rt-select-v2-virtual-option>
@@ -306,89 +305,67 @@ export default {
     },
 
     renderLabel() {
-
       const classList = [];
-      classList.push('floating-placeholder')
-      if (this.selectActiveValue.length > 0) {
-        classList.push('floating-placeholder--go-top')
+      classList.push('select-v2-label')
+      if (this.selectActiveValue && this.selectActiveValue[0]?.length > 0) {
+        classList.push('select-v2-label--up')
       }
       return <label ref="placeholder" class={classList.join(' ')}>{this.label}</label>
     },
     selectClasses() {
       let selectClasses = [];
-      if (this.v2) {
-        selectClasses.push('rt-select-v2')
-      } else {
-        selectClasses.push('rt-select', 'select', 'text-field')
-        if (this.hasError) {
-          selectClasses.push("select--error text-field--error");
-        }
-        if (this.selectOpenStatus) {
-          selectClasses.push("select--is-open");
-          if (this.verticalOrientation == 'top') {
-            selectClasses.push("select--invert-open-list");
-          }
+      selectClasses.push('select-v2',)
+      if (this.hasError) {
+        selectClasses.push("select-v2--error text-field--error");
+      }
+      if (this.selectOpenStatus) {
+        selectClasses.push("select-v2--is-open");
+        if (this.verticalOrientation == 'top') {
+          selectClasses.push("select-v2--invert-open-list");
         }
       }
 
-      // if (this.resetWrapperWidth) {
-      //   selectClasses.push("select--is-reset-width");
-      // }
       if (this.disabled) {
-        selectClasses.push("select--disabled");
+        selectClasses.push("select-v2--disabled");
       }
-      // if (this.isOpenListOnTop) {
-      //   selectClasses.push("select--invert-open-list");
-      // }
-      // if (this.isB2bSelect) {
-      //   selectClasses.push("rtb-select");
-      // }
-      // if (this.outlined) {
-      //   selectClasses.push("rtb-select--outlined");
-      // }
-      // if (this.multi) {
-      //   selectClasses.push("rtb-select--multi");
-      // }
-      // if (this.hasContentText) {
-      //   selectClasses.push("rt-select--has-content")
-      // }
+
       return selectClasses.join(' ');
     },
     renderValue() {
       if (this.autoComplete) {
-        //todo доделать автокомплит
         <rt-input value={"this.selectActiveLabels.join(', ')"}></rt-input>
       } else {
-        return <p class="select-input">{this.selectActiveLabels.join(', ')}</p>
+        if(this.selectActiveLabels.length < 2 && !this.multiple) {
+          return <p class="select-v2-value">{this.selectActiveLabels[0]}</p>
+        }
+        const valueItem = this.selectActiveLabels.map((item,index)=>{
+          const click = (e)=>{
+            SelectStore.removeActiveValue(this.name, this.selectActiveValue[index])
+            e.preventDefault();
+            e.stopPropagation();
+          }
+
+          return <span class="select-v2-tag" onClick={click}>
+            <span>{item}</span>
+            <rt-system-icons class="select-v2-tag__remove" name="close small"></rt-system-icons>
+          </span>
+        })
+        return <p class="select-v2-value d-flex">{valueItem}</p>
       }
     }
   },
   render(h) {
-    if (this.v2) {
-      return <div class={this.selectClasses} ref="select">
-        {this.$slots.default}
-        new select
-      </div>
-    }
-
     return <div class={this.selectClasses} ref="select">
-      <div class="select__inner">
-        <div class="select-inner-container">
-          <button type="button" disabled={this.disabled} class="select__inner" onClick={this.toggleOpen}>
-            <div class="select-value">
-              {this.renderValue}
-            </div>
-            {this.renderLabel}
-            {this.$slots.default}
-            {this.renderSelectLine}
-          </button>
-          <div class="select-arrow">
-            <svg class="select-arrow__icon" width="13" height="7">
-              <path d="M.705 1.704l5.999 6 6-6L11.295.295h-.002l-4.59 4.58L2.115.294h-.002z"
-                    fill="#575D68" fill-rule="evenodd"/>
-            </svg>
-          </div>
-        </div>
+      <div class="select-v2__container">
+        <button type="button" disabled={this.disabled} class="select-v2__inner" onClick={this.toggleOpen}>
+          {this.renderValue}
+          {this.renderLabel}
+          {this.$slots.default}
+          {this.renderSelectLine}
+
+          <rt-system-icons class="select-v2-arrow" name="chevron down"></rt-system-icons>
+
+        </button>
         {this.renderSelectList}
       </div>
     </div>
