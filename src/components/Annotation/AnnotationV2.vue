@@ -59,6 +59,7 @@
             },
             labelClasses(){
                 const classList = this.titleFontClass.split(' ');
+                classList.push('rt-font-bold');
                 classList.push('rt-annotation__title');
                 classList.push('rt-annotation-v2__title');
                 return classList.join(' ')
