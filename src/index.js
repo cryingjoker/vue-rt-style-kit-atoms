@@ -23,6 +23,7 @@ import {
     Textarea,
     TextareaStatic,
     Annotation,
+    AnnotationV2,
     ColorLineText,
     Ussd,
     Spinner,
@@ -92,6 +93,7 @@ let VueRtStyle = {
             Vue.component(Textarea.name, Textarea);
             Vue.component(TextareaStatic.name, TextareaStatic);
             Vue.component(Annotation.name, Annotation);
+            Vue.component(AnnotationV2.name, AnnotationV2);
             Vue.component(ColorLineText.name, ColorLineText);
             Vue.component(Ussd.name, Ussd);
             Vue.component(GridRow.name, GridRow);
@@ -101,9 +103,9 @@ let VueRtStyle = {
             Vue.component(SystemIcons.name, SystemIcons);
             Vue.component(VideoPlayer.name, VideoPlayer);
             Vue.component(ArrowAnchor.name, ArrowAnchor);
-            
+
             Vue.directive(LazySrcDirective.name, LazySrcDirective);
-            
+
             Vue.RtStyleAtoms = true;
         }
     }
@@ -130,7 +132,7 @@ if (typeof window !== 'undefined') {
 
 // @Deprecated
     window.RTK_STYLE_VER = version;
-    
+
     window.addEventListener('getVueRtStyleVersion', function () {
         window.postMessage({from: "vue-rt-style-kit", type: "setVersion", label: "atoms", version: version}, "*");
     })
@@ -159,6 +161,7 @@ export {
     Textarea,
     TextareaStatic,
     Annotation,
+    AnnotationV2,
     ColorLineText,
     Ussd,
     Spinner,
@@ -199,7 +202,7 @@ export {
     backgroundColorProps,
     getBackgroundClassByProps,
     getBackgroundClass,
-    
+
     StorePrototype,
     viewportPositionStore,
     deviceTypeStore,
