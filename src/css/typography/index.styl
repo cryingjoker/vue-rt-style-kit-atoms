@@ -74,9 +74,9 @@ h1,
     @media (max-width tablet-upper-limit)
       font-size 28px
       line-height 32px
-  //.{newAppName}-card &
-  //  font-size 50px
-  //  line-height 60px
+//.{newAppName}-card &
+//  font-size 50px
+//  line-height 60px
 
 .{newAppName}-font-banner-label
   font-size 50px
@@ -128,9 +128,9 @@ h2,
     @media (max-width tablet-upper-limit)
       font-size 24px
       line-height 32px
-  //.{newAppName}-card &
-  //  font-size 36px
-  //  line-height 46px
+//.{newAppName}-card &
+//  font-size 36px
+//  line-height 46px
 
 .{newAppName}-font-promo-title
   font-size 36px
@@ -152,9 +152,9 @@ h3,
     @media (max-width tablet-upper-limit)
       font-size 22px
       line-height 28px
-  //.{newAppName}-card &
-  //  font-size 28px
-  //  line-height 36px
+//.{newAppName}-card &
+//  font-size 28px
+//  line-height 36px
 
 .{newAppName}-font-promo
   font-size 24px
@@ -182,9 +182,9 @@ h4,
     @media (max-width tablet-upper-limit)
       font-size 18px
       line-height 24px
-  //.{newAppName}-card &
-  //  font-size 20px
-  //  line-height 28px
+//.{newAppName}-card &
+//  font-size 20px
+//  line-height 28px
 
 strong,
 b,
@@ -220,9 +220,9 @@ b,
     line-height 24px
     &.{newAppName}-font-bold
       line-height 20px
-  //.{newAppName}-card &
-  //  font-size 16px
-  //  line-height 20px
+//.{newAppName}-card &
+//  font-size 16px
+//  line-height 20px
 
 .p2,
 .{newAppName}-font-small-paragraph
@@ -255,9 +255,9 @@ b,
       &.{newAppName}-font-bold
         line-height 16px
 
-  //.{newAppName}-card &
-  //  font-size 16px
-  //  line-height 20px
+//.{newAppName}-card &
+//  font-size 16px
+//  line-height 20px
 
 .p3,
 .{newAppName}-font-control
@@ -294,9 +294,9 @@ b,
       &.{newAppName}-font-bold
         line-height 16px
 
-  //.{newAppName}-card &
-  //  font-size 14px
-  //  line-height 16px
+//.{newAppName}-card &
+//  font-size 14px
+//  line-height 16px
 
 .p4,
 .{newAppName}-font-label
@@ -416,16 +416,24 @@ a
     position absolute
     top .5em
     left 7px
+    @media(max-width mobile-upper-limit)
+      left 6px
 
     .{newAppName}-dark-theme &
       background-color b2c-white05
+  &--orange
+    &:before
+      background-color b2c-orange
+  &--purple
+    &:before
+      background-color b2c-purple
 
 .{newAppName}-numeric-list__item
   counter-increment step-counter
 
   &:before
     content counter(step-counter) "."
-    min-width 20px
+    min-width 28px
     color main-color
     position absolute
     left 0
@@ -434,26 +442,56 @@ a
       color b2c-white
 
 .{newAppName}-ordered-list__item,
-.{newAppName}-numeric-list__item
-  padding-left horizontal-space * 1.5
+.{newAppName}-numeric-list__item,
+.{newAppName}-checked-list__item
   position relative
-  .{newAppName}-ordered-list--boolet &
+  padding-left 32px
+  .{newAppName}-ordered-list--bullet &
     padding-left: 18px
     &:before
       left: 0
 
   &+&
-    margin-top 12px
-
+    margin-top 16px
     @media (max-width: mobile-upper-limit)
-      margin-top 10px
+      margin-top 12px
+  .rt-annotation &
+    @media (max-width: mobile-upper-limit)
+      margin-left -32px
+      .{newAppName}-ordered-list__item,
+      .{newAppName}-numeric-list__item,
+      .{newAppName}-checked-list__item
+        margin-left 0
 
-  &:before
-    text-align center
+.{newAppName}-numeric-list__item
+  &.rt-font-paragraph
+    @media(max-width laptop-upper-limit)
+      padding-left 28px
+  &.rt-font-small-paragraph
+    padding-left 28px
+    @media(max-width mobile-upper-limit)
+      padding-left 24px
 
 .{newAppName}-ordered-list__item+.{newAppName}-numeric-list__item,
 .{newAppName}-numeric-list__item+.{newAppName}-ordered-list__item
-  margin-top 15px
+  margin-top 16px
+
+.{newAppName}-checked-list__item
+  &:before
+    content ''
+    background-image url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTQgMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTMuMDMwNCAyLjAzMDMzTDYuMDMwMzkgOS4wMzAzM0M1LjczNzQ5IDkuMzIzMjIgNS4yNjI2MiA5LjMyMzIyIDQuOTY5NzMgOS4wMzAzM0wwLjk2OTcyNyA1LjAzMDMzTDIuMDMwMzkgMy45Njk2N0w1LjUwMDA2IDcuNDM5MzRMMTEuOTY5NyAwLjk2OTY2NkwxMy4wMzA0IDIuMDMwMzNaIiBmaWxsPSIjMTAxODI4Ii8+Cjwvc3ZnPg==')
+    position absolute
+    top .5em
+    width .7em
+    height .6em
+    left .4em
+    background-repeat no-repeat
+  &--purple
+    &:before
+      background-image url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTQgMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTMuMDMwNCAyLjAzMDMzTDYuMDMwMzkgOS4wMzAzM0M1LjczNzQ5IDkuMzIzMjIgNS4yNjI2MiA5LjMyMzIyIDQuOTY5NzMgOS4wMzAzM0wwLjk2OTcyNyA1LjAzMDMzTDIuMDMwMzkgMy45Njk2N0w1LjUwMDA2IDcuNDM5MzRMMTEuOTY5NyAwLjk2OTY2NkwxMy4wMzA0IDIuMDMwMzNaIiBmaWxsPSIjNzcwMGZmIi8+Cjwvc3ZnPg==')
+  &--orange
+    &:before
+      background-image url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTQgMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTMuMDMwNCAyLjAzMDMzTDYuMDMwMzkgOS4wMzAzM0M1LjczNzQ5IDkuMzIzMjIgNS4yNjI2MiA5LjMyMzIyIDQuOTY5NzMgOS4wMzAzM0wwLjk2OTcyNyA1LjAzMDMzTDIuMDMwMzkgMy45Njk2N0w1LjUwMDA2IDcuNDM5MzRMMTEuOTY5NyAwLjk2OTY2NkwxMy4wMzA0IDIuMDMwMzNaIiBmaWxsPSIjZmY0ZjEyIi8+Cjwvc3ZnPg==')
 
 .{b2bAppName}-faq-unordered-list
   &__item
