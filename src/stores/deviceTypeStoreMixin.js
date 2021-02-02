@@ -55,4 +55,4 @@ export const deviceTypeStore = Vue.observable({
   getStatus: deviceTypeStoreObject.getStatus,
   removeWatcher: deviceTypeStoreObject.removeWatcher,
   addWatcher: deviceTypeStoreObject.addWatcher
-});
+})

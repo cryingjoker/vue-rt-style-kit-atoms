@@ -103,9 +103,9 @@ let VueRtStyle = {
             Vue.component(SystemIcons.name, SystemIcons);
             Vue.component(VideoPlayer.name, VideoPlayer);
             Vue.component(ArrowAnchor.name, ArrowAnchor);
-            
+
             Vue.directive(LazySrcDirective.name, LazySrcDirective);
-            
+
             Vue.RtStyleAtoms = true;
         }
     }
@@ -132,7 +132,7 @@ if (typeof window !== 'undefined') {
 
 // @Deprecated
     window.RTK_STYLE_VER = version;
-    
+
     window.addEventListener('getVueRtStyleVersion', function () {
         window.postMessage({from: "vue-rt-style-kit", type: "setVersion", label: "atoms", version: version}, "*");
     })
@@ -202,7 +202,7 @@ export {
     backgroundColorProps,
     getBackgroundClassByProps,
     getBackgroundClass,
-    
+
     StorePrototype,
     viewportPositionStore,
     deviceTypeStore,
