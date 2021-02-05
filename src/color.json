@@ -1,4 +1,7 @@
 {
+  "b2c-black": "#000000",
+  "b2c-black085": "rgba(16, 24, 40 , 0.85)",
+  "b2c-black085-no-opacity": "#343B48",
   "b2c-purple": "#7700FF",
   "b2c-purple-button-hover": "#5B09C0",
   "b2c-purple-button-active": "#3F028C",
