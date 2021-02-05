@@ -1,0 +1,148 @@
+{
+  "items": [
+    {
+      "name": "rt-img",
+      "property": "src",
+      "type": "String",
+      "description": "ссылка на картинку",
+      "value": "''",
+      "version": "0.3.43"
+    },
+    {
+      "name": "rt-img",
+      "property": "td-src",
+      "type": "String",
+      "description": "ссылка на картинку для планшета",
+      "value": "''",
+      "version": "0.3.43"
+    },
+    {
+      "name": "rt-img",
+      "property": "md-src",
+      "type": "String",
+      "description": "ссылка на картинку для мобильного телефона",
+      "value": "''",
+      "version": "0.3.43"
+    },
+    {
+      "name": "rt-img",
+      "property": "lg-src",
+      "type": "String",
+      "description": "ссылка на картинку для больших экранов",
+      "value": "''",
+      "version": "0.3.43"
+    },
+    {
+      "name": "rt-img",
+      "property": "x2-src",
+      "type": "String",
+      "description": "ссылка на картинку для ретины",
+      "value": "''",
+      "version": "0.3.43"
+    },
+    {
+      "name": "rt-img",
+      "property": "x2-td-src",
+      "type": "String",
+      "description": "ссылка на картинку для планшета более плотная",
+      "value": "''",
+      "version": "0.3.43"
+    },
+    {
+      "name": "rt-img",
+      "property": "x2-md-src",
+      "type": "String",
+      "description": "ссылка на картинку для мобильного телефона более плотная",
+      "value": "''",
+      "version": "0.3.43"
+    },
+    {
+      "name": "rt-img",
+      "property": "x2-lg-src",
+      "type": "String",
+      "description": "ссылка на картинку для больших экранов ретины",
+      "value": "''",
+      "version": "0.3.43"
+    },
+    {
+      "name": "rt-img",
+      "property": "webp-src",
+      "type": "String",
+      "description": "ссылка на webp картинку (если поддерживается)",
+      "value": "''",
+      "version": "0.3.43"
+    },
+    {
+      "name": "rt-img",
+      "property": "webp-td-src",
+      "type": "String",
+      "description": "ссылка на webp картинку (если поддерживается) для планшета",
+      "value": "''",
+      "version": "0.3.43"
+    },
+    {
+      "name": "rt-img",
+      "property": "webp-md-src",
+      "type": "String",
+      "description": "ссылка на webp картинку (если поддерживается) для мобильного телефона",
+      "value": "''",
+      "version": "0.3.43"
+    },
+    {
+      "name": "rt-img",
+      "property": "webp-lg-src",
+      "type": "String",
+      "description": "ссылка на webp картинку (если поддерживается) для больших экранов",
+      "value": "''",
+      "version": "0.3.43"
+    },
+    {
+      "name": "rt-img",
+      "property": "webp-x2-src",
+      "type": "String",
+      "description": "ссылка на webp картинку (если поддерживается) более плотную для ретины",
+      "value": "''",
+      "version": "0.3.43"
+    },
+    {
+      "name": "rt-img",
+      "property": "webp-x2-lg-src",
+      "type": "String",
+      "description": "ссылка на webp картинку (если поддерживается) для больших экранов более плотную для ретины",
+      "value": "''",
+      "version": "0.3.43"
+    },
+    {
+      "name": "rt-img",
+      "property": "lazy-src",
+      "type": "String",
+      "description": "ссылка на картинку если картинка вне области видимости пользователя - lazy через observable api",
+      "value": "''",
+      "version": "0.3.43"
+    },
+    {
+      "name": "rt-img",
+      "property": "lazy-lg-src",
+      "type": "String",
+      "description": "ссылка на картинку для больших экранов если картинка вне области видимости пользователя - lazy через observable api",
+      "value": "''",
+      "version": "0.3.43"
+    },
+    {
+      "name": "rt-img",
+      "property": "lazy-td-src",
+      "type": "String",
+      "description": "ссылка на картинку для планшетов если картинка вне области видимости пользователя - lazy через observable api",
+      "value": "''",
+      "version": "0.3.43"
+    },
+    {
+      "name": "rt-img",
+      "property": "lazy-md-src",
+      "type": "String",
+      "description": "ссылка на картинку для мобильных если картинка вне области видимости пользователя - lazy через observable api",
+      "value": "''",
+      "version": "0.3.43"
+    }
+  ]
+}
