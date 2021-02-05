@@ -27,6 +27,20 @@
       "type" : "String",
       "description" : "Задаёт шрифт для заголовка примечания",
       "value" : "rt-font-paragraph"
+    },
+    {
+      "name" : "rt-annotation",
+      "property" : ":v2",
+      "type" : "Boolean",
+      "description" : "Флаг установки обновлённого вида и логики компонента",
+      "value" : "false"
+    },
+    {
+      "name" : "rt-annotation",
+      "property" : "scroll-timeout",
+      "type" : "Number",
+      "description" : "Устанавливает задержку времени до прокрутки страницы к открытому по умолчанию блоку",
+      "value" : "0"
     }
   ]
 }
