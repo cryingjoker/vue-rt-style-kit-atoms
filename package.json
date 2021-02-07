@@ -33,6 +33,7 @@
     "normalize.css": "^8.0.1",
     "reflect-metadata": "^0.1.13",
     "reset-css": "^5.0.1",
+    "smoothscroll-polyfill": "^0.4.4",
     "tslib": "^2.0.0",
     "vue-fragment": "^1.5.1",
     "vue-tsx-support": "^2.3.3",

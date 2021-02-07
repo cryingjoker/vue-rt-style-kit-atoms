@@ -8,7 +8,7 @@
       "value" : "null"
     },
     {
-      "name" : "rt-annotation",{
+      "name" : "rt-annotation",
       "items" : [
         {
           "name" : "rt-annotation",
@@ -54,7 +54,7 @@
         }
       ]
     },
-
+    {
     "property" : "has-white-color",
       "type" : "Boolean",
       "description" : "Флаг белого цвета",
