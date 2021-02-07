@@ -125,8 +125,7 @@ export default {
       localLabel: this.label,
       localValue: this.value,
       hasInputText: this.value?.length > 0,
-      hintPosition: "right",
-      passwordVisibilityLocal: false
+      hintPosition: "right"
     };
   },
   computed: {
@@ -182,6 +181,18 @@ export default {
     },
     onPaste(e){
       this.$emit('paste',e)
+    },
+    onKeydown(e){
+      this.$emit('keydown',e)
+    },
+    onKeyup(e){
+      this.$emit('keyup',e)
+    },
+    onFocus(e){
+      this.$emit('focus',e)
+    },
+    onInput(e) {
+      this.$emit('input',e)
     }
   },
   watch: {
@@ -222,6 +233,18 @@ export default {
                       max={this.maxNumber}
                       onPaste={this.onPaste}
                       step={this.step}
+                      placeholder={this.placeholder}/>
+      }
+      if (this.type == 'tel') {
+        return <input class="rt-input-v2__input"
+                      value={this.localValue}
+                      type={this.type}
+                      ref="input"
+                      onBlur={this.onBlur}
+                      onPaste={this.onPaste}
+                      onInput={this.onInput}
+                      onKeydown={this.onKeydown}
+                      onFocus={this.onFocus}
                       placeholder={this.placeholder}/>
       }
       return <input class="rt-input-v2__input" value={this.localValue} onInput={this.changeValue} type={this.type}

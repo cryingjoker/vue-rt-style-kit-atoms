@@ -83,9 +83,13 @@ class SelectStoreClass extends StorePrototype {
   
   removeActiveValue(id, value) {
     const index = this.selectorsActiveValue[id]?.indexOf(value);
-    if (index >= 0) {
-      this.selectorsActiveValue[id].splice(index, 1)
-      this.runWatchersById(id);
+    if(this.selectorsTypes[id].multiple) {
+      if (index >= 0) {
+        this.selectorsActiveValue[id].splice(index, 1)
+        this.runWatchersById(id);
+      }
+    } else {
+      this.setClose(id);
     }
   }
   

@@ -11,10 +11,6 @@ export default {
       type: Boolean,
       default: false
     },
-    newVersion: {
-      type: Number,
-      default: 2
-    },
     disabled: {
       type: Boolean,
       default: false
@@ -70,23 +66,23 @@ export default {
       let icon = ''
       if (this.localType == 'password') {
         icon = createElement('rt-system-icons', {
-              props: {name: "password hide", bright:this.bright}, on: {
-                click: this.changeLocalType
-              }
-            },
+            props: {name: "password hide", bright:this.bright}, on: {
+              click: this.changeLocalType
+            }
+          },
         )
       } else {
         icon = createElement('rt-system-icons', {
-              props: {name: "password show", bright:this.bright}, on: {
-                click: this.changeLocalType
-              }
-            },
+            props: {name: "password show", bright:this.bright}, on: {
+              click: this.changeLocalType
+            }
+          },
         )
       }
       return createElement(
-          'template',
-          {slot: 'icon'},
-          [icon],
+        'template',
+        {slot: 'icon'},
+        [icon],
       );
     }
   },
