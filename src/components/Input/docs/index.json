@@ -107,13 +107,6 @@
     },
     {
       "name": "rt-input",
-      "property": "validate",
-      "type": "Object | String",
-      "description": "Установка правил для `v-validate`",
-      "value": "null"
-    },
-    {
-      "name": "rt-input",
       "property": ":show-numbers-buttons",
       "type": "Boolean",
       "description": "Флаг устанавливающий наличие кнопок `+/-` при вводе цифр",
@@ -194,13 +187,6 @@
       "property": "input-button-text",
       "type": "String",
       "description": "Устанавливает текст в кнопке, описанной выше",
-      "value": ""
-    },
-    {
-      "name": "rt-input",
-      "property": "scope",
-      "type": "String",
-      "description": "Задаёт `scope` при использовании `vee-validate`",
       "value": ""
     },
     {
