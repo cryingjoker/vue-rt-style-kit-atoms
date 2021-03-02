@@ -5,7 +5,7 @@ let activeAnnotationID = null;
 const watchers = {};
 
 const initStore = (uid, isOpened) => {
-  annotations[uid] = {isOpened : isOpened};
+    annotations[uid] = {isOpened : isOpened};
 };
 
 const setActive = (uid) => {
@@ -39,10 +39,10 @@ const runWatchers = () => {
 };
 
 export const AnnotationStore = Vue.observable({
-  initStore: initStore,
-  setActive: setActive,
-  addWatcher: addWatcher,
-  getActive: getActive,
-  removeWatcher: removeWatcher,
-  clearStore: clearStore
+    initStore: initStore,
+    setActive: setActive,
+    addWatcher: addWatcher,
+    getActive: getActive,
+    removeWatcher: removeWatcher,
+    clearStore: clearStore
 });
