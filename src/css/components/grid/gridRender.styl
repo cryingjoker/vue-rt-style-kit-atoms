@@ -4,11 +4,16 @@ $postfixes = '' 'persent'
 $steps = (12 12 6 3)(10 10 10 10)
 $unitsType = '%' '%'
 
+rt-col
+  flex 0 0 1
+
 .rt-col
-  width 100%
-  padding-left (horizontal-space * .5)
-  padding-right (horizontal-space * .5)
-  position relative
+  &,
+  \rt-col
+    width 100%
+    padding-left (horizontal-space * .5)
+    padding-right (horizontal-space * .5)
+    position relative
 
 gridRender()
   for $device_index in 0 .. 3
@@ -23,7 +28,6 @@ gridRender()
 
         for $i in 1 .. $steps[$postfixIndex][$device_index]
           className = 'rt-col'
-
           if $device_types_code[$device_index]
             className = className + '-'+$device_types_code[$device_index]
           if $postfixes[$postfixIndex]
