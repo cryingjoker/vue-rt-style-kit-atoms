@@ -29,13 +29,13 @@ gridRender()
           className = 'rt-col'
           selector = "rt-col"
           if $device_index == 0
-            selector= selector+'[size="'+$i+'"],'+selector+'[\:size="'+$i+'"]'
+            selector= selector+'[size="'+$i+'"]'
           if $device_index == 1
-            selector= selector+'[large-size="'+$i+'"],'+selector+'[\:large-size="'+$i+'"]'
+            selector= selector+'[large-size="'+$i+'"]'
           if $device_index == 2
-            selector= selector+'[tablet-size="'+$i+'"],'+selector+'[\:tablet-size="'+$i+'"]'
+            selector= selector+'[tablet-size="'+$i+'"]'
           if $device_index == 3
-            selector= selector+'[mobile-size="'+$i+'"],'+selector+'[\:mobile-size="'+$i+'"]'
+            selector= selector+'[mobile-size="'+$i+'"]'
           if $device_types_code[$device_index]
             className = className + '-'+$device_types_code[$device_index]
           if $postfixes[$postfixIndex]
