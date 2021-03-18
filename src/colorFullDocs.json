@@ -6,18 +6,23 @@
   },
   {
     "code_variable_name": "b2c-purple-button-hover",
-    "label": "",
+    "label": "Rostelecom Purple Hover",
     "value": "#5B09C0"
   },
   {
     "code_variable_name": "b2c-purple-button-active",
-    "label": "",
+    "label": "Rostelecom Purple Active",
     "value": "#3F028C"
   },
   {
     "code_variable_name": "b2c-purple01",
-    "label": "",
-    "value": "rgba(119,0,255,0.1)"
+    "label": "Rostelecom Purple 10%",
+    "value": "rgba(119, 0, 255, 0.1)"
+  },
+  {
+    "code_variable_name": "b2c-purple005",
+    "label": "Rostelecom Purple 5%",
+    "value": "rgba(119, 0, 255, 0.05)"
   },
   {
     "code_variable_name": "b2c-purple-low",
@@ -93,6 +98,21 @@
     "code_variable_name": "b2c-orange",
     "label": "Rostelecom Orange",
     "value": "#FF4F12"
+  },
+  {
+    "code_variable_name": "b2c-orange03",
+    "label": "Rostelecom Orange 30%",
+    "value": "rgba(255, 79, 18, 0.3)"
+  },
+  {
+    "code_variable_name": "b2c-orange01",
+    "label": "Rostelecom Orange 10%",
+    "value": "rgba(255, 79, 18, 0.1)"
+  },
+  {
+    "code_variable_name": "b2c-orange005",
+    "label": "Rostelecom Orange  5%",
+    "value": "rgba(255, 79, 18, 0.05)"
   },
   {
     "code_variable_name": "b2c-orange-low",
