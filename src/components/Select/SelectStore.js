@@ -31,7 +31,6 @@ class SelectStoreClass extends StorePrototype {
   }
   
   setSelectorType(id, type) {
-    
     this.selectorsTypes[id] = type;
     this.runWatchersById(id);
     if (type == 'simple') {
@@ -52,8 +51,8 @@ class SelectStoreClass extends StorePrototype {
     delete this.focusIndex[id];
   }
   
-  getSelectorType(id, type) {
-    this.selectorsTypes[id] = type;
+  getSelectorType(id, type, multiple = false) {
+    this.selectorsTypes[id] = {type:type,multiple:multiple};
   }
   
   getSelectorOptions(id) {
@@ -65,30 +64,32 @@ class SelectStoreClass extends StorePrototype {
       value.forEach(val => this.setActiveValue(id, val))
     } else {
       if (this.selectorsActiveValue[id]?.indexOf(value) < 0) {
-        if (this.selectorsTypes[id] == 'simple') {
+        if (!this.selectorsTypes[id].multiple) {
           this.removeAllActiveValue(id)
           this.setClose(id)
         }
         this.selectorsActiveValue[id].push(value)
-        if (this.selectorsTypes[id] == 'multiselect') {
+        if (this.selectorsTypes[id].multiple) {
           const values = Object.keys(this.selectorsValue[id]);
           this.selectorsActiveValue[id].sort((a,b)=>{
             return values.indexOf(a) <= values.indexOf(b) ? -1 : 1
           })
         }
         this.runWatchersById(id);
-        if (this.selectorsTypes[id] == 'simple') {
-          this.setActiveFocusEl(id)
-        }
+        this.setActiveFocusEl(id)
       }
     }
   }
   
   removeActiveValue(id, value) {
     const index = this.selectorsActiveValue[id]?.indexOf(value);
-    if (index >= 0) {
-      this.selectorsActiveValue[id].splice(index, 1)
-      this.runWatchersById(id);
+    if(this.selectorsTypes[id].multiple) {
+      if (index >= 0) {
+        this.selectorsActiveValue[id].splice(index, 1)
+        this.runWatchersById(id);
+      }
+    } else {
+      this.setClose(id);
     }
   }
   
@@ -113,10 +114,10 @@ class SelectStoreClass extends StorePrototype {
   getActiveIndex(id) {
     const activeIndexes = {}
     if(this.selectorsTypes[id] && this.selectors[id]) {
-      if (this.selectorsTypes[id] == 'simple') {
+      if (!this.selectorsTypes[id].multiple) {
         activeIndexes[this.selectors[id].findIndex((i) => i.value == this.selectorsActiveValue[id][0])] = 1
       }
-      if (this.selectorsTypes[id] == 'multiselect') {
+      else {
         this.selectorsActiveValue[id]?.map((activeVal) => {
           return this.selectors[id].findIndex((i) => i.value == activeVal)
         }).forEach((activeKey) => {
@@ -150,7 +151,9 @@ class SelectStoreClass extends StorePrototype {
   }
   
   setActiveFocusEl(id) {
-    this.setFocusIndex(id, this.selectors[id].findIndex(i => i.value == this.selectorsActiveValue[id][0]))
+    if (!this.selectorsTypes[id]?.multiple) {
+      this.setFocusIndex(id, this.selectors[id].findIndex(i => i.value == this.selectorsActiveValue[id][0]))
+    }
   }
   addJson(id, json){
     json.forEach((obj)=>{
@@ -163,7 +166,9 @@ class SelectStoreClass extends StorePrototype {
       this.selectorsValue[id] = {};
       this.selectorsActiveValue[id] = [];
       this.selectorsOpenStatus[id] = false;
-      this.focusIndex[id] = 0;
+      if (!this.selectorsTypes[id]?.multiple) {
+        this.focusIndex[id] = 0;
+      }
     }
     if (!this.selectorsValue[id][data.value]) {
       this.selectorsValue[id][data.value] = 1
