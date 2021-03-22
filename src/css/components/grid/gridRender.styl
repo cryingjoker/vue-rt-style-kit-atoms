@@ -4,11 +4,16 @@ $postfixes = '' 'persent'
 $steps = (12 12 6 3)(10 10 10 10)
 $unitsType = '%' '%'
 
+rt-col
+  flex 0 0 1
+
 .rt-col
-  width 100%
-  padding-left (horizontal-space * .5)
-  padding-right (horizontal-space * .5)
-  position relative
+  &,
+  /rt-col
+    width 100%
+    padding-left (horizontal-space * .5)
+    padding-right (horizontal-space * .5)
+    position relative
 
 gridRender()
   for $device_index in 0 .. 3
@@ -20,23 +25,42 @@ gridRender()
         media = '(max-width: '+lookup($device_types[$device_index])+')'
     gridClassRender()
       for $postfixIndex in 0 .. 1
-
         for $i in 1 .. $steps[$postfixIndex][$device_index]
           className = 'rt-col'
-
+          selector = "rt-col"
+          if $device_index == 0
+            selector= selector+'[size="'+$i+'"],'+selector+'[\:size="'+$i+'"]'
+          if $device_index == 1
+            selector= selector+'[large-size="'+$i+'"],'+selector+'[\:large-size="'+$i+'"]'
+          if $device_index == 2
+            selector= selector+'[tablet-size="'+$i+'"],'+selector+'[\:tablet-size="'+$i+'"]'
+          if $device_index == 3
+            selector= selector+'[mobile-size="'+$i+'"],'+selector+'[\:mobile-size="'+$i+'"]'
           if $device_types_code[$device_index]
             className = className + '-'+$device_types_code[$device_index]
           if $postfixes[$postfixIndex]
             className = className +'-'+ $postfixes[$postfixIndex]
           className = className + '-'+$i
           $value = ceil(unit( $i/$steps[$postfixIndex][$device_index]*100  , $unitsType[$postfixIndex]),4)
+
           .{className}
+
+
             flex 0 0 $value
             max-width $value
             width 100%
             padding-left (horizontal-space * .5)
             padding-right (horizontal-space * .5)
             position relative
+
+            if $postfixIndex == 0 && length(selector) > 6
+              /{selector}
+                flex 0 0 $value
+                max-width $value
+                width 100%
+                padding-left (horizontal-space * .5)
+                padding-right (horizontal-space * .5)
+                position relative
     if media
       @media media
         gridClassRender()
