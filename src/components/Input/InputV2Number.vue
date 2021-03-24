@@ -73,7 +73,11 @@ export default {
 
     }
   },
-
+  data() {
+    return {
+      localValue: this.value
+    }
+  },
   methods: {
     onBlur(e){
       if(!isNaN(e)){
@@ -105,7 +109,6 @@ export default {
       }
     },
     onInput(e) {
-
       if (isNaN(e)) {
         e = this.value
         this.$refs['input'].value = e;
@@ -114,8 +117,11 @@ export default {
         if (typeof e == 'number') {
           if (typeof this.maxNumber == 'number' && e > this.maxNumber) {
             e = this.maxNumber
-            this.$refs['input'].localValue = e;
+          } else if (typeof this.minNumber == 'number' && e < this.minNumber) {
+            e = this.minNumber
           }
+          this.$refs['input'].localValue = e;
+          this.localValue = e;
         }
       }
       this.$emit('input', e)
@@ -123,18 +129,17 @@ export default {
     addNumber() {
       let min = typeof this.minNumber == 'number' ? this.minNumber : 0
       let step = 0
-      if (this.value == '') {
-          step = min;
-        if(min < 0){
+      if (this.localValue == '') {
+        step = min;
+        if(min <= 0){
           step += this.step
         }
         if(typeof this.minNumber != 'number') {
           step = this.step
         }
       } else {
-
         if(this.step%1 == 0) {
-          step = this.step - (this.value - 0) % this.step;
+          step = this.step - (this.localValue - 0 - min) % this.step;
           if(this.step >= 90) {
             step += Math.abs(min)
           }
@@ -142,19 +147,18 @@ export default {
           step = this.step
         }
       }
-
       this.changeInput(step)
     },
     subtractNumber() {
       let min = typeof this.minNumber == 'number' ? this.minNumber : 0
       let step = 0
-      if (this.value == '') {
-          step = min;
-          if(typeof this.minNumber != 'number'){
-            step += this.step;
-          }
+      if (this.localValue == '') {
+        step = min;
+        if(typeof this.minNumber != 'number'){
+          step += this.step;
+        }
       }else {
-        step = -(((this.value - 0) - this.step - min) % this.step);
+        step = -(((this.localValue - 0) - this.step - min) % this.step);
         if (step >= 0) {
           step = -this.step;
         }
@@ -162,7 +166,7 @@ export default {
       this.changeInput(step)
     },
     changeInput(delta) {
-      let value = this.$refs['input'].value - 0
+      let value = this.$refs['input'].localValue - 0
       if (value.length == 0) {
         value = 0
       } else {

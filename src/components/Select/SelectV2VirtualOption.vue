@@ -12,7 +12,7 @@ export default {
       default: false
     },
     label:{
-      type: String,
+      type: [String, Number],
       default: ''
     },
     selectName:{
@@ -20,7 +20,8 @@ export default {
       default: ''
     },
     value:{
-      type: String
+      type: [String, Number],
+      default: null
     },
     multiple:{
       type: Boolean,
@@ -28,7 +29,7 @@ export default {
     },
     isFocus:{
       type: Boolean,
-      defaut: false
+      default: false
     },
     sublabel: {
       type: String,
@@ -48,7 +49,7 @@ export default {
     },
     renderSublabel(){
       if(this.sublabel.length > 0){
-
+        return <p class="rt-font-label color-main05">{this.sublabel}</p>
       }
       return null
     },
@@ -79,25 +80,43 @@ export default {
     },
     onClickFire(){
       if(this.isActive){
-
         SelectStore.removeActiveValue(this.selectName, this.value)
       }else{
         SelectStore.setActiveValue(this.selectName, this.value)
       }
+      if(this.$parent.autoComplete) {
+        SelectStore.setClose(this.selectName)
+      }
     }
   },
   render(h) {
+    const renderLabel = () => {
+      if(!!SelectStore.getInputText()) {
+        let boldText = SelectStore.getInputText();
+        let fullString = this.label;
+        return <span>
+          <span class="rt-font-bold">{fullString.slice(0, boldText.length)}</span>
+          {fullString.slice(boldText.length)}
+        </span>
+      } else {
+        return this.label
+      }
+    }
     if(this.label.length>0) {
       if(this.multiple){
         return <button type="button" ref="button" class={this.selectClass} onClick={this.onClickFire}>
           <rt-checkbox is-orange={true} checked={this.isActive}></rt-checkbox>
-          <div class="select-v2-option__inner">{this.label}</div>
-          {this.renderSublabel}
+          <div class="select-v2-option__inner">
+            <p class="rt-font-small-paragraph">{this.label}</p>
+            {this.renderSublabel}
+          </div>
         </button>
       }
       return <button type="button" ref="button" class={this.selectClass} onClick={this.onClickFire}>
-        <div class="select-v2-option__inner">{this.label}</div>
-        {this.renderSublabel}
+        <div class="select-v2-option__inner">
+          <p class="rt-font-small-paragraph">{renderLabel()}</p>
+          {this.renderSublabel}
+        </div>
       </button>
     }
     return null

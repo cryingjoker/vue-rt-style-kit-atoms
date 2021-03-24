@@ -20,7 +20,6 @@ export default {
       type: Number,
       default: null
     },
-
     version:{
       type: Number,
       default: 1
@@ -37,7 +36,6 @@ export default {
       type: Number,
       default: null
     },
-
     insertLang: {
       type: String,// [ru, en]
       default: ''
@@ -137,6 +135,14 @@ export default {
     isInteger: {
       type: Boolean,
       default: false
+    },
+    needVerification: {
+      type: Boolean,
+      default: false
+    },
+    verified: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -151,7 +157,6 @@ export default {
       passwordVisibilityLocal: false
     };
   },
-
   computed: {
     fieldName() {
       return this.name || "input-field__" + this._uid;
@@ -230,12 +235,9 @@ export default {
       this.setDisabled()
     }
   },
-
-    mounted() {
-      this.setNewRender();
-      this.disabledLocal = this.disabled;
-
-
+  mounted() {
+    this.setNewRender();
+    this.disabledLocal = this.disabled;
     this.setValue();
     this.setDisabled();
     this.bindEvents();
@@ -585,6 +587,8 @@ export default {
           inputButtonText={this.inputButtonText}
           scope={this.scope}
           isInteger={this.isInteger}
+          needVerification={this.needVerification}
+          verified={this.verified}
       >{renderSlots}</rt-input-v2>
     }
 

@@ -13,7 +13,8 @@ class SelectStoreClass extends StorePrototype {
     this.isFirstActive = {};
     this.defaultValue = {};
     this.selectorsOpenStatus = {}
-    this.focusIndex = {}
+    this.focusIndex = {};
+    this.autocompleteText = ''
   }
   
   setOpen(id) {
@@ -64,12 +65,12 @@ class SelectStoreClass extends StorePrototype {
       value.forEach(val => this.setActiveValue(id, val))
     } else {
       if (this.selectorsActiveValue[id]?.indexOf(value) < 0) {
-        if (!this.selectorsTypes[id].multiple) {
+        if (!this.selectorsTypes[id]?.multiple) {
           this.removeAllActiveValue(id)
           this.setClose(id)
         }
         this.selectorsActiveValue[id].push(value)
-        if (this.selectorsTypes[id].multiple) {
+        if (this.selectorsTypes[id]?.multiple) {
           const values = Object.keys(this.selectorsValue[id]);
           this.selectorsActiveValue[id].sort((a,b)=>{
             return values.indexOf(a) <= values.indexOf(b) ? -1 : 1
@@ -156,11 +157,18 @@ class SelectStoreClass extends StorePrototype {
     }
   }
   addJson(id, json){
-    json.forEach((obj)=>{
-      this.setSelectorOption(id,obj)
-    })
+    // console.log('addJson', json.length)
+    if(json.length == 0) {
+      this.selectors[id] = []
+    } else {
+      json.forEach((obj)=>{
+        this.setSelectorOption(id,obj)
+        // console.log(this.selectors[id])
+      })
+    }
   }
   setSelectorOption(id, data) {
+    // console.log(data.length)
     if (!this.selectors[id]) {
       this.selectors[id] = [];
       this.selectorsValue[id] = {};
@@ -190,18 +198,24 @@ class SelectStoreClass extends StorePrototype {
     }
   }
   
-  setFirstActive(id) {
-    this.isFirstActive[id] = true;
-    
-    if (this.selectorsValue[id].length > 0 && !(this.selectorsActiveValue[id]?.length > 0)) {
-      this.setActiveValue(id, this.selectorsValue[id][0]);
-    }
-  }
+  // setFirstActive(id, value) {
+  //   this.isFirstActive[id] = true;
+  //   console.log(id, '--', !!this.selectorsValue[id] && !(this.selectorsActiveValue[id]?.length > 0))
+  //   if (!!this.selectorsValue[id] && !(this.selectorsActiveValue[id]?.length > 0)) {
+  //     this.setActiveValue(id, value);
+  //   }
+  // }
   
   setDefaultValue(id, data) {
-    this.defaultValue = {label: data.label, value: data.value}
+    this.defaultValue[id] = {label: data.label, value: data.value}
   }
-  
+
+  setInputText(str) {
+    this.autocompleteText = str;
+  }
+  getInputText() {
+    return this.autocompleteText;
+  }
 }
 
 const selectStoreObject = new SelectStoreClass();
