@@ -191,7 +191,6 @@ export default {
         });
       }
     },
-
   },
   mounted() {
     this.bindEvents();
