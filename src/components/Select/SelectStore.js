@@ -13,7 +13,8 @@ class SelectStoreClass extends StorePrototype {
     this.isFirstActive = {};
     this.defaultValue = {};
     this.selectorsOpenStatus = {}
-    this.focusIndex = {}
+    this.focusIndex = {};
+    this.autocompleteText = ''
   }
   
   setOpen(id) {
@@ -31,7 +32,6 @@ class SelectStoreClass extends StorePrototype {
   }
   
   setSelectorType(id, type) {
-    
     this.selectorsTypes[id] = type;
     this.runWatchersById(id);
     if (type == 'simple') {
@@ -52,8 +52,8 @@ class SelectStoreClass extends StorePrototype {
     delete this.focusIndex[id];
   }
   
-  getSelectorType(id, type) {
-    this.selectorsTypes[id] = type;
+  getSelectorType(id, type, multiple = false) {
+    this.selectorsTypes[id] = {type:type,multiple:multiple};
   }
   
   getSelectorOptions(id) {
@@ -65,30 +65,32 @@ class SelectStoreClass extends StorePrototype {
       value.forEach(val => this.setActiveValue(id, val))
     } else {
       if (this.selectorsActiveValue[id]?.indexOf(value) < 0) {
-        if (this.selectorsTypes[id] == 'simple') {
+        if (!this.selectorsTypes[id]?.multiple) {
           this.removeAllActiveValue(id)
           this.setClose(id)
         }
         this.selectorsActiveValue[id].push(value)
-        if (this.selectorsTypes[id] == 'multiselect') {
+        if (this.selectorsTypes[id]?.multiple) {
           const values = Object.keys(this.selectorsValue[id]);
           this.selectorsActiveValue[id].sort((a,b)=>{
             return values.indexOf(a) <= values.indexOf(b) ? -1 : 1
           })
         }
         this.runWatchersById(id);
-        if (this.selectorsTypes[id] == 'simple') {
-          this.setActiveFocusEl(id)
-        }
+        this.setActiveFocusEl(id)
       }
     }
   }
   
   removeActiveValue(id, value) {
     const index = this.selectorsActiveValue[id]?.indexOf(value);
-    if (index >= 0) {
-      this.selectorsActiveValue[id].splice(index, 1)
-      this.runWatchersById(id);
+    if(this.selectorsTypes[id].multiple) {
+      if (index >= 0) {
+        this.selectorsActiveValue[id].splice(index, 1)
+        this.runWatchersById(id);
+      }
+    } else {
+      this.setClose(id);
     }
   }
   
@@ -113,10 +115,10 @@ class SelectStoreClass extends StorePrototype {
   getActiveIndex(id) {
     const activeIndexes = {}
     if(this.selectorsTypes[id] && this.selectors[id]) {
-      if (this.selectorsTypes[id] == 'simple') {
+      if (!this.selectorsTypes[id].multiple) {
         activeIndexes[this.selectors[id].findIndex((i) => i.value == this.selectorsActiveValue[id][0])] = 1
       }
-      if (this.selectorsTypes[id] == 'multiselect') {
+      else {
         this.selectorsActiveValue[id]?.map((activeVal) => {
           return this.selectors[id].findIndex((i) => i.value == activeVal)
         }).forEach((activeKey) => {
@@ -150,20 +152,31 @@ class SelectStoreClass extends StorePrototype {
   }
   
   setActiveFocusEl(id) {
-    this.setFocusIndex(id, this.selectors[id].findIndex(i => i.value == this.selectorsActiveValue[id][0]))
+    if (!this.selectorsTypes[id]?.multiple) {
+      this.setFocusIndex(id, this.selectors[id].findIndex(i => i.value == this.selectorsActiveValue[id][0]))
+    }
   }
   addJson(id, json){
-    json.forEach((obj)=>{
-      this.setSelectorOption(id,obj)
-    })
+    // console.log('addJson', json.length)
+    if(json.length == 0) {
+      this.selectors[id] = []
+    } else {
+      json.forEach((obj)=>{
+        this.setSelectorOption(id,obj)
+        // console.log(this.selectors[id])
+      })
+    }
   }
   setSelectorOption(id, data) {
+    // console.log(data.length)
     if (!this.selectors[id]) {
       this.selectors[id] = [];
       this.selectorsValue[id] = {};
       this.selectorsActiveValue[id] = [];
       this.selectorsOpenStatus[id] = false;
-      this.focusIndex[id] = 0;
+      if (!this.selectorsTypes[id]?.multiple) {
+        this.focusIndex[id] = 0;
+      }
     }
     if (!this.selectorsValue[id][data.value]) {
       this.selectorsValue[id][data.value] = 1
@@ -185,18 +198,24 @@ class SelectStoreClass extends StorePrototype {
     }
   }
   
-  setFirstActive(id) {
-    this.isFirstActive[id] = true;
-    
-    if (this.selectorsValue[id].length > 0 && !(this.selectorsActiveValue[id]?.length > 0)) {
-      this.setActiveValue(id, this.selectorsValue[id][0]);
-    }
-  }
+  // setFirstActive(id, value) {
+  //   this.isFirstActive[id] = true;
+  //   console.log(id, '--', !!this.selectorsValue[id] && !(this.selectorsActiveValue[id]?.length > 0))
+  //   if (!!this.selectorsValue[id] && !(this.selectorsActiveValue[id]?.length > 0)) {
+  //     this.setActiveValue(id, value);
+  //   }
+  // }
   
   setDefaultValue(id, data) {
-    this.defaultValue = {label: data.label, value: data.value}
+    this.defaultValue[id] = {label: data.label, value: data.value}
   }
-  
+
+  setInputText(str) {
+    this.autocompleteText = str;
+  }
+  getInputText() {
+    return this.autocompleteText;
+  }
 }
 
 const selectStoreObject = new SelectStoreClass();

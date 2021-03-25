@@ -46,33 +46,17 @@ export default {
       type: [String, Number],
       default: null
     },
-    resetWrapperWidth: {
-      type: Boolean,
-      default: false
-    },
-    isB2bSelect: {
-      type: Boolean,
-      default: false
-    },
-    outlined: {
-      type: Boolean,
-      default: false
-    },
     autoComplete: {
       type: Boolean,
       default: false
     },
-    multi: {
+    multiple: {
       type: Boolean,
       default: false
     },
     fieldId: {
       type: String,
       default: ''
-    },
-    hasContentText: {
-      type: Boolean,
-      default: false
     },
     name: {
       type: String,
@@ -82,7 +66,11 @@ export default {
       type: Boolean,
       default: false
     },
-    v2: {
+    hasContentText: {
+      type: Boolean,
+      default: false
+    },
+    bright: {
       type: Boolean,
       default: false
     }
@@ -94,9 +82,171 @@ export default {
     selectOpenStatus: false,
     focusIndex: 0,
     activeIndex: 0,
-    verticalOrientation: 'bottom'
+    verticalOrientation: 'bottom',
+    bottomEdge: null,
+    isTagOutside: false,
+    lastInside: null,
+    inputLocalValue: ''
   }),
+  watch: {
+    value: {
+      deep: true,
+      handler(newVal, oldVal) {
+        if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
+          SelectStore.setActiveValue(this.name, newVal)
+          this.getSelectType();
+          this.getSelectOptions()
+          this.getActiveValue();
+          this.setActiveValue();
+        }
+      }
+    },
+    json: {
+      deep: true,
+      handler(newVal, oldVal) {
+        if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
+          SelectStore.clear(this.name);
+          SelectStore.addJson(this.name, newVal)
+          this.getSelectType();
+          this.getSelectOptions()
+          this.getActiveValue();
+          this.setActiveValue();
+        }
+      }
+    },
+    selectActiveValue(newVal, oldVal) {
+      if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
+        this.$emit('change', newVal.filter(i => i))
+      }
+    },
+    selectOpenStatus(newVal, oldVal) {
+      if (newVal && !oldVal) {
+        this.mouseenterFn();
+        this.bindClickOutside()
+        this.bindMouseenterMouse()
+        this.bindKeydown()
+      } else {
+        if (!newVal && oldVal) {
+          this.unbindClickOutside()
+          this.unbindMouseenterMouse()
+          this.unbindKeydown();
+        }
+      }
+    }
+  },
+  computed: {
+    renderSelectList() {
+      const renderShadowUp = () => {
+        if (this.selectOptions.length > 6) {
+          return <div class="select-v2-list-shadow-up"></div>
+        }
+        return null
+      }
+      const renderShadowDown = () => {
+        if (this.selectOptions.length > 6 ) {
+          return <div class="select-v2-list-shadow-down"></div>
+        }
+        return null
+      }
+      return <div class="select-v2-list">
+        <div class="select-v2-list-inner">
+          {renderShadowUp()}
+          {renderShadowDown()}
+          {this.renderSelectOption}
+        </div>
+      </div>
+    },
+    renderSelectOption() {
+      if(this.autoComplete) {
+        if(this.selectActiveLabels[0]?.toLowerCase() != this.$refs.input?.localValue?.toLowerCase() && this.selectOptions.length > 0 && SelectStore.getInputText(this.name).length > 2) {
+          SelectStore.setOpen(this.name)
+        } else {
+          SelectStore.setClose(this.name)
+        }
+      }
+      if (!this.selectOpenStatus) {
+        return null
+      }
+      return this.selectOptions.map((item, index) => {
+        const isActive = this.activeIndex[index] > 0;
+        const isFocus = index == this.focusIndex;
+        return <rt-select-v2-virtual-option ref={'select-item-' + index} select-name={this.name} is-active={isActive}
+                                            value={item.value}
+                                            multiple={this.multiple}
+                                            sublabel={item.sublabel}
+                                            is-focus={isFocus}
+                                            label={item.label}></rt-select-v2-virtual-option>
+      })
+    },
+    renderLabel() {
+      const classList = [];
+      classList.push('select-v2-label')
+      if (this.selectActiveValue && this.selectActiveValue[0]?.length > 0) {
+        classList.push('select-v2-label--up')
+      }
+      return <label ref="placeholder" class={classList.join(' ')}>{this.label}</label>
+    },
+    selectClasses() {
+      let selectClasses = [];
+      selectClasses.push('select-v2',)
+      if (this.hasError) {
+        selectClasses.push("select-v2--error text-field--error");
+      }
+      if (this.selectOpenStatus) {
+        selectClasses.push("select-v2--is-open");
+        if (this.verticalOrientation == 'top') {
+          selectClasses.push("select-v2--invert-open-list");
+        }
+      }
+      if (this.hasContentText) {
+        selectClasses.push("rt-select--has-content")
+      }
+      if (this.disabled) {
+        selectClasses.push("select-v2--disabled");
+      }
+      if (this.multiple) {
+        selectClasses.push("select-v2--multiline");
+      }
+      if(this.bright) {
+        selectClasses.push('select-v2--bright')
+      }
+      return selectClasses.join(' ');
+    }
+  },
+  mounted() {
+    if (Object.keys(this.json)?.length > 0) {
+      SelectStore.addJson(this.name, this.json)
+    }
+    SelectStore.setSelectorType(this.name, this.type);
+    SelectStore.addWatcher(this.name, this.getSelectOptions)
+    SelectStore.addWatcher(this.name, this.getActiveValue)
+    SelectStore.addWatcher(this.name, this.getSelectType)
+    SelectStore.addWatcher(this.name, this.getSelectOpenStatus)
+    this.setActiveValue();
+    this.getSelectType();
+    this.getSelectOptions()
+    this.getActiveValue();
+  },
+  updated() {
+    this.fixValueList();
+  },
+  beforeDestroy() {
+    SelectStore.removeWatcher(this.name)
+    SelectStore.clear(this.name)
+  },
   methods: {
+    setActiveValue() {
+      if (this.setFirstActive) {
+        if(this.json[0]?.value) {
+          SelectStore.setActiveValue(this.name, this.json[0]?.value);
+        } else {
+          SelectStore.setActiveValue(this.name, this.$children[0].value);
+        }
+      }
+      if(this.value) {
+        SelectStore.setActiveValue(this.name, this.value)
+      }
+    },
     getSelectOptions() {
       const selectorOptions = SelectStore.getSelectorOptions(this.name);
       if (selectorOptions) {
@@ -104,8 +254,8 @@ export default {
       }
     },
     getActiveValue() {
-      const selectActiveValue = SelectStore.getActiveValue(this.name)
-      const selectActiveLabels = SelectStore.getActiveLabels(this.name)
+      let selectActiveValue = SelectStore.getActiveValue(this.name)
+      let selectActiveLabels = SelectStore.getActiveLabels(this.name)
       if (selectActiveValue) {
         this.selectActiveValue = [...selectActiveValue];
       }
@@ -116,7 +266,7 @@ export default {
       this.focusIndex = SelectStore.getFocusIndex(this.name)
     },
     getSelectType() {
-      this.selectorType = SelectStore.getSelectorType(this.name, this.type);
+      this.selectorType = SelectStore.getSelectorType(this.name, this.type, this.multiple);
     },
     getSelectOpenStatus() {
       this.selectOpenStatus = SelectStore.getOpenStatus(this.name);
@@ -175,6 +325,9 @@ export default {
         this.$refs['select-item-' + this.focusIndex]?.onClickFire()
         e.preventDefault()
         e.stopPropagation()
+        if (this.autoComplete) {
+          SelectStore.setClose(this.name)
+        }
       }
     },
     setNextFocus() {
@@ -190,7 +343,6 @@ export default {
         this.$refs['select'].addEventListener('mouseenter', this.mouseenterFn)
         this.$refs['select'].addEventListener('mouseleave', this.mouseleaveFn)
       }
-
     },
     unbindMouseenterMouse() {
       if (this.$refs['select'].removeEventListener) {
@@ -208,187 +360,104 @@ export default {
       if (!this.mouseenter) {
         SelectStore.setClose(this.name)
       }
-    }
-  },
-  mounted() {
-    if (Object.keys(this.json)?.length > 0) {
-      SelectStore.addJson(this.name, this.json)
-    }
-    if (this.setFirstActive) {
-      SelectStore.setFirstActive(this.name);
-    }
-
-    SelectStore.setSelectorType(this.name, this.type);
-    SelectStore.addWatcher(this.name, this.getSelectOptions)
-    SelectStore.addWatcher(this.name, this.getActiveValue)
-    SelectStore.addWatcher(this.name, this.getSelectType)
-    SelectStore.addWatcher(this.name, this.getSelectOpenStatus)
-    SelectStore.setActiveValue(this.name, this.value)
-    this.getSelectType();
-    this.getSelectOptions()
-    this.getActiveValue();
-
-  },
-  beforeDestroy() {
-    SelectStore.removeWatcher(this.name)
-    SelectStore.clear(this.name)
-  },
-  watch: {
-
-    value: {
-      deep: true,
-      handler(newVal, oldVal) {
-        if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
-          SelectStore.setActiveValue(this.name, newVal)
-          this.getSelectType();
-          this.getSelectOptions()
-          this.getActiveValue();
-        }
-      }
     },
-    json: {
-      deep: true,
-      handler(newVal, oldVal) {
-        if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
-          SelectStore.addJson(this.name, newVal)
-          this.getSelectType();
-          this.getSelectOptions()
-          this.getActiveValue();
-
-        }
-      }
-    },
-    selectActiveValue(newVal, oldVal) {
-      if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
-        this.$emit('change', newVal.filter(i => i))
-      }
-    },
-    selectOpenStatus(newVal, oldVal) {
-      if (newVal && !oldVal) {
-        this.mouseenterFn();
-        this.bindClickOutside()
-        this.bindMouseenterMouse()
-        this.bindKeydown()
-      } else {
-        if (!newVal && oldVal) {
-          this.unbindClickOutside()
-          this.unbindMouseenterMouse()
-          this.unbindKeydown();
-        }
-      }
-    }
-  },
-  computed: {
-    renderSelectLine() {
-      let borderClass = '';
-      borderClass += this.selectOpenStatus ? 'text-field__border' : 'text-field__line';
-      borderClass += (this.outlined && this.hasError) ? ' text-field__border--error' : '';
-      return <div class={borderClass}></div>
-    },
-    renderSelectList() {
-      return <div class="select-list">
-        {this.renderSelectOption}
-      </div>
-    },
-    renderSelectOption() {
-      if (!this.selectOpenStatus) {
-        return null
-      }
-      return this.selectOptions.map((item, index) => {
-        const isActive = this.activeIndex[index] > 0;
-        const isFocus = index == this.focusIndex;
-        return <rt-select-v2-virtual-option ref={'select-item-' + index} select-name={this.name} is-active={isActive}
-                                            value={item.value}
-                                            sublabel={item.sublabel}
-                                            is-focus={isFocus}
-                                            label={item.label}></rt-select-v2-virtual-option>
-      })
-    },
-
-    renderLabel() {
-
-      const classList = [];
-      classList.push('floating-placeholder')
-      if (this.selectActiveValue.length > 0) {
-        classList.push('floating-placeholder--go-top')
-      }
-      return <label ref="placeholder" class={classList.join(' ')}>{this.label}</label>
-    },
-    selectClasses() {
-      let selectClasses = [];
-      if (this.v2) {
-        selectClasses.push('rt-select-v2')
-      } else {
-        selectClasses.push('rt-select', 'select', 'text-field')
-        if (this.hasError) {
-          selectClasses.push("select--error text-field--error");
-        }
-        if (this.selectOpenStatus) {
-          selectClasses.push("select--is-open");
-          if (this.verticalOrientation == 'top') {
-            selectClasses.push("select--invert-open-list");
+    fixValueList() {
+      this.bottomEdge = this.$refs.valueWrapper?.getBoundingClientRect().bottom;
+      let valuesList = this.$el.querySelectorAll('.select-v2-tag');
+      let fullLength = valuesList.length;
+      Array.from(valuesList).map((item, index) => {
+        if(item.getBoundingClientRect().top >= this.bottomEdge) {
+          this.isTagOutside = true;
+        } else {
+          this.isTagOutside = false;
+          if(!this.$el.querySelector('.select-v2-tag__outside-count')) {
+            this.lastInside = index;
           }
         }
+      })
+      this.$el.querySelector('.select-v2-tag__outside-count')?.remove()
+      if(this.isTagOutside && this.lastInside && !this.$el.querySelector('.select-v2-tag__outside-count') && (fullLength - this.lastInside > 1)) {
+        let overflowTag = '<span class="select-v2-tag__outside-count rt-font-label">показать ещё ' + (fullLength - this.lastInside) + '</span>';
+        this.$el.querySelectorAll('.select-v2-tag')[this.lastInside - 1].insertAdjacentHTML('afterend', overflowTag);
+        this.$el.querySelector('.select-v2-tag__outside-count').addEventListener('click', ($event) => {
+          $event.preventDefault();
+          $event.stopPropagation();
+          this.toggleOpen();
+        })
       }
-
-      // if (this.resetWrapperWidth) {
-      //   selectClasses.push("select--is-reset-width");
-      // }
-      if (this.disabled) {
-        selectClasses.push("select--disabled");
-      }
-      // if (this.isOpenListOnTop) {
-      //   selectClasses.push("select--invert-open-list");
-      // }
-      // if (this.isB2bSelect) {
-      //   selectClasses.push("rtb-select");
-      // }
-      // if (this.outlined) {
-      //   selectClasses.push("rtb-select--outlined");
-      // }
-      // if (this.multi) {
-      //   selectClasses.push("rtb-select--multi");
-      // }
-      // if (this.hasContentText) {
-      //   selectClasses.push("rt-select--has-content")
-      // }
-      return selectClasses.join(' ');
     },
-    renderValue() {
-      if (this.autoComplete) {
-        //todo доделать автокомплит
-        <rt-input value={"this.selectActiveLabels.join(', ')"}></rt-input>
-      } else {
-        return <p class="select-input">{this.selectActiveLabels.join(', ')}</p>
+    checkMatch(e) {
+      SelectStore.setInputText(e)
+      this.selectActiveLabels[0] = ''
+      if(this.inputLocalValue != this.$refs.input.localValue) {
+        this.$refs.input.localValue = this.inputLocalValue
       }
+      this.inputLocalValue = e;
+      if(e.length > 2) {
+        SelectStore.setOpen(this.name)
+      } else {
+        SelectStore.setClose(this.name)
+      }
+      this.$emit('input', e)
+    },
+    clearValue() {
+      SelectStore.clear(this.name);
     }
   },
   render(h) {
-    if (this.v2) {
+    const renderValue = () => {
+      if(this.selectActiveLabels.length < 2 && !this.multiple) {
+        return <p class="select-v2-value">{this.selectActiveLabels[0]}</p>
+      }
+      const valueItem = this.selectActiveLabels.map((item,index)=>{
+        const click = (e)=>{
+          SelectStore.removeActiveValue(this.name, this.selectActiveValue[index])
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        const preventClick = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        return <span class="select-v2-tag" onClick={preventClick}>
+          <span>{item}</span>
+          <span class="d-flex">
+            <rt-system-icons class="select-v2-tag__remove" name="close small" ref={'selectTag-' + index} onClick={click}></rt-system-icons>
+          </span>
+        </span>
+      })
+      return <p class="select-v2-value d-flex" ref="valueWrapper">{valueItem}</p>
+    }
+    const errorMessage = () => {
+      if(this.hasError) {
+        if(this.errorMessage.length > 0) {
+          return <p class="select-v2__error-message color-error rt-font-label">{this.errorMessage}</p>
+        }
+      }
+    }
+    if(this.autoComplete) {
       return <div class={this.selectClasses} ref="select">
-        {this.$slots.default}
-        new select
+        <div class="select-v2__container">
+          <rt-input version={2}
+                    disabled={this.disabled}
+                    placeholder={this.label}
+                    ref="input"
+                    onChange={this.checkMatch}
+                    value={this.selectActiveLabels[0] || this.inputLocalValue}
+                    onClear={this.clearValue}/>
+          {this.renderSelectList}
+        </div>
       </div>
     }
-
     return <div class={this.selectClasses} ref="select">
-      <div class="select__inner">
-        <div class="select-inner-container">
-          <button type="button" disabled={this.disabled} class="select__inner" onClick={this.toggleOpen}>
-            <div class="select-value">
-              {this.renderValue}
-            </div>
-            {this.renderLabel}
-            {this.$slots.default}
-            {this.renderSelectLine}
-          </button>
-          <div class="select-arrow">
-            <svg class="select-arrow__icon" width="13" height="7">
-              <path d="M.705 1.704l5.999 6 6-6L11.295.295h-.002l-4.59 4.58L2.115.294h-.002z"
-                    fill="#575D68" fill-rule="evenodd"/>
-            </svg>
-          </div>
-        </div>
+      <div class="select-v2__container">
+        <button type="button" disabled={this.disabled} class="select-v2__inner" onClick={this.toggleOpen}>
+          {renderValue()}
+          {this.renderLabel}
+          {this.$slots.default}
+          <rt-system-icons class="select-v2-arrow" name="chevron down"></rt-system-icons>
+        </button>
+        {errorMessage()}
         {this.renderSelectList}
       </div>
     </div>

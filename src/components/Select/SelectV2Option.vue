@@ -5,17 +5,16 @@ export default {
   name: "RtSelectV2Option",
   props: {
     selectName: {
-      type: String
+      type: String,
+      default: ''
     },
     value: {
-      type: String
+      type: String,
+      default: ''
     },
     label: {
-      type: String
-    },
-    isActive: {
-      type: Boolean,
-      default: false
+      type: String,
+      default: ''
     },
     default: {
       type: Boolean,
@@ -24,14 +23,14 @@ export default {
     sublabel: {
       type: String,
       default: ''
+    },
+    selected: {
+      type: Boolean,
+      default: false
     }
   },
-  // data() {
-  //
-  // },
+  data: () => ({}),
   computed: {},
-
-
   mounted() {
     let label
     if (this.label) {
@@ -46,7 +45,7 @@ export default {
       data.sublabel = this.sublabel
     }
     SelectStore.setSelectorOption(this.selectName, data)
-    if (this.isActive) {
+    if (this.selected) {
       SelectStore.setActiveValue(this.selectName, this.value)
     }
     if (this.default) {

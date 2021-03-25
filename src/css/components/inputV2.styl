@@ -1,148 +1,228 @@
-.input_v2
-  .text-field
-    height: auto
-  .input
-    padding-left: 12px
-    padding-right: 12px
-    padding-top: 0
-    padding-bottom: 0
-    min-height 48px
-    border 1px solid main-color003-no-opacity
-    border-radius 4px
-    transition-timing-function ease-in-out
-    transition-duration .2s
-    transition-property border
-  &.rtb-input--approved:after
-    top: 0
-    bottom: 0
-    right: 12px
-    margin-top auto
-    margin-bottom auto
-  &.rtb-input--approved
-    .input-clear
-      right: 28px
-  .input-element
-    padding-top: 12px
-    padding-bottom: 12px
-    padding-right: 0
-    padding-left: 0
-    transition-timing-function ease-in-out
-    transition-duration .2s
-    transition-property padding
-    .text-field--error &
-      color inherit
-      placeholder(color main-color05,)
-  .floating-placeholder
-    top: 12px
-    font-size 16px
-    transition-timing-function ease-in-out
-    transition-duration .2s
-    transition-property top, font-size, color
-
-  .error-message-text-content
-    text-overflow ellipsis
-    overflow: hidden
-    white-space nowrap
-    max-width 100%
-    display: block
-  .input-label,
-  .text-field__error-message
-    margin-top: 0
-    padding-top: 8px
-    padding-left: 12px
-    max-width 100%
-
-  .rt-button
+.rt-input-v2
+  position relative
+  width 100%
+  &__informer-body
     position absolute
-    bottom 0px
-    top: 0
-    margin-top: auto
-    margin-bottom: auto
-    right 12px
-    z-index 9
+    width 250px
+    bottom 44px
+    right 0
+    padding 16px 28px 16px 16px
+    border-radius 8px
+    background-color b2c-white
+    box-shadow 0 0 1px rgba(28, 41, 61, 0.1), 0 12px 20px rgba(28, 41, 61, 0.1)
+    color main-color07
+    .rt-input-v2__informer-close
+      position absolute
+      right 4px
+      top 4px
+
+.rt-input-v2-bright
+  color white
+
+.rt-input-v2__input
+  border none
+  outline none
+  position: relative;
+  display: block
+  height: 24px
+  line-height: 24px
+  width: 100%
+  border-width 0
+  padding 0
+  background-color: transparent
+  color inherit
+  placeholder(color rgba(0,0,0,0), null)
+  transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
+  transition-duration 0.25s
+  transition-property color
+  &[disabled]
+    color main-color03
+    .rt-dark-theme &
+      color b2c-white03
+  &[type="password"]
+    letter-spacing 3px
+
+.rt-input-v2-wrapper
+  position: relative
+  height: 48px
+  font-size 16px
+  display: block
+  padding-top: 20px
+  padding-right: 24px
+
+.rt-input-v2-label
+  opacity .5
+  display block
+  padding-top 6px
+
+.rt-input-v2__line
+  position absolute
+  width 100%
+  height 2px
+  bottom -2px
+  left 0
+  right 0
+  background-color main-color01
+  transition background-color .2s linear
+  &:after,
+  &:before
+    content ''
+    width 0
+    height 2px
+    bottom 0
+    left 0
+    right 0
+    position absolute
+    transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
+    transition-duration 0.25s
+    transition-property width
+  .rt-dark-theme &
+    background-color b2c-white01
+  &:after
+    background-color: b2c-purple
+  &:before
+    background-color main-color03
+
+.rt-input-v2-placeholder
+  position absolute
+  left 0
+  bottom 12px
+  font-size 16px
+  color main-color07
+  transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
+  transition-duration 0.25s
+  transition-property transform, opacity
+  transform-origin left bottom
+  .rt-dark-theme &
+    color b2c-white07
+
+.rt-input-v2__input[disabled]+.rt-input-v2-placeholder
+  color main-color03
+
+.rt-dark-theme
+  .rt-input-v2__input[disabled]+.rt-input-v2-placeholder
+    color b2c-white03
+
+.rt-input-v2__input:focus+.rt-input-v2-placeholder+.rt-input-v2__line:after
+  width: 100%
+
+.rt-input-v2__input:focus+.rt-input-v2-placeholder
+  transform: scale(0.75) translateY(-18px);
+  opacity: 0.8
+
+.rt-input-v2__input:not(:placeholder-shown)+.rt-input-v2-placeholder
+  transform: scale(0.75) translateY(-18px);
+  opacity: 0.8
+.rt-input-v2__input:focus+.rt-input-v2-placeholder
+  color: b2c-purple
+  opacity: 1
+
+.rt-input-v2-icon
+  position absolute
+  top 12px
+  right 0
+  display flex
+  &__item
+    &--verified
+      circle
+        fill b2c-green
+      path
+        fill b2c-white
+        opacity 1!important
+    &--verification-in-progress
+      opacity .5
+      animation spinning 3s linear infinite
+
+.rt-input-v2-icon-item
+  cursor pointer
+  display flex
+  path
+    opacity: 0.5
+    transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
+    transition-duration 0.25s
+    transition-property opacity, color
+  &:hover
+    @media (hover:hover)
+      path
+        opacity: 1
+  &+&
+    margin-left 12px
+
+.rt-input-v2-clear
+  cursor: pointer
+  opacity: 0
+  transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
+  transition-duration 0.25s
+  transition-property opacity
+
+.rt-input-v2__input:not(:placeholder-shown)+.rt-input-v2-placeholder+.rt-input-v2__line+.rt-input-v2-icon .rt-input-v2-clear
+  opacity: 1
+
+.rt-input-v2-error
+  display: block
+  opacity: 0.8
+  color error-color
+  transform: scale(0)
+  transform-origin: left top;
+  transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
+  transition-duration 0.25s
+  transition-property transform
+.rt-input-v2--error
+  .rt-input-v2-error
+    transform: scale(1)
+  .rt-input-v2__line
+  .rt-input-v2__line
+    background-color error-color
+    &:after,
+    &:before
+      display none
+  .rt-input-v2__input:focus+.rt-input-v2-placeholder
+    color error-color!important
+
+.input-number-icon.rt-sys-icon
+  background-color: main-color01
+  border-radius 50%
+  transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
+  transition-duration 0.25s
+  transition-property background-color, fill
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+  .rt-dark-theme &,
+  &.input-number-icon-bright
+    background-color b2c-white01
 
   &:hover
-    @media(hover: hover)
-      .input
-        border-color main-color03-no-opacity
-      .input--focus
-        border-color b2c-purple
-  .text-field--error
-    border-color error-color
-    &.input--focus
-      border-color error-color
-    @media(hover: hover)
-      &:hover
-        border-color error-color
-  .input-element:focus+.floating-placeholder,
-  .floating-placeholder--go-top
-    top: 3px
-    font-size 12px
-  .input-element:focus,
-  .input-element--n-emp
-    padding-top: 20px
-    padding-bottom: 4px
-    &+.input-clear,
-    &+.floating-placeholder+.input-clear
-      opacity: 1
-  .password-icon,
-  .input-clear,
-  .input-arithmetic
-    padding-left: 12px
-    padding-right 12px
-    top: 0
-    bottom: 0
-    margin-top: auto
-    margin-bottom: auto
-    height 100%
-    box-sizing content-box
-    display: flex
-    align-items center
-    position: absolute;
-    right: 0
-  .password-icon
-    width: 20px
-  .password-icon__icon
-    position: relative;
-    display: block
+    @media (hover:hover)
+      background-color: main-color03
+      .rt-dark-theme &,
+      &.input-number-icon-bright
+        background-color b2c-white03
 
-    .input-clear__icon
-      display: block
-      fill main-color05-no-opacity
-  .input--focus
-    border-color b2c-purple
-  .input-timer
-    position: absolute
-    top: 0
-    bottom: 0
-    right -70px
-    box-sizing content-box
-    display flex
-    align-items center
+.rt-input-v2:hover
+  &:not(.rt-input-v2--disabled)
+    .rt-input-v2__line
+      &:before
+        width 100%
 
-  .rt-timer
-    position relative
-    top: 0
-    bottom: 0
-    left: 0
-    right: 0
-.input-disabled.input_v2 .input
-  border none
-  background-color: b2c-gray
-  .input-label
-    color hsl(main-color03)
-  @media(hover: hover)
-    &:hover
-      border none
+.rt-dark-theme
+  .rt-input-v2:hover
+    &:not(.rt-input-v2--disabled)
+      .rt-input-v2__line
+        &:before
+          width 100%
+  .rt-input-v2__informer-body
+    background-color #3d4555
+    color b2c-white06
 
-//.{b2bAppName}-input
-//  .input-element:focus + .text-field__line + .floating-placeholder,
-//  .input-element:focus + .text-field__border + .floating-placeholder,
-//  .input-element:focus+.floating-placeholder,
-//  .textarea-element:focus + .text-field__line + .floating-placeholder,
-//  .textarea-element:focus + .text-field__border + .floating-placeholder,
-//  .textarea-element:focus + .floating-placeholder,
-//  .floating-placeholder--go-top
-//    font-size 14px
-//    top 10px
-//F3F3F4
+@keyframes spinning
+  0%
+    stroke-dashoffset 0
+    stroke-dasharray 32
+  50%
+    stroke-dashoffset -96
+    stroke-dasharray 64
+  100%
+    stroke-dashoffset -192
+    stroke-dasharray 32
