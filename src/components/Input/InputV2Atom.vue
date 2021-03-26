@@ -336,7 +336,8 @@ export default {
           {icons()}
         </rt-input-v2-icon>
       </label>
-      {renderLabel()}
+      <span class="rt-input-v2-error rt-font-label">{this.errorMessage}</span>
+      <span class="rt-input-v2-label rt-font-label">{this.label}</span>
     </div>
   }
 };
