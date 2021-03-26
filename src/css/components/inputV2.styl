@@ -80,6 +80,8 @@
     background-color b2c-white01
   &:after
     background-color: b2c-purple
+    .rt-dark-theme &
+      background-color b2c-purple-night
   &:before
     background-color main-color03
 
@@ -116,6 +118,8 @@
 .rt-input-v2__input:focus+.rt-input-v2-placeholder
   color: b2c-purple
   opacity: 1
+  .rt-dark-theme &
+    color b2c-purple-night
 
 .rt-input-v2-icon
   position absolute
@@ -167,6 +171,9 @@
   transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
   transition-duration 0.25s
   transition-property transform
+  .rt-dark-theme &
+    color error-color-light
+
 .rt-input-v2--error
   .rt-input-v2-error
     transform: scale(1)

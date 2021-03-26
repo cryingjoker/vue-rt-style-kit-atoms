@@ -143,12 +143,20 @@ class SelectStoreClass extends StorePrototype {
   
   setNextFocus(id) {
     const size = this.selectors[id].length;
-    this.setFocusIndex(id, (this.focusIndex[id] + 1) % size)
+    if(this.focusIndex[id] == -1) {
+      this.setFocusIndex(id, 0)
+    } else {
+      this.setFocusIndex(id, (this.focusIndex[id] + 1) % size)
+    }
   }
   
-  setPreviewFocus(id) {
+  setPreviousFocus(id) {
     const size = this.selectors[id].length;
-    this.setFocusIndex(id, (this.focusIndex[id] - 1 + size) % size)
+    if(this.focusIndex[id] == -1) {
+      this.setFocusIndex(id, this.selectors[id].length - 1)
+    } else {
+      this.setFocusIndex(id, (this.focusIndex[id] - 1 + size) % size)
+    }
   }
   
   setActiveFocusEl(id) {
@@ -157,25 +165,22 @@ class SelectStoreClass extends StorePrototype {
     }
   }
   addJson(id, json){
-    // console.log('addJson', json.length)
     if(json.length == 0) {
       this.selectors[id] = []
     } else {
       json.forEach((obj)=>{
         this.setSelectorOption(id,obj)
-        // console.log(this.selectors[id])
       })
     }
   }
   setSelectorOption(id, data) {
-    // console.log(data.length)
     if (!this.selectors[id]) {
       this.selectors[id] = [];
       this.selectorsValue[id] = {};
       this.selectorsActiveValue[id] = [];
       this.selectorsOpenStatus[id] = false;
       if (!this.selectorsTypes[id]?.multiple) {
-        this.focusIndex[id] = 0;
+        this.focusIndex[id] = -1;
       }
     }
     if (!this.selectorsValue[id][data.value]) {
@@ -200,7 +205,6 @@ class SelectStoreClass extends StorePrototype {
   
   // setFirstActive(id, value) {
   //   this.isFirstActive[id] = true;
-  //   console.log(id, '--', !!this.selectorsValue[id] && !(this.selectorsActiveValue[id]?.length > 0))
   //   if (!!this.selectorsValue[id] && !(this.selectorsActiveValue[id]?.length > 0)) {
   //     this.setActiveValue(id, value);
   //   }
