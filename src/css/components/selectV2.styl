@@ -56,7 +56,7 @@
 .select-v2-arrow.rt-sys-icon
   position: absolute
   right: 0
-  top 12px
+  top 10px
   opacity: 0.5
   transform rotate(0deg)
   transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
@@ -76,23 +76,25 @@
   transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
   color main-color07
   transition-duration 0.25s
-  transition-property transform, opacity, top
+  transition-property transform, opacity, top, line-height
   transform-origin left bottom
 
 .select-v2--is-open .select-v2-label,
 .select-v2-label--up
-  transform: scale(0.75) //translateY(-24px)
+  transform scale(0.75) //translateY(-24px)
   line-height 21px
-  //font-size 12px
-  top 0
+  top -3px
 
 .select-v2--is-open .select-v2-label
   color b2c-purple
 
+.select-v2-label--up
+  color main-color05
+
 .select-v2-value
   font-size 16px
   line-height 24px
-  margin-bottom 2px
+  margin-bottom 4px
   max-width calc(100% - 28px)
   overflow hidden
   white-space nowrap
@@ -105,18 +107,17 @@
 
 .select-v2--multiline
   .select-v2-value
-    padding-top 22px
-    margin-bottom 0
+    padding-top 20px
+    margin-bottom 2px
 
 .select-v2-list
   opacity 0
   pointer-events none
   position absolute
-  left: 0
-  right: 0
-  margin-top: 2px
-  padding-left: 16px
-  padding-right: 16px
+  left 0
+  right 0
+  margin-top 2px
+  padding-left 16px
   background-color: b2c-white
   box-shadow 0 0 1px rgba(28, 41, 61, 0.1), 0 36px 36px rgba(28, 41, 61, 0.1);
   transition-duration 0.25s
@@ -132,9 +133,8 @@
 
 .select-v2-list-inner
   max-height 256px
-  overflow: auto;
-  padding-bottom: 20px
-  padding-top: 20px
+  overflow auto
+  padding 20px 16px 20px 0
 
 .select-v2-tag
   background-color main-color01
@@ -196,26 +196,30 @@
   transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
   transition-property background-color, color
   cursor pointer
-  &:hover,
+  //&:hover,
   &.select-v2-option--focus
-    background-color: main-color005
+    background-color main-color005
   &--select
     color b2c-purple
-  &__inner
-    line-height 20px
   &--hidden
     display none
+  &__mismatch
+    opacity .5
+
+.select-v2-option__inner
+  .rt-font-label
+    opacity .5
 
 .rt-dark-theme,
 .select-v2--bright
   .select-v2-label
     color b2c-white07
   .select-v2--is-open .select-v2-label
-    color b2c-purple
+    color b2c-purple-night
   .select-v2-list
     background-color b2c-black085-no-opacity
   .select-v2-option--focus
-    background-color b2c-white05
+    background-color b2c-white005
   .select-v2-list-shadow-up
     background linear-gradient(0deg, rgba(b2c-black085-no-opacity, 0) 0%, b2c-black085-no-opacity 100%)
   .select-v2-list-shadow-down
@@ -224,8 +228,13 @@
     background linear-gradient(to left, main-color 0%, main-color 50%, rgba(main-color, 0) 100%)
   .select-v2__inner
     border-bottom-color b2c-white01
+    &:after
+      background-color b2c-purple-night
   .select-v2-tag
     background-color b2c-white01
+    color b2c-white09
+    &__remove.rt-sys-icon
+      fill b2c-white05
   .select-v2-tag:hover .rt-sys-icon.select-v2-tag__remove
     fill rgbab2c-white07
   .select-v2-tag__outside-count
@@ -241,6 +250,16 @@
   &.select-v2--is-open .select-v2-label,
   .select-v2-label--up
     color error-color
+  .select-v2__error-message
+    color error-color
+  .rt-dark-theme &
+    .select-v2__inner
+      border-bottom-color error-color-light
+    &.select-v2--is-open .select-v2-label,
+    .select-v2-label--up
+      color error-color-light
+    .select-v2__error-message
+      color error-color-light
 
 .select-v2--disabled
   .select-v2-label
@@ -256,6 +275,16 @@
   .select-v2-tag:hover .rt-sys-icon.select-v2-tag__remove
     pointer-events none
     fill main-color005
+  .select-v2-tag
+    background-color main-color005
+  .rt-dark-theme &
+    .select-v2-tag
+      color b2c-white03
+      background-color b2c-white01
+      &__remove
+        fill b2c-white01
+    .select-v2-label
+      color b2c-white025
 
 .select-v2__error-message
   margin-top 6px

@@ -80,13 +80,16 @@ export default {
     selectActiveValue: [],
     selectActiveLabels: [],
     selectOpenStatus: false,
-    focusIndex: 0,
+    focusIndex: -1,
     activeIndex: 0,
     verticalOrientation: 'bottom',
     bottomEdge: null,
     isTagOutside: false,
     lastInside: null,
-    inputLocalValue: ''
+    inputLocalValue: '',
+    shadowUp: false,
+    shadowDown: true,
+    tempIndex: null
   }),
   watch: {
     value: {
@@ -137,19 +140,19 @@ export default {
   computed: {
     renderSelectList() {
       const renderShadowUp = () => {
-        if (this.selectOptions.length > 6) {
+        if (this.selectOptions.length > 6 && this.shadowUp) {
           return <div class="select-v2-list-shadow-up"></div>
         }
         return null
       }
       const renderShadowDown = () => {
-        if (this.selectOptions.length > 6 ) {
+        if (this.selectOptions.length > 6 && this.shadowDown ) {
           return <div class="select-v2-list-shadow-down"></div>
         }
         return null
       }
       return <div class="select-v2-list">
-        <div class="select-v2-list-inner">
+        <div class="select-v2-list-inner" ref="inner" onScroll={this.noteScroll}>
           {renderShadowUp()}
           {renderShadowDown()}
           {this.renderSelectOption}
@@ -168,20 +171,36 @@ export default {
         return null
       }
       return this.selectOptions.map((item, index) => {
+        const presetActiveIndex = () => {
+            this.tempIndex = index
+        }
+        const resetActiveIndex = () => {
+          if(this.focusIndex == index) {
+            SelectStore.setFocusIndex(this.name, -1);
+          }
+        }
+        const setActiveIndex = () => {
+          SelectStore.setFocusIndex(this.name, this.tempIndex)
+        }
         const isActive = this.activeIndex[index] > 0;
         const isFocus = index == this.focusIndex;
-        return <rt-select-v2-virtual-option ref={'select-item-' + index} select-name={this.name} is-active={isActive}
+        return <rt-select-v2-virtual-option ref={'select-item-' + index}
+                                            select-name={this.name}
+                                            is-active={isActive}
                                             value={item.value}
                                             multiple={this.multiple}
                                             sublabel={item.sublabel}
                                             is-focus={isFocus}
-                                            label={item.label}></rt-select-v2-virtual-option>
+                                            label={item.label}
+                                            onMouseenter={presetActiveIndex}
+                                            onMouseleave={resetActiveIndex}
+                                            onMousemove={setActiveIndex}/>
       })
     },
     renderLabel() {
       const classList = [];
       classList.push('select-v2-label')
-      if (this.selectActiveValue && this.selectActiveValue[0]?.length > 0) {
+      if (this.selectActiveValue && this.selectActiveValue[0]?.toString().length > 0) {
         classList.push('select-v2-label--up')
       }
       return <label ref="placeholder" class={classList.join(' ')}>{this.label}</label>
@@ -226,6 +245,7 @@ export default {
     this.getSelectType();
     this.getSelectOptions()
     this.getActiveValue();
+    console.log(this.focusIndex)
   },
   updated() {
     this.fixValueList();
@@ -311,7 +331,7 @@ export default {
         e.stopPropagation()
       }
       if (e.keyCode == 38) {
-        SelectStore.setPreviewFocus(this.name)
+        SelectStore.setPreviousFocus(this.name)
         e.preventDefault()
         e.stopPropagation()
       }
@@ -330,14 +350,14 @@ export default {
         }
       }
     },
-    setNextFocus() {
-      const size = this.selectOptions.length
-      this.focusIndex = (this.focusIndex + 1) % size
-    },
-    setPreviewFocus() {
-      const size = this.selectOptions.length
-      this.focusIndex = (this.focusIndex - 1 + size) % size
-    },
+    // setNextFocus() {
+    //   const size = this.selectOptions.length
+    //   this.focusIndex = (this.focusIndex + 1) % size
+    // },
+    // setPreviousFocus() {
+    //   const size = this.selectOptions.length
+    //   this.focusIndex = (this.focusIndex - 1 + size) % size
+    // },
     bindMouseenterMouse() {
       if (this.$refs['select']?.addEventListener) {
         this.$refs['select'].addEventListener('mouseenter', this.mouseenterFn)
@@ -402,6 +422,18 @@ export default {
     },
     clearValue() {
       SelectStore.clear(this.name);
+    },
+    noteScroll() {
+      if(this.$refs.inner.scrollTop != 0) {
+        this.shadowUp = true
+      } else {
+        this.shadowUp = false
+      }
+      if(this.$refs.inner.scrollTop != this.$refs.inner.scrollHeight - this.$refs.inner.offsetHeight) {
+        this.shadowDown = true
+      } else {
+        this.shadowDown = false
+      }
     }
   },
   render(h) {
@@ -431,7 +463,7 @@ export default {
     const errorMessage = () => {
       if(this.hasError) {
         if(this.errorMessage.length > 0) {
-          return <p class="select-v2__error-message color-error rt-font-label">{this.errorMessage}</p>
+          return <p class="select-v2__error-message rt-font-label">{this.errorMessage}</p>
         }
       }
     }

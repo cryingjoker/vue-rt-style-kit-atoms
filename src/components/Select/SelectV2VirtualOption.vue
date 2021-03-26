@@ -34,6 +34,15 @@ export default {
     sublabel: {
       type: String,
       default: ''
+    },
+    index: {
+      type: Number,
+      default: null
+    }
+  },
+  data() {
+    return {
+      checkMouseEnter: true
     }
   },
   computed:{
@@ -49,7 +58,7 @@ export default {
     },
     renderSublabel(){
       if(this.sublabel.length > 0){
-        return <p class="rt-font-label color-main05">{this.sublabel}</p>
+        return <p class="rt-font-label">{this.sublabel}</p>
       }
       return null
     },
@@ -83,10 +92,20 @@ export default {
         SelectStore.removeActiveValue(this.selectName, this.value)
       }else{
         SelectStore.setActiveValue(this.selectName, this.value)
+        this.emitLeave()
       }
       if(this.$parent.autoComplete) {
         SelectStore.setClose(this.selectName)
       }
+    },
+    emitEnter() {
+      this.$emit('mouseenter')
+    },
+    emitLeave() {
+      this.$emit('mouseleave')
+    },
+    emitMove() {
+      this.$emit('mousemove')
     }
   },
   render(h) {
@@ -95,26 +114,28 @@ export default {
         let boldText = SelectStore.getInputText();
         let fullString = this.label;
         return <span>
-          <span class="rt-font-bold">{fullString.slice(0, boldText.length)}</span>
-          {fullString.slice(boldText.length)}
+          <span>{fullString.slice(0, boldText.length)}</span>
+          <span class="select-v2-option__mismatch">{fullString.slice(boldText.length)}</span>
         </span>
       } else {
         return this.label
       }
     }
-    if(this.label.length>0) {
+    if(this.label.length > 0) {
       if(this.multiple){
-        return <button type="button" ref="button" class={this.selectClass} onClick={this.onClickFire}>
+        return <button type="button" ref="button" class={this.selectClass} onClick={this.onClickFire}
+                       onMouseenter={this.emitEnter} onMouseleave={this.emitLeave} onMousemove={this.emitMove}>
           <rt-checkbox is-orange={true} checked={this.isActive}></rt-checkbox>
           <div class="select-v2-option__inner">
-            <p class="rt-font-small-paragraph">{this.label}</p>
+            <p class="rt-font-control">{this.label}</p>
             {this.renderSublabel}
           </div>
         </button>
       }
-      return <button type="button" ref="button" class={this.selectClass} onClick={this.onClickFire}>
+      return <button type="button" ref="button" class={this.selectClass} onClick={this.onClickFire}
+                     onMouseenter={this.emitEnter} onMouseleave={this.emitLeave} onMousemove={this.emitMove}>
         <div class="select-v2-option__inner">
-          <p class="rt-font-small-paragraph">{renderLabel()}</p>
+          <p class="rt-font-control">{renderLabel()}</p>
           {this.renderSublabel}
         </div>
       </button>
