@@ -57,12 +57,14 @@
   "main-color003": "rgba(16,24,40,0.03)",
 
   "main-color09-no-opacity": "#272F3D",
+  "main-color085-no-opacity": "#343B48",
   "main-color07-no-opacity": "#575D68",
   "main-color05-no-opacity": "#868B95",
   "main-color03-no-opacity": "#B8B9C0",
-  "main-color01-no-opacity": "#B8B9C0",
+  "main-color01-no-opacity": "#E7E7E9",
+  "main-color007-no-opacity": "#EEEFF0",
   "main-color005-no-opacity": "#F3F3F4",
-  "main-color003-no-opacity": "#E7E7E9",
+  "main-color003-no-opacity": "#F8F8F8",
 
   "b2c-cool-grey": "#E3E8EC",
   "b2c-cool-grey07": "rgba(227,232,236,0.7)",
