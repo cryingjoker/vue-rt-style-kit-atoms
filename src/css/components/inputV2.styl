@@ -53,7 +53,11 @@
 .rt-input-v2-label
   opacity .5
   display block
-  padding-top 6px
+  padding-top 8px
+  position relative
+  transform scale(1)
+  transition transform .25s cubic-bezier(0.4, 0, 0.2, 1)
+  transform-origin left top
 
 .rt-input-v2__line
   position absolute
@@ -166,18 +170,20 @@
   display: block
   opacity: 0.8
   color error-color
-  transform: scale(0)
-  transform-origin: left top;
+  transform scale(0)
+  transform-origin left top
   transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
-  transition-duration 0.25s
+  transition-duration .25s
   transition-property transform
+  position absolute
+  padding-top 8px
   .rt-dark-theme &
     color error-color-light
 
 .rt-input-v2--error
   .rt-input-v2-error
-    transform: scale(1)
-  .rt-input-v2__line
+    transform scale(1)
+    position relative
   .rt-input-v2__line
     background-color error-color
     &:after,
@@ -185,6 +191,9 @@
       display none
   .rt-input-v2__input:focus+.rt-input-v2-placeholder
     color error-color!important
+  .rt-input-v2-label
+    transform scale(0)
+    position absolute
 
 .input-number-icon.rt-sys-icon
   background-color: main-color01
