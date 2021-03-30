@@ -1,0 +1,119 @@
+.rt-textarea-v2
+  position: relative
+  padding-top: 16px
+  padding-bottom: 4px
+
+  @media(hover: hover)
+    &:hover
+      .rt-textarea-v2__line
+        &:before
+          width: 100%
+          background-color: main-color03
+  //    .rt-textarea-v2__label
+  //      color b2c-purple
+.rt-textarea-v2--error
+  .rt-textarea-v2__line
+    &:before
+      background-color: error-color!important
+      width: 100%!important
+
+.rt-textarea-v2__line
+  position: relative;
+  bottom: 0
+  left: 0
+  right: 0
+  height: 2px
+  z-index 1
+  margin-top: 2px
+  background-color main-color01
+  &:before
+    content ''
+    position absolute
+    left: 0
+    right: 0
+    bottom: 0
+    height: 2px
+    width: 0
+    z-index: 2
+    transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
+    transition-duration 0.25s
+    transition-property width, background-color
+
+
+.rt-textarea-v2__tag
+  border-width 0
+  outline none
+  display: block
+  width: 100%
+  min-height 76px
+  resize none
+  transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
+  transition-duration 0.25s
+  transition-property color
+  &.rt-textarea-v2__tag--resize
+    resize: vertical
+  &:focus
+    &+.rt-textarea-v2__label
+      color b2c-purple
+    &+.rt-textarea-v2__label+.rt-textarea-v2__line
+      &:before
+        width: 100%
+        background-color: b2c-purple
+
+
+.rt-textarea-v2__label
+  position: absolute;
+  top: 0
+  left: 0
+  color main-color07
+  transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
+  transition-duration 0.25s
+  transition-property color, font-size, line-height
+.rt-textarea-v2__label--small
+  font-size 12px
+  line-height: 16px
+.rt-textarea-v2__label--error
+  color error-color!important
+
+.rt-textarea-v2--disabled
+  .rt-textarea-v2__label
+    color main-color03!important
+  .rt-textarea-v2__line
+    &:before
+      width: 0!important
+  .rt-textarea-v2__tag
+    color main-color03!important
+
+.rt-textarea-v2__size
+  color main-color05
+  text-align right
+  margin-top: 6px
+  transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
+  transition-duration 0.25s
+  transition-property color, font-size, line-height
+
+
+
+
+  &+.rt-textarea-v2__line
+    bottom: 28px
+  &+.rt-textarea-v2__error
+    padding-right: 80px
+    bottom: 4px
+    margin-top: -16px
+
+.rt-textarea-v2__size--error
+  color error-color
+  margin-top: 6px
+.rt-textarea-v2__size--disabled
+  color main-color03!important
+  margin-top: 6px
+
+
+.rt-textarea-v2__error
+  margin-top: 12px
+  color error-color
+  &+.rt-textarea-v2__line
+    bottom: 28px
+.rt-textarea-v2-footer
+  position relative
