@@ -1,10 +1,10 @@
-const stylus = require('stylus')
-const path = require('path')
-const {createFilter} = require('@rollup/pluginutils')
+import stylus from 'stylus'
+import path from 'path'
+import {createFilter} from '@rollup/pluginutils'
 
 
 
-module.exports = function (options = {}) {
+export default function (options = {}) {
     if (!options.include) options.include = ['**/*.styl', '**/*.stylus']
 
     const filter = createFilter(options.include, options.exclude);

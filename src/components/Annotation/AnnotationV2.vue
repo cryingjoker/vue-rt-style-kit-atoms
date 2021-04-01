@@ -108,8 +108,8 @@
             }
         },
         render(h) {
-            return <div class={this.annotationClasses} onClick={this.toggleOpen}>
-                <p class={this.labelClasses}>
+            return <div class={this.annotationClasses}>
+                <p class={this.labelClasses} onClick={this.toggleOpen}>
                     {this.title}
                     <svg class="rt-annotation__arrow" width="12px" height="7px" viewBox="0 0 12 7" xmlns="http://www.w3.org/2000/svg">
                         <g transform="translate(0.000000, -9.000000)" stroke-width="1">

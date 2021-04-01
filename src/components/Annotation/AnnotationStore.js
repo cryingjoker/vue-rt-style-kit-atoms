@@ -9,33 +9,33 @@ const initStore = (uid, isOpened) => {
 };
 
 const setActive = (uid) => {
-    if (activeAnnotationID === uid) return;
-    activeAnnotationID = uid;
-    runWatchers()
+  if (activeAnnotationID === uid) return;
+  activeAnnotationID = uid;
+  runWatchers()
 };
 
 const getActive = () => {
-    return activeAnnotationID;
+  return activeAnnotationID;
 };
 
 const addWatcher = (id, fn) => {
-    if(annotations[id]) {
-        watchers[id] = fn
-    }
+  if(annotations[id]) {
+    watchers[id] = fn
+  }
 };
 
 const removeWatcher = (id) => {
-    delete watchers[id];
+  delete watchers[id];
 };
 
 const clearStore = (id) => {
-    delete annotations[id];
+  delete annotations[id];
 };
 
 const runWatchers = () => {
-    Object.keys(watchers).forEach((id) => {
-        watchers[id]()
-    })
+  Object.keys(watchers).forEach((id) => {
+    watchers[id]()
+  })
 };
 
 export const AnnotationStore = Vue.observable({
