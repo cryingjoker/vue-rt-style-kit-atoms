@@ -15,6 +15,10 @@ export default {
       type: String,
       default: ''
     },
+    bright:{
+      type: Boolean,
+      default: false
+    },
     disabled: {
       type: Boolean,
       default: false
@@ -204,6 +208,7 @@ export default {
             resize={this.resize}
             label={this.label}
             max-size={this.maxSize}
+            bright={this.bright}
             stop-on-oversize={this.stopOnOversize}
         ></rt-textarea-v2>
       </div>
