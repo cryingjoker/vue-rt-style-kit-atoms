@@ -50,8 +50,9 @@
       this.calcTextLength();
       hintStore.initStore(this._uid, this.hintText);
       window.addEventListener('resize', debounce(this.determineDeviceType, 35));
-      window.addEventListener('scroll', () => this.hideHint())
-      setTimeout(() => this.pushCoords(false), 1000)
+      window.addEventListener('scroll', () => {
+        this.hideHint();
+      })
     },
     created() {},
     methods: {
@@ -59,18 +60,18 @@
         if(hintStore.getHintData().hovered && $event.type === 'click') {
           this.hideHint();
         } else {
-          this.$nextTick(this.pushCoords(true));
+          this.$nextTick(this.pushCoords());
         }
       },
       hideHint() {
         hintStore.setActive(this._uid, null, false)
       },
-      pushCoords(hovered){
+      pushCoords(){
         let coords = {};
         let el = this.$el;
         coords.x = el.getBoundingClientRect().left;
         coords.y = el.getBoundingClientRect().top;
-        hintStore.setActive(this._uid, coords, hovered)
+        hintStore.setActive(this._uid, coords, true)
       },
       determineDeviceType() {
         this.isDesktop = window.innerWidth > parseInt(variables["tablet-upper-limit"]);
