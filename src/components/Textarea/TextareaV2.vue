@@ -41,7 +41,11 @@ export default {
     stopOnOversize:{
       type: Boolean,
       default: false
-    }
+    },
+    bright:{
+      type: Boolean,
+      default: false
+    },
   },
   data() {
     return {
@@ -95,6 +99,9 @@ export default {
     },
     textareaClassname() {
       const textareaClassname = ['rt-textarea-v2']
+      if(this.bright){
+        textareaClassname.push('rt-textarea-v2-bright')
+      }
       if (this.hasError) {
         textareaClassname.push('rt-textarea-v2--error')
       }
