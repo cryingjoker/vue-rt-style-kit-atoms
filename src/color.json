@@ -3,7 +3,6 @@
   "b2c-black085": "rgba(16, 24, 40 , 0.85)",
   "b2c-black085-no-opacity": "#343B48",
   "b2c-purple": "#7700FF",
-  "b2c-purple": "#9466FF",
   "b2c-purple-button-hover": "#5B09C0",
   "b2c-purple-button-active": "#3F028C",
   "b2c-purple01": "rgba(119,0,255,0.1)",
@@ -109,8 +108,7 @@
   "card-list-border": "#E5E5E5",
   "default-wive-color": "#808080",
   "error-color": "#eb3728",
-  "error-color-darktheme": "#FF4747",
-  "error-color-light": "#FF4747",
+  "error-color-night": "#FF4747",
   "box-shadow-background": "rgba(16,24,40,0.1)",
   "dark-theme-dropdown-background": "#202432",
   "light-grey": "#fafafa"
