@@ -50,6 +50,9 @@
   &:after
     background-color: b2c-purple
     z-index 2
+    .rt-dark-theme &,
+    .select-v2--bright &
+      background-color b2c-purple-night
     .select-v2--is-open &
       width 100%
 
@@ -87,10 +90,13 @@
 
 .select-v2--is-open .select-v2-label
   color b2c-purple
+  .rt-dark-theme &
+    color b2c-purple-night
 
 .select-v2-label--up
   color main-color05
-
+.select-v2--bright.select-v2--is-open .select-v2-label
+  color b2c-purple-night
 .select-v2-value
   font-size 16px
   line-height 24px
@@ -201,6 +207,9 @@
     background-color main-color005
   &--select
     color b2c-purple
+    .rt-dark-theme &,
+    .select-v2--bright &
+      color b2c-purple-night
   &--hidden
     display none
   &__mismatch

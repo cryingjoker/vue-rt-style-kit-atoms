@@ -98,6 +98,10 @@ export default {
         SelectStore.setClose(this.selectName)
       }
     },
+    clickOnCheckbox(e){
+      e.preventDefault()
+      this.onClickFire()
+    },
     emitEnter() {
       this.$emit('mouseenter')
     },
@@ -125,7 +129,7 @@ export default {
       if(this.multiple){
         return <button type="button" ref="button" class={this.selectClass} onClick={this.onClickFire}
                        onMouseenter={this.emitEnter} onMouseleave={this.emitLeave} onMousemove={this.emitMove}>
-          <rt-checkbox is-orange={true} checked={this.isActive}></rt-checkbox>
+          <rt-checkbox onClick={this.clickOnCheckbox} is-orange={true} checked={this.isActive}></rt-checkbox>
           <div class="select-v2-option__inner">
             <p class="rt-font-control">{this.label}</p>
             {this.renderSublabel}
