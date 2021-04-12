@@ -178,7 +178,7 @@
   position absolute
   padding-top 8px
   .rt-dark-theme &
-    color error-color-light
+    color error-color-night
 
 .rt-input-v2--error
   .rt-input-v2-error
@@ -186,11 +186,15 @@
     position relative
   .rt-input-v2__line
     background-color error-color
+    .rt-dark-theme &
+      background-color error-color-night
     &:after,
     &:before
       display none
   .rt-input-v2__input:focus+.rt-input-v2-placeholder
     color error-color!important
+    .rt-dark-theme &
+      color error-color-night!important
   .rt-input-v2-label
     transform scale(0)
     position absolute
@@ -208,7 +212,6 @@
   .rt-dark-theme &,
   &.input-number-icon-bright
     background-color b2c-white01
-
   &:hover
     @media (hover:hover)
       background-color: main-color03
