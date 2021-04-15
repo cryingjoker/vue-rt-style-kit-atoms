@@ -1,0 +1,101 @@
+// New typography (2021)
+set-font(fontSize, lineHeight)
+  font-size (fontSize)px
+  line-height (lineHeight)px
+
+// For all devices
+.font-h1,
+.font-h2,
+.font-h3,
+.font-h4,
+.font-h-l,
+.font-h-m,
+.font-h-s,
+.font-h-xs
+  font-weight 500
+.font-h-s
+  set-font(14, 16)
+.font-h-xs
+  set-font(12, 16)
+.font-t-s
+  set-font(14, 20)
+.font-t-xs
+  set-font(12, 16)
+
+// Tablet = Web Small
+@media (min-width: 768px) and (max-width: 1024px)
+  .font-h1
+    set-font(36, 44)
+
+// Web Small
+@media (min-width: 1025px) and (max-width: 1279px)
+  .font-h1
+    set-font(44, 52)
+
+// Tablet = Web Small
+@media (min-width: 768px) and (max-width: 1279px) { // Без скобочек брейкпоинт при компиляции закрывается после 1 св-ва ;(
+  .font-h2 {
+    set-font(32, 40)
+  }
+	.font-h3 {
+    set-font(24, 32)
+  }
+  .font-h4 {
+    set-font(20, 24)
+  }
+}
+
+// Tablet = Web
+@media (min-width: 768px)
+  .font-h-m
+    set-font(16, 20)
+  .font-t-m
+    set-font(16, 24)
+  .font-lb
+    set-font(14, 16)
+
+// < Web
+@media (max-width: 1279px)
+  .font-h-l
+    set-font(16, 20)
+  .font-t-l
+    set-font(16, 24)
+
+// Web
+@media (min-width: 1280px) {
+  .font-h1 {
+    set-font(50, 60)
+  }
+	.font-h2 {
+    set-font(36, 44)
+  }
+	.font-h3 {
+    set-font(28, 36)
+  }
+	.font-h4 {
+    set-font(22, 28)
+  }
+	.font-h-l {
+    set-font(18, 24)
+  }
+	.font-t-l {
+    set-font(18, 28)
+  }
+}
+
+// Mobile
+@media (max-width: 767px)
+	.font-h1
+    set-font(28, 32)
+	.font-h2
+    set-font(24, 32)
+	.font-h3
+    set-font(22, 28)
+	.font-h4
+    set-font(18, 24)
+	.font-h-m
+    set-font(14, 16)
+	.font-t-m
+    set-font(14, 20)
+	.font-lb
+    set-font(12, 16)
