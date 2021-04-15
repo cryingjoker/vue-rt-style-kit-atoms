@@ -494,3 +494,86 @@ a
 .{newAppName}-va-top
   vertical-align: top
 
+
+// New typography (2021)
+renderFont(fontSize, lineHeight)
+  font-size (fontSize)px
+  line-height (lineHeight)px
+// For all devices
+.font-H1,
+.font-H2,
+.font-H3,
+.font-H4,
+.font-h-l,
+.font-h-m,
+.font-h-s,
+.font-h-xs
+  font-weight 500
+.font-h-s
+  renderFont(14, 16)
+.font-h-xs
+  renderFont(12, 16)
+.font-t-s
+  renderFont(14, 20)
+.font-t-xs
+  renderFont(12, 16)
+// Mobile
+@media (max-width 767px)
+	.font-H1
+    renderFont(28, 32)
+	.font-H2
+    renderFont(24, 32)
+	.font-H3
+    renderFont(22, 28)
+	.font-H4
+    renderFont(18, 24)
+	.font-h-m
+    renderFont(14, 16)
+	.font-t-m
+    renderFont(14, 20)
+	.font-lb
+    renderFont(12, 16)
+// Tablet = Web Small
+@media (min-width 768px) and (max-width 1024px)
+	.font-H1
+    renderFont(36, 44)
+// Web Small
+@media (min-width 1025px) and (max-width 1279px)
+  .font-H1
+    renderFont(44, 52)
+// Tablet = Web Small
+@media (min-width 768px) and (max-width 1279px)
+  .font-H2
+    renderFont(32, 40)
+	.font-H3
+    renderFont(24, 32)
+  .font-H4
+    renderFont(20, 24)
+// Tablet = Web
+@media (min-width 768px)
+  .font-h-m
+    renderFont(16, 20)
+  .font-t-m
+    renderFont(16, 24)
+  .font-lb
+    renderFont(14, 16)
+// < Web
+@media (max-width 1279px)
+  .font-h-l
+    renderFont(16, 20)
+  .font-t-l
+    renderFont(16, 24)
+// Web
+@media (min-width 1280px)
+  .font-H1
+    renderFont(50, 60)
+	.font-H2
+    renderFont(36, 44)
+	.font-H3
+    renderFont(28, 36)
+	.font-H4
+    renderFont(22, 28)
+	.font-h-l
+    renderFont(18, 24)
+	.font-t-l
+    renderFont(18, 28)
