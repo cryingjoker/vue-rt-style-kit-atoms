@@ -167,8 +167,8 @@
   opacity: 1
 
 .rt-input-v2-error
-  display: block
-  opacity: 0.8
+  display block
+  opacity 0.8
   color error-color
   transform scale(0)
   transform-origin left top
@@ -181,6 +181,10 @@
     color error-color-night
 
 .rt-input-v2--error
+  .rt-input-v2-label
+    transform scale(0)
+    position absolute
+    bottom 0
   .rt-input-v2-error
     transform scale(1)
     position relative
@@ -195,9 +199,6 @@
     color error-color!important
     .rt-dark-theme &
       color error-color-night!important
-  .rt-input-v2-label
-    transform scale(0)
-    position absolute
 
 .input-number-icon.rt-sys-icon
   background-color: main-color01

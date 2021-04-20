@@ -279,13 +279,13 @@ export default {
         return <template slot="icon">{icon}</template>
       })
     }
-    const renderLabel = () => {
-      if (this.hasError) {
-        if (this.errorMessage?.length > 0) {
-          return <span class="rt-input-v2-label rt-input-v2-error rt-font-label">{this.errorMessage}</span>
-        }
-        return null
+    const renderError = () => {
+      if (this.errorMessage?.length > 0) {
+        return <span class="rt-input-v2-label rt-input-v2-error rt-font-label">{this.errorMessage}</span>
       }
+      return null
+    }
+    const renderLabel = () => {
       if (this.label?.length > 0) {
         return <span class="rt-input-v2-label rt-font-label">{this.label}</span>
       }
@@ -336,8 +336,8 @@ export default {
           {icons()}
         </rt-input-v2-icon>
       </label>
-      <span class="rt-input-v2-error rt-font-label">{this.errorMessage}</span>
-      <span class="rt-input-v2-label rt-font-label">{this.label}</span>
+      {renderError()}
+      {renderLabel()}
     </div>
   }
 };
