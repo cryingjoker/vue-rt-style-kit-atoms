@@ -23,17 +23,17 @@ set-font(fontSize, lineHeight)
   set-font(12, 16)
 
 // Tablet = Web Small
-@media (min-width: 768px) and (max-width: 1024px)
+@media (min-width: tablet-lower-limit) and (max-width: tablet-upper-limit)
   .font-h1
     set-font(36, 44)
 
 // Web Small
-@media (min-width: 1025px) and (max-width: 1279px)
+@media (min-width: laptop-lower-limit) and (max-width: laptop-upper-limit)
   .font-h1
     set-font(44, 52)
 
 // Tablet = Web Small
-@media (min-width: 768px) and (max-width: 1279px) { // Без скобочек брейкпоинт при компиляции закрывается после 1 св-ва ;(
+@media (min-width: tablet-lower-limit) and (max-width: laptop-lower-limit) { // Без скобочек брейкпоинт при компиляции закрывается после 1 св-ва ;(
   .font-h2 {
     set-font(32, 40)
   }
@@ -46,7 +46,7 @@ set-font(fontSize, lineHeight)
 }
 
 // Tablet = Web
-@media (min-width: 768px)
+@media (min-width: tablet-lower-limit)
   .font-h-m
     set-font(16, 20)
   .font-t-m
@@ -55,14 +55,14 @@ set-font(fontSize, lineHeight)
     set-font(14, 16)
 
 // < Web
-@media (max-width: 1279px)
+@media (max-width: laptop-lower-limit)
   .font-h-l
     set-font(16, 20)
   .font-t-l
     set-font(16, 24)
 
 // Web
-@media (min-width: 1280px) {
+@media (min-width: desktop-lower-limit) {
   .font-h1 {
     set-font(50, 60)
   }
@@ -84,7 +84,7 @@ set-font(fontSize, lineHeight)
 }
 
 // Mobile
-@media (max-width: 767px)
+@media (max-width: mobile-upper-limit)
 	.font-h1
     set-font(28, 32)
 	.font-h2
