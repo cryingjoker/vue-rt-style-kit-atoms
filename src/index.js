@@ -19,6 +19,7 @@ import {
     SelectV2,
     SelectV2Option,
     Switch,
+    SwitchV2,
     SwitchContainer,
     Textarea,
     TextareaStatic,
@@ -35,6 +36,7 @@ import {
     SystemIcons,
     ArrowAnchor
 } from "./components";
+console.info('SwitchV2',SwitchV2);
 // import 'element-closest-polyfill';
 // import 'nodelist-foreach-polyfill';
 // import 'element-remove';
@@ -88,6 +90,7 @@ let VueRtStyle = {
             Vue.component(SelectV2.name, SelectV2);
             Vue.component(SelectV2Option.name, SelectV2Option);
             Vue.component(Switch.name, Switch);
+            Vue.component(SwitchV2.name, SwitchV2);
             Vue.component(SwitchContainer.name, SwitchContainer);
             Vue.component(Spinner.name, Spinner);
             Vue.component(Textarea.name, Textarea);
@@ -157,6 +160,7 @@ export {
     SelectV2,
     SelectV2Option,
     Switch,
+    SwitchV2,
     SwitchContainer,
     Textarea,
     TextareaStatic,

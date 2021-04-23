@@ -1,0 +1,46 @@
+.switch-v2
+  display: inline-block
+  position: relative;
+
+.switch-v2-element
+  display: none
+
+.switch-v2-float
+  height: 18px
+  width: 32px
+  background-color: main-color03
+  border-radius 4px
+  margin-right: 12px
+  transition-timing-function cubic-bezier(10, 2, .9, .65)
+  transition-duration .2s
+  transition-property background
+  position: relative;
+  @media(hover: hover)
+    .switch-v2:hover &
+      background-color: main-color05
+  .switch-v2:active &
+      background-color: main-color05
+  &:before
+    content ''
+    width: 14px
+    height: 14px
+    background-color: #fff
+    position: absolute;
+    left: 2px
+    top: 2px
+    bottom: 2px
+    border-radius 4px
+    transition-timing-function cubic-bezier(10, 2, .9, .65)
+    transition-duration .2s
+    transition-property left
+
+  .switch-v2-element:checked+.switch-v2-container &
+    background-color: b2c-orange
+    @media(hover: hover)
+      .switch-v2:hover &
+        background-color: b2c-orange-button-hover
+    &:before
+      left: calc(100% - 16px)
+.switch-v2-container
+  display: flex
+

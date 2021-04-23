@@ -12,6 +12,7 @@ export default {
       type: Boolean,
       default: false
     },
+
 //    checkIdAllChecked: {
 //      type: Boolean,
 //      default: false
