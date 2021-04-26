@@ -71,7 +71,10 @@ for type in values(switch.types)
       left: calc(100% - 16px)
   .switch-v2-element:disabled+.switch-v2-container &
     &:before
-      background-color: b2c-white03
+      background-color: main-color01
+      .switch-v2-bright &,
+      .rt-dark-theme &
+        background-color: b2c-white03
 
   border-radius 4px
   margin-right: 12px
