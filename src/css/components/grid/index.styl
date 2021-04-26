@@ -23,21 +23,21 @@ spaceRender(prefix, needMedia, value, mediaWidth)
     else
       horizontalValueHalf = horizontalValueHalf - 1
 
-  .{newAppName}{prefix}-space-top{name}-half
+  .rt{prefix}-space-top{name}-half
     if (needMedia)
       @media (max-width: mediaWidth)
         padding-top verticalValueHalf
     else
       padding-top verticalValueHalf
 
-  .{newAppName}{prefix}-space-bottom{name}-half
+  .rt{prefix}-space-bottom{name}-half
     if (needMedia)
       @media (max-width: mediaWidth)
         padding-bottom verticalValueHalf
     else
       padding-bottom verticalValueHalf
 
-  .{newAppName}{prefix}-space-vertical{name}-half
+  .rt{prefix}-space-vertical{name}-half
     if (needMedia)
       @media (max-width: mediaWidth)
         padding-top verticalValueHalf
@@ -46,21 +46,21 @@ spaceRender(prefix, needMedia, value, mediaWidth)
       padding-top verticalValueHalf
       padding-bottom verticalValueHalf
 
-  .{newAppName}{prefix}-space-left{name}-half
+  .rt{prefix}-space-left{name}-half
     if (needMedia)
       @media (max-width: mediaWidth)
         padding-left horizontalValueHalf
     else
       padding-left horizontalValueHalf
 
-  .{newAppName}{prefix}-space-right{name}-half
+  .rt{prefix}-space-right{name}-half
     if (needMedia)
       @media (max-width: mediaWidth)
         padding-right horizontalValueHalf
     else
       padding-right horizontalValueHalf
 
-  .{newAppName}{prefix}-space-horizontal{name}-half
+  .rt{prefix}-space-horizontal{name}-half
     if (needMedia)
       @media (max-width: mediaWidth)
         padding-left horizontalValueHalf
@@ -76,21 +76,21 @@ spaceRender(prefix, needMedia, value, mediaWidth)
     verticalValueUnit = verticalValueUnit + 2
   if horizontalValueUnit % 20 == 10
     horizontalValueUnit = horizontalValueUnit + 2
-  .{newAppName}{prefix}-space-top{name}
+  .rt{prefix}-space-top{name}
     if (needMedia)
       @media (max-width: mediaWidth)
         padding-top verticalValueUnit
     else
       padding-top verticalValueUnit
 
-  .{newAppName}{prefix}-space-bottom{name}
+  .rt{prefix}-space-bottom{name}
     if (needMedia)
       @media (max-width: mediaWidth)
         padding-bottom verticalValueUnit
     else
       padding-bottom verticalValueUnit
 
-  .{newAppName}{prefix}-space-vertical{name}
+  .rt{prefix}-space-vertical{name}
     if (needMedia)
       @media (max-width: mediaWidth)
         padding-top verticalValueUnit
@@ -99,21 +99,21 @@ spaceRender(prefix, needMedia, value, mediaWidth)
       padding-top verticalValueUnit
       padding-bottom verticalValueUnit
 
-  .{newAppName}{prefix}-space-left{name}
+  .rt{prefix}-space-left{name}
     if (needMedia)
       @media (max-width: mediaWidth)
         padding-left horizontalValueUnit
     else
       padding-left horizontalValueUnit
 
-  .{newAppName}{prefix}-space-right{name}
+  .rt{prefix}-space-right{name}
     if (needMedia)
       @media (max-width: mediaWidth)
         padding-right horizontalValueUnit
     else
       padding-right horizontalValueUnit
 
-  .{newAppName}{prefix}-space-horizontal{name}
+  .rt{prefix}-space-horizontal{name}
     if (needMedia)
       @media (max-width: mediaWidth)
         padding-left horizontalValueUnit
@@ -125,7 +125,7 @@ spaceRender(prefix, needMedia, value, mediaWidth)
 steps = desktop-step-grid 12, tablet-step-grid 6 "td" tablet-upper-limit, mobile-step-grid 3 "md" mobile-upper-limit
 
 
-.{newAppName}-col
+.rt-col
   flex 0 0 1
   width 100%
   padding-left (horizontal-space * .5)
@@ -432,41 +432,40 @@ for $device_index in 0 .. 3
       justify-content left
       align-items flex-end
 
-.{newAppName}-container
+.rt-container
   width 100%
   max-width container-upper-limit
   margin-left auto
   margin-right auto
-  padding-left horizontal-space * 3.5
-  padding-right horizontal-space * 3.5
+  padding-left 70px
+  padding-right 70px
   transition-timing-function ease-in-out
   transition-duration 3s
   transition-property opacity, visibility
 
-  @media (max-width: container-device-limit)
-    padding-left horizontal-space * 1.5
-    padding-right horizontal-space * 1.5
-  @media (max-width: tablet-upper-limit)
-    padding-left horizontal-space * .5
-    padding-right horizontal-space * .5
+
   @media (max-width: desktop-lower-limit)
-    padding-left horizontal-space * .5
-    padding-right horizontal-space * .5
+    padding-left 30px
+    padding-right 30px
+  @media (max-width: tablet-upper-limit)
+    padding-left 10px
+    padding-right 10px
+
   @media (max-width: mobile-upper-limit)
-    padding-left horizontal-space * .5
-    padding-right horizontal-space * .5
+    padding-left 10px
+    padding-right 10px
 
 .no-gutters
   margin-left 0
   margin-right 0
 
-.no-gutters > .{newAppName}-col,
+.no-gutters > .rt-col,
 .no-gutters > [class*="col-"]
   padding-left 0
   padding-right 0
 
 .d-md-flex-column
-  .{newAppName}-card
+  .rt-card
     @media (max-width: mobile-upper-limit)
       min-height fit-content
 
@@ -474,7 +473,7 @@ for $device_index in 0 .. 3
     display flex
     flex-direction column
 
-.{newAppName}-pseudo-col
+.rt-pseudo-col
   position absolute
   transition-timing-function ease-in-out
   transition-duration .2s
@@ -490,122 +489,122 @@ for $device_index in 0 .. 3
   &--right
     left 100%
 
-.{newAppName}-fill-viewport
+.rt-fill-viewport
   min-width calc(100vw - 20px)
   min-height 100vh
 
-.{newAppName}-fill-viewport-width
+.rt-fill-viewport-width
   min-width 100vw
 
-.{newAppName}-fill-viewport-height
+.rt-fill-viewport-height
   min-height 100vh
 
-.{newAppName}-md-viewport-height-reset
+.rt-md-viewport-height-reset
   @media (max-width:  mobile-upper-limit)
     min-height auto
-.{newAppName}-space-horizontal-none
+.rt-space-horizontal-none
   padding-left 0
   padding-right 0
 
-.{newAppName}-td-fill-viewport
+.rt-td-fill-viewport
   @media (max-width: tablet-upper-limit)
     min-width 100vw
     min-height 100vh
 
-.{newAppName}-td-fill-viewport-width
+.rt-td-fill-viewport-width
   @media (max-width: tablet-upper-limit)
     min-width 100vw
 
-.{newAppName}-td-fill-viewport-height
+.rt-td-fill-viewport-height
   @media (max-width: tablet-upper-limit)
     min-height 100vh
 
-.{newAppName}-td-space-horizontal-none
+.rt-td-space-horizontal-none
   @media (max-width: tablet-upper-limit)
     padding-left 0
     padding-right 0
 
-.{newAppName}-md-fill-viewport
+.rt-md-fill-viewport
   @media (max-width: mobile-upper-limit)
     min-width 100vw
     min-height 100vh
 
-.{newAppName}-md-fill-viewport-width
+.rt-md-fill-viewport-width
   @media (max-width: mobile-upper-limit)
     min-width 100vw
 
-.{newAppName}-md-fill-viewport-height
+.rt-md-fill-viewport-height
   @media (max-width: mobile-upper-limit)
     min-height 100vh
 
-.{newAppName}-md-space-horizontal-none
+.rt-md-space-horizontal-none
   @media (max-width: mobile-upper-limit)
     padding-left 0
     padding-right 0
 
-.{newAppName}-td-space-left-none
+.rt-td-space-left-none
   @media (max-width: tablet-upper-limit)
     padding-left 0
 
-.{newAppName}-td-space-left-none
+.rt-td-space-left-none
   @media (max-width: tablet-upper-limit)
     padding-left 0
 
-.{newAppName}-md-space-left-none
+.rt-md-space-left-none
   @media (max-width: mobile-upper-limit)
     padding-left 0
 
-.{newAppName}-space-right-none
+.rt-space-right-none
   padding-right 0
 
-.{newAppName}-td-space-right-none
+.rt-td-space-right-none
   @media (max-width: tablet-upper-limit)
     padding-right 0
 
-.{newAppName}-md-space-right-none
+.rt-md-space-right-none
   @media (max-width: mobile-upper-limit)
     padding-right 0
 
-.{newAppName}-reverse-horizontal2
+.rt-reverse-horizontal2
   margin-left -2 * horizontal-space
   margin-right -2 * horizontal-space
 
-.{newAppName}-reverse-horizontal
+.rt-reverse-horizontal
   margin-left -1 * horizontal-space
   margin-right -1 * horizontal-space
 
-.{newAppName}-reverse-horizontal05
+.rt-reverse-horizontal05
   margin-left -1 * horizontal-space * .5
   margin-right -1 * horizontal-space * .5
 
-.{newAppName}-space-top-none
+.rt-space-top-none
   padding-top 0
 
-.{newAppName}-td-space-top-none
+.rt-td-space-top-none
   @media (max-width: tablet-upper-limit)
     padding-top 0
 
-.{newAppName}-md-space-top-none
+.rt-md-space-top-none
   @media (max-width: mobile-upper-limit)
     padding-top 0
 
-.{newAppName}-space-top-none
+.rt-space-top-none
   padding-top 0
 
-.{newAppName}-td-space-bottom-none
+.rt-td-space-bottom-none
   @media (max-width: tablet-upper-limit)
     padding-bottom 0
 
-.{newAppName}-md-space-bottom-none
+.rt-md-space-bottom-none
   @media (max-width: mobile-upper-limit)
     padding-bottom 0
 
-.{newAppName}-td-space-vertical-none
+.rt-td-space-vertical-none
   @media (max-width: tablet-upper-limit)
     padding-top 0
     padding-bottom 0
 
-.{newAppName}-md-space-vertical-none
+.rt-md-space-vertical-none
   @media (max-width: mobile-upper-limit)
     padding-top 0
     padding-bottom 0
@@ -726,7 +725,7 @@ for $device_index in 0 .. 3
     right: 0
     border-top: 2px solid #e3e8ec
 
-.{newAppName}-animate-opacity
+.rt-animate-opacity
   transition-timing-function ease-in-out
   transition-duration .2s
   transition-property opacity, visibility
@@ -737,12 +736,12 @@ for $device_index in 0 .. 3
 //mobile-upper-limit = 767px
 //newAppName = 'rt'
 
-.{newAppName}-main-footer
+.rt-main-footer
   padding-top: 25px
   padding-bottom: 25px
   border-top: 2px solid #585D68
 
-.{newAppName}-main-footer-container
+.rt-main-footer-container
   display: grid
   grid-template-columns: 1fr 1fr 1fr
   grid-template-rows: 1fr
@@ -757,7 +756,7 @@ for $device_index in 0 .. 3
     grid-template-rows: 1fr 1fr 1fr
 
 
-.{newAppName}-main-footer-copyright
+.rt-main-footer-copyright
   grid-column-start: 1;
   grid-column-end: 1;
   @media (max-width: tablet-upper-limit)
@@ -771,7 +770,7 @@ for $device_index in 0 .. 3
     grid-row-start: 2;
     grid-row-start: 2;
 
-.{newAppName}-main-footer-social
+.rt-main-footer-social
   grid-column-start: 2;
   grid-column-end: 2;
   @media (max-width: tablet-upper-limit)
@@ -785,7 +784,7 @@ for $device_index in 0 .. 3
     grid-row-start: 3;
     grid-row-start: 3;
 
-.{newAppName}-main-footer-phone
+.rt-main-footer-phone
   grid-column-start: 3;
   grid-column-end: 3;
   text-align: right
