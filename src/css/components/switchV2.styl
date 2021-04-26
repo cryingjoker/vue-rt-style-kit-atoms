@@ -1,3 +1,61 @@
+
+switch = json('./switch-settings.json',{hash:true})
+themes = ('light')('dark')
+.switch-v2
+  cursor: pointer;
+for type in values(switch.types)
+  n_type = replace(s(type),'t-','')
+  className = 'switch-v2'
+  if n_type != 'default'
+    className= className + '--' + n_type
+
+  .switch-v2-float
+    .{className} &
+      background-color: switch['default'][themes[0]]['normal']
+    .{className}.switch-v2-bright &,
+    .rt-dark-theme .{className} &
+      background-color: switch['default'][themes[1]]['normal']
+  @media(hover: hover)
+    .{className}.switch-v2:hover .switch-v2-float
+      background-color: switch['default'][themes[0]]['hover']
+    .{className}.switch-v2-bright:hover .switch-v2-float,
+    .rt-dark-theme .{className}:hover .switch-v2-float
+      background-color: switch['default'][themes[1]]['hover']
+  .switch-v2:active.{className}
+    background-color: switch['default'][themes[0]]['active']
+
+  .switch-v2:active.{className}
+    background-color: switch['default'][themes[0]]['active']
+  .{className}.switch-v2-bright:active &,
+  .rt-dark-theme .{className}:active &
+    background-color: switch['default'][themes[1]]['active']
+
+  .{className} .switch-v2-element:checked+.switch-v2-container .switch-v2-float
+    background-color: switch[type][themes[0]]['normal']
+  .{className}
+    .switch-v2-element:disabled+.switch-v2-container .switch-v2-float
+      background-color: switch[type][themes[0]]['disabled']!important
+    &.switch-v2-bright
+    .rt-dark-theme &
+      .switch-v2:active.{className}
+        background-color: switch['default'][themes[0]]['active']
+      .switch-v2-element:checked+.switch-v2-container .switch-v2-float
+        background-color: switch[type][themes[1]]['normal']
+      .switch-v2-element:disabled+.switch-v2-container .switch-v2-float
+        background-color: switch[type][themes[1]]['disabled']!important
+
+  @media(hover: hover)
+    .{className}
+      &:hover .switch-v2-element:checked+.switch-v2-container .switch-v2-float
+       background-color: switch[type][themes[0]]['hover']
+      &.switch-v2-bright:hover
+      .rt-dark-theme &:hover
+        .switch-v2-element:checked+.switch-v2-container .switch-v2-float
+          background-color: switch[type][themes[1]]['hover']
+
+  //for theme in values(switch[type])
+  //  for state in keys(theme)
+
 .switch-v2
   display: inline-block
   position: relative;
@@ -8,7 +66,13 @@
 .switch-v2-float
   height: 18px
   width: 32px
-  background-color: main-color03
+  .switch-v2-element:checked+.switch-v2-container &
+    &:before
+      left: calc(100% - 16px)
+  .switch-v2-element:disabled+.switch-v2-container &
+    &:before
+      background-color: b2c-white03
+
   border-radius 4px
   margin-right: 12px
   transition-timing-function cubic-bezier(10, 2, .9, .65)
@@ -18,8 +82,8 @@
   @media(hover: hover)
     .switch-v2:hover &
       background-color: main-color05
-  .switch-v2:active &
-      background-color: main-color05
+
+
   &:before
     content ''
     width: 14px
@@ -32,15 +96,19 @@
     border-radius 4px
     transition-timing-function cubic-bezier(10, 2, .9, .65)
     transition-duration .2s
-    transition-property left
+    transition-property left background
 
-  .switch-v2-element:checked+.switch-v2-container &
-    background-color: b2c-orange
-    @media(hover: hover)
-      .switch-v2:hover &
-        background-color: b2c-orange-button-hover
+
+
     &:before
       left: calc(100% - 16px)
+
 .switch-v2-container
   display: flex
+.switch-v2-invert
+  .switch-v2-container
+    flex-direction row-reverse
+  .switch-v2-float
+    margin-right: 0
+    margin-left: 12px
 

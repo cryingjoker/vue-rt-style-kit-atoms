@@ -7,11 +7,19 @@ export default {
   name: "RtSwitchV2",
   components: componentsList,
   props: {
+    id:{
+      type:String,
+      default:''
+    },
     disabled: {
       type: Boolean,
       default: false
     },
     checked: {
+      type: Boolean,
+      default: false
+    },
+    bright: {
       type: Boolean,
       default: false
     },
@@ -22,6 +30,10 @@ export default {
     invert:{
       type: Boolean,
       default: false
+    },
+    color:{
+      type: String,
+      default: 'orange'
     }
 
 
@@ -31,7 +43,13 @@ export default {
     switchClassName(){
       const switchClassName = ['switch-v2']
       if(this.invert){
-        switchClassName.push('switch-v2--invert')
+        switchClassName.push('switch-v2-invert')
+      }
+      if(this.color){
+        switchClassName.push('switch-v2--'+this.color)
+      }
+      if(this.bright){
+        switchClassName.push('switch-v2-bright')
       }
       return switchClassName.join(' ')
     }
@@ -49,6 +67,7 @@ export default {
     const renderInput = ()=> {
       if (this.name) {
         return <input ref="input"
+                      id={this.id}
                       name={this.name}
                       disabled={this.disabled}
                       checked={this.checked}
@@ -57,6 +76,7 @@ export default {
                       onChange={this.onChange}/>
       } else {
         return <input ref="input"
+                      id={this.id}
                       disabled={this.disabled}
                       checked={this.checked}
                       type="checkbox"
