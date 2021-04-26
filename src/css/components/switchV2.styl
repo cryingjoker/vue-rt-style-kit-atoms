@@ -1,4 +1,3 @@
-
 switch = json('./switch-settings.json',{hash:true})
 themes = ('light')('dark')
 .switch-v2
@@ -47,14 +46,14 @@ for type in values(switch.types)
   @media(hover: hover)
     .{className}
       &:hover .switch-v2-element:checked+.switch-v2-container .switch-v2-float
-       background-color: switch[type][themes[0]]['hover']
+        background-color: switch[type][themes[0]]['hover']
       &.switch-v2-bright:hover
       .rt-dark-theme &:hover
         .switch-v2-element:checked+.switch-v2-container .switch-v2-float
           background-color: switch[type][themes[1]]['hover']
 
-  //for theme in values(switch[type])
-  //  for state in keys(theme)
+//for theme in values(switch[type])
+//  for state in keys(theme)
 
 .switch-v2
   display: inline-block
@@ -71,10 +70,7 @@ for type in values(switch.types)
       left: calc(100% - 16px)
   .switch-v2-element:disabled+.switch-v2-container &
     &:before
-      background-color: main-color01
-      .switch-v2-bright &,
-      .rt-dark-theme &
-        background-color: b2c-white03
+      background-color: b2c-white03
 
   border-radius 4px
   margin-right: 12px
@@ -114,4 +110,3 @@ for type in values(switch.types)
   .switch-v2-float
     margin-right: 0
     margin-left: 12px
-
