@@ -59,6 +59,27 @@ export default {
     onInput(e){
       this.$emit('input',e)
     },
+    onClear() {
+      this.$emit('clear')
+    },
+    onKeydown(e) {
+      this.$emit('keydown', e)
+    },
+    onKeyup(e) {
+      this.$emit('keyup', e.key)
+    },
+    onFocus() {
+      this.$emit('focus')
+    },
+    onBlur() {
+      this.$emit('blur')
+    },
+    onFilled(e) {
+      this.$emit('filled', e)
+    },
+    onChange(e) {
+      this.$emit('change', e)
+    },
     changeLocalType() {
       this.localType = this.localType == 'password' ? 'text' : 'password';
     },
@@ -91,7 +112,16 @@ export default {
     componentStack.push(this.renderIcons(createElement))
     const props = {...this._props}
     props.type = this.localType;
-    return createElement(InputV2Atom, {props: props,on:{input:this.onInput}}, componentStack)
+    return createElement(InputV2Atom, {
+      props: props,
+      on:{
+        input:this.onInput,
+        clear: this.onClear,
+        focus: this.onFocus,
+        blur: this.onBlur,
+        change: this.onChange
+      }
+      }, componentStack)
   }
 };
 </script>

@@ -245,7 +245,6 @@ export default {
     this.getSelectType();
     this.getSelectOptions()
     this.getActiveValue();
-    console.log(this.focusIndex)
   },
   updated() {
     this.fixValueList();
@@ -434,6 +433,12 @@ export default {
       } else {
         this.shadowDown = false
       }
+    },
+    onFocus(e) {
+      this.$emit('focus', e)
+    },
+    onBlur(e) {
+      this.$emit('blur', e)
     }
   },
   render(h) {
@@ -474,16 +479,25 @@ export default {
                     disabled={this.disabled}
                     placeholder={this.label}
                     ref="input"
-                    onChange={this.checkMatch}
+                    onInput={this.checkMatch}
                     value={this.selectActiveLabels[0] || this.inputLocalValue}
-                    onClear={this.clearValue}/>
+                    onClear={this.clearValue}
+                    hasError={this.hasError}
+                    errorMessage={this.errorMessage}
+                    onFocus={this.onFocus}
+                    onBlur={this.onBlur}/>
           {this.renderSelectList}
         </div>
       </div>
     }
     return <div class={this.selectClasses} ref="select">
       <div class="select-v2__container">
-        <button type="button" disabled={this.disabled} class="select-v2__inner" onClick={this.toggleOpen}>
+        <button type="button"
+                disabled={this.disabled}
+                class="select-v2__inner"
+                onClick={this.toggleOpen}
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}>
           {renderValue()}
           {this.renderLabel}
           {this.$slots.default}
