@@ -140,9 +140,9 @@ export default {
         this.localValue = newValue;
       }
     },
-    localValue(val) {
-      this.$emit("change", val);
-    },
+    // localValue(val) {
+    //   this.$emit("change", val);
+    // },
     disabled(newVal) {
       this.disabledLocal = newVal;
     },
@@ -217,6 +217,12 @@ export default {
     onInput(e) {
       this.$emit('input',e)
     },
+    onChange(e) {
+      this.$emit('change',e)
+    },
+    onMouseUp(e) {
+      this.$emit('mouseup',e)
+    },
     toggleInformer($event) {
       $event.preventDefault();
       $event.stopPropagation();
@@ -279,13 +285,13 @@ export default {
         return <template slot="icon">{icon}</template>
       })
     }
-    const renderLabel = () => {
-      if (this.hasError) {
-        if (this.errorMessage?.length > 0) {
-          return <span class="rt-input-v2-label rt-input-v2-error rt-font-label">{this.errorMessage}</span>
-        }
-        return null
+    const renderError = () => {
+      if (this.errorMessage?.length > 0) {
+        return <span class="rt-input-v2-label rt-input-v2-error rt-font-label">{this.errorMessage}</span>
       }
+      return null
+    }
+    const renderLabel = () => {
       if (this.label?.length > 0) {
         return <span class="rt-input-v2-label rt-font-label">{this.label}</span>
       }
@@ -293,13 +299,18 @@ export default {
     }
     const inputComponent = () => {
       if (this.type == 'number') {
-        return <input class="rt-input-v2__input" value={this.localValue} onInput={this.changeValue} type={this.type}
+        return <input class="rt-input-v2__input"
+                      value={this.localValue}
+                      onInput={this.changeValue}
+                      type={this.type}
                       ref="input"
+                      onFocus={this.onFocus}
                       onBlur={this.onBlur}
                       min={this.minNumber}
                       max={this.maxNumber}
                       onPaste={this.onPaste}
                       onKeyup={this.onKeyup}
+                      onChange={this.onChange}
                       step={this.step}
                       placeholder={this.placeholder}
                       disabled={this.disabledLocal}/>
@@ -315,14 +326,21 @@ export default {
                       onKeydown={this.onKeydown}
                       onKeyup={this.onKeyup}
                       onFocus={this.onFocus}
+                      onChange={this.onChange}
                       placeholder={this.placeholder}
-                      disabled={this.disabledLocal}/>
+                      disabled={this.disabledLocal}
+                      onMouseup={this.onMouseUp}/>
       }
-      return <input class="rt-input-v2__input" value={this.localValue} onInput={this.changeValue} type={this.type}
+      return <input class="rt-input-v2__input"
+                    value={this.localValue}
+                    onInput={this.changeValue}
+                    type={this.type}
+                    onFocus={this.onFocus}
                     onBlur={this.onBlur}
                     onPaste={this.onPaste}
                     onKeydown={this.onKeydown}
                     onKeyup={this.onKeyup}
+                    onChange={this.onChange}
                     ref="input"
                     placeholder={this.placeholder}
                     disabled={this.disabledLocal}/>
@@ -336,8 +354,8 @@ export default {
           {icons()}
         </rt-input-v2-icon>
       </label>
-      <span class="rt-input-v2-error rt-font-label">{this.errorMessage}</span>
-      <span class="rt-input-v2-label rt-font-label">{this.label}</span>
+      {renderError()}
+      {renderLabel()}
     </div>
   }
 };

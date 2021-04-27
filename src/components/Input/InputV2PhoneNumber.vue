@@ -58,19 +58,24 @@ export default {
   },
   data: () => ({
     localType: 'tel',
-    localValue: true,
-    filled: false
+    localValue: null,
+    filled: false,
+    caretPositionBefore: 0,
+    caretPositionAfter: 0
   }),
   computed:{},
   mounted(){},
   methods: {
-    checkInputType($event){
-      if((/\b[a-zA-Z]\b/).test($event.key)){
+    preventZipCodeChange($event){
+      this.caretPositionBefore = this.$refs.input.$refs.input.selectionStart;
+      if($event.keyCode == 8 && this.caretPositionBefore <= 2 && this.localValue.length > 3) {
         $event.preventDefault();
       }
     },
     addMask($event) {
-      let field = this.$refs.input.$el.querySelector('.rt-input-v2__input');
+      let field = this.$refs.input.$refs.input;
+      field.value.replace(/\D/g, "")
+      let fixCaretPosition = false;
       if($event.inputType == 'deleteContentBackward') {
         if(field.value.length == 4) {
           this.localValue = '+7 '
@@ -79,12 +84,13 @@ export default {
           this.localValue = ''
         }
       } else if(field.value.length == 1) {
-        if((field.value != '7' && field.value != '8')) {
+        if(field.value != '7' && field.value != '8') {
           this.localValue = '+7 (' + field.value;
         } else {
           this.localValue = '+7 '
         }
       }
+      this.caretPositionBefore = this.$refs.input.$refs.input.selectionStart;
       let matrix = "+7 (___) ___ __ __",
           i = 0,
           def = matrix.replace(/\D/g, ""),
@@ -97,47 +103,28 @@ export default {
         this.localValue = field.value;
       }
       this.filled = this.localValue.length == 18;
+      if(this.caretPositionBefore < this.caretPositionAfter - 2) {
+        fixCaretPosition = true;
+      }
       this.$refs.input._data.localValue = this.localValue;
       if(this.filled && this.needVerification) {
         this.$emit('filled', this.localValue);
+      }
+      this.caretPositionAfter = this.$refs.input.$refs.input.selectionStart;
+      if(fixCaretPosition) {
+        this.setCaret(this.caretPositionBefore)
       }
     },
     clearValue() {
       this.localValue = '';
       this.$refs.input._data.localValue = '';
     },
-    // renderIcons(createElement) {
-    //   let icon = '';
-    //   if(this.localValue) {
-    //     icon = createElement('rt-system-icons', {
-    //         props: {name: "close large"}
-    //       }
-    //     )
-    //   }
-    //   if(this.needVerification) {
-    //     if(this.verified) {
-    //       return <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    //         <circle opacity="0.8" cx="12" cy="12" r="10" fill="#5BCF6A"/>
-    //         <path fill-rule="evenodd" clip-rule="evenodd" d="M17.5612 9.1768L11.0613 15.5704C10.7481 15.8784 10.2452 15.8763 9.93457 15.5657L6.93457 12.5657L8.06594 11.4343L10.5049 13.8733L16.4392 8.03613L17.5612 9.1768Z" fill="white"/>
-    //       </svg>
-    //     }
-    //     if(this.filled) {
-    //       icon = createElement('rt-system-icons', {
-    //           props: {name: "loading"}
-    //         }
-    //       )
-    //     }
-    //   }
-    //   return createElement(
-    //       'template',
-    //       {slot: 'icon'},
-    //       [icon],
-    //   );
-    // }
+    setCaret(pos) {
+      this.$refs.input.$refs.input.setSelectionRange(pos, pos)
+    }
   },
   render(createElement) {
     const componentStack = [];
-    // componentStack.push(this.renderIcons(createElement));
     const props = {...this._props}
     props.type = this.localType;
     return createElement(InputV2Atom,
@@ -147,7 +134,7 @@ export default {
           {
             input: this.addMask,
             clear: this.clearValue,
-            keydown: this.checkInputType
+            keydown: this.preventZipCodeChange
           },
         ref: 'input',
         componentStack
