@@ -236,7 +236,8 @@ export default {
           clear: this.onClear,
           focus: this.onFocus,
           blur: this.onBlur,
-          filled: this.onFilled
+          filled: this.onFilled,
+          change: this.onChange
         }
       }, componentStack)
     }

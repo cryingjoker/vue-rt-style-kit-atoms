@@ -287,7 +287,7 @@ export default {
     }
     const renderError = () => {
       if (this.errorMessage?.length > 0) {
-        return <span class="rt-input-v2-label rt-input-v2-error rt-font-label">{this.errorMessage}</span>
+        return <span class="rt-input-v2-error rt-font-label">{this.errorMessage}</span>
       }
       return null
     }

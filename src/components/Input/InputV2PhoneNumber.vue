@@ -121,6 +121,9 @@ export default {
     },
     setCaret(pos) {
       this.$refs.input.$refs.input.setSelectionRange(pos, pos)
+    },
+    onChange(e) {
+      this.$emit('change', e)
     }
   },
   render(createElement) {
@@ -134,7 +137,8 @@ export default {
           {
             input: this.addMask,
             clear: this.clearValue,
-            keydown: this.preventZipCodeChange
+            keydown: this.preventZipCodeChange,
+            change: this.onChange
           },
         ref: 'input',
         componentStack
