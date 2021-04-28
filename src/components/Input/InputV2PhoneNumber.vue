@@ -114,16 +114,24 @@ export default {
       if(fixCaretPosition) {
         this.setCaret(this.caretPositionBefore)
       }
+      this.$emit('input', $event)
     },
     clearValue() {
       this.localValue = '';
       this.$refs.input._data.localValue = '';
+      this.$emit('clear')
     },
     setCaret(pos) {
       this.$refs.input.$refs.input.setSelectionRange(pos, pos)
     },
     onChange(e) {
       this.$emit('change', e)
+    },
+    onBlur(e) {
+      this.$emit('blur', e)
+    },
+    onFocus(e) {
+      this.$emit('focus', e)
     }
   },
   render(createElement) {
@@ -138,7 +146,9 @@ export default {
             input: this.addMask,
             clear: this.clearValue,
             keydown: this.preventZipCodeChange,
-            change: this.onChange
+            change: this.onChange,
+            focus: this.onFocus,
+            blur: this.onBlur
           },
         ref: 'input',
         componentStack

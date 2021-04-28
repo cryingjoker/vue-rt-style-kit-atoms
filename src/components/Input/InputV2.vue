@@ -127,6 +127,7 @@ export default {
   methods: {
     onInput(e) {
       this.$emit('input', e)
+      this.$emit('custom', e)
     },
     onClear() {
       this.$emit('clear')

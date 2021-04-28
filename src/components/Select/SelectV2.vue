@@ -406,7 +406,7 @@ export default {
       }
     },
     checkMatch(e) {
-      SelectStore.setInputText(e)
+      SelectStore.setInputText(e.toLowerCase())
       this.selectActiveLabels[0] = ''
       if(this.inputLocalValue != this.$refs.input.localValue) {
         this.$refs.input.localValue = this.inputLocalValue
@@ -419,8 +419,9 @@ export default {
       }
       this.$emit('input', e)
     },
-    clearValue() {
+    clearValue(e) {
       SelectStore.clear(this.name);
+      this.$emit('clear', e)
     },
     noteScroll() {
       if(this.$refs.inner.scrollTop != 0) {
@@ -479,7 +480,7 @@ export default {
                     disabled={this.disabled}
                     placeholder={this.label}
                     ref="input"
-                    onInput={this.checkMatch}
+                    onCustom={this.checkMatch}
                     value={this.selectActiveLabels[0] || this.inputLocalValue}
                     onClear={this.clearValue}
                     hasError={this.hasError}

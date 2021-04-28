@@ -220,9 +220,6 @@ export default {
     onChange(e) {
       this.$emit('change',e)
     },
-    onMouseUp(e) {
-      this.$emit('mouseup',e)
-    },
     toggleInformer($event) {
       $event.preventDefault();
       $event.stopPropagation();
@@ -328,8 +325,7 @@ export default {
                       onFocus={this.onFocus}
                       onChange={this.onChange}
                       placeholder={this.placeholder}
-                      disabled={this.disabledLocal}
-                      onMouseup={this.onMouseUp}/>
+                      disabled={this.disabledLocal}/>
       }
       return <input class="rt-input-v2__input"
                     value={this.localValue}
