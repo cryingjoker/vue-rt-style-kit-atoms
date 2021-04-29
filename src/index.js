@@ -123,7 +123,7 @@ VueRtStyle = {
 const settingsKey = Global.globalSettingsKey;
 
 const version = Project.version;
-if (typeof window !== 'undefined') {
+if (window && window.addEventListener) {
     if (settingsKey) {
         if (!window[settingsKey]) window[settingsKey] = {}
         if (!window[settingsKey].segment) window[settingsKey].segment = Global.defaultSegment
@@ -202,7 +202,8 @@ export {
     backgroundColorProps,
     getBackgroundClassByProps,
     getBackgroundClass,
-
+    SystemIcons,
+    
     StorePrototype,
     viewportPositionStore,
     deviceTypeStore,
