@@ -37,6 +37,13 @@
     },
     {
       "name" : "rt-annotation",
+      "property" : "ga-label",
+      "type" : "String",
+      "description" : "Текст в атрибуте button для ссылки",
+      "value" : "null"
+    },
+    {
+      "name" : "rt-annotation",
       "property" : "scroll-timeout",
       "type" : "Number",
       "description" : "Устанавливает задержку времени до прокрутки страницы к открытому по умолчанию блоку",
