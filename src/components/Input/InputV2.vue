@@ -238,6 +238,7 @@ export default {
           focus: this.onFocus,
           blur: this.onBlur,
           filled: this.onFilled,
+          keydown: this.onKeydown,
           change: this.onChange
         }
       }, componentStack)

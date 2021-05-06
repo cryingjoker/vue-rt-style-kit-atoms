@@ -191,7 +191,8 @@
     &:after,
     &:before
       display none
-  .rt-input-v2__input:focus+.rt-input-v2-placeholder
+  .rt-input-v2__input:focus+.rt-input-v2-placeholder,
+  .rt-input-v2__input:not(:placeholder-shown)+.rt-input-v2-placeholder
     color error-color!important
     .rt-dark-theme &
       color error-color-night!important

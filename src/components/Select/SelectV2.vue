@@ -120,6 +120,11 @@ export default {
     selectActiveValue(newVal, oldVal) {
       if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
         this.$emit('change', newVal.filter(i => i))
+        if(Object.keys(this.activeIndex) < 0) {
+          this.$emit('item-select', null)
+        } else {
+          this.$emit('item-select', this.json[parseInt(Object.keys(this.activeIndex))])
+        }
       }
     },
     selectOpenStatus(newVal, oldVal) {
@@ -406,7 +411,7 @@ export default {
       }
     },
     checkMatch(e) {
-      SelectStore.setInputText(e.toLowerCase())
+      SelectStore.setInputText(this.name, e.toLowerCase())
       this.selectActiveLabels[0] = ''
       if(this.inputLocalValue != this.$refs.input.localValue) {
         this.$refs.input.localValue = this.inputLocalValue

@@ -14,7 +14,7 @@ class SelectStoreClass extends StorePrototype {
     this.defaultValue = {};
     this.selectorsOpenStatus = {}
     this.focusIndex = {};
-    this.autocompleteText = ''
+    this.autocompleteText = {}
   }
   
   setOpen(id) {
@@ -214,11 +214,11 @@ class SelectStoreClass extends StorePrototype {
     this.defaultValue[id] = {label: data.label, value: data.value}
   }
 
-  setInputText(str) {
-    this.autocompleteText = str;
+  setInputText(id, str) {
+    this.autocompleteText[id] = str;
   }
-  getInputText() {
-    return this.autocompleteText;
+  getInputText(id) {
+    return this.autocompleteText[id];
   }
 }
 

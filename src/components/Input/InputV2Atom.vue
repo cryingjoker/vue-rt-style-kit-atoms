@@ -140,9 +140,6 @@ export default {
         this.localValue = newValue;
       }
     },
-    // localValue(val) {
-    //   this.$emit("change", val);
-    // },
     disabled(newVal) {
       this.disabledLocal = newVal;
     },
@@ -319,7 +316,7 @@ export default {
                       ref="input"
                       onBlur={this.onBlur}
                       onPaste={this.onPaste}
-                      onInput={this.onInput}
+                      onInput={this.changeValue}
                       onKeydown={this.onKeydown}
                       onKeyup={this.onKeyup}
                       onFocus={this.onFocus}

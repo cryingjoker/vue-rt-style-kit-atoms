@@ -114,8 +114,8 @@ export default {
   },
   render(h) {
     const renderLabel = () => {
-      if(!!SelectStore.getInputText()) {
-        let boldText = SelectStore.getInputText();
+      if(!!SelectStore.getInputText(this.selectName)) {
+        let boldText = SelectStore.getInputText(this.selectName);
         let fullString = this.label;
         return <span>
           <span class="select-v2-option__mismatch">{fullString.slice(0, fullString.toLowerCase().indexOf(boldText))}</span>

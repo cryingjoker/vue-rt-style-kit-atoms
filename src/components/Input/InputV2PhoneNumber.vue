@@ -58,25 +58,36 @@ export default {
   },
   data: () => ({
     localType: 'tel',
-    localValue: null,
+    localValue: '',
     filled: false,
     caretPositionBefore: 0,
-    caretPositionAfter: 0
+    caretPositionAfter: 0,
+    prevVal: ''
   }),
+  watch:{
+    value(newVal, oldVal) {
+      this.addMask(newVal)
+    }
+  },
   computed:{},
-  mounted(){},
+  mounted(){
+    if(this.value != '') {
+      this.addMask(this.value)
+    }
+  },
   methods: {
     preventZipCodeChange($event){
       this.caretPositionBefore = this.$refs.input.$refs.input.selectionStart;
       if($event.keyCode == 8 && this.caretPositionBefore <= 2 && this.localValue.length > 3) {
         $event.preventDefault();
       }
+      this.$emit('keydown', $event)
     },
     addMask($event) {
       let field = this.$refs.input.$refs.input;
-      field.value.replace(/\D/g, "")
       let fixCaretPosition = false;
-      if($event.inputType == 'deleteContentBackward') {
+      let backWards = this.prevVal.length > $event.length
+      if(backWards) {
         if(field.value.length == 4) {
           this.localValue = '+7 '
         }
@@ -89,6 +100,8 @@ export default {
         } else {
           this.localValue = '+7 '
         }
+      } else if(field.value.charAt(1) != '7') {
+        field.value = '+7' + field.value
       }
       this.caretPositionBefore = this.$refs.input.$refs.input.selectionStart;
       let matrix = "+7 (___) ___ __ __",
@@ -103,17 +116,18 @@ export default {
         this.localValue = field.value;
       }
       this.filled = this.localValue.length == 18;
-      if(this.caretPositionBefore < this.caretPositionAfter - 2) {
-        fixCaretPosition = true;
-      }
       this.$refs.input._data.localValue = this.localValue;
       if(this.filled && this.needVerification) {
         this.$emit('filled', this.localValue);
       }
       this.caretPositionAfter = this.$refs.input.$refs.input.selectionStart;
+      if(this.caretPositionBefore < this.caretPositionAfter - 2 || backWards) {
+        fixCaretPosition = true;
+      }
       if(fixCaretPosition) {
         this.setCaret(this.caretPositionBefore)
       }
+      this.prevVal = this.localValue
       this.$emit('input', $event)
     },
     clearValue() {
