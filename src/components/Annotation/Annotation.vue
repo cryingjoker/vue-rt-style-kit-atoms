@@ -43,7 +43,7 @@ export default {
             if(newVal) {
                 this.$refs.content.style.maxHeight = (parseInt(getComputedStyle(this.$refs.contentHeightResolver).height, 10) + 10) + 'px';
             } else {
-                this.$refs.content.style.maxHeight =  'none'
+                this.$refs.content.style.maxHeight =  0
             }
         }
     },
