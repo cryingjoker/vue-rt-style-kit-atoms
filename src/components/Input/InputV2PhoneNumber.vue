@@ -150,6 +150,9 @@ export default {
     },
     onInput(e) {
       this.$emit('input', e)
+    },
+    onKeyup(e) {
+      this.$emit('keydown', e)
     }
   },
   render(createElement) {
@@ -167,7 +170,8 @@ export default {
             change: this.onChange,
             focus: this.onFocus,
             blur: this.onBlur,
-            input: this.onInput
+            input: this.onInput,
+            keyup: this.onKeyup
           },
         ref: 'input',
         componentStack
