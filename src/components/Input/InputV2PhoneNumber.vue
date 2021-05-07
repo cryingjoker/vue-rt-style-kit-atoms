@@ -66,13 +66,15 @@ export default {
   }),
   watch:{
     value(newVal, oldVal) {
-      this.addMask(newVal)
+      this.value = newVal
+      this.$refs.input.$refs.input.value = newVal
+      this.addMask()
     }
   },
   computed:{},
   mounted(){
     if(this.value != '') {
-      this.addMask(this.value)
+      this.addMask()
     }
   },
   methods: {
@@ -83,10 +85,10 @@ export default {
       }
       this.$emit('keydown', $event)
     },
-    addMask($event) {
+    addMask() {
       let field = this.$refs.input.$refs.input;
       let fixCaretPosition = false;
-      let backWards = this.prevVal.length > $event.length
+      let backWards = this.prevVal.length > field.value.length
       if(backWards) {
         if(field.value.length == 4) {
           this.localValue = '+7 '
@@ -128,7 +130,6 @@ export default {
         this.setCaret(this.caretPositionBefore)
       }
       this.prevVal = this.localValue
-      this.$emit('input', $event)
     },
     clearValue() {
       this.localValue = '';
@@ -146,6 +147,9 @@ export default {
     },
     onFocus(e) {
       this.$emit('focus', e)
+    },
+    onInput(e) {
+      this.$emit('input', e)
     }
   },
   render(createElement) {
@@ -157,12 +161,13 @@ export default {
         props: props,
         on:
           {
-            input: this.addMask,
+            phone: this.addMask,
             clear: this.clearValue,
             keydown: this.preventZipCodeChange,
             change: this.onChange,
             focus: this.onFocus,
-            blur: this.onBlur
+            blur: this.onBlur,
+            input: this.onInput
           },
         ref: 'input',
         componentStack

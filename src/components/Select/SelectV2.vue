@@ -445,6 +445,12 @@ export default {
     },
     onBlur(e) {
       this.$emit('blur', e)
+    },
+    onKeydown(e) {
+      this.$emit('keydown', e)
+    },
+    onKeyup(e) {
+      this.$emit('keyup', e)
     }
   },
   render(h) {
@@ -491,7 +497,9 @@ export default {
                     hasError={this.hasError}
                     errorMessage={this.errorMessage}
                     onFocus={this.onFocus}
-                    onBlur={this.onBlur}/>
+                    onBlur={this.onBlur}
+                    onKeydown={this.onKeydown}
+                    onKeyup={this.onKeyup}/>
           {this.renderSelectList}
         </div>
       </div>

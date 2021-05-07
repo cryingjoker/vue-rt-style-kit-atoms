@@ -138,6 +138,7 @@ export default {
     value(newValue, oldValue) {
       if (newValue != oldValue && newValue != this.localValue) {
         this.localValue = newValue;
+        this.$emit('phone',newValue)
       }
     },
     disabled(newVal) {
@@ -188,6 +189,7 @@ export default {
         this.localValue = input.value + '';
       }
       this.$emit('input', this.localValue)
+      this.$emit('phone', this.localValue)
     },
     clearInput() {
       if(!this.$parent.filled) {
@@ -213,6 +215,7 @@ export default {
     },
     onInput(e) {
       this.$emit('input',e)
+      this.$emit('phone',e)
     },
     onChange(e) {
       this.$emit('change',e)
