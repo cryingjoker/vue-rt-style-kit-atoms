@@ -45,6 +45,13 @@ set-font(fontSize, lineHeight)
 	.font-lb
     set-font(12, 16)
 
+// < Tablet
+@media (max-width tabletBpEnd)
+  .font-h-l
+    set-font(16, 20)
+  .font-t-l
+    set-font(16, 24)
+
 // Tablet
 @media (min-width tabletBpStart) and (max-width tabletBpEnd)
   .font-h1
@@ -59,7 +66,7 @@ set-font(fontSize, lineHeight)
   .font-h4
     set-font(20, 24)
 
-// Tablet = Web
+// > Tablet
 @media (min-width tabletBpStart)
   .font-h-m
     set-font(16, 20)
@@ -74,11 +81,14 @@ set-font(fontSize, lineHeight)
     set-font(44, 52)
 
 // < Web
-@media (max-width webSmallBpEnd)
+// @media (max-width webSmallBpEnd)
+
+// Web Small = Web
+@media (min-width webSmallBpStart)
   .font-h-l
-    set-font(16, 20)
+    set-font(18, 24)
   .font-t-l
-    set-font(16, 24)
+    set-font(18, 28)
 
 // Web
 @media (min-width webBp)
@@ -90,7 +100,3 @@ set-font(fontSize, lineHeight)
     set-font(28, 36)
   .font-h4
     set-font(22, 28)
-  .font-h-l
-    set-font(18, 24)
-  .font-t-l
-    set-font(18, 28)
