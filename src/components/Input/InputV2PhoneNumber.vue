@@ -170,7 +170,7 @@ export default {
       this.$emit('input', e)
     },
     onKeyup(e) {
-      this.$emit('keydown', e)
+      this.$emit('keyup', e)
     }
   },
   render(createElement) {
