@@ -131,7 +131,7 @@ export default {
       hasInputText: this.value?.length > 0,
       hintPosition: "right",
       showInformer: false,
-      localVerified: 2
+      localVerified: +this.verified || 2
     };
   },
   watch: {
@@ -249,6 +249,7 @@ export default {
         </template>
       }
       if(this.needVerification) {
+        console.log(this.localVerified)
         if(this.localVerified === 1) {
           return <template slot="icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
