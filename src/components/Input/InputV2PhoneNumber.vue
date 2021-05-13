@@ -62,7 +62,9 @@ export default {
     filled: false,
     caretPositionBefore: 0,
     caretPositionAfter: 0,
-    prevVal: ''
+    prevVal: '',
+    nativeInput: false,
+    backwards: false
   }),
   watch:{
     value(newVal, oldVal) {
@@ -80,32 +82,36 @@ export default {
   methods: {
     preventZipCodeChange($event){
       this.caretPositionBefore = this.$refs.input.$refs.input.selectionStart;
-      if($event.keyCode == 8 && this.caretPositionBefore <= 2 && this.localValue.length > 3) {
+      // console.log('caret before keydown = ', this.caretPositionBefore)
+      if($event.keyCode == 8 && this.caretPositionBefore <= 2 && this.localValue.length > 3 || this.localValue.length >= 18 && ($event.keyCode > 47 && $event.keyCode < 58)) {
         $event.preventDefault();
       }
       this.$emit('keydown', $event)
     },
     addMask() {
       let field = this.$refs.input.$refs.input;
-      let fixCaretPosition = false;
-      let backWards = this.prevVal.length > field.value.length
-      if(backWards) {
+      if(this.nativeInput) {
+        this.caretPositionBefore = field.selectionStart;
+        this.backwards = this.prevVal.length > field.value.length
+      }
+      if(this.backwards && this.nativeInput) {
         if(field.value.length == 4) {
           this.localValue = '+7 '
         }
         if(field.value.length < 4) {
           this.localValue = ''
         }
-      } else if(field.value.length == 1) {
-        if(field.value != '7' && field.value != '8') {
-          this.localValue = '+7 (' + field.value;
-        } else {
-          this.localValue = '+7 '
+      } else {
+        if(field.value.length == 1) {
+          if(field.value != '7' && field.value != '8') {
+            this.localValue = '+7 (' + field.value;
+          } else {
+            this.localValue = '+7 '
+          }
+        } else if(field.value.charAt(1) != '7') {
+          field.value = '+7' + field.value
         }
-      } else if(field.value.charAt(1) != '7') {
-        field.value = '+7' + field.value
       }
-      this.caretPositionBefore = this.$refs.input.$refs.input.selectionStart;
       let matrix = "+7 (___) ___ __ __",
           i = 0,
           def = matrix.replace(/\D/g, ""),
@@ -122,14 +128,25 @@ export default {
       if(this.filled && this.needVerification) {
         this.$emit('filled', this.localValue);
       }
-      this.caretPositionAfter = this.$refs.input.$refs.input.selectionStart;
-      if(this.caretPositionBefore < this.caretPositionAfter - 2 || backWards) {
-        fixCaretPosition = true;
-      }
-      if(fixCaretPosition) {
-        this.setCaret(this.caretPositionBefore)
+      this.caretPositionAfter = field.selectionStart;
+      if(this.backwards) {
+        if(this.caretPositionBefore <= this.caretPositionAfter - 1) {
+          this.setCaret(this.caretPositionBefore)
+        }
+      } else {
+        if(this.caretPositionBefore < this.caretPositionAfter - 2) {
+          if(field.value.charAt(this.caretPositionBefore) == ' ') {
+            this.setCaret(this.caretPositionBefore + 1)
+            if(/[\D]/.test(field.value.charAt(this.caretPositionBefore - 1))) {
+              this.setCaret(this.caretPositionBefore + 2)
+            }
+          } else {
+            this.setCaret(this.caretPositionBefore)
+          }
+        }
       }
       this.prevVal = this.localValue
+      this.nativeInput = false
     },
     clearValue() {
       this.localValue = '';
@@ -149,6 +166,7 @@ export default {
       this.$emit('focus', e)
     },
     onInput(e) {
+      this.nativeInput = true;
       this.$emit('input', e)
     },
     onKeyup(e) {

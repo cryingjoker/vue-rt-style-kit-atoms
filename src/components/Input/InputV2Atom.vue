@@ -138,7 +138,7 @@ export default {
     value(newValue, oldValue) {
       if (newValue != oldValue && newValue != this.localValue) {
         this.localValue = newValue;
-        this.$emit('phone',newValue)
+        this.$emit('phone', newValue)
       }
     },
     disabled(newVal) {
@@ -192,11 +192,11 @@ export default {
       this.$emit('phone', this.localValue)
     },
     clearInput() {
-      if(!this.$parent.filled) {
+      // if(!this.$parent.filled) {
         this.$refs.input.value = ''
         this.changeValue()
         this.$emit('clear')
-      }
+      // }
     },
     onBlur(){
       this.$emit('blur',this.localValue)
