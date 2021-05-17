@@ -131,17 +131,15 @@ export default {
       hasInputText: this.value?.length > 0,
       hintPosition: "right",
       showInformer: false,
-      localVerified: 2
+      localVerified: +this.verified || 2
     };
   },
   watch: {
     value(newValue, oldValue) {
       if (newValue != oldValue && newValue != this.localValue) {
         this.localValue = newValue;
+        this.$emit('phone', newValue)
       }
-    },
-    localValue(val) {
-      this.$emit("change", val);
     },
     disabled(newVal) {
       this.disabledLocal = newVal;
@@ -191,13 +189,14 @@ export default {
         this.localValue = input.value + '';
       }
       this.$emit('input', this.localValue)
+      this.$emit('phone', this.localValue)
     },
     clearInput() {
-      if(!this.$parent.filled) {
+      // if(!this.$parent.filled) {
         this.$refs.input.value = ''
         this.changeValue()
         this.$emit('clear')
-      }
+      // }
     },
     onBlur(){
       this.$emit('blur',this.localValue)
@@ -216,6 +215,10 @@ export default {
     },
     onInput(e) {
       this.$emit('input',e)
+      this.$emit('phone',e)
+    },
+    onChange(e) {
+      this.$emit('change',e)
     },
     toggleInformer($event) {
       $event.preventDefault();
@@ -246,6 +249,7 @@ export default {
         </template>
       }
       if(this.needVerification) {
+        console.log(this.localVerified)
         if(this.localVerified === 1) {
           return <template slot="icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -281,7 +285,7 @@ export default {
     }
     const renderError = () => {
       if (this.errorMessage?.length > 0) {
-        return <span class="rt-input-v2-label rt-input-v2-error rt-font-label">{this.errorMessage}</span>
+        return <span class="rt-input-v2-error rt-font-label">{this.errorMessage}</span>
       }
       return null
     }
@@ -293,13 +297,18 @@ export default {
     }
     const inputComponent = () => {
       if (this.type == 'number') {
-        return <input class="rt-input-v2__input" value={this.localValue} onInput={this.changeValue} type={this.type}
+        return <input class="rt-input-v2__input"
+                      value={this.localValue}
+                      onInput={this.changeValue}
+                      type={this.type}
                       ref="input"
+                      onFocus={this.onFocus}
                       onBlur={this.onBlur}
                       min={this.minNumber}
                       max={this.maxNumber}
                       onPaste={this.onPaste}
                       onKeyup={this.onKeyup}
+                      onChange={this.onChange}
                       step={this.step}
                       placeholder={this.placeholder}
                       disabled={this.disabledLocal}/>
@@ -311,18 +320,24 @@ export default {
                       ref="input"
                       onBlur={this.onBlur}
                       onPaste={this.onPaste}
-                      onInput={this.onInput}
+                      onInput={this.changeValue}
                       onKeydown={this.onKeydown}
                       onKeyup={this.onKeyup}
                       onFocus={this.onFocus}
+                      onChange={this.onChange}
                       placeholder={this.placeholder}
                       disabled={this.disabledLocal}/>
       }
-      return <input class="rt-input-v2__input" value={this.localValue} onInput={this.changeValue} type={this.type}
+      return <input class="rt-input-v2__input"
+                    value={this.localValue}
+                    onInput={this.changeValue}
+                    type={this.type}
+                    onFocus={this.onFocus}
                     onBlur={this.onBlur}
                     onPaste={this.onPaste}
                     onKeydown={this.onKeydown}
                     onKeyup={this.onKeyup}
+                    onChange={this.onChange}
                     ref="input"
                     placeholder={this.placeholder}
                     disabled={this.disabledLocal}/>

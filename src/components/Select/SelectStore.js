@@ -14,7 +14,7 @@ class SelectStoreClass extends StorePrototype {
     this.defaultValue = {};
     this.selectorsOpenStatus = {}
     this.focusIndex = {};
-    this.autocompleteText = ''
+    this.autocompleteText = {}
   }
   
   setOpen(id) {
@@ -33,6 +33,7 @@ class SelectStoreClass extends StorePrototype {
   
   setSelectorType(id, type) {
     this.selectorsTypes[id] = type;
+    this.createSelectorDefaultProps(id);
     this.runWatchersById(id);
     if (type == 'simple') {
       if (this.selectorsActiveValue[id]?.length > 1) {
@@ -61,6 +62,7 @@ class SelectStoreClass extends StorePrototype {
   }
   
   setActiveValue(id, value) {
+    
     if (Array.isArray(value)) {
       value.forEach(val => this.setActiveValue(id, val))
     } else {
@@ -105,6 +107,7 @@ class SelectStoreClass extends StorePrototype {
   
   getActiveLabels(id) {
     if (this.selectorsActiveValue[id]?.length > 0) {
+      
       return this.selectorsActiveValue[id]?.map((value) => {
         return this.selectors[id].find((item) => item.value == value)?.label
       }).filter(i => i)
@@ -173,7 +176,7 @@ class SelectStoreClass extends StorePrototype {
       })
     }
   }
-  setSelectorOption(id, data) {
+  createSelectorDefaultProps(id){
     if (!this.selectors[id]) {
       this.selectors[id] = [];
       this.selectorsValue[id] = {};
@@ -183,6 +186,9 @@ class SelectStoreClass extends StorePrototype {
         this.focusIndex[id] = -1;
       }
     }
+  }
+  setSelectorOption(id, data) {
+    this.createSelectorDefaultProps(id);
     if (!this.selectorsValue[id][data.value]) {
       this.selectorsValue[id][data.value] = 1
       this.selectors[id].push(data)
@@ -214,11 +220,11 @@ class SelectStoreClass extends StorePrototype {
     this.defaultValue[id] = {label: data.label, value: data.value}
   }
 
-  setInputText(str) {
-    this.autocompleteText = str;
+  setInputText(id, str) {
+    this.autocompleteText[id] = str;
   }
-  getInputText() {
-    return this.autocompleteText;
+  getInputText(id) {
+    return this.autocompleteText[id];
   }
 }
 

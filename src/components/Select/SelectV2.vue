@@ -27,7 +27,7 @@ export default {
       default: ""
     },
     value: {
-      type: String | Array,
+      type: Array|String ,
       default: ''
     },
     text: {
@@ -99,8 +99,10 @@ export default {
           SelectStore.setActiveValue(this.name, newVal)
           this.getSelectType();
           this.getSelectOptions()
-          this.getActiveValue();
+          // this.getActiveValue();
           this.setActiveValue();
+          this.clearInput();
+          this.$refs.input.$el.querySelector('input').focus()
         }
       }
     },
@@ -112,14 +114,34 @@ export default {
           SelectStore.addJson(this.name, newVal)
           this.getSelectType();
           this.getSelectOptions()
-          this.getActiveValue();
+          // this.getActiveValue();
           this.setActiveValue();
+          // if(newVal.length > 0 && this.inputLocalValue.length > 2) {
+          //   console.info('@@@')
+          //   SelectStore.setOpen(this.name)
+          // }else{
+          //   SelectStore.setClose(this.name)
+          // }
+          this.$refs.input.$el.querySelector('input').focus()
+          this.$nextTick(()=>{
+            this.$refs.input.$el.querySelector('input').focus()
+            this.$nextTick(()=>{
+              this.$refs.input.$el.querySelector('input').focus()
+            })
+          })
+
         }
       }
     },
     selectActiveValue(newVal, oldVal) {
       if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
-        this.$emit('change', newVal.filter(i => i))
+        newVal = newVal.filter(i => i).map(i=>(i+''))
+        this.$emit('input', newVal)
+        if(Object.keys(this.activeIndex) < 0) {
+          this.$emit('item-select', null)
+        } else {
+          this.$emit('item-select', this.json[parseInt(Object.keys(this.activeIndex))])
+        }
       }
     },
     selectOpenStatus(newVal, oldVal) {
@@ -140,13 +162,13 @@ export default {
   computed: {
     renderSelectList() {
       const renderShadowUp = () => {
-        if (this.selectOptions.length > 6 && this.shadowUp) {
+        if (this.selectOptions?.length > 6 && this.shadowUp) {
           return <div class="select-v2-list-shadow-up"></div>
         }
         return null
       }
       const renderShadowDown = () => {
-        if (this.selectOptions.length > 6 && this.shadowDown ) {
+        if (this.selectOptions?.length > 6 && this.shadowDown ) {
           return <div class="select-v2-list-shadow-down"></div>
         }
         return null
@@ -161,7 +183,7 @@ export default {
     },
     renderSelectOption() {
       if(this.autoComplete) {
-        if(this.selectActiveLabels[0]?.toLowerCase() != this.$refs.input?.localValue?.toLowerCase() && this.selectOptions.length > 0 && SelectStore.getInputText(this.name).length > 2) {
+        if(this.selectActiveLabels[0]?.toLowerCase() != this.$refs.input?.localValue?.toLowerCase() && this.selectOptions?.length > 0 && SelectStore.getInputText(this.name)?.length > 2) {
           SelectStore.setOpen(this.name)
         } else {
           SelectStore.setClose(this.name)
@@ -207,7 +229,7 @@ export default {
     },
     selectClasses() {
       let selectClasses = [];
-      selectClasses.push('select-v2',)
+      selectClasses.push('select-v2')
       if (this.hasError) {
         selectClasses.push("select-v2--error text-field--error");
       }
@@ -245,7 +267,6 @@ export default {
     this.getSelectType();
     this.getSelectOptions()
     this.getActiveValue();
-    console.log(this.focusIndex)
   },
   updated() {
     this.fixValueList();
@@ -255,6 +276,11 @@ export default {
     SelectStore.clear(this.name)
   },
   methods: {
+    clearInput(){
+      if(this.autoComplete){
+        // this.inputLocalValue = ''
+      }
+    },
     setActiveValue() {
       if (this.setFirstActive) {
         if(this.json[0]?.value) {
@@ -407,21 +433,19 @@ export default {
       }
     },
     checkMatch(e) {
-      SelectStore.setInputText(e)
+      SelectStore.setInputText(this.name, e.toLowerCase())
       this.selectActiveLabels[0] = ''
       if(this.inputLocalValue != this.$refs.input.localValue) {
         this.$refs.input.localValue = this.inputLocalValue
       }
       this.inputLocalValue = e;
-      if(e.length > 2) {
-        SelectStore.setOpen(this.name)
-      } else {
-        SelectStore.setClose(this.name)
-      }
-      this.$emit('input', e)
+      this.$emit('change', e)
+      this.$emit('input', '')
+      SelectStore.removeAllActiveValue(this.selectName)
     },
-    clearValue() {
-      SelectStore.clear(this.name);
+    clearValue(e) {
+
+      SelectStore.setActiveValue(this.selectName, this.value)
     },
     noteScroll() {
       if(this.$refs.inner.scrollTop != 0) {
@@ -434,6 +458,18 @@ export default {
       } else {
         this.shadowDown = false
       }
+    },
+    onFocus(e) {
+      this.$emit('focus', e)
+    },
+    onBlur(e) {
+      this.$emit('blur', e)
+    },
+    onKeydown(e) {
+      this.$emit('keydown', e)
+    },
+    onKeyup(e) {
+      this.$emit('keyup', e)
     }
   },
   render(h) {
@@ -474,16 +510,27 @@ export default {
                     disabled={this.disabled}
                     placeholder={this.label}
                     ref="input"
-                    onChange={this.checkMatch}
+                    onCustom={this.checkMatch}
                     value={this.selectActiveLabels[0] || this.inputLocalValue}
-                    onClear={this.clearValue}/>
+                    onClear={this.clearValue}
+                    hasError={this.hasError}
+                    errorMessage={this.errorMessage}
+                    onFocus={this.onFocus}
+                    onBlur={this.onBlur}
+                    onKeydown={this.onKeydown}
+                    onKeyup={this.onKeyup}/>
           {this.renderSelectList}
         </div>
       </div>
     }
     return <div class={this.selectClasses} ref="select">
       <div class="select-v2__container">
-        <button type="button" disabled={this.disabled} class="select-v2__inner" onClick={this.toggleOpen}>
+        <button type="button"
+                disabled={this.disabled}
+                class="select-v2__inner"
+                onClick={this.toggleOpen}
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}>
           {renderValue()}
           {this.renderLabel}
           {this.$slots.default}

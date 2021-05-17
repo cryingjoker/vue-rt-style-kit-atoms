@@ -145,7 +145,6 @@ export default {
         }
       } else {
         if (newVal != oldVal) {
-          console.info('-->>', newVal)
           this.$emit("input", newVal);
         }
       }

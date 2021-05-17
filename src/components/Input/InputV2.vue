@@ -127,7 +127,7 @@ export default {
   methods: {
     onInput(e) {
       this.$emit('input', e)
-      this.$emit('change', e)
+      this.$emit('custom', e)
     },
     onClear() {
       this.$emit('clear')
@@ -139,13 +139,16 @@ export default {
       this.$emit('keyup', e.key)
     },
     onFocus() {
-      this.$emit('focus-in')
+      this.$emit('focus')
     },
     onBlur() {
-      this.$emit('focus-out')
+      this.$emit('blur')
     },
     onFilled(e) {
       this.$emit('filled', e)
+    },
+    onChange(e) {
+      this.$emit('change', e)
     },
     renderIcons(createElement) {
       if (this.$slots.icon) {
@@ -222,7 +225,8 @@ export default {
           input: this.onInput,
           clear: this.onClear,
           focus: this.onFocus,
-          blur: this.onBlur
+          blur: this.onBlur,
+          change: this.onChange
         }
       }, componentStack)
     }
@@ -233,7 +237,9 @@ export default {
           clear: this.onClear,
           focus: this.onFocus,
           blur: this.onBlur,
-          filled: this.onFilled
+          filled: this.onFilled,
+          keydown: this.onKeydown,
+          change: this.onChange
         }
       }, componentStack)
     }
@@ -252,7 +258,8 @@ export default {
         keydown: this.onKeydown,
         keyup: this.onKeyup,
         focus: this.onFocus,
-        blur: this.onBlur
+        blur: this.onBlur,
+        change: this.onChange
       }
     }, componentStack)
   }

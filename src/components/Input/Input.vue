@@ -309,13 +309,15 @@ export default {
       }
     },
     unbindEvents() {
-      if (this["_events"] && this.$refs.input) {
+      if (this["_events"] ) {
         Object.keys(this["_events"]).map(eventName => {
           if(this.$refs.component){
-            this.$refs.component.removeEventListener(
-                eventName,
-                this["_events"][eventName]
-            );
+            this["_events"][eventName].forEach((fn) => {
+              const index = this.$refs.component['_events'][eventName].indexOf(fn);
+              if(index>=0){
+                this.$refs.component['_events'][eventName].splice(index,1)
+              }
+            })
           }else {
             this.$refs.input.removeEventListener(
                 eventName,

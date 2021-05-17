@@ -114,12 +114,13 @@ export default {
   },
   render(h) {
     const renderLabel = () => {
-      if(!!SelectStore.getInputText()) {
-        let boldText = SelectStore.getInputText();
+      if(!!SelectStore.getInputText(this.selectName)) {
+        let boldText = SelectStore.getInputText(this.selectName);
         let fullString = this.label;
         return <span>
-          <span>{fullString.slice(0, boldText.length)}</span>
-          <span class="select-v2-option__mismatch">{fullString.slice(boldText.length)}</span>
+          <span class="select-v2-option__mismatch">{fullString.slice(0, fullString.toLowerCase().indexOf(boldText))}</span>
+          <span>{fullString.slice(fullString.toLowerCase().indexOf(boldText), (fullString.toLowerCase().indexOf(boldText) + boldText.length))}</span>
+          <span class="select-v2-option__mismatch">{fullString.substring(fullString.toLowerCase().indexOf(boldText) + boldText.length)}</span>
         </span>
       } else {
         return this.label

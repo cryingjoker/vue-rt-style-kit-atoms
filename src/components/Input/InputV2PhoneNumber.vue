@@ -58,31 +58,58 @@ export default {
   },
   data: () => ({
     localType: 'tel',
-    localValue: true,
-    filled: false
+    localValue: '',
+    filled: false,
+    caretPositionBefore: 0,
+    caretPositionAfter: 0,
+    prevVal: '',
+    nativeInput: false,
+    backwards: false
   }),
+  watch:{
+    value(newVal, oldVal) {
+      this.value = newVal
+      this.$refs.input.$refs.input.value = newVal
+      this.addMask()
+    }
+  },
   computed:{},
-  mounted(){},
+  mounted(){
+    if(this.value != '') {
+      this.addMask()
+    }
+  },
   methods: {
-    checkInputType($event){
-      if((/\b[a-zA-Z]\b/).test($event.key)){
+    preventZipCodeChange($event){
+      this.caretPositionBefore = this.$refs.input.$refs.input.selectionStart;
+      // console.log('caret before keydown = ', this.caretPositionBefore)
+      if($event.keyCode == 8 && this.caretPositionBefore <= 2 && this.localValue.length > 3 || this.localValue.length >= 18 && ($event.keyCode > 47 && $event.keyCode < 58)) {
         $event.preventDefault();
       }
+      this.$emit('keydown', $event)
     },
-    addMask($event) {
-      let field = this.$refs.input.$el.querySelector('.rt-input-v2__input');
-      if($event.inputType == 'deleteContentBackward') {
+    addMask() {
+      let field = this.$refs.input.$refs.input;
+      if(this.nativeInput) {
+        this.caretPositionBefore = field.selectionStart;
+        this.backwards = this.prevVal.length > field.value.length
+      }
+      if(this.backwards && this.nativeInput) {
         if(field.value.length == 4) {
           this.localValue = '+7 '
         }
         if(field.value.length < 4) {
           this.localValue = ''
         }
-      } else if(field.value.length == 1) {
-        if((field.value != '7' && field.value != '8')) {
-          this.localValue = '+7 (' + field.value;
-        } else {
-          this.localValue = '+7 '
+      } else {
+        if(field.value.length == 1) {
+          if(field.value != '7' && field.value != '8') {
+            this.localValue = '+7 (' + field.value;
+          } else {
+            this.localValue = '+7 '
+          }
+        } else if(field.value.charAt(1) != '7') {
+          field.value = '+7' + field.value
         }
       }
       let matrix = "+7 (___) ___ __ __",
@@ -101,43 +128,53 @@ export default {
       if(this.filled && this.needVerification) {
         this.$emit('filled', this.localValue);
       }
+      this.caretPositionAfter = field.selectionStart;
+      if(this.backwards) {
+        if(this.caretPositionBefore <= this.caretPositionAfter - 1) {
+          this.setCaret(this.caretPositionBefore)
+        }
+      } else {
+        if(this.caretPositionBefore < this.caretPositionAfter - 2) {
+          if(field.value.charAt(this.caretPositionBefore) == ' ') {
+            this.setCaret(this.caretPositionBefore + 1)
+            if(/[\D]/.test(field.value.charAt(this.caretPositionBefore - 1))) {
+              this.setCaret(this.caretPositionBefore + 2)
+            }
+          } else {
+            this.setCaret(this.caretPositionBefore)
+          }
+        }
+      }
+      this.prevVal = this.localValue
+      this.nativeInput = false
     },
     clearValue() {
       this.localValue = '';
       this.$refs.input._data.localValue = '';
+      this.$emit('clear')
     },
-    // renderIcons(createElement) {
-    //   let icon = '';
-    //   if(this.localValue) {
-    //     icon = createElement('rt-system-icons', {
-    //         props: {name: "close large"}
-    //       }
-    //     )
-    //   }
-    //   if(this.needVerification) {
-    //     if(this.verified) {
-    //       return <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    //         <circle opacity="0.8" cx="12" cy="12" r="10" fill="#5BCF6A"/>
-    //         <path fill-rule="evenodd" clip-rule="evenodd" d="M17.5612 9.1768L11.0613 15.5704C10.7481 15.8784 10.2452 15.8763 9.93457 15.5657L6.93457 12.5657L8.06594 11.4343L10.5049 13.8733L16.4392 8.03613L17.5612 9.1768Z" fill="white"/>
-    //       </svg>
-    //     }
-    //     if(this.filled) {
-    //       icon = createElement('rt-system-icons', {
-    //           props: {name: "loading"}
-    //         }
-    //       )
-    //     }
-    //   }
-    //   return createElement(
-    //       'template',
-    //       {slot: 'icon'},
-    //       [icon],
-    //   );
-    // }
+    setCaret(pos) {
+      this.$refs.input.$refs.input.setSelectionRange(pos, pos)
+    },
+    onChange(e) {
+      this.$emit('change', e)
+    },
+    onBlur(e) {
+      this.$emit('blur', e)
+    },
+    onFocus(e) {
+      this.$emit('focus', e)
+    },
+    onInput(e) {
+      this.nativeInput = true;
+      this.$emit('input', e)
+    },
+    onKeyup(e) {
+      this.$emit('keyup', e)
+    }
   },
   render(createElement) {
     const componentStack = [];
-    // componentStack.push(this.renderIcons(createElement));
     const props = {...this._props}
     props.type = this.localType;
     return createElement(InputV2Atom,
@@ -145,9 +182,14 @@ export default {
         props: props,
         on:
           {
-            input: this.addMask,
+            phone: this.addMask,
             clear: this.clearValue,
-            keydown: this.checkInputType
+            keydown: this.preventZipCodeChange,
+            change: this.onChange,
+            focus: this.onFocus,
+            blur: this.onBlur,
+            input: this.onInput,
+            keyup: this.onKeyup
           },
         ref: 'input',
         componentStack
