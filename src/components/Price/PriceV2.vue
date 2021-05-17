@@ -58,9 +58,11 @@ export default {
         if (this.showFloat) {
           value = (parseFloat(value.replace(',', '.')) + '').split('.')
           value[0] = (value[0] + '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ");
-          value[1] = '0.' + value[1]
-          value[1] = ((value[1] - 0).toFixed(2) + '').replace('0.', '')
-          value = value.join(',')
+          if(value[1] != undefined) {
+            value[1] = '0.' + value[1]
+            value[1] = ((value[1] - 0).toFixed(2) + '').replace('0.', '')
+            value = value.join(',')
+          }
         } else {
           value = parseInt(value) + ''
           value = value.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ");
@@ -74,9 +76,11 @@ export default {
       if (this.showFloat) {
         value = (parseFloat(value.replace(',', '.')) + '').split('.')
         value[0] = (value[0] + '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ");
-        value[1] = '0.' + value[1]
-        value[1] = ((value[1] - 0).toFixed(2) + '').replace('0.', '')
-        value = value.join(',')
+        if(value[1] != undefined) {
+          value[1] = '0.' + value[1]
+          value[1] = ((value[1] - 0).toFixed(2) + '').replace('0.', '')
+          value = value.join(',')
+        }
       } else {
         value = parseInt(value) + ''
         value = value.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ");
