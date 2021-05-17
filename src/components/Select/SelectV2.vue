@@ -14,6 +14,10 @@ export default {
         return []
       }
     },
+    defaultValue:{
+      type: String,
+      default: ''
+    },
     type: {
       type: String,
       default: 'simple'
@@ -258,6 +262,7 @@ export default {
     if (Object.keys(this.json)?.length > 0) {
       SelectStore.addJson(this.name, this.json)
     }
+    this.setDefaultValue()
     SelectStore.setSelectorType(this.name, this.type);
     SelectStore.addWatcher(this.name, this.getSelectOptions)
     SelectStore.addWatcher(this.name, this.getActiveValue)
@@ -291,6 +296,11 @@ export default {
       }
       if(this.value) {
         SelectStore.setActiveValue(this.name, this.value)
+      }
+    },
+    setDefaultValue(){
+      if(this.defaultValue.length > 0 && this.inputLocalValue.length == 0){
+        this.inputLocalValue = this.defaultValue;
       }
     },
     getSelectOptions() {
