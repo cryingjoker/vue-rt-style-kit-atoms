@@ -163,7 +163,7 @@ class SelectStoreClass extends StorePrototype {
   }
   
   setActiveFocusEl(id) {
-    if (!this.selectorsTypes[id]?.multiple) {
+    if (!this.selectorsTypes[id]?.multiple && this.selectors[id]) {
       this.setFocusIndex(id, this.selectors[id].findIndex(i => i.value == this.selectorsActiveValue[id][0]))
     }
   }
