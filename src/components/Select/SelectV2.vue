@@ -27,7 +27,7 @@ export default {
       default: ""
     },
     value: {
-      type: String | Array,
+      type: Array|String ,
       default: ''
     },
     text: {
@@ -99,8 +99,10 @@ export default {
           SelectStore.setActiveValue(this.name, newVal)
           this.getSelectType();
           this.getSelectOptions()
-          this.getActiveValue();
+          // this.getActiveValue();
           this.setActiveValue();
+          this.clearInput();
+          this.$refs.input.$el.querySelector('input').focus()
         }
       }
     },
@@ -112,14 +114,29 @@ export default {
           SelectStore.addJson(this.name, newVal)
           this.getSelectType();
           this.getSelectOptions()
-          this.getActiveValue();
+          // this.getActiveValue();
           this.setActiveValue();
+          // if(newVal.length > 0 && this.inputLocalValue.length > 2) {
+          //   console.info('@@@')
+          //   SelectStore.setOpen(this.name)
+          // }else{
+          //   SelectStore.setClose(this.name)
+          // }
+          this.$refs.input.$el.querySelector('input').focus()
+          this.$nextTick(()=>{
+            this.$refs.input.$el.querySelector('input').focus()
+            this.$nextTick(()=>{
+              this.$refs.input.$el.querySelector('input').focus()
+            })
+          })
+
         }
       }
     },
     selectActiveValue(newVal, oldVal) {
       if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
-        this.$emit('change', newVal.filter(i => i))
+        newVal = newVal.filter(i => i).map(i=>(i+''))
+        this.$emit('input', newVal)
         if(Object.keys(this.activeIndex) < 0) {
           this.$emit('item-select', null)
         } else {
@@ -145,13 +162,13 @@ export default {
   computed: {
     renderSelectList() {
       const renderShadowUp = () => {
-        if (this.selectOptions.length > 6 && this.shadowUp) {
+        if (this.selectOptions?.length > 6 && this.shadowUp) {
           return <div class="select-v2-list-shadow-up"></div>
         }
         return null
       }
       const renderShadowDown = () => {
-        if (this.selectOptions.length > 6 && this.shadowDown ) {
+        if (this.selectOptions?.length > 6 && this.shadowDown ) {
           return <div class="select-v2-list-shadow-down"></div>
         }
         return null
@@ -166,7 +183,7 @@ export default {
     },
     renderSelectOption() {
       if(this.autoComplete) {
-        if(this.selectActiveLabels[0]?.toLowerCase() != this.$refs.input?.localValue?.toLowerCase() && this.selectOptions.length > 0 && SelectStore.getInputText(this.name).length > 2) {
+        if(this.selectActiveLabels[0]?.toLowerCase() != this.$refs.input?.localValue?.toLowerCase() && this.selectOptions?.length > 0 && SelectStore.getInputText(this.name)?.length > 2) {
           SelectStore.setOpen(this.name)
         } else {
           SelectStore.setClose(this.name)
@@ -212,7 +229,7 @@ export default {
     },
     selectClasses() {
       let selectClasses = [];
-      selectClasses.push('select-v2',)
+      selectClasses.push('select-v2')
       if (this.hasError) {
         selectClasses.push("select-v2--error text-field--error");
       }
@@ -259,6 +276,11 @@ export default {
     SelectStore.clear(this.name)
   },
   methods: {
+    clearInput(){
+      if(this.autoComplete){
+        // this.inputLocalValue = ''
+      }
+    },
     setActiveValue() {
       if (this.setFirstActive) {
         if(this.json[0]?.value) {
@@ -417,16 +439,13 @@ export default {
         this.$refs.input.localValue = this.inputLocalValue
       }
       this.inputLocalValue = e;
-      if(e.length > 2) {
-        SelectStore.setOpen(this.name)
-      } else {
-        SelectStore.setClose(this.name)
-      }
-      this.$emit('input', e)
+      this.$emit('change', e)
+      this.$emit('input', '')
+      SelectStore.removeAllActiveValue(this.selectName)
     },
     clearValue(e) {
-      SelectStore.clear(this.name);
-      this.$emit('clear', e)
+
+      SelectStore.setActiveValue(this.selectName, this.value)
     },
     noteScroll() {
       if(this.$refs.inner.scrollTop != 0) {
