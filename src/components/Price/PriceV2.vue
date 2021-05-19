@@ -125,7 +125,7 @@ export default {
         classList.push("sp-l-0-1")
       }
 
-      return <div class={classList.join(' ')}>{this.normalValue}</div>;
+      return <div class={classList.join(' ')}>{this.$slots.default || this.normalValue}</div>;
     },
     postCodeRender(){
       const classNames = ["d-inline-block", "flex-column", "sp-l-0-1", "rt-price-n__info"]
