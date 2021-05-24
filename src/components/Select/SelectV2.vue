@@ -15,7 +15,7 @@ export default {
       }
     },
     defaultValue:{
-      type: String,
+      type: String|Array,
       default: ''
     },
     type: {
@@ -93,7 +93,8 @@ export default {
     inputLocalValue: '',
     shadowUp: false,
     shadowDown: true,
-    tempIndex: null
+    tempIndex: null,
+    isFocus: false
   }),
   watch: {
     value: {
@@ -141,6 +142,7 @@ export default {
       if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
         newVal = newVal.filter(i => i).map(i=>(i+''))
         this.$emit('input', newVal)
+
         if(Object.keys(this.activeIndex) < 0) {
           this.$emit('item-select', null)
         } else {
@@ -300,7 +302,7 @@ export default {
     },
     setDefaultValue(){
       if(this.defaultValue.length > 0 && this.inputLocalValue.length == 0){
-        this.inputLocalValue = this.defaultValue;
+        this.inputLocalValue = Array.isArray(this.defaultValue) ? this.defaultValue[0] : this.defaultValue;
       }
     },
     getSelectOptions() {
@@ -449,8 +451,7 @@ export default {
         this.$refs.input.localValue = this.inputLocalValue
       }
       this.inputLocalValue = e;
-      this.$emit('change', e)
-      this.$emit('input', '')
+      this.$emit('input', e)
       SelectStore.removeAllActiveValue(this.selectName)
     },
     clearValue(e) {
@@ -470,11 +471,21 @@ export default {
       }
     },
     onFocus(e) {
+      this.isFocus = true
       this.$emit('focus', e)
     },
     onBlur(e) {
       this.$emit('blur', e)
     },
+    onBlurAuto(val,event) {
+      this.isFocus = false
+      setTimeout(()=>{
+        if(!this.isFocus){
+          this.$emit('blur', val, event)
+        }
+      },300)
+    },
+
     onKeydown(e) {
       this.$emit('keydown', e)
     },
@@ -526,7 +537,7 @@ export default {
                     hasError={this.hasError}
                     errorMessage={this.errorMessage}
                     onFocus={this.onFocus}
-                    onBlur={this.onBlur}
+                    onBlur={this.onBlurAuto}
                     onKeydown={this.onKeydown}
                     onKeyup={this.onKeyup}/>
           {this.renderSelectList}

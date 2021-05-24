@@ -125,24 +125,24 @@ export default {
   },
 
   methods: {
-    onInput(e) {
-      this.$emit('input', e)
-      this.$emit('custom', e)
+    onInput() {
+      this.$emit('input',...arguments)
+      this.$emit('custom', arguments[0])
     },
     onClear() {
       this.$emit('clear')
     },
-    onKeydown(e) {
-      this.$emit('keydown', e)
+    onKeydown() {
+      this.$emit('keydown',...arguments)
     },
-    onKeyup(e) {
-      this.$emit('keyup', e.key)
+    onKeyup() {
+      this.$emit('keyup',...arguments)
     },
     onFocus() {
-      this.$emit('focus')
+      this.$emit('focus',...arguments)
     },
     onBlur() {
-      this.$emit('blur')
+      this.$emit('blur',...arguments)
     },
     onFilled(e) {
       this.$emit('filled', e)
