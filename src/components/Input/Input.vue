@@ -1,6 +1,7 @@
 <script type="text/jsx">
 import variables from "../../variables.json";
 import InputV2 from "./InputV2.vue";
+
 const components = {}
 components[InputV2.name] = InputV2
 export default {
@@ -20,11 +21,11 @@ export default {
       type: Number,
       default: null
     },
-    version:{
+    version: {
       type: Number,
       default: 1
     },
-    step:{
+    step: {
       type: Number,
       default: 1
     },
@@ -69,7 +70,7 @@ export default {
       default: ''
     },
     value: {
-      type: String|Number,
+      type: String | Number,
       default: ""
     },
     isWhite: {
@@ -176,7 +177,7 @@ export default {
       if (this.outlined) {
         className.push("input-wrapper--outlined");
       }
-      if (this.isB2bInput ) {
+      if (this.isB2bInput) {
         className.push("rtb-input color-block--white");
       }
       if (this.isHidden) {
@@ -241,7 +242,7 @@ export default {
     this.setValue();
     this.setDisabled();
     this.bindEvents();
-    if(this.$el && this.$el.getBoundingClientRect) {
+    if (this.$el && this.$el.getBoundingClientRect) {
       if (this.$el.getBoundingClientRect().left > window.innerWidth / 2) {
         this.hintPosition = "left";
       } else {
@@ -257,7 +258,7 @@ export default {
     this.unbindEvents();
   },
   methods: {
-    setNewRender(){
+    setNewRender() {
       // if(this.newRender){
       //   this.isNew = true
       // }
@@ -276,32 +277,36 @@ export default {
       this.isFocus = false
     },
     bindEvents() {
-      if (this["_events"] ) {
+      if (this["_events"]) {
         Object.keys(this["_events"]).map(eventName => {
 
           this["_events"][eventName].forEach((fn) => {
 
-            if(this.$refs.component){
+            if (this.$refs.component) {
 
-              Object.keys(this.$slots).forEach((slotKey)=>{
+              Object.keys(this.$slots).forEach((slotKey) => {
                 this.$refs.component.$slots = this.$slots[slotKey]
               })
-              if(!this.$refs.component['_events'][eventName]){
+              if (!this.$refs.component['_events'][eventName]) {
                 this.$refs.component['_events'][eventName] = []
               }
-              this.$refs.component['_events'][eventName].push(fn)
-            }else {
-              if (eventName != 'input' && window[variables.globalSettingsKey].segment != 'b2c') { // for work with v-model
-                this.$refs.input.addEventListener(eventName, fn)
-              } else if (eventName != 'input') {
-                this.$refs.input.addEventListener(
-                    eventName,
-                     ()=> {
-                      if (this["_events"] && this["_events"][eventName] && this["_events"][eventName][0] && typeof this["_events"][eventName][0] === 'function') {
-                        this["_events"][eventName][0](arguments[0]);
+              if (this.$refs.component['_events'][eventName].indexOf(fn) < 0) {
+                this.$refs.component['_events'][eventName].push(fn)
+              }
+            } else {
+              if (this.$refs.input) {
+                if (eventName != 'input' && window[variables.globalSettingsKey].segment != 'b2c') { // for work with v-model
+                  this.$refs.input.addEventListener(eventName, fn)
+                } else if (eventName != 'input') {
+                  this.$refs.input.addEventListener(
+                      eventName,
+                      () => {
+                        if (this["_events"] && this["_events"][eventName] && this["_events"][eventName][0] && typeof this["_events"][eventName][0] === 'function') {
+                          this["_events"][eventName][0](arguments[0]);
+                        }
                       }
-                    }
-                );
+                  );
+                }
               }
             }
           });
@@ -309,20 +314,23 @@ export default {
       }
     },
     unbindEvents() {
-      if (this["_events"] ) {
+      if (this["_events"]) {
         Object.keys(this["_events"]).map(eventName => {
-          if(this.$refs.component){
+          if (this.$refs.component) {
             this["_events"][eventName].forEach((fn) => {
               const index = this.$refs.component['_events'][eventName].indexOf(fn);
-              if(index>=0){
-                this.$refs.component['_events'][eventName].splice(index,1)
+              if (index >= 0) {
+                this.$refs.component['_events'][eventName].splice(index, 1)
               }
             })
-          }else {
-            this.$refs.input.removeEventListener(
-                eventName,
-                this["_events"][eventName]
-            );
+          } else {
+            // console.info(this['_events'])
+            // if(this.$refs.input) {
+            //   this.$refs.input.removeEventListener(
+            //       eventName,
+            //       this["_events"][eventName]
+            //   );
+            // }
           }
         });
       }
@@ -348,18 +356,18 @@ export default {
       this.$refs.input.focus();
     },
     updateInputValue() {
-      if(this.$refs.input) {
+      if (this.$refs.input) {
         this.$refs.input.value = this.localValue;
       }
     },
     setValue() {
-      if(this.$refs.input) {
+      if (this.$refs.input) {
         this.$refs.input.value = this.localValue;
       }
       this.setValueLength();
     },
     setDisabled() {
-      if(this.$refs.input) {
+      if (this.$refs.input) {
         this.$refs.input.disabled = Boolean(this.disabledLocal);
       }
     },
@@ -550,10 +558,10 @@ export default {
     },
   },
   render() {
-    if(this.version == 2){
-      const renderSlots = Object.keys(this.$slots).map((key)=>{
-        return this.$slots[key].map((slot)=>{
-         return <template slot={key}>{slot}</template>
+    if (this.version == 2) {
+      const renderSlots = Object.keys(this.$slots).map((key) => {
+        return this.$slots[key].map((slot) => {
+          return <template slot={key}>{slot}</template>
         })
       })
       return <rt-input-v2
@@ -771,20 +779,20 @@ export default {
         return <div class="text-field__line"/>
       }
     }
-    const renderButton = ()=>{
-      if(this.inputButton) {
+    const renderButton = () => {
+      if (this.inputButton) {
 
 
-          return <rt-button class="rt-button-transparent-purple rt-button-small"
-                            onClick={this.getCode}>{this.inputButtonText}</rt-button>
+        return <rt-button class="rt-button-transparent-purple rt-button-small"
+                          onClick={this.getCode}>{this.inputButtonText}</rt-button>
       }
       return null
 
     }
-    const renderTimer= () =>{
-      if(this.hasTimer){
+    const renderTimer = () => {
+      if (this.hasTimer) {
 
-          return <rt-countdown-timer duration={this.timerDuration}/>
+        return <rt-countdown-timer duration={this.timerDuration}/>
       }
       return null
 

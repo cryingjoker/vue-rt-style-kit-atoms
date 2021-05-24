@@ -198,27 +198,27 @@ export default {
         this.$emit('clear')
       // }
     },
-    onBlur(){
-      this.$emit('blur',this.localValue)
+    onBlur(e){
+      this.$emit('blur',this.localValue,e)
     },
     onPaste(e){
       this.$emit('paste',e)
     },
     onKeydown(e){
-      this.$emit('keydown',e)
+      this.$emit('keydown',e,this.localValue)
     },
     onKeyup(e){
-      this.$emit('keyup',e)
+      this.$emit('keyup',e,this.localValue)
     },
     onFocus(e){
-      this.$emit('focus',e)
+      this.$emit('focus',e,this.localValue)
     },
     onInput(e) {
       this.$emit('input',e)
       this.$emit('phone',e)
     },
     onChange(e) {
-      this.$emit('change',e)
+      this.$emit('change',e,this.localValue)
     },
     toggleInformer($event) {
       $event.preventDefault();
@@ -249,7 +249,6 @@ export default {
         </template>
       }
       if(this.needVerification) {
-        console.log(this.localVerified)
         if(this.localVerified === 1) {
           return <template slot="icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
