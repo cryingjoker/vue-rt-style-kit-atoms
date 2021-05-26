@@ -294,6 +294,9 @@ export default {
     onInputAutoField(e,a){
 
     },
+    onChange(){
+      this.$emit('change',...arguments)
+    },
     setActiveValue() {
 
       if (this.setFirstActive) {
@@ -550,7 +553,7 @@ export default {
                     onCustom={this.checkMatch}
                     value={this.selectActiveLabels[0] || this.inputLocalValue}
                     onClear={this.clearValue}
-
+                    onChange={this.onChange}
                     hasError={this.hasError}
                     errorMessage={this.errorMessage}
                     onFocus={this.onFocus}
