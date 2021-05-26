@@ -66,7 +66,6 @@ class SelectStoreClass extends StorePrototype {
   }
   
   setActiveValue(id, value) {
-    console.info('setActiveValue',id,value)
     if (Array.isArray(value)) {
       value.forEach(val => this.setActiveValue(id, val))
     } else {
