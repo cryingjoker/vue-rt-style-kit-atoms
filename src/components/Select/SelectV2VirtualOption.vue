@@ -38,6 +38,10 @@ export default {
     index: {
       type: Number,
       default: null
+    },
+    inputValue:{
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -114,8 +118,8 @@ export default {
   },
   render(h) {
     const renderLabel = () => {
-      if(!!SelectStore.getInputText(this.selectName)) {
-        let boldText = SelectStore.getInputText(this.selectName);
+      if(this.inputValue.length > 0) {
+        let boldText = this.inputValue;
         let fullString = this.label;
         return h('span', {
               domProps: {

@@ -77,6 +77,14 @@ export default {
     bright: {
       type: Boolean,
       default: false
+    },
+    joinValue:{
+      type: Boolean,
+      default: false
+    },
+    sep:{
+      type: String,
+      default: ', '
     }
   },
   data: () => ({
@@ -101,13 +109,14 @@ export default {
       deep: true,
       handler(newVal, oldVal) {
         if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
-          SelectStore.setActiveValue(this.name, newVal)
+          // SelectStore.setActiveValue(this.name, newVal)
           this.getSelectType();
           this.getSelectOptions()
           // this.getActiveValue();
           this.setActiveValue();
-          this.clearInput();
-          this.$refs.input.$el.querySelector('input').focus()
+          if(this.$refs.input) {
+            this.$refs.input.$el.querySelector('input').focus()
+          }
         }
       }
     },
@@ -115,12 +124,12 @@ export default {
       deep: true,
       handler(newVal, oldVal) {
         if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
-          SelectStore.clear(this.name);
+          // SelectStore.clear(this.name);
           SelectStore.addJson(this.name, newVal)
           this.getSelectType();
           this.getSelectOptions()
           // this.getActiveValue();
-          this.setActiveValue();
+          // this.setActiveValue();
           // if(newVal.length > 0 && this.inputLocalValue.length > 2) {
           //   console.info('@@@')
           //   SelectStore.setOpen(this.name)
@@ -141,8 +150,6 @@ export default {
     selectActiveValue(newVal, oldVal) {
       if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
         newVal = newVal.filter(i => i).map(i=>(i+''))
-        this.$emit('input', newVal)
-
         if(Object.keys(this.activeIndex) < 0) {
           this.$emit('item-select', null)
         } else {
@@ -214,6 +221,7 @@ export default {
         const isFocus = index == this.focusIndex;
         return <rt-select-v2-virtual-option ref={'select-item-' + index}
                                             select-name={this.name}
+                                            input-value={this.inputLocalValue}
                                             is-active={isActive}
                                             value={item.value}
                                             multiple={this.multiple}
@@ -283,12 +291,11 @@ export default {
     SelectStore.clear(this.name)
   },
   methods: {
-    clearInput(){
-      if(this.autoComplete){
-        // this.inputLocalValue = ''
-      }
+    onInputAutoField(e,a){
+
     },
     setActiveValue() {
+
       if (this.setFirstActive) {
         if(this.json[0]?.value) {
           SelectStore.setActiveValue(this.name, this.json[0]?.value);
@@ -314,14 +321,26 @@ export default {
     getActiveValue() {
       let selectActiveValue = SelectStore.getActiveValue(this.name)
       let selectActiveLabels = SelectStore.getActiveLabels(this.name)
-      if (selectActiveValue) {
+      if (selectActiveValue && JSON.stringify(this.selectActiveValue) != JSON.stringify(selectActiveValue)) {
         this.selectActiveValue = [...selectActiveValue];
+        if (this.autoComplete && selectActiveValue.length == 0) {
+          this.$emit('input', this.inputLocalValue);
+        }else {
+          if (this.joinValue) {
+            this.$emit('input', selectActiveValue.join(this.sep))
+          } else {
+            this.$emit('input', selectActiveValue)
+          }
+        }
       }
+
       if (selectActiveLabels) {
         this.selectActiveLabels = [...selectActiveLabels];
       }
+
       this.activeIndex = SelectStore.getActiveIndex(this.name)
       this.focusIndex = SelectStore.getFocusIndex(this.name)
+
     },
     getSelectType() {
       this.selectorType = SelectStore.getSelectorType(this.name, this.type, this.multiple);
@@ -445,17 +464,14 @@ export default {
       }
     },
     checkMatch(e) {
-      SelectStore.setInputText(this.name, e.toLowerCase())
+      SelectStore.setInputText(this.name, e)
       this.selectActiveLabels[0] = ''
-      if(this.inputLocalValue != this.$refs.input.localValue) {
-        this.$refs.input.localValue = this.inputLocalValue
-      }
       this.inputLocalValue = e;
-      this.$emit('input', e)
+
+      this.$emit('input',e);
       SelectStore.removeAllActiveValue(this.selectName)
     },
     clearValue(e) {
-
       SelectStore.setActiveValue(this.selectName, this.value)
     },
     noteScroll() {
@@ -534,6 +550,7 @@ export default {
                     onCustom={this.checkMatch}
                     value={this.selectActiveLabels[0] || this.inputLocalValue}
                     onClear={this.clearValue}
+
                     hasError={this.hasError}
                     errorMessage={this.errorMessage}
                     onFocus={this.onFocus}
