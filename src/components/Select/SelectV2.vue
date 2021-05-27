@@ -14,8 +14,8 @@ export default {
         return []
       }
     },
-    defaultValue:{
-      type: String|Array,
+    defaultValue: {
+      type: String | Array,
       default: ''
     },
     type: {
@@ -31,7 +31,7 @@ export default {
       default: ""
     },
     value: {
-      type: Array|String ,
+      type: Array | String,
       default: ''
     },
     text: {
@@ -78,11 +78,11 @@ export default {
       type: Boolean,
       default: false
     },
-    joinValue:{
+    joinValue: {
       type: Boolean,
       default: false
     },
-    sep:{
+    sep: {
       type: String,
       default: ', '
     }
@@ -102,7 +102,9 @@ export default {
     shadowUp: false,
     shadowDown: true,
     tempIndex: null,
-    isFocus: false
+    isFocus: false,
+    mouseenter: false,
+    stopOpenAuto: false
   }),
   watch: {
     value: {
@@ -114,7 +116,7 @@ export default {
           this.getSelectOptions()
           // this.getActiveValue();
           this.setActiveValue();
-          if(this.$refs.input) {
+          if (this.$refs.input) {
             this.$refs.input.$el.querySelector('input').focus()
           }
         }
@@ -137,9 +139,9 @@ export default {
           //   SelectStore.setClose(this.name)
           // }
           this.$refs.input.$el.querySelector('input').focus()
-          this.$nextTick(()=>{
+          this.$nextTick(() => {
             this.$refs.input.$el.querySelector('input').focus()
-            this.$nextTick(()=>{
+            this.$nextTick(() => {
               this.$refs.input.$el.querySelector('input').focus()
             })
           })
@@ -149,8 +151,8 @@ export default {
     },
     selectActiveValue(newVal, oldVal) {
       if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
-        newVal = newVal.filter(i => i).map(i=>(i+''))
-        if(Object.keys(this.activeIndex) < 0) {
+        newVal = newVal.filter(i => i).map(i => (i + ''))
+        if (Object.keys(this.activeIndex) < 0) {
           this.$emit('item-select', null)
         } else {
           this.$emit('item-select', this.json[parseInt(Object.keys(this.activeIndex))])
@@ -161,12 +163,10 @@ export default {
       if (newVal && !oldVal) {
         this.mouseenterFn();
         this.bindClickOutside()
-        this.bindMouseenterMouse()
         this.bindKeydown()
       } else {
         if (!newVal && oldVal) {
           this.unbindClickOutside()
-          this.unbindMouseenterMouse()
           this.unbindKeydown();
         }
       }
@@ -181,7 +181,7 @@ export default {
         return null
       }
       const renderShadowDown = () => {
-        if (this.selectOptions?.length > 6 && this.shadowDown ) {
+        if (this.selectOptions?.length > 6 && this.shadowDown) {
           return <div class="select-v2-list-shadow-down"></div>
         }
         return null
@@ -195,22 +195,23 @@ export default {
       </div>
     },
     renderSelectOption() {
-      if(this.autoComplete) {
-        if(this.selectActiveLabels[0]?.toLowerCase() != this.$refs.input?.localValue?.toLowerCase() && this.selectOptions?.length > 0 && SelectStore.getInputText(this.name)?.length > 2) {
-          SelectStore.setOpen(this.name)
-        } else {
-          SelectStore.setClose(this.name)
-        }
-      }
+
+      // if(this.autoComplete && !this.stopOpenAuto) {
+      //   if(this.selectActiveLabels[0]?.toLowerCase() != this.$refs.input?.localValue?.toLowerCase() && this.selectOptions?.length > 0 && SelectStore.getInputText(this.name)?.length > 2) {
+      //     SelectStore.setOpen(this.name)
+      //   } else {
+      //     SelectStore.setClose(this.name)
+      //   }
+      // }
       if (!this.selectOpenStatus) {
         return null
       }
       return this.selectOptions.map((item, index) => {
         const presetActiveIndex = () => {
-            this.tempIndex = index
+          this.tempIndex = index
         }
         const resetActiveIndex = () => {
-          if(this.focusIndex == index) {
+          if (this.focusIndex == index) {
             SelectStore.setFocusIndex(this.name, -1);
           }
         }
@@ -262,7 +263,7 @@ export default {
       if (this.multiple) {
         selectClasses.push("select-v2--multiline");
       }
-      if(this.bright) {
+      if (this.bright) {
         selectClasses.push('select-v2--bright')
       }
       return selectClasses.join(' ');
@@ -291,27 +292,33 @@ export default {
     SelectStore.clear(this.name)
   },
   methods: {
-    onInputAutoField(e,a){
-
+    onInputAutoField(e, a) {
+      if (this.isFocus || this.mouseenter) {
+        if (this.selectActiveLabels[0]?.toLowerCase() != this.$refs.input?.localValue?.toLowerCase() && this.selectOptions?.length > 0 && SelectStore.getInputText(this.name)?.length > 2) {
+          SelectStore.setOpen(this.name)
+        } else {
+          SelectStore.setClose(this.name)
+        }
+      }
     },
-    onChange(){
-      this.$emit('change',...arguments)
+    onChange() {
+      this.$emit('change', ...arguments)
     },
     setActiveValue() {
 
       if (this.setFirstActive) {
-        if(this.json[0]?.value) {
+        if (this.json[0]?.value) {
           SelectStore.setActiveValue(this.name, this.json[0]?.value);
         } else {
           SelectStore.setActiveValue(this.name, this.$children[0].value);
         }
       }
-      if(this.value) {
+      if (this.value) {
         SelectStore.setActiveValue(this.name, this.value)
       }
     },
-    setDefaultValue(){
-      if(this.defaultValue.length > 0 && this.inputLocalValue.length == 0){
+    setDefaultValue() {
+      if (this.defaultValue.length > 0 && this.inputLocalValue.length == 0) {
         this.inputLocalValue = Array.isArray(this.defaultValue) ? this.defaultValue[0] : this.defaultValue;
       }
     },
@@ -322,13 +329,15 @@ export default {
       }
     },
     getActiveValue() {
+      console.info('getActiveValue')
       let selectActiveValue = SelectStore.getActiveValue(this.name)
       let selectActiveLabels = SelectStore.getActiveLabels(this.name)
+      console.info('getActiveValue',selectActiveLabels)
       if (selectActiveValue && JSON.stringify(this.selectActiveValue) != JSON.stringify(selectActiveValue)) {
         this.selectActiveValue = [...selectActiveValue];
         if (this.autoComplete && selectActiveValue.length == 0) {
           this.$emit('input', this.inputLocalValue);
-        }else {
+        } else {
           if (this.joinValue) {
             this.$emit('input', selectActiveValue.join(this.sep))
           } else {
@@ -418,27 +427,23 @@ export default {
     //   const size = this.selectOptions.length
     //   this.focusIndex = (this.focusIndex - 1 + size) % size
     // },
-    bindMouseenterMouse() {
-      if (this.$refs['select']?.addEventListener) {
-        this.$refs['select'].addEventListener('mouseenter', this.mouseenterFn)
-        this.$refs['select'].addEventListener('mouseleave', this.mouseleaveFn)
-      }
-    },
-    unbindMouseenterMouse() {
-      if (this.$refs['select'].removeEventListener) {
-        this.$refs['select'].removeEventListener('mouseenter', this.mouseenterFn)
-        this.$refs['select'].removeEventListener('mouseleave', this.mouseleaveFn)
-      }
-    },
+
     mouseenterFn() {
       this.mouseenter = true
+      console.info('mouseenterFn')
     },
     mouseleaveFn() {
+      console.info('mouseleaveFn')
       this.mouseenter = false
     },
     clickOutsideFn() {
+      console.info('clickOutsideFn',this.mouseenter)
       if (!this.mouseenter) {
         SelectStore.setClose(this.name)
+        this.stopOpenAuto = true
+        setTimeout(() => {
+          this.stopOpenAuto = false
+        }, 1000)
       }
     },
     fixValueList() {
@@ -446,17 +451,17 @@ export default {
       let valuesList = this.$el.querySelectorAll('.select-v2-tag');
       let fullLength = valuesList.length;
       Array.from(valuesList).map((item, index) => {
-        if(item.getBoundingClientRect().top >= this.bottomEdge) {
+        if (item.getBoundingClientRect().top >= this.bottomEdge) {
           this.isTagOutside = true;
         } else {
           this.isTagOutside = false;
-          if(!this.$el.querySelector('.select-v2-tag__outside-count')) {
+          if (!this.$el.querySelector('.select-v2-tag__outside-count')) {
             this.lastInside = index;
           }
         }
       })
       this.$el.querySelector('.select-v2-tag__outside-count')?.remove()
-      if(this.isTagOutside && this.lastInside && !this.$el.querySelector('.select-v2-tag__outside-count') && (fullLength - this.lastInside > 1)) {
+      if (this.isTagOutside && this.lastInside && !this.$el.querySelector('.select-v2-tag__outside-count') && (fullLength - this.lastInside > 1)) {
         let overflowTag = '<span class="select-v2-tag__outside-count rt-font-label">показать ещё ' + (fullLength - this.lastInside) + '</span>';
         this.$el.querySelectorAll('.select-v2-tag')[this.lastInside - 1].insertAdjacentHTML('afterend', overflowTag);
         this.$el.querySelector('.select-v2-tag__outside-count').addEventListener('click', ($event) => {
@@ -471,19 +476,22 @@ export default {
       this.selectActiveLabels[0] = ''
       this.inputLocalValue = e;
 
-      this.$emit('input',e);
+      this.$emit('input', e);
       SelectStore.removeAllActiveValue(this.selectName)
     },
     clearValue(e) {
-      SelectStore.setActiveValue(this.selectName, this.value)
+      SelectStore.setActiveValue(this.name, '')
+      SelectStore.removeAllActiveValue(this.selectName)
+      this.checkMatch('');
+
     },
     noteScroll() {
-      if(this.$refs.inner.scrollTop != 0) {
+      if (this.$refs.inner.scrollTop != 0) {
         this.shadowUp = true
       } else {
         this.shadowUp = false
       }
-      if(this.$refs.inner.scrollTop != this.$refs.inner.scrollHeight - this.$refs.inner.offsetHeight) {
+      if (this.$refs.inner.scrollTop != this.$refs.inner.scrollHeight - this.$refs.inner.offsetHeight) {
         this.shadowDown = true
       } else {
         this.shadowDown = false
@@ -494,15 +502,17 @@ export default {
       this.$emit('focus', e)
     },
     onBlur(e) {
+
       this.$emit('blur', e)
+
     },
-    onBlurAuto(val,event) {
+    onBlurAuto(val, event) {
       this.isFocus = false
-      setTimeout(()=>{
-        if(!this.isFocus){
+      setTimeout(() => {
+        if (!this.isFocus && (!this.mouseenter || !this.selectOpenStatus)) {
           this.$emit('blur', val, event)
         }
-      },300)
+      }, 300)
     },
 
     onKeydown(e) {
@@ -514,11 +524,11 @@ export default {
   },
   render(h) {
     const renderValue = () => {
-      if(this.selectActiveLabels.length < 2 && !this.multiple) {
+      if (this.selectActiveLabels.length < 2 && !this.multiple) {
         return <p class="select-v2-value">{this.selectActiveLabels[0]}</p>
       }
-      const valueItem = this.selectActiveLabels.map((item,index)=>{
-        const click = (e)=>{
+      const valueItem = this.selectActiveLabels.map((item, index) => {
+        const click = (e) => {
           SelectStore.removeActiveValue(this.name, this.selectActiveValue[index])
           e.preventDefault();
           e.stopPropagation();
@@ -530,21 +540,23 @@ export default {
         return <span class="select-v2-tag" onClick={preventClick}>
           <span>{item}</span>
           <span class="d-flex">
-            <rt-system-icons class="select-v2-tag__remove" name="close small" ref={'selectTag-' + index} onClick={click}></rt-system-icons>
+            <rt-system-icons class="select-v2-tag__remove" name="close small" ref={'selectTag-' + index}
+                             onClick={click}></rt-system-icons>
           </span>
         </span>
       })
       return <p class="select-v2-value d-flex" ref="valueWrapper">{valueItem}</p>
     }
     const errorMessage = () => {
-      if(this.hasError) {
-        if(this.errorMessage.length > 0) {
+      if (this.hasError) {
+        if (this.errorMessage.length > 0) {
           return <p class="select-v2__error-message rt-font-label">{this.errorMessage}</p>
         }
       }
     }
-    if(this.autoComplete) {
-      return <div class={this.selectClasses} ref="select">
+    if (this.autoComplete) {
+      return <div class={this.selectClasses} ref="select" onMouseenter={this.mouseenterFn}
+                  onMouseleave={this.mouseleaveFn}>
         <div class="select-v2__container">
           <rt-input version={2}
                     disabled={this.disabled}
@@ -554,6 +566,7 @@ export default {
                     value={this.selectActiveLabels[0] || this.inputLocalValue}
                     onClear={this.clearValue}
                     onChange={this.onChange}
+                    onInput={this.onInputAutoField}
                     hasError={this.hasError}
                     errorMessage={this.errorMessage}
                     onFocus={this.onFocus}
@@ -564,7 +577,8 @@ export default {
         </div>
       </div>
     }
-    return <div class={this.selectClasses} ref="select">
+    return <div class={this.selectClasses} ref="select" onMouseenter={this.mouseenterFn}
+                onMouseleave={this.mouseleaveFn}>
       <div class="select-v2__container">
         <button type="button"
                 disabled={this.disabled}
