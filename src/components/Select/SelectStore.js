@@ -112,7 +112,6 @@ class SelectStoreClass extends StorePrototype {
   
   getActiveLabels(id) {
     if (this.selectorsActiveValue[id]?.length > 0) {
-      
       return this.selectorsActiveValue[id]?.map((value) => {
         return this.selectors[id].find((item) => item.value == value)?.label
       }).filter(i => i)
