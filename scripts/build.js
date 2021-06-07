@@ -46,8 +46,8 @@ function build(buildIndex = 0) {
             next()
         })
     }
-
-
+    
+    
 }
 build();
 
@@ -58,7 +58,7 @@ function buildEntry (configData) {
     }
     const opts = configData.opts;
     const output = config.output
-
+    
     const { file, banner } = output
     const isProd = /(min|prod)\.js$/.test(file)
     return rollup(config)
@@ -83,12 +83,12 @@ function buildEntry (configData) {
                         pure_funcs: ['makeMap']
                     }
                 }).code;
-
+                
                 primises.push(write(file, minified, true))
             } else {
                 primises.push(write(file, code))
             }
-
+            
             return Promise.all(primises);
         })
 }
@@ -99,7 +99,7 @@ function write (dest, code, zip) {
             console.log(blue(path.relative(process.cwd(), dest)) + ' ' + getSize(code) + (extra || ''))
             resolve()
         }
-
+        
         fs.writeFile(dest, code, err => {
             if (err) return reject(err)
             if (zip) {
