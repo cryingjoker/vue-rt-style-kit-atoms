@@ -58,9 +58,11 @@ export default {
         if (this.showFloat) {
           value = (parseFloat(value.replace(',', '.')) + '').split('.')
           value[0] = (value[0] + '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ");
-          value[1] = '0.' + value[1]
-          value[1] = ((value[1] - 0).toFixed(2) + '').replace('0.', '')
-          value = value.join(',')
+          if(value[1] != undefined) {
+            value[1] = '0.' + value[1]
+            value[1] = ((value[1] - 0).toFixed(2) + '').replace('0.', '')
+            value = value.join(',')
+          }
         } else {
           value = parseInt(value) + ''
           value = value.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ");
@@ -74,9 +76,11 @@ export default {
       if (this.showFloat) {
         value = (parseFloat(value.replace(',', '.')) + '').split('.')
         value[0] = (value[0] + '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ");
-        value[1] = '0.' + value[1]
-        value[1] = ((value[1] - 0).toFixed(2) + '').replace('0.', '')
-        value = value.join(',')
+        if(value[1] != undefined) {
+          value[1] = '0.' + value[1]
+          value[1] = ((value[1] - 0).toFixed(2) + '').replace('0.', '')
+          value = value.join(',')
+        }
       } else {
         value = parseInt(value) + ''
         value = value.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ");
@@ -121,7 +125,7 @@ export default {
         classList.push("sp-l-0-1")
       }
 
-      return <div class={classList.join(' ')}>{this.normalValue}</div>;
+      return <div class={classList.join(' ')}>{this.$slots.default || this.normalValue}</div>;
     },
     postCodeRender(){
       const classNames = ["d-inline-block", "flex-column", "sp-l-0-1", "rt-price-n__info"]
