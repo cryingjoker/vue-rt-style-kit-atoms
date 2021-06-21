@@ -4,6 +4,7 @@ import zlib from 'zlib'
 import {rollup} from 'rollup'
 import terser from 'terser'
 import genConfig from './config.js'
+import {fileURLToPath} from "url";
 
 if (!fs.existsSync('dist')) {
     fs.mkdirSync('dist')
@@ -13,6 +14,29 @@ if (!fs.existsSync('dist')) {
 
 // filter builds via command line arg
 const keysBuild = ['web-es-full-prod','web-full-prod'];
+
+let date_ob = new Date();
+let date = ("0" + date_ob.getDate()).slice(-2);
+let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+let year = date_ob.getFullYear()
+let hours = date_ob.getHours() + '';
+
+let minutes = date_ob.getMinutes() + '';
+if(hours.length == 1){
+    hours = '0'+hours
+}
+if(minutes.length == 1){
+    minutes = '0'+minutes
+}
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename)
+const version = year + "-" + month + "-" + date + " " + hours + ":" + minutes
+
+let indexFile = fs.readFileSync(path.join(__dirname,'..','src','index.js'),"utf8")
+indexFile = indexFile.replace(/(const version = )([0-9a-z"\. :-]*)/gi,'const version = "'+version+'"')
+
+fs.writeFileSync(path.join(__dirname,'..','src','index.js'),indexFile)
+
 function build(buildIndex = 0) {
     if(buildIndex < keysBuild.length) {
         const next = () => {
@@ -22,8 +46,8 @@ function build(buildIndex = 0) {
             next()
         })
     }
-
-
+    
+    
 }
 build();
 
@@ -34,7 +58,7 @@ function buildEntry (configData) {
     }
     const opts = configData.opts;
     const output = config.output
-
+    
     const { file, banner } = output
     const isProd = /(min|prod)\.js$/.test(file)
     return rollup(config)
@@ -59,12 +83,12 @@ function buildEntry (configData) {
                         pure_funcs: ['makeMap']
                     }
                 }).code;
-
+                
                 primises.push(write(file, minified, true))
             } else {
                 primises.push(write(file, code))
             }
-
+            
             return Promise.all(primises);
         })
 }
@@ -75,7 +99,7 @@ function write (dest, code, zip) {
             console.log(blue(path.relative(process.cwd(), dest)) + ' ' + getSize(code) + (extra || ''))
             resolve()
         }
-
+        
         fs.writeFile(dest, code, err => {
             if (err) return reject(err)
             if (zip) {

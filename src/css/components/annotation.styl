@@ -69,16 +69,16 @@
   &__title
     padding-left 36px
     transition color .2s linear
-    display block
-    .{newAppName}-annotation--is-open &
-      color b2c-orange
-      .{newAppName}-annotation__arrow
-        fill b2c-orange
-    @media (hover: hover)
-      &:hover
-        color b2c-orange
-        .{newAppName}-annotation__arrow
-          fill b2c-orange
+    display inline-block
+    //.{newAppName}-annotation--is-open &
+    //  color b2c-orange
+    //  .{newAppName}-annotation__arrow
+    //    fill b2c-orange
+    //@media (hover: hover)
+    //  &:hover
+    //    color b2c-orange
+    //    .{newAppName}-annotation__arrow
+    //      fill b2c-orange
   .{newAppName}-annotation__arrow
     left 6px
     transition fill .2s linear, transform .2s linear
@@ -87,3 +87,45 @@
   &.{newAppName}-annotation--is-open
     .{newAppName}-annotation__content
       padding-top 20px
+  &--small-gap
+    .rt-annotation-v2__title
+      padding-left 32px
+  &--reversed
+    .rt-annotation-v2__title
+      padding-left 0
+      padding-right 36px
+    &.rt-annotation-v2--small-gap
+      .rt-annotation-v2__title
+        padding-right 32px
+    .{newAppName}-annotation__arrow
+      left auto
+      right 6px
+    .rt-annotation__content
+      padding-left 0
+
+.rt-annotation--is-open > .rt-annotation-v2__title
+  .rt-annotation__arrow
+    transform rotate(-180deg)
+
+colors = {color--black-main: main-color b2c-orange-low b2c-white},
+        {color--black-additional: main-color b2c-purple-button-hover b2c-white},
+        {color--orange: b2c-orange b2c-orange-low b2c-orange-night},
+        {color--purple: b2c-purple b2c-purple-button-hover b2c-purple-night},
+        {color--grey: main-color07-no-opacity b2c-black085-no-opacity b2c-white05}
+
+.rt-annotation-v2__title
+  for item in colors
+    key = keys(item)
+    value = values(item)
+    &.{key}
+      color value[0]
+      .rt-annotation__arrow
+        fill value[0]
+      .rt-dark-theme &
+        color value[2]
+        .rt-annotation__arrow
+          fill value[2]
+      &:hover
+        color value[1]
+        .rt-annotation__arrow
+          fill value[1]

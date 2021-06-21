@@ -48,6 +48,27 @@
       "type" : "Number",
       "description" : "Устанавливает задержку времени до прокрутки страницы к открытому по умолчанию блоку",
       "value" : "0"
+    },
+    {
+      "name" : "rt-annotation",
+      "property" : ":small-gap",
+      "type" : "Boolean",
+      "description" : "Флаг установки уменьшенного расстояния между текстом и стрелкой",
+      "value" : "false"
+    },
+    {
+      "name" : "rt-annotation",
+      "property" : ":reversed",
+      "type" : "Boolean",
+      "description" : "Флаг установки стрелки справа от текста",
+      "value" : "false"
+    },
+    {
+      "name" : "rt-annotation",
+      "property" : "color",
+      "type" : "String",
+      "description" : "Задаёт цвет заголовку. Возможные варианты: `black-main`, `black-additional`, `orange`, `purple`, `grey`",
+      "value" : "black-main"
     }
   ]
 }
