@@ -74,9 +74,6 @@ h1,
     @media (max-width tablet-upper-limit)
       font-size 28px
       line-height 32px
-//.{newAppName}-card &
-//  font-size 50px
-//  line-height 60px
 
 .{newAppName}-font-banner-label
   font-size 50px
@@ -128,9 +125,6 @@ h2,
     @media (max-width tablet-upper-limit)
       font-size 24px
       line-height 32px
-//.{newAppName}-card &
-//  font-size 36px
-//  line-height 46px
 
 .{newAppName}-font-promo-title
   font-size 36px
@@ -152,9 +146,6 @@ h3,
     @media (max-width tablet-upper-limit)
       font-size 22px
       line-height 28px
-//.{newAppName}-card &
-//  font-size 28px
-//  line-height 36px
 
 .{newAppName}-font-promo
   font-size 24px
@@ -182,9 +173,6 @@ h4,
     @media (max-width tablet-upper-limit)
       font-size 18px
       line-height 24px
-//.{newAppName}-card &
-//  font-size 20px
-//  line-height 28px
 
 strong,
 b,
@@ -206,9 +194,6 @@ b,
     &.{newAppName}-font-bold
       line-height 20px
 
-//.{newAppName}-card &
-//  font-size 16px
-//  line-height 20px
 .{newAppName}-font-paragraph
   font-size 18px
   line-height 28px
@@ -220,9 +205,6 @@ b,
     line-height 24px
     &.{newAppName}-font-bold
       line-height 20px
-//.{newAppName}-card &
-//  font-size 16px
-//  line-height 20px
 
 .p2,
 .{newAppName}-font-small-paragraph
@@ -254,10 +236,6 @@ b,
       line-height 20px
       &.{newAppName}-font-bold
         line-height 16px
-
-  //.{newAppName}-card &
-  //  font-size 16px
-  //  line-height 20px
 
 .p3,
 .{newAppName}-font-control
@@ -294,15 +272,10 @@ b,
       &.{newAppName}-font-bold
         line-height 16px
 
-//.{newAppName}-card &
-//  font-size 14px
-//  line-height 16px
-
 .p4,
 .{newAppName}-font-label
   font-size 12px
   line-height 16px
-
 
 .tagline,
 .{newAppName}-font-label-uppercase
@@ -339,14 +312,12 @@ b,
 .{newAppName}-font-light
   font-weight 200
 
-
 .{newAppName}-font-small-link
   font-size 14px
   line-height 20px
   @media (max-width: mobile-upper-limit)
     font-size 12px
     line-height 16px
-
 
 .{newAppName}-td-font-left
   @media (max-width: tablet-upper-limit)
@@ -448,11 +419,11 @@ a
     padding-left: 18px
     &:before
       left: 0
-
   &+&
-    margin-top 16px
-    @media (max-width: mobile-upper-limit)
-      margin-top 12px
+    &:not(.font-t-s)
+      margin-top 16px
+    &.font-t-s
+      margin-top 4px
   .rt-annotation &
     @media (max-width: mobile-upper-limit)
       margin-left -32px
@@ -461,23 +432,30 @@ a
       .{newAppName}-checked-list__item
         margin-left 0
 
-//&:before
-//  text-align center
-
-.{newAppName}-ordered-list__item+.{newAppName}-numeric-list__item,
-.{newAppName}-numeric-list__item+.{newAppName}-ordered-list__item
-  margin-top 16px
+.{newAppName}-numeric-list__item
+  &+&.rt-font-paragraph
+    margin-top 20px
+    @media(max-width laptop-upper-limit)
+      margin-top 16px
 
 .{newAppName}-checked-list__item
   &:before
     content ''
     background-image url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTQgMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTMuMDMwNCAyLjAzMDMzTDYuMDMwMzkgOS4wMzAzM0M1LjczNzQ5IDkuMzIzMjIgNS4yNjI2MiA5LjMyMzIyIDQuOTY5NzMgOS4wMzAzM0wwLjk2OTcyNyA1LjAzMDMzTDIuMDMwMzkgMy45Njk2N0w1LjUwMDA2IDcuNDM5MzRMMTEuOTY5NyAwLjk2OTY2NkwxMy4wMzA0IDIuMDMwMzNaIiBmaWxsPSIjMTAxODI4Ii8+Cjwvc3ZnPg==')
     position absolute
-    top .5em
-    width .7em
-    height .6em
-    left .4em
+    width 14px
+    height 10px
+    left 7px
     background-repeat no-repeat
+  &.rt-font-paragraph
+    &:before
+      top .5em
+  &.rt-font-small-paragraph
+    &:before
+      top .4em
+  &.font-t-s
+    &:before
+      top .3em
   &--purple
     &:before
       background-image url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTQgMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTMuMDMwNCAyLjAzMDMzTDYuMDMwMzkgOS4wMzAzM0M1LjczNzQ5IDkuMzIzMjIgNS4yNjI2MiA5LjMyMzIyIDQuOTY5NzMgOS4wMzAzM0wwLjk2OTcyNyA1LjAzMDMzTDIuMDMwMzkgMy45Njk2N0w1LjUwMDA2IDcuNDM5MzRMMTEuOTY5NyAwLjk2OTY2NkwxMy4wMzA0IDIuMDMwMzNaIiBmaWxsPSIjNzcwMGZmIi8+Cjwvc3ZnPg==')
@@ -488,7 +466,6 @@ a
 .{b2bAppName}-faq-unordered-list
   &__item
     padding vertical-space 0
-
     &+&
       border-top 2px solid b2c-cool-grey05-no-opacity
 
