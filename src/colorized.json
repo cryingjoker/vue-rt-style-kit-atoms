@@ -1,0 +1,77 @@
+{
+  "gray": {
+    "spaceWeb": 1,
+    "spaceTablet": 1,
+    "spaceMobile": 1
+  },
+  "darkpurple": {
+    "spaceWeb": 2,
+    "spaceTablet": 2,
+    "spaceMobile": 2
+  },
+  "blue": {
+    "spaceWeb": 3,
+    "spaceTablet": 3,
+    "spaceMobile": 3
+  },
+  "lightblue": {
+    "spaceWeb": 4,
+    "spaceTablet": 4,
+    "spaceMobile": 4
+  },
+  "yellow": {
+    "spaceWeb": 5,
+    "spaceTablet": 5,
+    "spaceMobile": 5
+  },
+  "darkorange": {
+    "spaceWeb": 5,
+    "spaceTablet": 5,
+    "spaceMobile": 4
+  },
+  "burgundy": {
+    "spaceWeb": 6,
+    "spaceTablet": 6,
+    "spaceMobile": 6
+  },
+  "red": {
+    "spaceWeb": 7,
+    "spaceTablet": 7,
+    "spaceMobile": 7
+  },
+  "mint": {
+    "spaceWeb": 8,
+    "spaceTablet": 8,
+    "spaceMobile": 8
+  },
+  "purple": {
+    "spaceWeb": 10,
+    "spaceTablet": 10,
+    "spaceMobile": 10
+  },
+  "darkblue": {
+    "spaceWeb": 12,
+    "spaceTablet": 12,
+    "spaceMobile": 10
+  },
+  "green": {
+    "spaceWeb": 16,
+    "spaceTablet": 16,
+    "spaceMobile": 12
+  },
+  "orange": {
+    "spaceWeb": 20,
+    "spaceTablet": 20,
+    "spaceMobile": 16
+  },
+  "pink": {
+    "spaceWeb": 25,
+    "spaceTablet": 25,
+    "spaceMobile": 20
+  },
+  "wine": {
+    "spaceWeb": 30,
+    "spaceTablet": 30,
+    "spaceMobile": 25
+  }
+}
