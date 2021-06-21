@@ -169,6 +169,7 @@ export default {
   methods: {
     changeValue(e) {
       const input = this.$refs.input;
+
       if (this.type === 'number') {
         if(!this.isInteger && input.value.search(/[,.]$/) >= 0){
           this.localValue = input.value
@@ -188,6 +189,7 @@ export default {
       } else {
         this.localValue = input.value + '';
       }
+
       this.$emit('input', this.localValue)
       this.$emit('phone', this.localValue)
     },

@@ -36,7 +36,6 @@ import {
     SystemIcons,
     ArrowAnchor
 } from "./components";
-console.info('SwitchV2',SwitchV2);
 // import 'element-closest-polyfill';
 // import 'nodelist-foreach-polyfill';
 // import 'element-remove';
@@ -125,7 +124,7 @@ VueRtStyle = {
  */
 const settingsKey = Global.globalSettingsKey;
 
-const version = "2021-06-15 16:42";
+const version = "2021-06-15 10:46";
 if (window && window.addEventListener) {
     if (settingsKey) {
         if (!window[settingsKey]) window[settingsKey] = {}

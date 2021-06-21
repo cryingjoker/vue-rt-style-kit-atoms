@@ -147,8 +147,8 @@ export default {
     onFilled(e) {
       this.$emit('filled', e)
     },
-    onChange(e) {
-      this.$emit('change', e)
+    onChange() {
+      this.$emit('change', ...arguments)
     },
     renderIcons(createElement) {
       if (this.$slots.icon) {

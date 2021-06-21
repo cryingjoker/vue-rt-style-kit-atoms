@@ -7,11 +7,6 @@ components[InputV2.name] = InputV2
 export default {
   name: "RtInput",
   components: components,
-  model: {
-    prop: 'value',
-    event: 'input'
-  },
-
   props: {
     bright: {
       type: Boolean,

@@ -18,13 +18,17 @@ class SelectStoreClass extends StorePrototype {
   }
   
   setOpen(id) {
-    this.selectorsOpenStatus[id] = true;
-    this.runWatchersById(id);
+    if(!this.selectorsOpenStatus[id]) {
+      this.selectorsOpenStatus[id] = true;
+      this.runWatchersById(id);
+    }
   }
   
   setClose(id) {
-    this.selectorsOpenStatus[id] = false;
-    this.runWatchersById(id);
+    if(this.selectorsOpenStatus[id]){
+      this.selectorsOpenStatus[id] = false;
+      this.runWatchersById(id);
+    }
   }
   
   getOpenStatus(id) {
@@ -62,7 +66,6 @@ class SelectStoreClass extends StorePrototype {
   }
   
   setActiveValue(id, value) {
-    
     if (Array.isArray(value)) {
       value.forEach(val => this.setActiveValue(id, val))
     } else {
@@ -97,8 +100,10 @@ class SelectStoreClass extends StorePrototype {
   }
   
   removeAllActiveValue(id) {
-    this.selectorsActiveValue[id] = []
-    this.runWatchersById(id);
+    if(this.selectorsActiveValue[id] && this.selectorsActiveValue[id].length > 0) {
+      this.selectorsActiveValue[id] = []
+      this.runWatchersById(id);
+    }
   }
   
   getActiveValue(id) {
@@ -107,7 +112,6 @@ class SelectStoreClass extends StorePrototype {
   
   getActiveLabels(id) {
     if (this.selectorsActiveValue[id]?.length > 0) {
-      
       return this.selectorsActiveValue[id]?.map((value) => {
         return this.selectors[id].find((item) => item.value == value)?.label
       }).filter(i => i)
@@ -140,8 +144,10 @@ class SelectStoreClass extends StorePrototype {
     if (index > this.selectors[id].length) {
       index = 0;
     }
-    this.focusIndex[id] = index;
-    this.runWatchersById(id);
+    if(this.focusIndex[id] != index) {
+      this.focusIndex[id] = index;
+      this.runWatchersById(id);
+    }
   }
   
   setNextFocus(id) {
@@ -222,6 +228,7 @@ class SelectStoreClass extends StorePrototype {
 
   setInputText(id, str) {
     this.autocompleteText[id] = str;
+    this.runWatchersById(id);
   }
   getInputText(id) {
     return this.autocompleteText[id];
