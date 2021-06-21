@@ -31,6 +31,18 @@ export default {
     v2: {
         type: Boolean,
         default: false
+    },
+    smallGap: {
+      type: Boolean,
+      default: false
+    },
+    reversed: {
+      type: Boolean,
+      default: false
+    },
+    color: {
+      type: String,
+      default: 'black-main'
     }
   },
   data() {
@@ -88,7 +100,8 @@ export default {
   render(h) {
       if(this.v2) {
           return <rt-annotation-v2 label={this.label} open={this.open} hash={this.hash} hasWhiteColor={this.hasWhiteColor}
-                                   titleFontClass={this.titleFontClass} scrollTimeout={this.scrollTimeout}>
+                                   titleFontClass={this.titleFontClass} scrollTimeout={this.scrollTimeout}
+                                   smallGap={this.smallGap} reversed={this.reversed} color={this.color}>
               <template slot="label">
                   {this.$slots.label}
               </template>
