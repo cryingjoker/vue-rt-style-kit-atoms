@@ -17,7 +17,7 @@
   "lightblue": {
     "spaceWeb": 4,
     "spaceTablet": 4,
-    "spaceMobile": 4
+    "spaceMobile": 3
   },
   "yellow": {
     "spaceWeb": 5,
@@ -26,52 +26,52 @@
   },
   "darkorange": {
     "spaceWeb": 5,
-    "spaceTablet": 5,
-    "spaceMobile": 4
+    "spaceTablet": 4,
+    "spaceMobile": 3
   },
   "burgundy": {
     "spaceWeb": 6,
     "spaceTablet": 6,
-    "spaceMobile": 6
+    "spaceMobile": 5
   },
   "red": {
     "spaceWeb": 7,
     "spaceTablet": 7,
-    "spaceMobile": 7
+    "spaceMobile": 6
   },
   "mint": {
     "spaceWeb": 8,
     "spaceTablet": 8,
-    "spaceMobile": 8
+    "spaceMobile": 7
   },
   "purple": {
     "spaceWeb": 10,
     "spaceTablet": 10,
-    "spaceMobile": 10
+    "spaceMobile": 8
   },
   "darkblue": {
     "spaceWeb": 12,
-    "spaceTablet": 12,
-    "spaceMobile": 10
+    "spaceTablet": 10,
+    "spaceMobile": 8
   },
   "green": {
     "spaceWeb": 16,
-    "spaceTablet": 16,
-    "spaceMobile": 12
+    "spaceTablet": 12,
+    "spaceMobile": 10
   },
   "orange": {
     "spaceWeb": 20,
-    "spaceTablet": 20,
-    "spaceMobile": 16
+    "spaceTablet": 16,
+    "spaceMobile": 10
   },
   "pink": {
     "spaceWeb": 25,
-    "spaceTablet": 25,
-    "spaceMobile": 20
+    "spaceTablet": 20,
+    "spaceMobile": 16
   },
   "wine": {
     "spaceWeb": 30,
-    "spaceTablet": 30,
-    "spaceMobile": 25
+    "spaceTablet": 25,
+    "spaceMobile": 20
   }
 }
