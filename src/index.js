@@ -34,7 +34,8 @@ import {
     HintBody,
     VideoPlayer,
     SystemIcons,
-    ArrowAnchor
+    ArrowAnchor,
+    Autocomplete
 } from "./components";
 // import 'element-closest-polyfill';
 // import 'nodelist-foreach-polyfill';
@@ -101,6 +102,7 @@ let VueRtStyle = {
             Vue.component(GridRow.name, GridRow);
             Vue.component(GridColumn.name, GridColumn);
             Vue.component(Hint.name, Hint);
+            Vue.component(Autocomplete.name, Autocomplete);
             Vue.component(HintBody.name, HintBody);
             Vue.component(SystemIcons.name, SystemIcons);
             Vue.component(VideoPlayer.name, VideoPlayer);
@@ -175,7 +177,7 @@ export {
     VideoPlayer,
     ArrowAnchor,
     Image,
-
+    Autocomplete,
     // mixins
     fontColorPropsNames,
     fontColorProps,

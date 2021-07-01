@@ -90,6 +90,11 @@ export default {
     },
     addMask() {
       let field = this.$refs.input.$refs.input;
+      if(field.value.length == 11) {
+        if(+field.value.charAt(0) == 7 || +field.value.charAt(0) == 8) {
+          field.value = field.value.slice(1);
+        }
+      }
       if(this.nativeInput) {
         this.caretPositionBefore = field.selectionStart;
         this.backwards = this.prevVal.length > field.value.length

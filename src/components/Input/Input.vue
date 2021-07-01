@@ -293,11 +293,12 @@ export default {
                 if (eventName != 'input' && window[variables.globalSettingsKey].segment != 'b2c') { // for work with v-model
                   this.$refs.input.addEventListener(eventName, fn)
                 } else if (eventName != 'input') {
+                  const that = this;
                   this.$refs.input.addEventListener(
                       eventName,
-                      () => {
-                        if (this["_events"] && this["_events"][eventName] && this["_events"][eventName][0] && typeof this["_events"][eventName][0] === 'function') {
-                          this["_events"][eventName][0](arguments[0]);
+                      function () {
+                        if (that["_events"] && that["_events"][eventName] && that["_events"][eventName][0] && typeof that["_events"][eventName][0] === 'function') {
+                          that["_events"][eventName][0](arguments[0]);
                         }
                       }
                   );

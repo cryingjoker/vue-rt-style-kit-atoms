@@ -95,7 +95,7 @@ export default {
       if(this.isActive){
         SelectStore.removeActiveValue(this.selectName, this.value)
       }else{
-        SelectStore.setActiveValue(this.selectName, this.value)
+        SelectStore.setActiveValue(this.selectName, this.value, true)
         this.emitLeave()
       }
       if(this.$parent.autoComplete) {
