@@ -15,6 +15,7 @@ class SelectStoreClass extends StorePrototype {
     this.selectorsOpenStatus = {}
     this.focusIndex = {};
     this.autocompleteText = {}
+    this.selectorsClickValue = {}
   }
   
   setOpen(id) {
@@ -60,12 +61,14 @@ class SelectStoreClass extends StorePrototype {
   getSelectorType(id, type, multiple = false) {
     this.selectorsTypes[id] = {type:type,multiple:multiple};
   }
-  
+  getSelectorsClickValue(id){
+    return this.selectorsClickValue[id]
+  }
   getSelectorOptions(id) {
     return this.selectors[id]
   }
   
-  setActiveValue(id, value) {
+  setActiveValue(id, value, isOnClick = false) {
     if (Array.isArray(value)) {
       value.forEach(val => this.setActiveValue(id, val))
     } else {
@@ -75,6 +78,9 @@ class SelectStoreClass extends StorePrototype {
           this.setClose(id)
         }
         this.selectorsActiveValue[id].push(value)
+        if(isOnClick){
+          this.selectorsClickValue[id] = this.selectorsValue[id][value]
+        }
         if (this.selectorsTypes[id]?.multiple) {
           const values = Object.keys(this.selectorsValue[id]);
           this.selectorsActiveValue[id].sort((a,b)=>{
@@ -196,7 +202,7 @@ class SelectStoreClass extends StorePrototype {
   setSelectorOption(id, data) {
     this.createSelectorDefaultProps(id);
     if (!this.selectorsValue[id][data.value]) {
-      this.selectorsValue[id][data.value] = 1
+      this.selectorsValue[id][data.value] = data
       this.selectors[id].push(data)
       if (this.selectors[id].length == 1 && this.isFirstActive[id]) {
         this.setActiveValue(id, data.value)
