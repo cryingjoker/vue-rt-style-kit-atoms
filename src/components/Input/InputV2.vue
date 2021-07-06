@@ -186,10 +186,12 @@ export default {
       if (this["_events"]) {
         Object.keys(this["_events"]).map(eventName => {
           this["_events"][eventName].forEach((fn) => {
-            this.$refs.input.removeEventListener(
-                eventName,
-                fn
-            );
+            if(this.$refs.input && typeof this.$refs.input.removeEventListener == 'function') {
+              this.$refs.input.removeEventListener(
+                  eventName,
+                  fn
+              );
+            }
           })
         });
       }
