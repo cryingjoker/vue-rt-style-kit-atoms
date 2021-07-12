@@ -19,7 +19,6 @@ import {
     SelectV2,
     SelectV2Option,
     Switch,
-    SwitchV2,
     SwitchContainer,
     Textarea,
     TextareaStatic,
@@ -34,8 +33,7 @@ import {
     HintBody,
     VideoPlayer,
     SystemIcons,
-    ArrowAnchor,
-    Autocomplete
+    ArrowAnchor
 } from "./components";
 // import 'element-closest-polyfill';
 // import 'nodelist-foreach-polyfill';
@@ -90,7 +88,6 @@ let VueRtStyle = {
             Vue.component(SelectV2.name, SelectV2);
             Vue.component(SelectV2Option.name, SelectV2Option);
             Vue.component(Switch.name, Switch);
-            Vue.component(SwitchV2.name, SwitchV2);
             Vue.component(SwitchContainer.name, SwitchContainer);
             Vue.component(Spinner.name, Spinner);
             Vue.component(Textarea.name, Textarea);
@@ -102,7 +99,6 @@ let VueRtStyle = {
             Vue.component(GridRow.name, GridRow);
             Vue.component(GridColumn.name, GridColumn);
             Vue.component(Hint.name, Hint);
-            Vue.component(Autocomplete.name, Autocomplete);
             Vue.component(HintBody.name, HintBody);
             Vue.component(SystemIcons.name, SystemIcons);
             Vue.component(VideoPlayer.name, VideoPlayer);
@@ -126,7 +122,7 @@ VueRtStyle = {
  */
 const settingsKey = Global.globalSettingsKey;
 
-const version = "2021-07-06 16:15";
+const version = "2021-07-05 17:34";
 if (window && window.addEventListener) {
     if (settingsKey) {
         if (!window[settingsKey]) window[settingsKey] = {}
@@ -161,7 +157,6 @@ export {
     SelectV2,
     SelectV2Option,
     Switch,
-    SwitchV2,
     SwitchContainer,
     Textarea,
     TextareaStatic,
@@ -177,7 +172,7 @@ export {
     VideoPlayer,
     ArrowAnchor,
     Image,
-    Autocomplete,
+
     // mixins
     fontColorPropsNames,
     fontColorProps,
