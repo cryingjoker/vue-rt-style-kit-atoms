@@ -15,13 +15,15 @@ export class StorePrototype {
     }
 
     runWatchers = () => {
+      if(this.watchers) {
         Object.values(this.watchers).forEach((fnArray) => {
-            if (fnArray && fnArray.length > 0) {
-                fnArray.forEach(fn => {
-                    fn.call();
-                });
-            }
+          if (fnArray && fnArray.length > 0) {
+            fnArray.forEach(fn => {
+              fn.call();
+            });
+          }
         });
+      }
     }
 
     runWatchersById = (id) => {

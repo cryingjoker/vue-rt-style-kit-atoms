@@ -33,7 +33,8 @@ import {
     HintBody,
     VideoPlayer,
     SystemIcons,
-    ArrowAnchor
+    ArrowAnchor,
+    Line
 } from "./components";
 // import 'element-closest-polyfill';
 // import 'nodelist-foreach-polyfill';
@@ -103,6 +104,7 @@ let VueRtStyle = {
             Vue.component(SystemIcons.name, SystemIcons);
             Vue.component(VideoPlayer.name, VideoPlayer);
             Vue.component(ArrowAnchor.name, ArrowAnchor);
+            Vue.component(Line.name, Line);
 
             Vue.directive(LazySrcDirective.name, LazySrcDirective);
 
@@ -197,7 +199,7 @@ export {
     strokeColorProps,
     getStrokeClassByProps,
     getStrokeClass,
-
+    Line,
     backgroundColorPropsNames,
     backgroundColorProps,
     getBackgroundClassByProps,
@@ -209,6 +211,5 @@ export {
     deviceTypeStore,
     getVariable,
 }
-
 
 
