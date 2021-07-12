@@ -137,16 +137,12 @@ export default {
         }
       }
     },
-    // selectActiveValue(newVal, oldVal) {
-    //   if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
-    //     newVal = newVal.filter(i => i).map(i => (i + ''))
-    //     if (Object.keys(this.activeIndex) < 0) {
-    //       this.$emit('item-select', null)
-    //     } else {
-    //       this.$emit('item-select', this.json[parseInt(Object.keys(this.activeIndex))])
-    //     }
-    //   }
-    // },
+    selectActiveValue(newVal, oldVal) {
+      if (JSON.stringify(newVal) != JSON.stringify(oldVal) && oldVal)  {
+        this.$emit('select',newVal[0])
+        this.$emit('input',newVal[0])
+      }
+    },
     selectOpenStatus(newVal, oldVal) {
       if (newVal && !oldVal) {
         this.mouseenterFn();
