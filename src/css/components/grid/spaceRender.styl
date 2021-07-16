@@ -1,7 +1,50 @@
+$vertical-direction_adaptive_device = (0 2 3)
+$vertical-direction_index = (0 2 3)
 $direction_names = 'v' 'h' 't' 'b' 'l' 'r'
 $direction_props = (padding-top padding-bottom) (padding-left padding-right) (padding-top) (padding-bottom) (padding-left) (padding-right)
 $device_types = 'laptop-upper-limit' 'desktop-lower-limit'  'tablet-upper-limit'  'mobile-upper-limit'
 $device_types_code = '' 'lg' 'td' 'md'
+vertivalAdaptive = json('../../../space-adaptive-map.json',{ hash: true })
+
+
+renderProps(className, full_step,part_step,$direction)
+  .{className}
+    for $opt in $direction_props[$direction]
+      {$opt} : unit(full_step*20+part_step*4,'px')
+
+adaptiveSpaceRender(full_step,part_step, device_type)
+  className = ''
+  if device_type > 0
+    className += $device_types_code[$vertical-direction_adaptive_device[device_type]]+'-'
+  className+='a'
+  className+='-sp'
+  for i in 0 .. 2
+    locClassName = className+''
+    locClassName+='-'+$direction_names[$vertical-direction_index[i]]
+    locClassName+='-'+full_step
+    locClassName+='-'+part_step
+    media = false
+    if device_type>0
+      media = '(max-width: '+lookup($device_types[device_type])+')'
+    if media
+      @media media
+        renderProps(locClassName,full_step,part_step, $vertical-direction_index[i])
+    else
+      renderProps(locClassName,full_step,part_step, $vertical-direction_index[i])
+
+
+
+sendToAdaptiveSpaceRender(value, index)
+  full_step = parseInt(value/20)
+  part_step = value%20/4
+  adaptiveSpaceRender(full_step,part_step,index)
+
+for sp in vertivalAdaptive
+  line = vertivalAdaptive[sp]
+  sendToAdaptiveSpaceRender(parseInt(sp), 0)
+  for i in line
+    sendToAdaptiveSpaceRender(parseInt(line[i]), parseInt(i)+1)
+
 
 spaceRender()
   for $device_index in  0 .. 3

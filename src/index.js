@@ -33,7 +33,9 @@ import {
     HintBody,
     VideoPlayer,
     SystemIcons,
-    ArrowAnchor
+    ArrowAnchor,
+    CircleNumber,
+    Line
 } from "./components";
 // import 'element-closest-polyfill';
 // import 'nodelist-foreach-polyfill';
@@ -95,6 +97,7 @@ let VueRtStyle = {
             Vue.component(Annotation.name, Annotation);
             Vue.component(AnnotationV2.name, AnnotationV2);
             Vue.component(ColorLineText.name, ColorLineText);
+            Vue.component(Line.name, Line);
             Vue.component(Ussd.name, Ussd);
             Vue.component(GridRow.name, GridRow);
             Vue.component(GridColumn.name, GridColumn);
@@ -103,6 +106,7 @@ let VueRtStyle = {
             Vue.component(SystemIcons.name, SystemIcons);
             Vue.component(VideoPlayer.name, VideoPlayer);
             Vue.component(ArrowAnchor.name, ArrowAnchor);
+            Vue.component(CircleNumber.name, CircleNumber);
 
             Vue.directive(LazySrcDirective.name, LazySrcDirective);
 
@@ -122,7 +126,7 @@ VueRtStyle = {
  */
 const settingsKey = Global.globalSettingsKey;
 
-const version = "2021-07-05 17:34";
+const version = "2021-07-14 15:36";
 if (window && window.addEventListener) {
     if (settingsKey) {
         if (!window[settingsKey]) window[settingsKey] = {}
@@ -172,7 +176,8 @@ export {
     VideoPlayer,
     ArrowAnchor,
     Image,
-
+    CircleNumber,
+    
     // mixins
     fontColorPropsNames,
     fontColorProps,
@@ -203,11 +208,11 @@ export {
     getBackgroundClassByProps,
     getBackgroundClass,
     SystemIcons,
-    
+    Line,
     StorePrototype,
     viewportPositionStore,
     deviceTypeStore,
-    getVariable,
+    getVariable
 }
 
 
