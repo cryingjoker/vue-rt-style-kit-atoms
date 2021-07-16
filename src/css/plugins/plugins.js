@@ -2,6 +2,7 @@ import stylus from 'stylus'
 import path from 'path'
 import fs from 'fs'
 var utils = stylus.utils;
+
 export default function () {
   return function (style) {
     style.define('getCalc', function (a, b, c, d) {
@@ -39,18 +40,27 @@ export default function () {
           return new nodes.String(val);
       }
     });
+    
     style.define('readJsonKeys', function(jsonPath) {
       var filepath = path.join(jsonPath.filename, jsonPath.val)
       var content = fs.readFileSync(filepath)
       return Object.keys(JSON.parse(content.toString()));
     });
+    
     style.define('replace', function(a,b,c) {
       return a.val.replace(b.val, c.val)
     });
+    
     style.define('search', function(a,b) {
       if(!a.val)
         return - 1
       return a.val.search(b.val)
     });
+    
+    style.define('parseInt', function (a){
+      if(a.val){
+        return parseInt(a.val)
+      }
+    })
   }
 }

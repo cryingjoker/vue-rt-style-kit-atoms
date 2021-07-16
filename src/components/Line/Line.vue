@@ -5,7 +5,7 @@ import colors from '../../color.json'
 const componentsList = {};
 
 export default {
-  name: "rtLine",
+  name: "RtLine",
   props: {
     color: {
       type: String,

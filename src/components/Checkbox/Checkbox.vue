@@ -30,7 +30,7 @@
         default: false
       },
       value: {
-        type: String,
+        type: [String, Boolean],
         default: null
       },
       name: {
@@ -44,7 +44,12 @@
       uid: {
         type: String,
         default: ''
+      },
+      native:{
+        type: Boolean,
+        default: false
       }
+
     },
 
     data() {
@@ -92,12 +97,16 @@
       changeInput($event) {
         this.$emit("update:checked", this.isChecked);
         this.isChecked = this.$refs['input'].checked
+
         this.$emit("changecheckbox", {
           name: this.name,
           value: this.value,
           checked: this.isChecked,
           _uid: this._uid
         });
+        if(this.native){
+          this.$emit('input',this.isChecked)
+        }
 
         this.showWave();
       },
@@ -106,10 +115,12 @@
         if (this["_events"]) {
           Object.keys(this["_events"]).map(eventName => {
             this["_events"][eventName].forEach((fn) => {
-              this.$refs.input.addEventListener(
-                  eventName,
-                  fn
-              );
+              if(eventName != 'input' || !this.native) {
+                this.$refs.input.addEventListener(
+                    eventName,
+                    fn
+                );
+              }
             })
 
           });
@@ -166,7 +177,6 @@
                name={this.name}
                type="checkbox" class="checkbox-element" onChange={this.changeInput}/>
         <div class="checkbox-container">
-
           <svg class="checkbox-container__angle"
                width="12px"
                height="9px"
