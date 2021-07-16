@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "name": "rt-circle-number",
+      "property":"value",
+      "type": "Number, String",
+      "description":"Значение(числитель)",
+      "value" :"0",
+      "version": ""
+    },
+    {
+      "name": "rt-circle-number",
+      "property":"size",
+      "type": "Number, String",
+      "description":"Общее значение(знаменатель)",
+      "value" :"0",
+      "version": ""
+    },
+    {
+      "name": "rt-circle-number",
+      "property":":is-small",
+      "type": "Boolean",
+      "description":"флаг маленького круга",
+      "value" :"false",
+      "version": ""
+    }
+  ]
+}
