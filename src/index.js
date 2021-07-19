@@ -35,7 +35,8 @@ import {
     SystemIcons,
     ArrowAnchor,
     CircleNumber,
-    Line
+    Line,
+    Autocomplete
 } from "./components";
 // import 'element-closest-polyfill';
 // import 'nodelist-foreach-polyfill';
@@ -107,6 +108,7 @@ let VueRtStyle = {
             Vue.component(VideoPlayer.name, VideoPlayer);
             Vue.component(ArrowAnchor.name, ArrowAnchor);
             Vue.component(CircleNumber.name, CircleNumber);
+            Vue.component(Autocomplete.name, Autocomplete);
 
             Vue.directive(LazySrcDirective.name, LazySrcDirective);
 
@@ -126,7 +128,7 @@ VueRtStyle = {
  */
 const settingsKey = Global.globalSettingsKey;
 
-const version = "2021-07-16 11:38";
+const version = "2021-07-19 16:00";
 if (window && window.addEventListener) {
     if (settingsKey) {
         if (!window[settingsKey]) window[settingsKey] = {}
@@ -212,7 +214,8 @@ export {
     StorePrototype,
     viewportPositionStore,
     deviceTypeStore,
-    getVariable
+    getVariable,
+    Autocomplete
 }
 
 
