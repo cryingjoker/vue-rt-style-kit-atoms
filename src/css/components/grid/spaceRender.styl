@@ -15,9 +15,9 @@ renderProps(className, part_step,$direction)
 adaptiveSpaceRender(name,part_step, device_type)
   className = ''
   className+='sp'
-  for i in 0 .. 2
+  for i in 0 .. 6
     locClassName = className+''
-    locClassName+='-'+$direction_names[$vertical-direction_index[i]]
+    locClassName+='-'+$direction_names[i]
     locClassName+='-x'+name
     media = false
     if device_type>0
@@ -25,9 +25,9 @@ adaptiveSpaceRender(name,part_step, device_type)
 
     if media
       @media media
-        renderProps(locClassName,part_step, $vertical-direction_index[i])
+        renderProps(locClassName,part_step, i)
     else
-      renderProps(locClassName,part_step, $vertical-direction_index[i])
+      renderProps(locClassName,part_step, i)
 
 
 
