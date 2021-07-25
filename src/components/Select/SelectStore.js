@@ -183,6 +183,7 @@ class SelectStoreClass extends StorePrototype {
     if(json.length == 0) {
       this.selectors[id] = []
     } else {
+      SelectStore.clear(id)
       json.forEach((obj)=>{
         this.setSelectorOption(id,obj)
       })
