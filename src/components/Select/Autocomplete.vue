@@ -493,14 +493,6 @@ export default {
     }
   },
   render(h) {
-    const errorMessage = () => {
-      if (this.hasError) {
-        if (this.errorMessage.length > 0) {
-          return <p class="select-v2__error-message rt-font-label">{this.errorMessage}</p>
-        }
-      }
-    }
-
     return <div class={this.selectClasses} ref="select" onMouseenter={this.mouseenterFn}
                 onMouseleave={this.mouseleaveFn}>
       <div class="select-v2__container">
@@ -508,7 +500,7 @@ export default {
                   disabled={this.disabled}
                   placeholder={this.label}
                   ref="input"
-                  value={this.clickValue?.label || this.inputLocalValue}
+                  value={this.selectActiveLabels[0] || this.inputLocalValue}
                   onCustom={this.checkMatch}
                   onClear={this.clearValue}
                   onChange={this.onChange}
@@ -520,7 +512,6 @@ export default {
                   onKeydown={this.onKeydown}
                   onKeyup={this.onKeyup}/>
         {this.renderSelectList}
-        {errorMessage()}
       </div>
     </div>
   }
