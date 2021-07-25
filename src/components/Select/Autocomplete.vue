@@ -124,7 +124,6 @@ export default {
         if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
           this.getSelectType();
           this.getSelectOptions()
-          // this.getActiveValue();
           this.setActiveValue();
           if (this.$refs.input) {
             this.$refs.input.$el.querySelector('input').focus()
@@ -161,7 +160,6 @@ export default {
         }
       }
     },
-
     selectOpenStatus(newVal, oldVal) {
       if (newVal && !oldVal) {
         this.mouseenterFn();
@@ -300,7 +298,7 @@ export default {
     getSelectorsClickValue(){
       this.clickValue = SelectStore.getSelectorsClickValue(this.name)
     },
-    onInputAutoField(e, a) {
+    onInputAutoField(e) {
       if (this.isFocus || this.mouseenter) {
         if (this.selectActiveLabels[0]?.toLowerCase() != this.$refs.input?.localValue?.toLowerCase() && this.selectOptions?.length > 0 && SelectStore.getInputText(this.name)?.length > 2) {
           SelectStore.setOpen(this.name)
@@ -313,7 +311,6 @@ export default {
       this.$emit('change', ...arguments)
     },
     setActiveValue() {
-
       if (this.setFirstActive) {
         if (this.getJson[0]?.value) {
           SelectStore.setActiveValue(this.name, this.getJson[0]?.value);
@@ -409,8 +406,6 @@ export default {
         }
       }
     },
-
-
     mouseenterFn() {
       this.mouseenter = true
     },
@@ -462,7 +457,6 @@ export default {
       SelectStore.setActiveValue(this.name, '')
       SelectStore.removeAllActiveValue(this.selectName)
       this.checkMatch('');
-
     },
     noteScroll() {
       if (this.$refs.inner.scrollTop != 0) {
@@ -481,9 +475,7 @@ export default {
       this.$emit('focus', e)
     },
     onBlur(e) {
-
       this.$emit('blur', e)
-
     },
     onBlurAuto(val, event) {
       this.isFocus = false
@@ -493,7 +485,6 @@ export default {
         }
       }, 300)
     },
-
     onKeydown(e) {
       this.$emit('keydown', e)
     },
@@ -502,36 +493,27 @@ export default {
     }
   },
   render(h) {
-    const errorMessage = () => {
-      if (this.hasError) {
-        if (this.errorMessage.length > 0) {
-          return <p class="select-v2__error-message rt-font-label">{this.errorMessage}</p>
-        }
-      }
-    }
-
-      return <div class={this.selectClasses} ref="select" onMouseenter={this.mouseenterFn}
-                  onMouseleave={this.mouseleaveFn}>
-        <div class="select-v2__container">
-          <rt-input version={2}
-                    disabled={this.disabled}
-                    placeholder={this.label}
-                    ref="input"
-                    value={this.selectActiveLabels[0] || this.inputLocalValue}
-                    onCustom={this.checkMatch}
-                    onClear={this.clearValue}
-                    onChange={this.onChange}
-                    onInput={this.onInputAutoField}
-                    hasError={this.hasError}
-                    errorMessage={this.errorMessage}
-                    onFocus={this.onFocus}
-                    onBlur={this.onBlurAuto}
-                    onKeydown={this.onKeydown}
-                    onKeyup={this.onKeyup}/>
-          {this.renderSelectList}
-          {errorMessage()}
-        </div>
+    return <div class={this.selectClasses} ref="select" onMouseenter={this.mouseenterFn}
+                onMouseleave={this.mouseleaveFn}>
+      <div class="select-v2__container">
+        <rt-input version={2}
+                  disabled={this.disabled}
+                  placeholder={this.label}
+                  ref="input"
+                  value={this.selectActiveLabels[0] || this.inputLocalValue}
+                  onCustom={this.checkMatch}
+                  onClear={this.clearValue}
+                  onChange={this.onChange}
+                  onInput={this.onInputAutoField}
+                  hasError={this.hasError}
+                  errorMessage={this.errorMessage}
+                  onFocus={this.onFocus}
+                  onBlur={this.onBlurAuto}
+                  onKeydown={this.onKeydown}
+                  onKeyup={this.onKeyup}/>
+        {this.renderSelectList}
       </div>
+    </div>
   }
 };
 </script>
