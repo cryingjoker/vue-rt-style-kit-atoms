@@ -1,0 +1,34 @@
+spPrefix = '.sp'
+spOnePoint = pixel-point
+spNames = json('../../colorized.json', { hash: true })
+
+// Миксина для вертикального отступа, нулевое значение игнорируется
+setVSpace(top=0, bottom=0)
+  if top
+    padding-top unit(top, 'px')
+  if bottom
+    padding-bottom unit(bottom, 'px')
+
+// Отрисовщик отступов со значением текущей точки слома
+renderVSpace(bpKeyValue)
+  for spaceName, value in spNames
+    currSpaceVal = value[bpKeyValue] * spOnePoint
+    // по-вертикале
+    .sp-v-{spaceName}
+      setVSpace(currSpaceVal, currSpaceVal)
+    // снизу
+    .sp-b-{spaceName}
+      setVSpace(0, currSpaceVal)
+    // сверху
+    .sp-t-{spaceName}
+      setVSpace(currSpaceVal)
+
+
+@media (max-width mobile-upper-limit)
+  renderVSpace('spaceMobile')
+
+@media (min-width tablet-lower-limit) and (max-width tablet-upper-limit)
+  renderVSpace('spaceTablet')
+
+@media (min-width laptop-lower-limit)
+  renderVSpace('spaceWeb')
