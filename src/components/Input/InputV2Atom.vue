@@ -274,11 +274,11 @@ export default {
             </svg>
           </template>
         }
-        if(this.localValue && !this.$slots.icon) {
-          return <template slot="icon">
-            <rt-system-icons name="close large"/>
-          </template>
-        }
+        // if(this.localValue && !this.$slots.icon) {
+        //   return <template slot="icon">
+        //     <rt-system-icons name="close large"/>
+        //   </template>
+        // }
       }
       return this.$slots.icon?.map((icon) => {
         return <template slot="icon">{icon}</template>
