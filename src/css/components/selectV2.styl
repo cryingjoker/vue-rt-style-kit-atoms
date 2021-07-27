@@ -81,12 +81,23 @@
   transition-duration 0.25s
   transition-property transform, opacity, top, line-height
   transform-origin left bottom
+  white-space nowrap
+  overflow hidden
+  width 100%
+  &:after
+    position absolute
+    content ''
+    height 100%
+    width 60px
+    background linear-gradient(to left, b2c-white 0%, b2c-white 50%, rgba(b2c-white, 0) 100%)
+    right 0
 
 .select-v2--is-open .select-v2-label,
 .select-v2-label--up
   transform scale(0.75) //translateY(-24px)
   line-height 21px
   top -3px
+  width 133.33%
 
 .select-v2--is-open .select-v2-label
   color b2c-purple

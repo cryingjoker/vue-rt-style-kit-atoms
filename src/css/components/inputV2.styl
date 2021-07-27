@@ -92,13 +92,23 @@
 .rt-input-v2-placeholder
   position absolute
   left 0
-  bottom 12px
+  bottom 10px
   font-size 16px
   color main-color07
   transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
   transition-duration 0.25s
   transition-property transform, opacity
   transform-origin left bottom
+  white-space nowrap
+  overflow hidden
+  width 100%
+  &:after
+    position absolute
+    content ''
+    height 100%
+    width 60px
+    background linear-gradient(to left, b2c-white 0%, b2c-white 50%, rgba(b2c-white, 0) 100%)
+    right 0
   .rt-dark-theme &
     color b2c-white07
 
@@ -112,13 +122,12 @@
 .rt-input-v2__input:focus+.rt-input-v2-placeholder+.rt-input-v2__line:after
   width: 100%
 
-.rt-input-v2__input:focus+.rt-input-v2-placeholder
-  transform: scale(0.75) translateY(-18px);
-  opacity: 0.8
-
+.rt-input-v2__input:focus+.rt-input-v2-placeholder,
 .rt-input-v2__input:not(:placeholder-shown)+.rt-input-v2-placeholder
-  transform: scale(0.75) translateY(-18px);
+  transform: scale(0.75) translateY(-20px);
   opacity: 0.8
+  width 133.33%
+
 .rt-input-v2__input:focus+.rt-input-v2-placeholder
   color: b2c-purple
   opacity: 1
