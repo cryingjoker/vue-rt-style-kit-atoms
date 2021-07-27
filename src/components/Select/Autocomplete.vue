@@ -150,13 +150,7 @@ export default {
           this.getSelectType();
           this.getSelectOptions()
           this.$refs.input.$el.querySelector('input').focus()
-          this.$nextTick(() => {
-            this.$refs.input.$el.querySelector('input').focus()
-            this.$nextTick(() => {
-              this.$refs.input.$el.querySelector('input').focus()
-            })
-          })
-
+          this.onInputAutoField();
         }
       }
     },
@@ -298,7 +292,7 @@ export default {
     getSelectorsClickValue(){
       this.clickValue = SelectStore.getSelectorsClickValue(this.name)
     },
-    onInputAutoField(e) {
+    onInputAutoField() {
       if (this.isFocus || this.mouseenter) {
         if (this.selectActiveLabels[0]?.toLowerCase() != this.$refs.input?.localValue?.toLowerCase() && this.selectOptions?.length > 0 && SelectStore.getInputText(this.name)?.length > 2) {
           SelectStore.setOpen(this.name)
