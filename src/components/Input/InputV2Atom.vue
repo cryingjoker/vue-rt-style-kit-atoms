@@ -231,23 +231,10 @@ export default {
   render() {
     const icons = () => {
       if(this.$slots.informer){
-        const informerBody = () => {
-          if(this.showInformer) {
-            return <div class="rt-input-v2__informer-body">
-              <div class="rt-input-v2__informer-close">
-                <rt-system-icons name="close small" onClick={this.toggleInformer}/>
-              </div>
-              <p class="rt-input-v2__informer-text rt-font-label">{this.$slots.informer}</p>
-            </div>
-          } else {
-            return null
-          }
-        }
         return <template slot="icon">
-          <div class="">
-            <rt-system-icons name="help stroke" onClick={this.toggleInformer}/>
-            {informerBody()}
-          </div>
+          <rt-popover vertical="top">
+            <template slot="content">{this.$slots.informer}</template>
+          </rt-popover>
         </template>
       }
       if(this.needVerification) {
