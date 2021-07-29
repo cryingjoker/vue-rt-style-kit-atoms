@@ -194,11 +194,11 @@ export default {
       this.$emit('phone', this.localValue)
     },
     clearInput() {
-      // if(!this.$parent.filled) {
+      if(!this.$parent.filled) {
         this.$refs.input.value = ''
         this.changeValue()
         this.$emit('clear')
-      // }
+      }
     },
     onBlur(e){
       this.$emit('blur',this.localValue,e)
