@@ -233,7 +233,9 @@ export default {
       if(this.$slots.informer){
         return <template slot="icon">
           <rt-popover vertical="top">
-            <template slot="content">{this.$slots.informer}</template>
+            <template slot="content">
+              <p class="rt-font-label color-main07">{this.$slots.informer}</p>
+            </template>
           </rt-popover>
         </template>
       }
