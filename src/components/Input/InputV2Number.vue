@@ -198,8 +198,6 @@ export default {
             }
           },
       ))
-
-
       return createElement(
           'template',
           {slot: 'icon'},

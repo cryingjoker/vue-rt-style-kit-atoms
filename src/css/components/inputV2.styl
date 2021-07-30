@@ -1,6 +1,17 @@
 .rt-input-v2
   position relative
   width 100%
+  &:after
+    position absolute
+    content ''
+    height 48px
+    width 40px
+    background linear-gradient(to left, b2c-white 0%, b2c-white 50%, rgba(b2c-white, 0) 100%)
+    top 0
+    right 0
+    .rt-dark-theme &
+      background linear-gradient(to left, main-color 0%, main-color 50%, rgba(main-color, 0) 100%)
+
   .rt-popover-icon-button
     opacity 1
 
@@ -10,7 +21,7 @@
 .rt-input-v2__input
   border none
   outline none
-  position: relative;
+  position relative
   display: block
   height: 24px
   line-height: 24px
@@ -145,6 +156,7 @@
 .rt-input-v2-icon-item
   cursor pointer
   display flex
+  z-index 1
   .rt-sys-icon
     opacity: 0.5
     transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
@@ -156,8 +168,6 @@
         opacity: 1
   &+&
     margin-left 12px
-
-//.rt-input-v2__input[type="tel"] + .rt-input-v2-placeholder
 
 .rt-input-v2-clear
   cursor pointer
