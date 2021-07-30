@@ -138,7 +138,9 @@ export default {
     value(newValue, oldValue) {
       if (newValue != oldValue && newValue != this.localValue) {
         this.localValue = newValue;
-        this.$emit('phone', newValue)
+        if(newValue != '') {
+          this.$emit('phone', newValue)
+        }
       }
     },
     disabled(newVal) {
