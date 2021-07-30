@@ -84,13 +84,13 @@
   white-space nowrap
   overflow hidden
   width 100%
-  &:after
-    position absolute
-    content ''
-    height 100%
-    width 60px
-    background linear-gradient(to left, b2c-white 0%, b2c-white 50%, rgba(b2c-white, 0) 100%)
-    right 0
+  //&:after
+  //  position absolute
+  //  content ''
+  //  height 100%
+  //  width 60px
+  //  background linear-gradient(to left, b2c-white 0%, b2c-white 50%, rgba(b2c-white, 0) 100%)
+  //  right 0
 
 .select-v2--is-open .select-v2-label,
 .select-v2-label--up
@@ -234,8 +234,8 @@
 .select-v2--bright
   .select-v2-label
     color b2c-white07
-    &:after
-      background linear-gradient(to left, main-color 0%, main-color 50%, rgba(main-color, 0) 100%)
+    //&:after
+    //  background linear-gradient(to left, main-color 0%, main-color 50%, rgba(main-color, 0) 100%)
   .select-v2--is-open .select-v2-label
     color b2c-purple-night
   .select-v2-list
@@ -252,6 +252,8 @@
     border-bottom-color b2c-white01
     &:after
       background-color b2c-purple-night
+  .select-v2:hover .select-v2__inner:before
+    background-color b2c-white03
   .select-v2-tag
     background-color b2c-white01
     color b2c-white09

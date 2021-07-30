@@ -138,7 +138,9 @@ export default {
     value(newValue, oldValue) {
       if (newValue != oldValue && newValue != this.localValue) {
         this.localValue = newValue;
-        this.$emit('phone', newValue)
+        if(newValue != '') {
+          this.$emit('phone', newValue)
+        }
       }
     },
     disabled(newVal) {
@@ -194,11 +196,11 @@ export default {
       this.$emit('phone', this.localValue)
     },
     clearInput() {
-      // if(!this.$parent.filled) {
+      if(!this.$parent.filled) {
         this.$refs.input.value = ''
         this.changeValue()
         this.$emit('clear')
-      // }
+      }
     },
     onBlur(e){
       this.$emit('blur',this.localValue,e)
@@ -231,23 +233,12 @@ export default {
   render() {
     const icons = () => {
       if(this.$slots.informer){
-        const informerBody = () => {
-          if(this.showInformer) {
-            return <div class="rt-input-v2__informer-body">
-              <div class="rt-input-v2__informer-close">
-                <rt-system-icons name="close small" onClick={this.toggleInformer}/>
-              </div>
-              <p class="rt-input-v2__informer-text rt-font-label">{this.$slots.informer}</p>
-            </div>
-          } else {
-            return null
-          }
-        }
         return <template slot="icon">
-          <div class="">
-            <rt-system-icons name="help stroke" onClick={this.toggleInformer}/>
-            {informerBody()}
-          </div>
+          <rt-popover vertical="top">
+            <template slot="content">
+              <p class="rt-font-label color-main07">{this.$slots.informer}</p>
+            </template>
+          </rt-popover>
         </template>
       }
       if(this.needVerification) {
