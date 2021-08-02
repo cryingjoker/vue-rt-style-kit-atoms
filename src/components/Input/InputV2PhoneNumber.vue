@@ -170,6 +170,11 @@ export default {
       this.$emit('focus', e)
     },
     onInput(e) {
+      if(!e.match(/\d/)) {
+        this.$nextTick(() => {
+          this.$refs.input._data.localValue = ''
+        })
+      }
       this.nativeInput = true;
       this.$emit('input', e)
     },
