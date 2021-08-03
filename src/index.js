@@ -100,11 +100,11 @@ let VueRtStyle = {
             Vue.component(GridRow.name, GridRow);
             Vue.component(GridColumn.name, GridColumn);
             Vue.component(Hint.name, Hint);
-            Vue.component(Autocomplete.name, Autocomplete);
             Vue.component(HintBody.name, HintBody);
             Vue.component(SystemIcons.name, SystemIcons);
             Vue.component(VideoPlayer.name, VideoPlayer);
             Vue.component(ArrowAnchor.name, ArrowAnchor);
+            Vue.component(Autocomplete.name, Autocomplete);
 
             Vue.directive(LazySrcDirective.name, LazySrcDirective);
 
@@ -124,8 +124,8 @@ VueRtStyle = {
  */
 const settingsKey = Global.globalSettingsKey;
 
-const version = Project.version;
-if (typeof window !== 'undefined') {
+const version = "2021-08-03 15:58";
+if (window && window.addEventListener) {
     if (settingsKey) {
         if (!window[settingsKey]) window[settingsKey] = {}
         if (!window[settingsKey].segment) window[settingsKey].segment = Global.defaultSegment
@@ -204,11 +204,11 @@ export {
     backgroundColorProps,
     getBackgroundClassByProps,
     getBackgroundClass,
-
+    SystemIcons,
     StorePrototype,
     viewportPositionStore,
     deviceTypeStore,
-    getVariable,
+    getVariable
 }
 
 
