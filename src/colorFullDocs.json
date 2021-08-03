@@ -5,6 +5,11 @@
     "value": "#7700FF"
   },
   {
+    "code_variable_name": "b2c-purple-night",
+    "label": "",
+    "value": "#9466FF"
+  },
+  {
     "code_variable_name": "b2c-purple-button-hover",
     "label": "Rostelecom Purple Hover",
     "value": "#5B09C0"
@@ -387,7 +392,12 @@
   {
     "code_variable_name": "error-color",
     "label": "",
-    "value": "#D30606"
+    "value": "#eb3728"
+  },
+  {
+    "code_variable_name": "error-color-night",
+    "label": "",
+    "value": "#FF4747"
   },
   {
     "code_variable_name": "box-shadow-background",

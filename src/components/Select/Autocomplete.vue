@@ -5,11 +5,11 @@ import SelectV2VirtualOption from './SelectV2VirtualOption.vue'
 const components = {};
 components[SelectV2VirtualOption.name] = SelectV2VirtualOption
 export default {
-  name: "RtSelectV2",
+  name: "RtAutocomplete",
   components: components,
   props: {
     json: {
-      type: Array,
+      type: String | Array,
       default: () => {
         return []
       }
@@ -49,6 +49,10 @@ export default {
     dropdownMinWidth: {
       type: [String, Number],
       default: null
+    },
+    autoComplete: {
+      type: Boolean,
+      default: false
     },
     multiple: {
       type: Boolean,
@@ -100,17 +104,26 @@ export default {
     tempIndex: null,
     isFocus: false,
     mouseenter: false,
-    stopOpenAuto: false
+    stopOpenAuto: false,
+    clickValue: ''
   }),
   watch: {
+    clickValue:{
+      deep: true,
+      handler(newVal, oldVal){
+        const a = newVal ? JSON.stringify(newVal) : '';
+        const b = oldVal ? JSON.stringify(oldVal) : ''
+        if(a != b){
+          this.$emit('item-select', newVal)
+        }
+      }
+    },
     value: {
       deep: true,
       handler(newVal, oldVal) {
         if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
-          // SelectStore.setActiveValue(this.name, newVal)
           this.getSelectType();
           this.getSelectOptions()
-          // this.getActiveValue();
           this.setActiveValue();
           if (this.$refs.input) {
             this.$refs.input.$el.querySelector('input').focus()
@@ -121,26 +134,24 @@ export default {
     json: {
       deep: true,
       handler(newVal, oldVal) {
-        if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
-          // SelectStore.clear(this.name);
-          SelectStore.addJson(this.name, newVal)
+        let a = newVal
+        let b = oldVal
+        if(typeof a != 'string'){
+          a = JSON.stringify(a)
+        }
+        if(typeof b != 'string'){
+          b = JSON.stringify(b)
+        }
+        if (a != b) {
+          if(typeof a == 'string'){
+            a = JSON.parse(a)
+          }
+          SelectStore.addJson(this.name, a)
           this.getSelectType();
           this.getSelectOptions()
           this.$refs.input.$el.querySelector('input').focus()
-          this.$nextTick(() => {
-            this.$refs.input.$el.querySelector('input').focus()
-            this.$nextTick(() => {
-              this.$refs.input.$el.querySelector('input').focus()
-            })
-          })
-
+          this.onInputAutoField();
         }
-      }
-    },
-    selectActiveValue(newVal, oldVal) {
-      if (JSON.stringify(newVal) != JSON.stringify(oldVal) && oldVal)  {
-        this.$emit('select',newVal[0])
-        this.$emit('input',newVal[0])
       }
     },
     selectOpenStatus(newVal, oldVal) {
@@ -179,8 +190,6 @@ export default {
       </div>
     },
     renderSelectOption() {
-
-
       if (!this.selectOpenStatus) {
         return null
       }
@@ -248,8 +257,10 @@ export default {
     }
   },
   mounted() {
-    if (Object.keys(this.json)?.length > 0) {
-      SelectStore.addJson(this.name, this.json)
+    let json = this.getJson();
+
+    if (Object.keys(json)?.length > 0) {
+      SelectStore.addJson(this.name, json)
     }
     this.setDefaultValue()
     SelectStore.setSelectorType(this.name, this.type);
@@ -257,6 +268,7 @@ export default {
     SelectStore.addWatcher(this.name, this.getActiveValue)
     SelectStore.addWatcher(this.name, this.getSelectType)
     SelectStore.addWatcher(this.name, this.getSelectOpenStatus)
+    SelectStore.addWatcher(this.name, this.getSelectorsClickValue)
     this.setActiveValue();
     this.getSelectType();
     this.getSelectOptions()
@@ -270,7 +282,17 @@ export default {
     SelectStore.clear(this.name)
   },
   methods: {
-    onInputAutoField(e, a) {
+    getJson(){
+      let json = this.json;
+      if(typeof json == 'string'){
+        json = JSON.parse(json)
+      }
+      return json
+    },
+    getSelectorsClickValue(){
+      this.clickValue = SelectStore.getSelectorsClickValue(this.name)
+    },
+    onInputAutoField() {
       if (this.isFocus || this.mouseenter) {
         if (this.selectActiveLabels[0]?.toLowerCase() != this.$refs.input?.localValue?.toLowerCase() && this.selectOptions?.length > 0 && SelectStore.getInputText(this.name)?.length > 2) {
           SelectStore.setOpen(this.name)
@@ -283,10 +305,9 @@ export default {
       this.$emit('change', ...arguments)
     },
     setActiveValue() {
-
       if (this.setFirstActive) {
-        if (this.json[0]?.value) {
-          SelectStore.setActiveValue(this.name, this.json[0]?.value);
+        if (this.getJson[0]?.value) {
+          SelectStore.setActiveValue(this.name, this.getJson[0]?.value);
         } else {
           SelectStore.setActiveValue(this.name, this.$children[0].value);
         }
@@ -307,19 +328,12 @@ export default {
       }
     },
     getActiveValue() {
-      let selectActiveValue = SelectStore.getActiveValue(this.name)
       let selectActiveLabels = SelectStore.getActiveLabels(this.name)
-      if (selectActiveValue && JSON.stringify(this.selectActiveValue) != JSON.stringify(selectActiveValue)) {
-        this.selectActiveValue = [...selectActiveValue];
-      }
-
       if (selectActiveLabels) {
         this.selectActiveLabels = [...selectActiveLabels];
       }
-
       this.activeIndex = SelectStore.getActiveIndex(this.name)
       this.focusIndex = SelectStore.getFocusIndex(this.name)
-
     },
     getSelectType() {
       this.selectorType = SelectStore.getSelectorType(this.name, this.type, this.multiple);
@@ -386,7 +400,6 @@ export default {
         }
       }
     },
-
     mouseenterFn() {
       this.mouseenter = true
     },
@@ -431,7 +444,6 @@ export default {
       SelectStore.setInputText(this.name, e)
       this.selectActiveLabels[0] = ''
       this.inputLocalValue = e;
-
       this.$emit('input', e);
       SelectStore.removeAllActiveValue(this.selectName)
     },
@@ -439,7 +451,7 @@ export default {
       SelectStore.setActiveValue(this.name, '')
       SelectStore.removeAllActiveValue(this.selectName)
       this.checkMatch('');
-
+      this.$emit('clear');
     },
     noteScroll() {
       if (this.$refs.inner.scrollTop != 0) {
@@ -458,9 +470,7 @@ export default {
       this.$emit('focus', e)
     },
     onBlur(e) {
-
       this.$emit('blur', e)
-
     },
     onBlurAuto(val, event) {
       this.isFocus = false
@@ -470,7 +480,6 @@ export default {
         }
       }, 300)
     },
-
     onKeydown(e) {
       this.$emit('keydown', e)
     },
@@ -479,76 +488,24 @@ export default {
     }
   },
   render(h) {
-    const renderValue = () => {
-      if (this.selectActiveLabels.length < 2 && !this.multiple) {
-        return <p class="select-v2-value">{this.selectActiveLabels[0]}</p>
-      }
-      const valueItem = this.selectActiveLabels.map((item, index) => {
-        const click = (e) => {
-          SelectStore.removeActiveValue(this.name, this.selectActiveValue[index])
-          e.preventDefault();
-          e.stopPropagation();
-        }
-        const preventClick = (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-        return <span class="select-v2-tag" onClick={preventClick}>
-          <span>{item}</span>
-          <span class="d-flex">
-            <rt-system-icons class="select-v2-tag__remove" name="close small" ref={'selectTag-' + index}
-                             onClick={click}></rt-system-icons>
-          </span>
-        </span>
-      })
-      return <p class="select-v2-value d-flex" ref="valueWrapper">{valueItem}</p>
-    }
-    const errorMessage = () => {
-      if (this.hasError) {
-        if (this.errorMessage.length > 0) {
-          return <p class="select-v2__error-message rt-font-label">{this.errorMessage}</p>
-        }
-      }
-    }
-    if (this.autoComplete) {
-      return <div class={this.selectClasses} ref="select" onMouseenter={this.mouseenterFn}
-                  onMouseleave={this.mouseleaveFn}>
-        <div class="select-v2__container">
-          <rt-input version={2}
-                    disabled={this.disabled}
-                    placeholder={this.label}
-                    ref="input"
-                    onCustom={this.checkMatch}
-                    value={this.selectActiveLabels[0] || this.inputLocalValue}
-                    onClear={this.clearValue}
-                    onChange={this.onChange}
-                    onInput={this.onInputAutoField}
-                    hasError={this.hasError}
-                    errorMessage={this.errorMessage}
-                    onFocus={this.onFocus}
-                    onBlur={this.onBlurAuto}
-                    onKeydown={this.onKeydown}
-                    onKeyup={this.onKeyup}/>
-          {this.renderSelectList}
-        </div>
-      </div>
-
-    }
     return <div class={this.selectClasses} ref="select" onMouseenter={this.mouseenterFn}
                 onMouseleave={this.mouseleaveFn}>
       <div class="select-v2__container">
-        <button type="button"
-                disabled={this.disabled}
-                class="select-v2__inner"
-                onClick={this.toggleOpen}
-                onFocus={this.onFocus}
-                onBlur={this.onBlur}>
-          {renderValue()}
-          {this.renderLabel}
-          {this.$slots.default}
-          <rt-system-icons class="select-v2-arrow" name="chevron down"></rt-system-icons>
-        </button>
-        {errorMessage()}
+        <rt-input version={2}
+                  disabled={this.disabled}
+                  placeholder={this.label}
+                  ref="input"
+                  value={this.selectActiveLabels[0] || this.inputLocalValue}
+                  onCustom={this.checkMatch}
+                  onClear={this.clearValue}
+                  onChange={this.onChange}
+                  onInput={this.onInputAutoField}
+                  hasError={this.hasError}
+                  errorMessage={this.errorMessage}
+                  onFocus={this.onFocus}
+                  onBlur={this.onBlurAuto}
+                  onKeydown={this.onKeydown}
+                  onKeyup={this.onKeyup}/>
         {this.renderSelectList}
       </div>
     </div>

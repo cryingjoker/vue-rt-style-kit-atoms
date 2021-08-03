@@ -1,0 +1,314 @@
+.select-v2
+  width: 100%
+  position relative
+  &__container
+    position relative
+  //  &:after
+  //    position absolute
+  //    content ''
+  //    top 0
+  //    height 46px
+  //    right 0
+  //    width 54px
+  //    background linear-gradient(to left, b2c-white 0%, b2c-white 50%, rgba(b2c-white, 0) 100%)
+  //    pointer-events none
+  .rt-input-v2-wrapper
+    width 100%
+  .rt-input-v2-icon
+    z-index 9
+  .rt-input-v2__line
+    bottom 0
+
+.select-v2__inner
+  min-height 48px
+  height auto
+  position relative
+  border-bottom 2px solid main-color01
+  display flex
+  align-items flex-end
+  width 100%
+  text-align left
+  &:before,
+  &:after
+    content ''
+    position: absolute
+    bottom: -2px
+    height: 2px
+    opacity: 1
+    width: 0
+    display: block
+    left: 0
+    right: 0
+    transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
+    transition-duration 0.25s
+    transition-property opacity, background-color, width
+  &:before
+    background-color: main-color03
+    z-index 1
+    .select-v2:hover &
+      width 100%
+  &:after
+    background-color: b2c-purple
+    z-index 2
+    .rt-dark-theme &,
+    .select-v2--bright &
+      background-color b2c-purple-night
+    .select-v2--is-open &
+      width 100%
+
+.select-v2-arrow.rt-sys-icon
+  position: absolute
+  right: 0
+  top 10px
+  opacity: 0.5
+  transform rotate(0deg)
+  transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
+  transition-duration 0.25s
+  transition-property opacity, transform, fill
+  z-index 9
+  .select-v2--is-open &
+    opacity: 1
+    transform rotate(180deg)
+
+.select-v2-label
+  position: absolute;
+  left: 0
+  top 12px
+  font-size 16px
+  line-height 24px
+  transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
+  color main-color07
+  transition-duration 0.25s
+  transition-property transform, opacity, top, line-height
+  transform-origin left bottom
+  white-space nowrap
+  overflow hidden
+  width 100%
+  //&:after
+  //  position absolute
+  //  content ''
+  //  height 100%
+  //  width 60px
+  //  background linear-gradient(to left, b2c-white 0%, b2c-white 50%, rgba(b2c-white, 0) 100%)
+  //  right 0
+
+.select-v2--is-open .select-v2-label,
+.select-v2-label--up
+  transform scale(0.75) //translateY(-24px)
+  line-height 21px
+  top -3px
+  width 133.33%
+
+.select-v2--is-open .select-v2-label
+  color b2c-purple
+  .rt-dark-theme &
+    color b2c-purple-night
+
+.select-v2-label--up
+  color main-color05
+.select-v2--bright.select-v2--is-open .select-v2-label
+  color b2c-purple-night
+.select-v2-value
+  font-size 16px
+  line-height 24px
+  margin-bottom 4px
+  max-width calc(100% - 28px)
+  overflow hidden
+  white-space nowrap
+  flex-wrap wrap
+  padding-top 18px
+  max-height 96px
+  box-sizing content-box
+  &--multiline
+    flex-wrap wrap
+
+.select-v2--multiline
+  .select-v2-value
+    padding-top 20px
+    margin-bottom 2px
+
+.select-v2-list
+  opacity 0
+  pointer-events none
+  position absolute
+  left 0
+  right 0
+  margin-top 2px
+  padding-left 16px
+  background-color: b2c-white
+  box-shadow 0 0 1px rgba(28, 41, 61, 0.1), 0 36px 36px rgba(28, 41, 61, 0.1);
+  transition-duration 0.25s
+  transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
+  transition-property opacity
+  z-index 10
+  .checkbox,
+  .checkbox .ripple
+    height: 20px
+  .select-v2--is-open &
+    opacity: 1
+    pointer-events auto
+
+.select-v2-list-inner
+  max-height 256px
+  overflow auto
+  padding 20px 16px 20px 0
+
+.select-v2-tag
+  background-color main-color01
+  padding 0 0 0 4px
+  display flex
+  align-items center
+  margin-right 4px
+  font-size 12px
+  line-height 16px
+  margin-bottom 4px
+  cursor pointer
+  white-space nowrap
+  max-width 100%
+  span
+    max-width 100%
+    overflow hidden
+    text-overflow ellipsis
+  &__outside-count
+    padding 2px 4px
+    background-color main-color01
+    margin-bottom 4px
+    color main-color05
+
+.rt-sys-icon.select-v2-tag__remove
+  min-width 20px
+  width: 20px!important
+  height: 20px!important
+  fill main-color05
+
+.select-v2-tag:hover .rt-sys-icon.select-v2-tag__remove
+  fill main-color07
+
+.select-v2-list-shadow-up
+  height: 20px
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 100%);
+  left: 0
+  top: 0
+  right: 0
+  position: absolute
+  pointer-events none
+
+.select-v2-list-shadow-down
+  position: absolute;
+  left: 0
+  right: 0
+  bottom: 0
+  height: 40px
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 100%);
+  pointer-events none
+
+.select-v2-option
+  width 100%
+  display flex
+  align-items flex-start
+  font-size 14px
+  padding 6px 8px
+  text-align left
+  transition-duration 0.25s
+  transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
+  transition-property background-color, color
+  cursor pointer
+  //&:hover,
+  &.select-v2-option--focus
+    background-color main-color005
+  &--select
+    color b2c-purple
+    .rt-dark-theme &,
+    .select-v2--bright &
+      color b2c-purple-night
+  &--hidden
+    display none
+  &__mismatch
+    opacity .5
+
+.select-v2-option__inner
+  .rt-font-label
+    opacity .5
+
+.rt-dark-theme,
+.select-v2--bright
+  .select-v2-label
+    color b2c-white07
+    //&:after
+    //  background linear-gradient(to left, main-color 0%, main-color 50%, rgba(main-color, 0) 100%)
+  .select-v2--is-open .select-v2-label
+    color b2c-purple-night
+  .select-v2-list
+    background-color b2c-black085-no-opacity
+  .select-v2-option--focus
+    background-color b2c-white005
+  .select-v2-list-shadow-up
+    background linear-gradient(0deg, rgba(b2c-black085-no-opacity, 0) 0%, b2c-black085-no-opacity 100%)
+  .select-v2-list-shadow-down
+    background linear-gradient(180deg, rgba(b2c-black085-no-opacity, 0) 0%, b2c-black085-no-opacity 100%)
+  .select-v2__container:after
+    background linear-gradient(to left, main-color 0%, main-color 50%, rgba(main-color, 0) 100%)
+  .select-v2__inner
+    border-bottom-color b2c-white01
+    &:after
+      background-color b2c-purple-night
+  .select-v2:hover .select-v2__inner:before
+    background-color b2c-white03
+  .select-v2-tag
+    background-color b2c-white01
+    color b2c-white09
+    &__remove.rt-sys-icon
+      fill b2c-white05
+  .select-v2-tag:hover .rt-sys-icon.select-v2-tag__remove
+    fill b2c-white07
+  .select-v2-tag__outside-count
+    color b2c-white05
+    background-color b2c-white01
+
+.select-v2--error
+  .select-v2__inner
+    border-bottom-color error-color
+    &:before,
+    &:after
+      display none
+  &.select-v2--is-open .select-v2-label,
+  .select-v2-label--up
+    color error-color
+  .select-v2__error-message
+    color error-color
+  .rt-dark-theme &
+    .select-v2__inner
+      border-bottom-color error-color-night
+    &.select-v2--is-open .select-v2-label,
+    .select-v2-label--up
+      color error-color-night
+    .select-v2__error-message
+      color error-color-night
+
+.select-v2--disabled
+  .select-v2-label
+    color main-color03
+  .select-v2__inner
+    color main-color03
+    &:before,
+    &:after
+      display none
+  .select-v2-arrow.rt-sys-icon
+    opacity .1
+  .select-v2-tag__remove,
+  .select-v2-tag:hover .rt-sys-icon.select-v2-tag__remove
+    pointer-events none
+    fill main-color005
+  .select-v2-tag
+    background-color main-color005
+  .rt-dark-theme &
+    .select-v2-tag
+      color b2c-white03
+      background-color b2c-white01
+      &__remove
+        fill b2c-white01
+    .select-v2-label
+      color b2c-white025
+
+.select-v2__error-message
+  margin-top 6px

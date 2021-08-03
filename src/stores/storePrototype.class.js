@@ -1,8 +1,10 @@
+
 export class StorePrototype {
 
     constructor(){
         this.watchers = {}
         this.methodFnMap = {}
+        this.runWatchersByIdDebounceObjs = {}
     }
 
     addWatcher = (id, fn) => {
@@ -23,14 +25,28 @@ export class StorePrototype {
             }
         });
     }
-
-    runWatchersById = (id) => {
-        if(this.watchers[id]) {
-            Object.values(this.watchers[id]).forEach((fn) => {
-                fn.call();
-            });
+  
+  debounceRunWatch = (id)=>{
+      
+      if(this.watchers[id]) {
+        if(this.runWatchersByIdDebounceObjs[id]) {
+          clearTimeout(this.runWatchersByIdDebounceObjs[id])
         }
+        
+        this.runWatchersByIdDebounceObjs[id] = setTimeout(()=>{
+          Object.values(this.watchers[id]).forEach((fn) => {
+            fn.call();
+          });
+          clearTimeout(this.runWatchersByIdDebounceObjs[id])
+        },50)
+        
+      }
     }
+    runWatchersById = (id) => this.debounceRunWatch(id)
+    
+    
+    
+    
 
     removeWatcher = id => {
         delete this.watchers[id];

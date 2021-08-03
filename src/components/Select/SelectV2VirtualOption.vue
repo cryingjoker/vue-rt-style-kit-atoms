@@ -12,7 +12,7 @@ export default {
       default: false
     },
     label:{
-      type: String,
+      type: [String, Number],
       default: ''
     },
     selectName:{
@@ -20,31 +20,49 @@ export default {
       default: ''
     },
     value:{
-      type: String
+      type: [String, Number],
+      default: null
+    },
+    multiple:{
+      type: Boolean,
+      default: false
     },
     isFocus:{
       type: Boolean,
-      defaut: false
+      default: false
     },
     sublabel: {
       type: String,
       default: ''
+    },
+    index: {
+      type: Number,
+      default: null
+    },
+    inputValue:{
+      type: String,
+      default: ''
+    }
+  },
+  data() {
+    return {
+      checkMouseEnter: true
     }
   },
   computed:{
     selectClass(){
-      const classList = ["select-option","d-block"];
-      if(this.isActive){
-        classList.push("select-option--select");
+      const classList = ["select-v2-option","d-block"];
+      if(this.isActive && !this.multiple){
+        classList.push("select-v2-option--select");
       }
       if(this.isFocus){
-        classList.push("select-option--focus");
+        classList.push("select-v2-option--focus");
       }
       return classList.join(' ')
     },
     renderSublabel(){
       if(this.sublabel.length > 0){
-
+        return <p class="rt-font-label">{this.sublabel}</p>
       }
       return null
     },
@@ -77,15 +95,59 @@ export default {
       if(this.isActive){
         SelectStore.removeActiveValue(this.selectName, this.value)
       }else{
-        SelectStore.setActiveValue(this.selectName, this.value)
+        SelectStore.setActiveValue(this.selectName, this.value, true)
+        this.emitLeave()
       }
+      if(this.$parent.autoComplete) {
+        SelectStore.setClose(this.selectName)
+      }
+    },
+    clickOnCheckbox(e){
+      e.preventDefault()
+      this.onClickFire()
+    },
+    emitEnter() {
+      this.$emit('mouseenter')
+    },
+    emitLeave() {
+      this.$emit('mouseleave')
+    },
+    emitMove() {
+      this.$emit('mousemove')
     }
   },
   render(h) {
-    if(this.label.length>0) {
-      return <button type="button" ref="button" class={this.selectClass} onClick={this.onClickFire}>
-        <div class="select-option__inner">{this.label}</div>
-        {this.renderSublabel}
+    const renderLabel = () => {
+      if(this.inputValue.length > 0) {
+        let boldText = this.inputValue;
+        let fullString = this.label;
+        return h('span', {
+              domProps: {
+                innerHTML: '<span class="select-v2-option__mismatch">'+fullString.replace(new RegExp('('+boldText.split(' ').join(')|(')+')','gi'),'</span><span>$&</span><span class="select-v2-option__mismatch">')+'</span>'
+              }
+            }
+        )
+      } else {
+        return this.label
+      }
+    }
+    if(this.label.length > 0) {
+      if(this.multiple){
+        return <button type="button" ref="button" class={this.selectClass} onClick={this.onClickFire}
+                       onMouseenter={this.emitEnter} onMouseleave={this.emitLeave} onMousemove={this.emitMove}>
+          <rt-checkbox onClick={this.clickOnCheckbox} is-orange={true} checked={this.isActive}></rt-checkbox>
+          <div class="select-v2-option__inner">
+            <p class="rt-font-control">{this.label}</p>
+            {this.renderSublabel}
+          </div>
+        </button>
+      }
+      return <button type="button" ref="button" class={this.selectClass} onClick={this.onClickFire}
+                     onMouseenter={this.emitEnter} onMouseleave={this.emitLeave} onMousemove={this.emitMove}>
+        <div class="select-v2-option__inner">
+          <p class="rt-font-control">{renderLabel()}</p>
+          {this.renderSublabel}
+        </div>
       </button>
     }
     return null

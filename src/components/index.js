@@ -11,6 +11,7 @@ export {default as RippleWihoutJs} from './Ripple/RippleWihoutJs.vue';
 export {default as Select} from './Select/Select.vue';
 export {default as SelectOption} from './Select/SelectOption.vue';
 export {default as SelectV2} from './Select/SelectV2.vue';
+export {default as Autocomplete} from './Select/Autocomplete.vue';
 export {default as SelectV2Option} from './Select/SelectV2Option.vue';
 export {default as Spinner} from './Spinner/Spinner.vue';
 export {default as GridRow} from './Grid/GridRow.vue';
