@@ -35,7 +35,8 @@ import {
     SystemIcons,
     ArrowAnchor,
     CircleNumber,
-    Line
+    Line,
+    Autocomplete
 } from "./components";
 // import 'element-closest-polyfill';
 // import 'nodelist-foreach-polyfill';
@@ -107,6 +108,7 @@ let VueRtStyle = {
             Vue.component(VideoPlayer.name, VideoPlayer);
             Vue.component(ArrowAnchor.name, ArrowAnchor);
             Vue.component(CircleNumber.name, CircleNumber);
+            Vue.component(Autocomplete.name, Autocomplete);
 
             Vue.directive(LazySrcDirective.name, LazySrcDirective);
 
@@ -177,7 +179,7 @@ export {
     ArrowAnchor,
     Image,
     CircleNumber,
-    
+    Autocomplete,
     // mixins
     fontColorPropsNames,
     fontColorProps,
