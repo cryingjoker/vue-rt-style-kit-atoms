@@ -111,8 +111,8 @@ export default {
     clickValue:{
       deep: true,
       handler(newVal, oldVal){
-        const a = newVal ? newVal.toString() : '';
-        const b = oldVal ? oldVal.toString() : ''
+        const a = newVal ? JSON.stringify(newVal) : '';
+        const b = oldVal ? JSON.stringify(oldVal) : ''
         if(a != b){
           this.$emit('item-select', newVal)
         }
@@ -451,6 +451,7 @@ export default {
       SelectStore.setActiveValue(this.name, '')
       SelectStore.removeAllActiveValue(this.selectName)
       this.checkMatch('');
+      this.$emit('clear');
     },
     noteScroll() {
       if (this.$refs.inner.scrollTop != 0) {
