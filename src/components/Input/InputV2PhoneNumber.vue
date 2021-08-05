@@ -86,7 +86,10 @@ export default {
         $event.preventDefault();
       }
       if($event.keyCode == 8 && window.getSelection().toString() == this.localValue) {
-        this.$children[0].$children[0].$el.click();
+        this.$refs.input.$refs.input.value = ''
+        this.$refs.input.localValue = ''
+        this.localValue = ''
+        this.filled = false
       }
       this.$emit('keydown', $event)
     },
