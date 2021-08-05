@@ -85,6 +85,12 @@ export default {
       if($event.keyCode == 8 && this.caretPositionBefore <= 2 && this.localValue.length > 3 || this.localValue.length >= 18 && ($event.keyCode > 47 && $event.keyCode < 58)) {
         $event.preventDefault();
       }
+      if($event.keyCode == 8 && window.getSelection().toString() == this.localValue) {
+        this.$refs.input.$refs.input.value = ''
+        this.$refs.input.localValue = ''
+        this.localValue = ''
+        this.filled = false
+      }
       this.$emit('keydown', $event)
     },
     addMask() {
