@@ -82,7 +82,7 @@ export default {
   methods: {
     preventZipCodeChange($event){
       this.caretPositionBefore = this.$refs.input.$refs.input.selectionStart;
-      if($event.keyCode == 8 && this.caretPositionBefore <= 2 && this.localValue.length > 3 || this.localValue.length >= 18 && ($event.keyCode > 47 && $event.keyCode < 58)) {
+      if($event.keyCode == 8 && this.caretPositionBefore <= 2 && this.localValue.length > 3) {
         $event.preventDefault();
       }
       if($event.keyCode == 8 && window.getSelection().toString() == this.localValue) {
