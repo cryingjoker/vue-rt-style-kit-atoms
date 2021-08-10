@@ -17,25 +17,25 @@ class SelectStoreClass extends StorePrototype {
     this.autocompleteText = {}
     this.selectorsClickValue = {}
   }
-  
+
   setOpen(id) {
     if(!this.selectorsOpenStatus[id]) {
       this.selectorsOpenStatus[id] = true;
       this.runWatchersById(id);
     }
   }
-  
+
   setClose(id) {
     if(this.selectorsOpenStatus[id]){
       this.selectorsOpenStatus[id] = false;
       this.runWatchersById(id);
     }
   }
-  
+
   getOpenStatus(id) {
     return this.selectorsOpenStatus[id]
   }
-  
+
   setSelectorType(id, type) {
     this.selectorsTypes[id] = type;
     this.createSelectorDefaultProps(id);
@@ -48,7 +48,7 @@ class SelectStoreClass extends StorePrototype {
       }
     }
   }
-  
+
   clear(id) {
     delete this.selectors[id];
     delete this.selectorsTypes[id];
@@ -57,7 +57,7 @@ class SelectStoreClass extends StorePrototype {
     delete this.selectorsOpenStatus[id];
     delete this.focusIndex[id];
   }
-  
+
   getSelectorType(id, type, multiple = false) {
     this.selectorsTypes[id] = {type:type,multiple:multiple};
   }
@@ -67,7 +67,7 @@ class SelectStoreClass extends StorePrototype {
   getSelectorOptions(id) {
     return this.selectors[id]
   }
-  
+
   setActiveValue(id, value, isOnClick = false) {
     if (Array.isArray(value)) {
       value.forEach(val => this.setActiveValue(id, val))
@@ -92,7 +92,7 @@ class SelectStoreClass extends StorePrototype {
       }
     }
   }
-  
+
   removeActiveValue(id, value) {
     const index = this.selectorsActiveValue[id]?.indexOf(value);
     if(this.selectorsTypes[id].multiple) {
@@ -104,18 +104,18 @@ class SelectStoreClass extends StorePrototype {
       this.setClose(id);
     }
   }
-  
+
   removeAllActiveValue(id) {
     if(this.selectorsActiveValue[id] && this.selectorsActiveValue[id].length > 0) {
       this.selectorsActiveValue[id] = []
       this.runWatchersById(id);
     }
   }
-  
+
   getActiveValue(id) {
     return this.selectorsActiveValue[id]
   }
-  
+
   getActiveLabels(id) {
     if (this.selectorsActiveValue[id]?.length > 0) {
       return this.selectorsActiveValue[id]?.map((value) => {
@@ -124,7 +124,7 @@ class SelectStoreClass extends StorePrototype {
     }
     return this.selectorsActiveValue[id]
   }
-  
+
   getActiveIndex(id) {
     const activeIndexes = {}
     if(this.selectorsTypes[id] && this.selectors[id]) {
@@ -141,11 +141,11 @@ class SelectStoreClass extends StorePrototype {
     }
     return activeIndexes
   }
-  
+
   getFocusIndex(id) {
     return this.focusIndex[id]
   }
-  
+
   setFocusIndex(id, index) {
     if (index > this.selectors[id].length) {
       index = 0;
@@ -155,7 +155,7 @@ class SelectStoreClass extends StorePrototype {
       this.runWatchersById(id);
     }
   }
-  
+
   setNextFocus(id) {
     const size = this.selectors[id].length;
     if(this.focusIndex[id] == -1) {
@@ -164,7 +164,7 @@ class SelectStoreClass extends StorePrototype {
       this.setFocusIndex(id, (this.focusIndex[id] + 1) % size)
     }
   }
-  
+
   setPreviousFocus(id) {
     const size = this.selectors[id].length;
     if(this.focusIndex[id] == -1) {
@@ -173,7 +173,7 @@ class SelectStoreClass extends StorePrototype {
       this.setFocusIndex(id, (this.focusIndex[id] - 1 + size) % size)
     }
   }
-  
+
   setActiveFocusEl(id) {
     if (!this.selectorsTypes[id]?.multiple && this.selectors[id]) {
       this.setFocusIndex(id, this.selectors[id].findIndex(i => i.value == this.selectorsActiveValue[id][0]))
@@ -183,6 +183,7 @@ class SelectStoreClass extends StorePrototype {
     if(json.length == 0) {
       this.selectors[id] = []
     } else {
+      this.clearSelectorProps(id)
       json.forEach((obj)=>{
         this.setSelectorOption(id,obj)
       })
@@ -199,6 +200,13 @@ class SelectStoreClass extends StorePrototype {
       }
     }
   }
+  clearSelectorProps(id){
+    if (this.selectors[id]) {
+      this.selectors[id] = [];
+      this.selectorsValue[id] = {};
+      this.selectorsActiveValue[id] = [];
+    }
+  }
   setSelectorOption(id, data) {
     this.createSelectorDefaultProps(id);
     if (!this.selectorsValue[id][data.value]) {
@@ -210,7 +218,7 @@ class SelectStoreClass extends StorePrototype {
     }
     this.runWatchersById(id);
   }
-  
+
   removeSelectorOption(id, data) {
     if (this.selectors[id]) {
       delete this.selectorsValue[id][data.value]
@@ -220,14 +228,14 @@ class SelectStoreClass extends StorePrototype {
       this.removeActiveValue(data.value);
     }
   }
-  
+
   // setFirstActive(id, value) {
   //   this.isFirstActive[id] = true;
   //   if (!!this.selectorsValue[id] && !(this.selectorsActiveValue[id]?.length > 0)) {
   //     this.setActiveValue(id, value);
   //   }
   // }
-  
+
   setDefaultValue(id, data) {
     this.defaultValue[id] = {label: data.label, value: data.value}
   }
