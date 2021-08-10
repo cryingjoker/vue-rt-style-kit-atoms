@@ -68,8 +68,8 @@ export default {
   }),
   watch:{
     value(newVal, oldVal) {
-
-      this.$refs.input.setInputValue(newVal)
+      this.value = newVal
+      this.$refs.input.$refs.input.value = newVal
       this.addMask()
     }
   },
@@ -81,9 +81,8 @@ export default {
   },
   methods: {
     preventZipCodeChange($event){
-      this.caretPositionBefore = this.$refs.input.getSelectionStart();
-
-      if($event.keyCode == 8 && this.caretPositionBefore <= 2 && this.localValue.length > 3) {
+      this.caretPositionBefore = this.$refs.input.$refs.input.selectionStart;
+      if($event.keyCode == 8 && this.caretPositionBefore <= 2 && this.localValue.length > 3 || this.localValue.length >= 18 && ($event.keyCode > 47 && $event.keyCode < 58)) {
         $event.preventDefault();
       }
       if($event.keyCode == 8 && window.getSelection().toString() == this.localValue) {
@@ -92,57 +91,50 @@ export default {
         this.filled = false
       }
       this.$emit('keydown', $event)
-      if(this.$refs.input.getValue() == '' || this.localValue == ''){
-        this.localValue = '';
-        this.$emit("input", this.localValue);
-      }
     },
     addMask() {
-      let field = this.$refs.input.getValue().toString();
-
-      if(field.length == 11) {
-        if(field.charAt(0) == 7 || field.charAt(0) == 8) {
-          this.$refs.input.setInputValue(field.slice(1));
+      let field = this.$refs.input.$refs.input;
+      let fieldVal = field.value;
+      if(fieldVal.length == 11) {
+        if(+fieldVal.charAt(0) == 7 || +fieldVal.charAt(0) == 8) {
+          fieldVal = fieldVal.slice(1);
         }
       }
       if(this.nativeInput) {
-        this.caretPositionBefore = this.$refs.input.getSelectionStart();
-        this.backwards = this.prevVal.length > field.length
+        this.caretPositionBefore = field.selectionStart;
+        this.backwards = this.prevVal.length > fieldVal.length
       }
       if(this.backwards && this.nativeInput) {
-        if(field.length == 4) {
+        if(fieldVal.length == 4) {
           this.localValue = '+7 '
         }
-        if(field.length < 4) {
+        if(fieldVal.length < 4) {
           this.localValue = ''
         }
       } else {
-
-        if(field.length == 1 && this.localValue.length <   field.length) {
-          if(field != '7' && field != '8') {
-            this.localValue = '+7 (' + field;
+        if(fieldVal.length == 1) {
+          if(fieldVal != '7' && fieldVal != '8') {
+            this.localValue = '+7 (' + fieldVal;
           } else {
             this.localValue = '+7 '
           }
-        } else if(field.charAt(1) != '7') {
-          this.$refs.input.setInputValue('+7' + field)
+        } else if(fieldVal.charAt(1) != '7') {
+          fieldVal = '+7' + fieldVal
         }
       }
       let matrix = "+7 (___) ___ __ __",
           i = 0,
           def = matrix.replace(/\D/g, ""),
-          val = field.replace(/\D/g, "");
+          val = fieldVal.replace(/\D/g, "");
       if (def.length >= val.length) val = def;
-      var normalizeValue = matrix.replace(/./g, function (a) {
+      fieldVal = matrix.replace(/./g, function (a) {
         return /[_\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? "" : a;
       });
-
-      this.$refs.input.setInputValue(normalizeValue);
-
-      this.localValue = normalizeValue;
+      if(fieldVal.length > 3) {
+        this.localValue = fieldVal;
+      }
       this.filled = this.localValue.length == 18;
       this.$refs.input.localValue = this.localValue;
-
       if(this.filled && this.needVerification) {
         this.$emit('filled', this.localValue);
       }
@@ -153,9 +145,9 @@ export default {
         }
       } else {
         if(this.caretPositionBefore < this.caretPositionAfter - 2) {
-          if(field.charAt(this.caretPositionBefore) == ' ') {
+          if(fieldVal.charAt(this.caretPositionBefore) == ' ') {
             this.setCaret(this.caretPositionBefore + 1)
-            if(/[\D]/.test(field.charAt(this.caretPositionBefore - 1))) {
+            if(/[\D]/.test(fieldVal.charAt(this.caretPositionBefore - 1))) {
               this.setCaret(this.caretPositionBefore + 2)
             }
           } else {
@@ -163,17 +155,16 @@ export default {
           }
         }
       }
-
       this.prevVal = this.localValue
       this.nativeInput = false
     },
     clearValue() {
       this.localValue = '';
-      this.$refs.input._data.localValue = '';
+      this.$refs.input.localValue = '';
       this.$emit('clear')
     },
     setCaret(pos) {
-      this.$refs.input.setSelectionRange(pos, pos)
+      this.$refs.input.$refs.input.setSelectionRange(pos, pos)
     },
     onChange(e) {
       this.$emit('change', e)
@@ -201,24 +192,24 @@ export default {
     const componentStack = [];
     const props = {...this._props}
     props.type = this.localType;
-    props.value = this.localValue
+    props.value = this.localValue;
     return createElement(InputV2Atom,
-        {
-          props: props,
-          on:
-              {
-                phone: this.addMask,
-                clear: this.clearValue,
-                keydown: this.preventZipCodeChange,
-                change: this.onChange,
-                focus: this.onFocus,
-                blur: this.onBlur,
-                input: this.onInput,
-                keyup: this.onKeyup
-              },
-          ref: 'input',
-          componentStack
-        }
+      {
+        props: props,
+        on:
+          {
+            phone: this.addMask,
+            clear: this.clearValue,
+            keydown: this.preventZipCodeChange,
+            change: this.onChange,
+            focus: this.onFocus,
+            blur: this.onBlur,
+            input: this.onInput,
+            keyup: this.onKeyup
+          },
+        ref: 'input',
+        componentStack
+      }
     )
   }
 };
