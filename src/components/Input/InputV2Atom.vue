@@ -138,7 +138,7 @@ export default {
     value(newValue, oldValue) {
       if (newValue != oldValue && newValue != this.localValue) {
         this.localValue = newValue;
-        if(newValue != '') {
+        if (newValue != '') {
           this.$emit('phone', newValue)
         }
       }
@@ -165,23 +165,26 @@ export default {
       return inputClassName.join(' ')
     }
   },
-  mounted() {},
-  updated() {},
-  beforeDestroy() {},
+  mounted() {
+  },
+  updated() {
+  },
+  beforeDestroy() {
+  },
   methods: {
     changeValue(e) {
       const input = this.$refs.input;
 
       if (this.type === 'number') {
-        if(!this.isInteger && input.value.search(/[,.]$/) >= 0){
+        if (!this.isInteger && input.value.search(/[,.]$/) >= 0) {
           this.localValue = input.value
-        }else {
+        } else {
           if ('valueAsNumber' in input) {
             this.localValue = input.valueAsNumber
           } else {
             this.localValue = input.value - 0
           }
-          if(this.isInteger){
+          if (this.isInteger) {
             this.localValue = parseInt(this.localValue);
           }
         }
@@ -193,46 +196,63 @@ export default {
       }
 
       this.$emit('input', this.localValue)
-      this.$emit('phone', this.localValue)
+      if (this.type == 'tel') {
+        this.$emit('phone', this.localValue)
+      }
+
     },
     clearInput() {
-      if(!this.$parent.filled) {
+      if (!this.$parent.filled) {
         this.$refs.input.value = ''
         this.changeValue()
         this.$emit('clear')
       }
     },
-    onBlur(e){
-      this.$emit('blur',this.localValue,e)
+
+    getValue() {
+      return this.$refs.input.value
     },
-    onPaste(e){
-      this.$emit('paste',e)
+    getSelectionStart() {
+      return this.$refs.input.selectionStart
     },
-    onKeydown(e){
-      this.$emit('keydown',e,this.localValue)
+    onBlur(e) {
+      this.$emit('blur', this.localValue, e)
     },
-    onKeyup(e){
-      this.$emit('keyup',e,this.localValue)
+    onPaste(e) {
+      this.$emit('paste', e)
     },
-    onFocus(e){
-      this.$emit('focus',e,this.localValue)
+    onKeydown(e) {
+      this.$emit('keydown', e, this.localValue)
+    },
+    onKeyup(e) {
+      this.$emit('keyup', e, this.localValue)
+    },
+    onFocus(e) {
+      this.$emit('focus', e, this.localValue)
     },
     onInput(e) {
-      this.$emit('input',e)
-      this.$emit('phone',e)
+      this.$emit('input', e)
+      this.$emit('phone', e)
     },
     onChange(e) {
-      this.$emit('change',e,this.localValue)
+      this.$emit('change', e, this.localValue)
     },
     toggleInformer($event) {
       $event.preventDefault();
       $event.stopPropagation();
       this.showInformer = !this.showInformer;
+    },
+    setInputValue(newVal){
+      this.$refs.input.value = newVal
+    },
+    setSelectionRange(posa, posb) {
+      this.$refs.input.setSelectionRange(posa, posb)
     }
+
   },
   render() {
     const icons = () => {
-      if(this.$slots.informer){
+      if (this.$slots.informer) {
         return <template slot="icon">
           <rt-popover vertical="top">
             <template slot="content">
@@ -241,23 +261,27 @@ export default {
           </rt-popover>
         </template>
       }
-      if(this.needVerification && this.localValue.length == 18) {
-        if(this.localVerified === 1) {
+      if (this.needVerification && this.localValue.length == 18) {
+        if (this.localVerified === 1) {
           return <template slot="icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle opacity="0.8" cx="12" cy="12" r="10" fill="#5BCF6A"/>
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M17.5612 9.1768L11.0613 15.5704C10.7481 15.8784 10.2452 15.8763 9.93457 15.5657L6.93457 12.5657L8.06594 11.4343L10.5049 13.8733L16.4392 8.03613L17.5612 9.1768Z" fill="white"/>
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M17.5612 9.1768L11.0613 15.5704C10.7481 15.8784 10.2452 15.8763 9.93457 15.5657L6.93457 12.5657L8.06594 11.4343L10.5049 13.8733L16.4392 8.03613L17.5612 9.1768Z"
+                    fill="white"/>
             </svg>
           </template>
-        } else if(this.localVerified === 0){
+        } else if (this.localVerified === 0) {
           return <template slot="icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle opacity="0.7" cx="12" cy="12" r="10" fill="#EB3728"/>
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M10.939 11.9999L7.46875 15.4701L8.53069 16.5295L11.9997 13.0606L15.4688 16.5297L16.5307 15.4703L13.0604 11.9999L16.5307 8.5296L15.4688 7.47021L11.9997 10.9392L8.53069 7.47023L7.46875 8.5296L10.939 11.9999Z" fill="white"/>
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M10.939 11.9999L7.46875 15.4701L8.53069 16.5295L11.9997 13.0606L15.4688 16.5297L16.5307 15.4703L13.0604 11.9999L16.5307 8.5296L15.4688 7.47021L11.9997 10.9392L8.53069 7.47023L7.46875 8.5296L10.939 11.9999Z"
+                    fill="white"/>
             </svg>
           </template>
         }
-        if(this.$parent.filled) {
+        if (this.$parent.filled) {
           return <template slot="icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                  class="rt-sys-icon rt-input-v2-icon__item--verification-in-progress">
@@ -337,7 +361,7 @@ export default {
     return <div class={this.inputClass}>
       <label class="rt-input-v2-wrapper">
         {inputComponent()}
-        <span class="rt-input-v2-placeholder">{this.placeholder||this.label}</span>
+        <span class="rt-input-v2-placeholder">{this.placeholder || this.label}</span>
         <span class="rt-input-v2__line"></span>
         <rt-input-v2-icon onClick={this.clearInput} color={this.isWhite ? 'white' : 'main'}>
           {icons()}
