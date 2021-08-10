@@ -175,7 +175,7 @@ export default {
       if (this.type === 'number') {
         if(!this.isInteger && input.value.search(/[,.]$/) >= 0){
           this.localValue = input.value
-        }else {
+        } else {
           if ('valueAsNumber' in input) {
             this.localValue = input.valueAsNumber
           } else {
@@ -193,36 +193,37 @@ export default {
       }
 
       this.$emit('input', this.localValue)
-      this.$emit('phone', this.localValue)
+      if (this.type == 'tel') {
+        this.$emit('phone', this.localValue)
+      }
+
     },
     clearInput() {
-      // if(!this.$parent.filled) {
-        this.$refs.input.value = ''
-        this.changeValue()
-        this.$emit('clear')
-      // }
+      this.$refs.input.value = ''
+      this.changeValue()
+      this.$emit('clear')
     },
-    onBlur(e){
-      this.$emit('blur',this.localValue,e)
+    onBlur(e) {
+      this.$emit('blur', this.localValue, e)
     },
-    onPaste(e){
-      this.$emit('paste',e)
+    onPaste(e) {
+      this.$emit('paste', e)
     },
-    onKeydown(e){
-      this.$emit('keydown',e,this.localValue)
+    onKeydown(e) {
+      this.$emit('keydown', e, this.localValue)
     },
-    onKeyup(e){
-      this.$emit('keyup',e,this.localValue)
+    onKeyup(e) {
+      this.$emit('keyup', e, this.localValue)
     },
-    onFocus(e){
-      this.$emit('focus',e,this.localValue)
+    onFocus(e) {
+      this.$emit('focus', e, this.localValue)
     },
     onInput(e) {
-      this.$emit('input',e)
-      this.$emit('phone',e)
+      this.$emit('input', e)
+      this.$emit('phone', e)
     },
     onChange(e) {
-      this.$emit('change',e,this.localValue)
+      this.$emit('change', e, this.localValue)
     },
     toggleInformer($event) {
       $event.preventDefault();
@@ -337,9 +338,9 @@ export default {
     return <div class={this.inputClass}>
       <label class="rt-input-v2-wrapper">
         {inputComponent()}
-        <span class="rt-input-v2-placeholder">{this.placeholder||this.label}</span>
+        <span class="rt-input-v2-placeholder">{this.placeholder || this.label}</span>
         <span class="rt-input-v2__line"></span>
-        <rt-input-v2-icon onClick={this.clearInput} color={this.isWhite ? 'white' : 'main'}>
+        <rt-input-v2-icon onClearInput={this.clearInput} color={this.isWhite ? 'white' : 'main'}>
           {icons()}
         </rt-input-v2-icon>
       </label>
