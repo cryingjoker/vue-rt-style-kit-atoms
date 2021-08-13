@@ -60,9 +60,6 @@
       }
     },
     computed: {
-      title() {
-        return this.label || this.$slots.label
-      },
       annotationClasses() {
         const classList = ['rt-annotation', 'rt-annotation-v2'];
         if(this.hasWhiteColor){
@@ -133,9 +130,12 @@
       }
     },
     render(h) {
+      const title = () => {
+        return this.label || this.$slots.label
+      }
       return <div class={this.annotationClasses}>
         <p class={this.labelClasses} onClick={this.toggleOpen} button={this.gaLabel}>
-          {this.title}
+          {title()}
           <svg class="rt-annotation__arrow" width="12px" height="7px" viewBox="0 0 12 7" xmlns="http://www.w3.org/2000/svg">
             <g transform="translate(0.000000, -9.000000)" stroke-width="1">
               <polygon points="10.6 9 6 13.3513514 1.4 9 0 10.3243243 6 16 12 10.3243243"/>
