@@ -245,14 +245,14 @@ export default {
       if(this.needVerification && this.localValue.length == 18) {
         if(this.localVerified === 1) {
           return <template slot="icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"class="rt-input-v2-icon__item--verified">
               <circle opacity="0.8" cx="12" cy="12" r="10" fill="#5BCF6A"/>
               <path fill-rule="evenodd" clip-rule="evenodd" d="M17.5612 9.1768L11.0613 15.5704C10.7481 15.8784 10.2452 15.8763 9.93457 15.5657L6.93457 12.5657L8.06594 11.4343L10.5049 13.8733L16.4392 8.03613L17.5612 9.1768Z" fill="white"/>
             </svg>
           </template>
         } else if(this.localVerified === 0){
           return <template slot="icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="rt-input-v2-icon__item--not-verified">
               <circle opacity="0.7" cx="12" cy="12" r="10" fill="#EB3728"/>
               <path fill-rule="evenodd" clip-rule="evenodd" d="M10.939 11.9999L7.46875 15.4701L8.53069 16.5295L11.9997 13.0606L15.4688 16.5297L16.5307 15.4703L13.0604 11.9999L16.5307 8.5296L15.4688 7.47021L11.9997 10.9392L8.53069 7.47023L7.46875 8.5296L10.939 11.9999Z" fill="white"/>
             </svg>
