@@ -81,6 +81,10 @@ export default {
     v2: {
       type: Boolean,
       default: false
+    },
+    isSmall:{
+      type:  Boolean,
+      default: false
     }
   },
   data: () => ({
@@ -218,6 +222,7 @@ export default {
       return <rt-price-v2 bright={this.bright} value={this.value} old-value={this.oldValue}
                           option-label={this.optionLabel} show-float={this.showFloat} currency={this.currency}
                           only-price={this.onlyPrice}
+                          is-small={this.isSmall}
                           time-interval={this.timeInterval} is-option={this.isOption}>{this.$slots.default}</rt-price-v2>
     }
     const rtPriceInfoClass = "rt-price__info" + (this.boldOption ? " rt-price__info--bold-font" : "");

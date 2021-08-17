@@ -41,6 +41,10 @@ export default {
     onlyPrice: {
       type: Boolean,
       default: false
+    },
+    isSmall:{
+      type:  Boolean,
+      default: false
     }
   },
   data: () => ({
@@ -89,7 +93,13 @@ export default {
     },
     currencyRender() {
       if (this.currency) {
-        return <div class="rt-price-v2__info-item rt-font-control">{this.currency}
+        const classList = ['rt-price-v2__info-item'];
+        if(this.isSmall){
+          classList.push('font-t-xs');
+        }else{
+          classList.push('font-t-s');
+        }
+        return <div class={classList}>{this.currency}
         </div>;
 
       }
@@ -98,14 +108,26 @@ export default {
     },
     oldValueRender() {
       if (this.oldValue && parseFloat(this.oldValue) > 0) {
-        return <div class="rt-price-v2__old-value d-inline-block rt-font-control">{this.normalOldValue}</div>;
+        const classList = ['rt-price-v2__old-value d-inline-block'];
+        if(this.isSmall){
+          classList.push('font-t-xs');
+        }else{
+          classList.push('font-t-s');
+        }
+        return <div class={classList}>{this.normalOldValue}</div>;
       } else {
         return null;
       }
     },
     timeIntervalRender() {
       if (this.timeInterval && !this.onlyPrice) {
-        return <div class="rt-price-v2__info-item rt-font-control">
+        const classList = ["rt-price-v2__info-item"];
+        if(this.isSmall){
+          classList.push('font-t-xs');
+        }else{
+          classList.push('font-t-s');
+        }
+        return <div class={classList}>
           {this.timeInterval}
         </div>;
       }
@@ -113,14 +135,26 @@ export default {
     },
     optionRender(){
       if (this.isOption) {
-        return <div class="rt-price-v2__option d-inline-block sp-r-0-1 rt-font-control">{this.optionLabel}</div>;
+        const classList = ["rt-price-v2__option d-inline-block sp-r-0-1"];
+        if(this.isSmall){
+          classList.push('font-t-xs');
+        }else{
+          classList.push('font-t-s');
+        }
+        return <div class={classList}>{this.optionLabel}</div>;
       } else {
         return null;
       }
     },
     valueRender(){
 
-      const classList = ["rt-price-v2__value", "d-inline-block", "rt-font-h1", "rt-font-bold"]
+      const classList = ["rt-price-v2__value", "d-inline-block", "rt-font-bold"]
+      if(this.isSmall){
+        classList.push("font-h2 ")
+      }else{
+        classList.push('font-h1')
+      }
+
       if (this.oldValue && parseFloat(this.oldValue) > 0) {
         classList.push("sp-l-0-1")
       }
