@@ -40,13 +40,13 @@ class SelectStoreClass extends StorePrototype {
     this.selectorsTypes[id] = type;
     this.createSelectorDefaultProps(id);
     this.runWatchersById(id);
-    if (type == 'simple') {
+    // if (type == 'simple') {
       if (this.selectorsActiveValue[id]?.length > 1) {
         const firstValue = this.selectorsActiveValue[id][0];
         this.removeAllActiveValue(id);
         this.setActiveValue(id, firstValue);
       }
-    }
+    // }
   }
 
   clear(id) {
@@ -119,7 +119,7 @@ class SelectStoreClass extends StorePrototype {
   getActiveLabels(id) {
     if (this.selectorsActiveValue[id]?.length > 0) {
       return this.selectorsActiveValue[id]?.map((value) => {
-        return this.selectors[id].find((item) => item.value == value)?.label
+        return this.selectors[id].find((item) => this.selectorsTypes[id].type == 'autocomplete' ? item.label == value : item.value == value)?.label
       }).filter(i => i)
     }
     return this.selectorsActiveValue[id]
