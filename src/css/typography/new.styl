@@ -1,10 +1,4 @@
-// New typography (2021)
-mobileBp = mobile-upper-limit // 767
-tabletBpStart = tablet-lower-limit // 768
-tabletBpEnd = tablet-upper-limit // 1024
-webSmallBpStart = laptop-lower-limit // 1025
-webSmallBpEnd = desktop-upper-limit // 1400
-webBp = large-desktop-lower-limit //1401
+
 set-font(fontSize, lineHeight)
   font-size unit(fontSize, 'px')
   line-height unit(lineHeight, 'px')
@@ -29,7 +23,7 @@ set-font(fontSize, lineHeight)
   set-font(12, 16)
 
 // Mobile
-@media (max-width mobileBp)
+@media (max-width mobile-upper-limit)
 	.font-h1
     set-font(28, 32)
 	.font-h2
@@ -46,19 +40,19 @@ set-font(fontSize, lineHeight)
     set-font(12, 16)
 
 // < Tablet
-@media (max-width tabletBpEnd)
+@media (max-width tablet-upper-limit)
   .font-h-l
     set-font(16, 20)
   .font-t-l
     set-font(16, 24)
 
 // Tablet
-@media (min-width tabletBpStart) and (max-width tabletBpEnd)
+@media (min-width tablet-lower-limit) and (max-width tablet-upper-limit)
   .font-h1
     set-font(36, 44)
 
 // Tablet = Web Small
-@media (min-width tabletBpStart) and (max-width webSmallBpEnd)
+@media (min-width tablet-lower-limit) and (max-width desktop-upper-limit)
   .font-h2
     set-font(32, 40)
   .font-h3
@@ -67,7 +61,7 @@ set-font(fontSize, lineHeight)
     set-font(20, 24)
 
 // > Tablet
-@media (min-width tabletBpStart)
+@media (min-width tablet-lower-limit)
   .font-h-m
     set-font(16, 20)
   .font-t-m
@@ -76,22 +70,22 @@ set-font(fontSize, lineHeight)
     set-font(14, 16)
 
 // Web Small
-@media (min-width webSmallBpStart) and (max-width webSmallBpEnd)
+@media (min-width laptop-lower-limit) and (max-width desktop-upper-limit)
   .font-h1
     set-font(44, 52)
 
 // < Web
-// @media (max-width webSmallBpEnd)
+// @media (max-width desktop-upper-limit)
 
 // Web Small = Web
-@media (min-width webSmallBpStart)
+@media (min-width laptop-lower-limit)
   .font-h-l
     set-font(18, 24)
   .font-t-l
     set-font(18, 28)
 
 // Web
-@media (min-width webBp)
+@media (min-width large-desktop-lower-limit)
   .font-h1
     set-font(50, 60)
   .font-h2
@@ -100,11 +94,3 @@ set-font(fontSize, lineHeight)
     set-font(28, 36)
   .font-h4
     set-font(22, 28)
-.font-h1-tab
-  set-font(36, 44)
-.font-h2-tab
-  set-font(32, 40)
-.font-h3-tab
-  set-font(24, 32)
-.font-h4-tab
-  set-font(20, 24)

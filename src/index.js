@@ -128,7 +128,7 @@ VueRtStyle = {
  */
 const settingsKey = Global.globalSettingsKey;
 
-const version = "2021-08-13 16:01";
+const version = "2021-08-16 13:14";
 if (window && window.addEventListener) {
     if (settingsKey) {
         if (!window[settingsKey]) window[settingsKey] = {}
@@ -179,7 +179,7 @@ export {
     ArrowAnchor,
     Image,
     CircleNumber,
-    
+    Autocomplete,
     // mixins
     fontColorPropsNames,
     fontColorProps,
@@ -214,8 +214,7 @@ export {
     StorePrototype,
     viewportPositionStore,
     deviceTypeStore,
-    getVariable,
-    Autocomplete
+    getVariable
 }
 
 
