@@ -128,7 +128,7 @@ VueRtStyle = {
  */
 const settingsKey = Global.globalSettingsKey;
 
-const version = "2021-08-18 01:47";
+const version = "2021-08-18 14:20";
 if (window && window.addEventListener) {
     if (settingsKey) {
         if (!window[settingsKey]) window[settingsKey] = {}
