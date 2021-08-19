@@ -229,6 +229,9 @@ export default {
       $event.preventDefault();
       $event.stopPropagation();
       this.showInformer = !this.showInformer;
+    },
+    onSelect(e) {
+      if(this.$refs.input.selectionStart != this.$refs.input.selectionEnd) this.$emit('select', e)
     }
   },
   render() {
@@ -319,7 +322,8 @@ export default {
                       onFocus={this.onFocus}
                       onChange={this.onChange}
                       placeholder={this.placeholder}
-                      disabled={this.disabledLocal}/>
+                      disabled={this.disabledLocal}
+                      onSelect={this.onSelect}/>
       }
       return <input class="rt-input-v2__input"
                     value={this.localValue}
