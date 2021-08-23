@@ -125,6 +125,9 @@
               if(this.isDisabled || this.disabled){
                   classList.push('radio-button-disabled')
               }
+              if(this.isChecked){
+                  classList.push('radio-button-active')
+              }
               return classList.join(' ')
           }
         },
