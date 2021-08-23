@@ -17,6 +17,9 @@ export default {
           );
         });
       }
+    },
+    clearInput() {
+      this.$emit('clearInput')
     }
   },
   mounted() {
@@ -35,7 +38,7 @@ export default {
     }
     const icon = () => {
       if(this.$parent.localValue && !this.$parent.disabled) {
-        return <span class="rt-input-v2-icon-item">
+        return <span class="rt-input-v2-icon-item" onClick={this.clearInput}>
           <rt-system-icons name="close large"/>
         </span>
       }

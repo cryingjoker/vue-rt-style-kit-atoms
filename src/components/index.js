@@ -24,6 +24,7 @@ export {default as CircleNumber} from './CircleNumber/CircleNumber.vue';
 
 
 export {default as Switch} from './Switch/Switch.vue';
+export {default as SwitchV2} from './Switch/SwitchV2.vue';
 export {default as SwitchContainer} from './Switch/SwitchContainer.vue';
 export {default as Textarea} from './Textarea/Textarea.vue';
 export {default as TextareaStatic} from './Textarea/TextareaStatic.vue';

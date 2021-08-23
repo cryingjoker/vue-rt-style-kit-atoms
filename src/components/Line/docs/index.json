@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "name": "rt-line",
+      "property": "color",
+      "type": "String",
+      "description": "цвет",
+      "value": "main-color005-no-opacity"
+    },
+    {
+      "name": "rt-line",
+      "property": "height",
+      "type": "Number, String",
+      "description": "высота полосы",
+      "value": "2"
+    }
+  ]
+}

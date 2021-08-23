@@ -448,12 +448,17 @@ a
     left 7px
     background-repeat no-repeat
   &.rt-font-paragraph,
-  &.font-t-m
+  &.font-t-l
     &:before
       top .5em
-  &.rt-font-small-paragraph
+      @media(max-width tablet-upper-limit)
+        top .4em
+  &.rt-font-small-paragraph,
+  &.font-t-m
     &:before
       top .4em
+      @media(max-width tablet-upper-limit)
+        top .35em
   &.font-t-s
     &:before
       top .3em

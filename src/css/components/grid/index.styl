@@ -313,7 +313,6 @@ for $device_index in 0 .. 3
       className = className + s(props[0])
       .{className}
         align-items: props[1]
-
   media = $device_media[$device_index]
   if media
     @media media
@@ -828,14 +827,10 @@ for $device_index in 0 .. 4
       className = className + s(props)
       .{className}
         display s(props)
-
   media = $device_media[$device_index]
-
-
   if media
     @media media
       classRender($device_index)
-
   else
     classRender($device_index)
 @require './gridRender.styl'

@@ -4,11 +4,15 @@ renderColorClass(classname, var, media)
     background-color lookup(var)
     .{b2bAppName}-product__triangle-image
       fill lookup(var)
+  @media (max-width: mobile-upper-limit)
+    .md-{classname}
+      background-color lookup(var)
 
 for $i in colors
   if search($i,'b2c') >= 0 || search($i,'main') >= 0
     className = 'color-block--'+replace($i,'b2c-','')
     renderColorClass(className, $i, $type)
+
 
 
 .color-block--main-color

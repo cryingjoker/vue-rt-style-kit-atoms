@@ -20,7 +20,7 @@ export default {
     },
     type: {
       type: String,
-      default: 'simple'
+      default: 'autocomplete'
     },
     hasError: {
       type: Boolean,
@@ -114,6 +114,12 @@ export default {
         const a = newVal ? JSON.stringify(newVal) : '';
         const b = oldVal ? JSON.stringify(oldVal) : ''
         if(a != b){
+          this.inputLocalValue = newVal.label
+          SelectStore.setActiveValue(this.name, newVal)
+          this.$emit('input', newVal.label)
+          this.$nextTick(() => {
+            this.selectActiveLabels[0] = newVal.label
+          })
           this.$emit('item-select', newVal)
         }
       }
