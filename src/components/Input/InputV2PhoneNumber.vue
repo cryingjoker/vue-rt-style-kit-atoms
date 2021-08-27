@@ -202,7 +202,7 @@ export default {
     const componentStack = [];
     const props = {...this._props}
     props.type = this.localType;
-    props.value = this.localValue;
+    props.value = this.value;
     return createElement(InputV2Atom,
       {
         props: props,

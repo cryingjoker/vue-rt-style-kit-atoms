@@ -126,6 +126,12 @@ export default {
           this.getSelectOptions()
           this.setActiveValue();
           if (this.$refs.input) {
+            if(newVal == '') {
+              this.inputLocalValue = '';
+              this.$nextTick(() => {
+                SelectStore.setClose(this.name)
+              })
+            }
             this.$refs.input.$el.querySelector('input').focus()
           }
         }
