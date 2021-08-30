@@ -181,7 +181,7 @@ export default {
           // } else {
           //   this.localValue = input.value - 0
           // }
-          this.localValue = input.value - 0;
+          this.localValue = input.value;
           if(this.isInteger){
             this.localValue = parseInt(this.localValue);
           }
