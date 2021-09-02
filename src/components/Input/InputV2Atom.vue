@@ -176,11 +176,12 @@ export default {
         if(!this.isInteger && input.value.search(/[,.]$/) >= 0){
           this.localValue = input.value
         } else {
-          if ('valueAsNumber' in input) {
-            this.localValue = input.valueAsNumber
-          } else {
-            this.localValue = input.value - 0
-          }
+          // if ('valueAsNumber' in input) {
+          //   this.localValue = input.valueAsNumber
+          // } else {
+          //   this.localValue = input.value - 0
+          // }
+          this.localValue = input.value;
           if(this.isInteger){
             this.localValue = parseInt(this.localValue);
           }
