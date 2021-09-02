@@ -64,7 +64,8 @@ export default {
     caretPositionAfter: 0,
     prevVal: '',
     nativeInput: false,
-    backwards: false
+    backwards: false,
+    selection: false
   }),
   watch:{
     value(newVal, oldVal) {
@@ -75,6 +76,7 @@ export default {
   },
   computed:{},
   mounted(){
+    this.localValue = this.value
     if(this.value != '') {
       this.addMask()
     }
@@ -82,8 +84,12 @@ export default {
   methods: {
     preventZipCodeChange($event){
       this.caretPositionBefore = this.$refs.input.$refs.input.selectionStart;
-      if($event.keyCode == 8 && this.caretPositionBefore <= 2 && this.localValue.length > 3 || this.localValue.length >= 18 && ($event.keyCode > 47 && $event.keyCode < 58)) {
-        $event.preventDefault();
+      if(!this.selection) {
+        if($event.keyCode == 8 && this.caretPositionBefore <= 2 && this.localValue.length > 3 || this.localValue.length >= 18 && ($event.keyCode > 47 && $event.keyCode < 58)) {
+          $event.preventDefault();
+        }
+      } else {
+        this.selection = false;
       }
       if($event.keyCode == 8 && window.getSelection().toString() == this.localValue) {
         this.$refs.input.clearInput();
@@ -144,7 +150,7 @@ export default {
           this.setCaret(this.caretPositionBefore)
         }
       } else {
-        if(this.caretPositionBefore < this.caretPositionAfter - 2) {
+        if(this.caretPositionBefore < this.caretPositionAfter - 2 && this.caretPositionBefore != 1) {
           if(fieldVal.charAt(this.caretPositionBefore) == ' ') {
             this.setCaret(this.caretPositionBefore + 1)
             if(/[\D]/.test(fieldVal.charAt(this.caretPositionBefore - 1))) {
@@ -157,6 +163,7 @@ export default {
       }
       this.prevVal = this.localValue
       this.nativeInput = false
+      this.$emit('input', this.localValue)
     },
     clearValue() {
       this.localValue = '';
@@ -186,13 +193,16 @@ export default {
     },
     onKeyup(e) {
       this.$emit('keyup', e)
+    },
+    onSelect() {
+      this.selection = true
     }
   },
   render(createElement) {
     const componentStack = [];
     const props = {...this._props}
     props.type = this.localType;
-    props.value = this.localValue;
+    props.value = this.value;
     return createElement(InputV2Atom,
       {
         props: props,
@@ -205,7 +215,8 @@ export default {
             focus: this.onFocus,
             blur: this.onBlur,
             input: this.onInput,
-            keyup: this.onKeyup
+            keyup: this.onKeyup,
+            select: this.onSelect
           },
         ref: 'input',
         componentStack
