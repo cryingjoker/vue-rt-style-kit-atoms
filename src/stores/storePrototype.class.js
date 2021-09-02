@@ -36,9 +36,11 @@ export class StorePrototype {
         }
         
         this.runWatchersByIdDebounceObjs[id] = setTimeout(()=>{
-          Object.values(this.watchers[id]).forEach((fn) => {
-            fn.call();
-          });
+          if(this.watchers && this.watchers[id] && Object.values(this.watchers[id])) {
+            Object.values(this.watchers[id]).forEach((fn) => {
+              fn.call();
+            });
+          }
           clearTimeout(this.runWatchersByIdDebounceObjs[id])
         },50)
         
