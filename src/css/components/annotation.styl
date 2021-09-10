@@ -29,6 +29,8 @@
   transition-timing-function ease-in-out
   transition-duration .3s
   transition-property transform
+  @media(max-width tablet-upper-limit)
+    top calc(.5em - 1px)
 
   .{newAppName}-annotation--white-color &
     fill rgba(#ffffff, .5)
