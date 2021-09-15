@@ -542,7 +542,7 @@ export default {
                 class="select-v2__inner"
                 onClick={this.toggleOpen}
                 onFocus={this.onFocus}
-                onBlur={this.onBlur}>
+                onBlur={this.onBlurAuto}>
           {renderValue()}
           {this.renderLabel}
           {this.$slots.default}
