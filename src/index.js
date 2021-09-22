@@ -36,7 +36,8 @@ import {
     ArrowAnchor,
     CircleNumber,
     Line,
-    Autocomplete
+    Autocomplete,
+    SwitchV2
 } from "./components";
 // import 'element-closest-polyfill';
 // import 'nodelist-foreach-polyfill';
@@ -92,6 +93,7 @@ let VueRtStyle = {
             Vue.component(SelectV2Option.name, SelectV2Option);
             Vue.component(Switch.name, Switch);
             Vue.component(SwitchContainer.name, SwitchContainer);
+            Vue.component(SwitchV2.name, SwitchV2);
             Vue.component(Spinner.name, Spinner);
             Vue.component(Textarea.name, Textarea);
             Vue.component(TextareaStatic.name, TextareaStatic);
@@ -164,6 +166,7 @@ export {
     SelectV2Option,
     Switch,
     SwitchContainer,
+    SwitchV2,
     Textarea,
     TextareaStatic,
     Annotation,
