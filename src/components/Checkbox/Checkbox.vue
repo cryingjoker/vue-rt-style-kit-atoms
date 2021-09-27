@@ -1,4 +1,6 @@
 <script type="text/jsx">
+  import './checkbox.styl'
+
   import Vue from "vue";
   import {default as RippleComponent} from "../Ripple/Ripple.vue";
 

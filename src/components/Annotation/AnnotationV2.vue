@@ -1,4 +1,6 @@
 <script type="text/jsx">
+  import './annotation.styl'
+
   import {AnnotationStore} from "./AnnotationStore";
   export default {
     name: "RtAnnotationV2",

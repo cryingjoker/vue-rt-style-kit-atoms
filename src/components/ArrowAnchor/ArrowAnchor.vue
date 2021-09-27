@@ -1,5 +1,5 @@
 <script type="text/jsx">
-
+import './arrowAnchor.styl'
 
 export default {
   name: "RtArrowAnchor",

@@ -1,4 +1,6 @@
 <script type="text/jsx">
+import './systemIcons.styl'
+
 import systemIcons from '../../system-icons.json'
 
 function de(b) {

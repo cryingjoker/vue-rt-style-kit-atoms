@@ -1,4 +1,6 @@
 <script type="text/jsx">
+  import './ussd.styl'
+
   export default {
     name: "RtUssd",
     props: {

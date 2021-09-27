@@ -1,4 +1,5 @@
 <script type="text/jsx">
+    import './colorLineText.styl'
     import {getColorsCustomProps, getColorClassByProps} from "../../mixins/colorTextClassMixin.js";
     import {getFillClassByProps, fillColorProps} from "../../mixins/fillTextClassMixin.js";
     import {deviceTypeStore} from "../../stores/deviceTypeStoreMixin.js";
