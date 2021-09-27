@@ -7,7 +7,6 @@ export {default as Price} from './Price/Price.vue';
 export {default as RadioButton} from './RadioButton/RadioButton.vue';
 export {default as RadioButtonContainer} from './RadioButton/RadioButtonContainer.vue';
 export {default as Ripple} from './Ripple/Ripple.vue';
-export {default as RippleWithoutJs} from './Ripple/RippleWithoutJs.vue';
 export {default as Select} from './Select/Select.vue';
 export {default as SelectOption} from './Select/SelectOption.vue';
 export {default as SelectV2} from './Select/SelectV2.vue';
