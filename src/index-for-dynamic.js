@@ -27,7 +27,7 @@ export default { // Сортировака по принадлежности, к
   ...load('RtImg', 'Image/Image.vue'),
   ...load('RtLine', 'Line/Line.vue'),
   ...load('RtRipple', 'Ripple/Ripple.vue'),
-  ...load('RtRtRippleWithoutJs', 'Ripple/RippleWithoutJs.vue'),
+  ...load('RtRippleWithoutJs', 'Ripple/RippleWithoutJs.vue'),
   ...load('RtCircleNumber', 'CircleNumber/CircleNumber.vue'),
 
   // Form

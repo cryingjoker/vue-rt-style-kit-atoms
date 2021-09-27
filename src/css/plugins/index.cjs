@@ -16,7 +16,7 @@ module.exports = function() {
       a = deltax
       b = deltay
       c = deltax * y1 - deltay * x1
-      const res = '(' + b + '* 100vw'
+      let res = '(' + b + '* 100vw'
       if (c > 0) {
         res = res + '+ '
       } else {
