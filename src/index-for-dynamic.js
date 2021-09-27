@@ -3,16 +3,16 @@
  * @info используется только для Widgets-шин сайта
  * @see RTRU-11155
  */
+import { safeImport } from './global-utils'
+
 export default {
-  // Rt: () => import('./components//.vue').catch(e => console.error(e)),
+  ...safeImport('RtButton', 'Button/Button.vue'),
+  ...safeImport('RtLine', 'Line/Line.vue'),
+  ...safeImport('RtImg', 'Image/Image.vue'),
+  ...safeImport('RtPrice', 'Price/Price.vue'),
+  ...safeImport('RtSpinner', 'Spinner/Spinner.vue'),
+  ...safeImport('RtSystemIcons', 'SystemIcons/SystemIcons.vue'),
 
-  RtButton: () => import('./components/Button/Button.vue').catch(e => console.error(e)),
-  RtLine: () => import('./components/Line/Line.vue').catch(e => console.error(e)),
-  RtImg: () => import('./components/Image/Image.vue').catch(e => console.error(e)),
-  RtPrice: () => import('./components/Price/Price.vue').catch(e => console.error(e)),
-  RtSpinner: () => import('./components/Spinner/Spinner.vue').catch(e => console.error(e)),
-  RtSystemIcons: () => import('./components/SystemIcons/SystemIcons.vue').catch(e => console.error(e)),
-
-  RtRow: () => import('./components/Grid/GridRow.vue').catch(e => console.error(e)),
-  RtCol: () => import('./components/Grid/GridColumn.vue').catch(e => console.error(e)),
+  ...safeImport('RtRow', 'Grid/GridRow.vue'),
+  ...safeImport('RtCol', 'Grid/GridColumn.vue'),
 }
