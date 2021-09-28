@@ -442,16 +442,8 @@ export default {
 
     },
     noteScroll() {
-      if (this.$refs.inner.scrollTop != 0) {
-        this.shadowUp = true
-      } else {
-        this.shadowUp = false
-      }
-      if (this.$refs.inner.scrollTop != this.$refs.inner.scrollHeight - this.$refs.inner.offsetHeight) {
-        this.shadowDown = true
-      } else {
-        this.shadowDown = false
-      }
+      this.shadowUp = this.$refs.inner.scrollTop != 0;
+      this.shadowDown = this.$refs.inner.scrollTop != this.$refs.inner.scrollHeight - this.$refs.inner.offsetHeight;
     },
     onFocus(e) {
       this.isFocus = true
