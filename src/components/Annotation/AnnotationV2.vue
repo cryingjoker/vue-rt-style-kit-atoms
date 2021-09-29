@@ -1,5 +1,5 @@
 <script type="text/jsx">
-  import './annotation.styl'
+  import './Annotation.styl'
 
   import {AnnotationStore} from "./AnnotationStore";
   export default {

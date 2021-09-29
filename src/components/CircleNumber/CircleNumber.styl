@@ -2,14 +2,17 @@
   position: relative;
   width: 120px
   height: 120px
+
 .rt-circle-number-small
   width: 80px
   height: 80px
+
 .rt-circle-number-svg
   position: absolute;
   top: 0
   left: 0
   pointer-events none
+
 .rt-circle-number-svg__line
   animation 2s showCircle linear
   stroke-dashoffset 0
@@ -17,15 +20,18 @@
   .rt-circle-number-small &
     stroke-dasharray 300
     animation 2s showCircleSmall linear
+
 .rt-circle-number-conent
   width: 120px
   height: 120px
   position: relative
+
 .rt-circle-number-small
   .rt-circle-number-conent
     width: 80px
     height: 80px
     position: relative
+
 .rt-circle-number-svg__circle
   animation 0.5s showCircleRound linear
 
