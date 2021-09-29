@@ -79,14 +79,6 @@ export default {
       type: Boolean,
       default: false
     },
-    hasTimer: {
-      type: Boolean,
-      default: false
-    },
-    timerDuration: {
-      type: String,
-      default: ''
-    },
     inputButton: {
       type: Boolean,
       default: false

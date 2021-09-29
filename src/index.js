@@ -39,9 +39,7 @@ import {LazySrcDirective} from "./directives/lazySrc/LazySrc";
 let VueRtStyle = {
     install(Vue, config) {
         if (!Vue.RtStyleAtoms) {
-
             Vue.directive(LazySrcDirective.name, LazySrcDirective);
-
             Vue.RtStyleAtoms = true;
         }
     }

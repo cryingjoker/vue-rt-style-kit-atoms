@@ -1,4 +1,5 @@
 <script type="text/jsx">
+import './PriceV2.styl'
 export default {
   name: "RtPriceV2",
   props: {

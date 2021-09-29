@@ -1,5 +1,6 @@
 <script type="text/jsx">
 import {default as RippleComponent} from "../Ripple/Ripple.vue";
+import './Switch.styl'
 
 const componentsList = {};
 componentsList[RippleComponent.name] = RippleComponent;

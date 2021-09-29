@@ -1,6 +1,8 @@
 <script type="text/jsx">
 import variables from "../../variables.json";
 import InputV2 from "./InputV2.vue";
+import './Input.styl'
+import './TextField.styl'
 
 const components = {}
 components[InputV2.name] = InputV2
@@ -111,14 +113,6 @@ export default {
     approved: {
       type: Boolean,
       default: false
-    },
-    hasTimer: {
-      type: Boolean,
-      default: false
-    },
-    timerDuration: {
-      type: String,
-      default: ''
     },
     inputButton: {
       type: Boolean,
@@ -587,8 +581,6 @@ export default {
           color={this.color}
           isHidden={this.isHidden}
           approved={this.approved}
-          hasTimer={this.hasTimer}
-          timerDuration={this.timerDuration}
           inputButton={this.inputButton}
           inputButtonText={this.inputButtonText}
           scope={this.scope}
@@ -763,7 +755,6 @@ export default {
       }
     })();
     const inputLine = () => {
-
       if (this.outlined) {
         return <div class="text-field__border"/>
       } else {
@@ -772,22 +763,12 @@ export default {
     }
     const renderButton = () => {
       if (this.inputButton) {
-
-
         return <rt-button class="rt-button-transparent-purple rt-button-small"
                           onClick={this.getCode}>{this.inputButtonText}</rt-button>
       }
       return null
-
     }
-    const renderTimer = () => {
-      if (this.hasTimer) {
 
-        return <rt-countdown-timer duration={this.timerDuration}/>
-      }
-      return null
-
-    }
     return <div class={this.inputClass}>
       <div class={this.inputContainerClass}>
         {inputElementByType}
@@ -799,10 +780,8 @@ export default {
         {errorMessage}
         {arithmeticButtons}
         {this.$slots.default}
-        {renderTimer()}
       </div>
       {inputLabel}
-
       {renderButton()}
     </div>;
   }

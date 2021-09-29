@@ -1,5 +1,6 @@
 <script type="text/jsx">
 import TextareaV2 from "./TextareaV2.vue";
+import './Textarea.styl'
 
 const components = {}
 components[TextareaV2.name] = TextareaV2;

@@ -2,6 +2,7 @@
     import {default as Spinner} from "../Spinner/Spinner.vue";
     import {default as RippleComponent} from "../Ripple/Ripple.vue";
     import {buttonsStore} from "./ButtonStore.js"
+    import './Button.styl'
 
     const componentsList = {};
     componentsList[RippleComponent.name] = RippleComponent;
