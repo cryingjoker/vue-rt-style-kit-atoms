@@ -1,5 +1,5 @@
 <script type="text/jsx">
-    import './videoplayer.styl'
+    import './Videoplayer.styl'
     import {default as Spinner} from "../Spinner/Spinner.vue";
     import debounce from "debounce";
     import variables from "../../variables.json";

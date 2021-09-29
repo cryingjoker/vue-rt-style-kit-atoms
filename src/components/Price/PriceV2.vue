@@ -102,10 +102,8 @@ export default {
         }
         return <div class={classList}>{this.currency}
         </div>;
-
       }
       return null;
-
     },
     oldValueRender() {
       if (this.oldValue && parseFloat(this.oldValue) > 0) {
@@ -155,11 +153,9 @@ export default {
       }else{
         classList.push('font-h1')
       }
-
       if (this.oldValue && parseFloat(this.oldValue) > 0) {
         classList.push("sp-l-0-1")
       }
-
       return <div class={classList.join(' ')}>{this.$slots.default || this.normalValue}</div>;
     },
     postCodeRender(){
@@ -177,17 +173,9 @@ export default {
       return classList.join(' ')
     }
   },
-
-
-  mounted() {
-
-
-  },
+  mounted() {},
   render(h) {
     return <div class={this.wrapperClass}>{this.optionRender}{this.oldValueRender}{this.valueRender}{this.postCodeRender}</div>
   }
-
-
 }
-
 </script>

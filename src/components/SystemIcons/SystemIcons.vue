@@ -1,5 +1,5 @@
 <script type="text/jsx">
-import './systemIcons.styl'
+import './SystemIcons.styl'
 
 import systemIcons from '../../system-icons.json'
 

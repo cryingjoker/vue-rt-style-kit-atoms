@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import './spinner.styl'
+import './Spinner.styl'
 
 export default {
   name: "RtSpinner",

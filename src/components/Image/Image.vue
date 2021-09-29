@@ -164,7 +164,6 @@ export default {
       if (this.backgroundMode) {
         image = 'url(' + image + ')';
       }
-      console.log('--->>', image)
       return image
     },
     lazy(){

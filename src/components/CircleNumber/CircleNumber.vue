@@ -1,5 +1,5 @@
 <script type="text/jsx">
-import './circleNumber.styl'
+import './CircleNumber.styl'
 
 export default {
   name: "RtCircleNumber",
