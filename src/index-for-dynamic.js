@@ -1,8 +1,16 @@
 /**
- * Данный список компонентов подключается динамически на страницу
- * @info используется только для Widgets-шин сайта
+ * Данный список используется для динамического подключения компонентов
  * @see RTRU-11155
  */
+// Список директив всегда статический
+import { LazySrcDirective } from './directives/lazySrc/LazySrc'
+ 
+/**
+ * @info использовать через Vue.directive(directive.name, directive)
+ */
+export const directives = {
+  LazySrcDirective
+}
 
 /**
  * Позволяет подключать компоненты и добавлять дополнительные обработчики
@@ -16,11 +24,14 @@ const load = (cmpDecorator, fileLocation) => {
       //   console.log('Hello there!', cmp)
       //   return cmp
       // })
-      .catch(e => console.error(e))
+      .catch(e => console.error('-->>', e))
   }
 }
 
-export default { // Сортировака по принадлежности, как в pages
+/**
+ * @info использовать через Vue.component(cmpDecorator, cmp), без use метода
+ */
+export default { // Сортировака по группам, как в pages
   // Main
   ...load('RtRow', 'Grid/GridRow.vue'),
   ...load('RtCol', 'Grid/GridColumn.vue'),
