@@ -1,7 +1,7 @@
 <script type="text/jsx">
+import './SwitchV2.styl'
 
 const componentsList = {};
-
 
 export default {
   name: "RtSwitchV2",

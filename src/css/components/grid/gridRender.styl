@@ -44,15 +44,12 @@ gridRender()
           $value = ceil(unit( $i/$steps[$postfixIndex][$device_index]*100  , $unitsType[$postfixIndex]),4)
 
           .{className}
-
-
             flex 0 0 $value
             max-width $value
             width 100%
             padding-left (horizontal-space * .5)
             padding-right (horizontal-space * .5)
             position relative
-
             if $postfixIndex == 0 && length(selector) > 6
               /{selector}
                 flex 0 0 $value
@@ -66,6 +63,5 @@ gridRender()
         gridClassRender()
     else
       gridClassRender()
-
 
 gridRender()

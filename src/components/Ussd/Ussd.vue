@@ -1,4 +1,6 @@
 <script type="text/jsx">
+  import './Ussd.styl'
+
   export default {
     name: "RtUssd",
     props: {
@@ -33,7 +35,6 @@
           }else{
             tel = "tel:" + this.$slots.default[0].text;
           }
-
         } else {
           if (this.$el && this.$el.querySelector && this.$el.querySelector(".epc-options__value")) {
             this.telHtml = this.$el.querySelector(".epc-options__value").innerHTML;
@@ -55,7 +56,6 @@
             this.tel = tel;
             this.hasHtml = true;
           }
-
         }
       }
       this.tel = tel;
@@ -66,7 +66,6 @@
     if (this.withoutLeftSpace) {
       ussdClassName += " rt-ussd--stand-alone";
     }
-
     if (this.tel) {
       return <a class={ussdClassName} href={this.tel}>
         {this.hasHtml ? this.telHtml : this.$slots.default}
@@ -80,7 +79,6 @@
         </svg>
       </a>;
     } else {
-
       if (this.$slots && this.$slots.default && this.$slots.default[0]) {
         return <span class="d-none">{this.$slots.default[0]}</span>;
       }

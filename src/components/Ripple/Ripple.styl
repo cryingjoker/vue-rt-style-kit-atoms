@@ -10,15 +10,12 @@
   transition-timing-function ease-in-out
   transition-duration .3s
   transition-property left
-
   .{newAppName}-button.{newAppName}-space-horizontal05 &
     width "calc(100% + %s)" % horizontal-space
     left -1 * horizontal-space * .5
-
   .{newAppName}-button.{newAppName}-space-horizontal &
     width "calc(100% + %s)" % (horizontal-space * 2)
     left -1 * horizontal-space
-
   .radio-button &,
   .checkbox &,
   .switch-container &
@@ -30,19 +27,15 @@
     position absolute
     top: calc(-24px + 1.2ex);
     z-index 2
-
   .checkbox &,
   .radio-button &
     left -15px
-
   .switch-container &
     left -20px
-
   .button &
     border-radius 4px
     padding-left 24px
     padding-right 24px
-
   &-wave
     width 10px
     height 10px
@@ -58,10 +51,8 @@
     transition-property width, height, margin, transform, opacity, visibility
     animation .4s showRipple linear
     pointer-events none
-
     .{newAppName}-dark-theme .checkbox &
       background-color b2c-orange
-
     .white-wave &
       background-color #fff
 
@@ -75,15 +66,13 @@
   width 1px
   height 1px
   background-color b2c-purple
-
-  .{newAppName}-dark-theme &,
-  .switch--orange &
-    background-color b2c-orange
-
   top 25px !important
   left 25px !important
   transition-timing-function cubic-bezier(.11, .34, .97, .33)
   transition-duration .4s
+  .{newAppName}-dark-theme &,
+  .switch--orange &
+    background-color b2c-orange
 
 @keyframes showRipple
   0%

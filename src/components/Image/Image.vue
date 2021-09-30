@@ -106,14 +106,14 @@ export default {
     }
   },
   beforeUpdate() {
-    deviceTypeStore.removeWatcher(this._uid, this.calculateTypepOtions);
+    deviceTypeStore.removeWatcher(this._uid, this.calculateTypeOptions);
   },
   updated() {
-    deviceTypeStore.removeWatcher(this._uid, this.calculateTypepOtions);
-    deviceTypeStore.addWatcher(this._uid, this.calculateTypepOtions);
+    deviceTypeStore.removeWatcher(this._uid, this.calculateTypeOptions);
+    deviceTypeStore.addWatcher(this._uid, this.calculateTypeOptions);
   },
   beforeDestroy() {
-    deviceTypeStore.removeWatcher(this._uid, this.calculateTypepOtions);
+    deviceTypeStore.removeWatcher(this._uid, this.calculateTypeOptions);
   },
   computed: {
     image() {
@@ -146,7 +146,6 @@ export default {
         } else {
           image = this.mdSrc
         }
-
       if (image.length == 0) {
         if (this.x2Src && window.devicePixelRatio && window.devicePixelRatio > 1) {
           if (this.supportWebP && this.webpX2Src) {
@@ -169,8 +168,6 @@ export default {
     },
     lazy(){
       let lazyImage = '';
-
-
       if (this.type == 'desktop-large' && this.lazyLgSrc) {
         lazyImage = this.lazyLgSrc
       }
@@ -180,7 +177,6 @@ export default {
       if (this.type == 'mobile' && this.lazyMdSrc){
         lazyImage = this.lazyMdSrc
       }
-
       if (lazyImage.length == 0 && this.lazySrc) {
         lazyImage = this.lazySrc
       }
@@ -193,12 +189,12 @@ export default {
         this.supportWebP = isSupported
       }
     })
-    deviceTypeStore.addWatcher(this._uid, this.calculateTypepOtions);
-    this.calculateTypepOtions();
+    deviceTypeStore.addWatcher(this._uid, this.calculateTypeOptions);
+    this.calculateTypeOptions();
 
   },
   methods: {
-    calculateTypepOtions() {
+    calculateTypeOptions() {
       this.type = deviceTypeStore.getStatus()
     },
   },

@@ -3,11 +3,7 @@
   word-break break-word
   position relative
   left 15px
-
-
-
   &-wrapper
-    //max-width calc(100vw - 70px)
     padding-bottom 20px
     padding-right 29px
     &--custom
@@ -18,24 +14,19 @@
           display: none
         .rt-price
           color b2c-white
-
   &--is-paragraph
     display flex
     flex-wrap wrap
     padding-right horizontal-space * .75
     position relative
-
     &:before,
     &:after
       content ""
       order 1
       width 100%
-
     @media (max-width: mobile-upper-limit)
       margin-right horizontal-space * 1.5
       left 0
-
-
   &-paragraph-icon
     width 40px
     height 20px
@@ -44,8 +35,6 @@
     bottom -20px
     right  23px
     transform: translateX(100%);
-
-
     @media (max-width: laptop-upper-limit)
       height 20px
       bottom -20px
@@ -78,8 +67,6 @@
       @media (max-width: mobile-upper-limit)
         bottom: -10px
         left -21px
-
-
   &-text
     border-right 2px solid white
     position relative
@@ -89,18 +76,11 @@
     box-shadow 15px 0 0 #fff, -15px 0 0 #fff
     .color-line-paragraph-icon__background
       fill white
-    //@media (max-width: mobile-upper-limit) //todo зачем эта фигня?
-    //  border-top-right-radius 4px
     .color-line--is-paragraph &
       @media (max-width: mobile-upper-limit)
         box-shadow none!important
         background-color: transparent!important
         border-right-color transparent!important
-
-    //br
-    //  @media (max-width: mobile-upper-limit)
-    //    display none
-
     .color-line--is-paragraph &
       border-radius 0 5px 0 0
       padding-top vertical-space * .25
@@ -120,7 +100,6 @@
         &+.color-line-paragraph-icon
           .color-line-paragraph-icon__background
             fill (b2c- + $color)
-
     &--black
       background-color main-color
       border-right 2px solid main-color

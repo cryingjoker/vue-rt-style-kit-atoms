@@ -2,6 +2,7 @@
   import variables from "../../variables.json";
   import debounce from 'debounce';
   import {hintStore} from "./HintStore";
+  import './Hint.styl'
 
   export default {
     name: "RtHint",

@@ -1,4 +1,5 @@
 <script type="text/jsx">
+import './TextareaV2.styl'
 export default {
   name: "RtTextareaV2",
   props: {

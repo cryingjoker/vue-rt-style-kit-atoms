@@ -12,22 +12,3 @@ for $i in colors
   if search($i,'b2c') >= 0 || search($i,'main') >= 0
     className = 'color-block--'+replace($i,'b2c-','')
     renderColorClass(className, $i, $type)
-
-
-
-.color-block--main-color
-  background-color main-color
-
-  .{b2bAppName}-product__triangle-image
-      fill main-color
-
-.color-block--light-grey
-  background-color light-grey
-
-  .{b2bAppName}-product__triangle-image
-      fill light-grey
-
-
-  .{b2bAppName}-product__triangle-image
-      fill #272F3D
-

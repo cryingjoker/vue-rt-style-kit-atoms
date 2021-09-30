@@ -3,6 +3,7 @@ import InputV2Atom from "./InputV2Atom.vue";
 import InputV2Password from "./InputV2Password.vue";
 import InputV2Number from "./InputV2Number.vue";
 import InputV2PhoneNumber from "./InputV2PhoneNumber.vue";
+import './InputV2.styl'
 
 const components = {}
 components[InputV2Atom.name] = InputV2Atom
@@ -85,14 +86,6 @@ export default {
     approved: {
       type: Boolean,
       default: false
-    },
-    hasTimer: {
-      type: Boolean,
-      default: false
-    },
-    timerDuration: {
-      type: String,
-      default: ''
     },
     inputButton: {
       type: Boolean,

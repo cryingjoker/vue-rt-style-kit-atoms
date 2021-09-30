@@ -1,5 +1,6 @@
 <script type="text/jsx">
 import PriceV2 from './PriceV2.vue'
+import './Price.styl'
 
 const componentsList = {};
 componentsList[PriceV2.name] = PriceV2
@@ -8,7 +9,6 @@ export default {
   name: "RtPrice",
   components: componentsList,
   props: {
-
     bright: {
       type: Boolean,
       default: false

@@ -1,6 +1,7 @@
 <script type="text/jsx">
 import {SelectStore} from './SelectStore.js'
 import SelectV2VirtualOption from './SelectV2VirtualOption.vue'
+import './SelectV2.styl'
 
 const components = {};
 components[SelectV2VirtualOption.name] = SelectV2VirtualOption

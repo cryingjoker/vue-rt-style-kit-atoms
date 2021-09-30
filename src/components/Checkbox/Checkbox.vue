@@ -1,5 +1,5 @@
 <script type="text/jsx">
-  import Vue from "vue";
+  import './Checkbox.styl'
   import {default as RippleComponent} from "../Ripple/Ripple.vue";
 
   const componentsList = {};
@@ -7,7 +7,6 @@
   export default {
     name: "RtCheckbox",
     components: componentsList,
-
     props: {
       bright: {
         type: Boolean,
@@ -49,9 +48,7 @@
         type: Boolean,
         default: false
       }
-
     },
-
     data() {
       return {
         isChecked: this.checked
@@ -97,7 +94,6 @@
       changeInput($event) {
         this.isChecked = this.$refs['input'].checked
         this.$emit("update:checked", this.isChecked);
-
         this.$emit("changecheckbox", {
           name: this.name,
           value: this.value,
@@ -107,11 +103,9 @@
         if(this.native){
           this.$emit('input',this.isChecked)
         }
-
         this.showWave();
       },
       bindEvents() {
-
         if (this["_events"]) {
           Object.keys(this["_events"]).map(eventName => {
             this["_events"][eventName].forEach((fn) => {
@@ -166,11 +160,9 @@
           classList.push('invalid')
         }
         return classList.join(' ')
-
       }
-
     },
-    render(createElement, context) {
+    render(h) {
       return <label class={this.checkBoxClass}>
         <rt-ripple ref="ripple" not-render={this.isDisabled}/>
         <input id={this.uid} checked={this.checked} ref="input" disabled={this.isDisabled}
@@ -198,6 +190,5 @@
         </div>
       </label>
     }
-
   };
 </script>

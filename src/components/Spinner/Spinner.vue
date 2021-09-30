@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import './Spinner.styl'
+
 export default {
   name: "RtSpinner",
   props: {
