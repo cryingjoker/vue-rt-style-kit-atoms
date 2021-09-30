@@ -37,7 +37,7 @@ class LazySrc {
   }
 }
 
-export const LazySrcDirective = {
+export default {
   name: "LazySrc",
   bind(el, bindings, vnode) {
     el.lazy = new LazySrc(vnode.elm, bindings, vnode);

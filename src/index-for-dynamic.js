@@ -3,13 +3,13 @@
  * @see RTRU-11155
  */
 // Список директив всегда статический
-import { LazySrcDirective } from './directives/lazySrc/LazySrc'
+import * as directivesFromAtoms from './directives'
  
 /**
  * @info использовать через Vue.directive(directive.name, directive)
  */
 export const directives = {
-  LazySrcDirective
+  ...directivesFromAtoms
 }
 
 /**
