@@ -1,4 +1,4 @@
-import  "./css/vue-rt-style-atoms.styl";
+import  "./css/vue-rt-style-kit-atoms.styl";
 import Global from "./variables.json";
 // import Project from "@projectAtoms";
 import ofi from './polyfills/ofi.min'
