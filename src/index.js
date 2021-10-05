@@ -11,7 +11,6 @@ import {
     RadioButton,
     RadioButtonContainer,
     Ripple,
-    RippleWihoutJs,
     Select,
     SelectOption,
     SelectV2,
@@ -67,7 +66,7 @@ import {
     getBackgroundClass
 } from "./mixins/backgroundColorTextClassMixin.js";
 import getVariable from "./mixins/variablesMixin.js";
-import {LazySrcDirective} from "./directives/lazySrc/LazySrc";
+import {default as LazySrcDirective} from "./directives/lazySrc/LazySrc";
 
 
 let VueRtStyle = {
@@ -83,7 +82,6 @@ let VueRtStyle = {
             Vue.component(RadioButton.name, RadioButton);
             Vue.component(RadioButtonContainer.name, RadioButtonContainer);
             Vue.component(Ripple.name, Ripple);
-            Vue.component(RippleWihoutJs.name, RippleWihoutJs);
             Vue.component(Select.name, Select);
             Vue.component(SelectOption.name, SelectOption);
             Vue.component(SelectV2.name, SelectV2);
@@ -155,7 +153,6 @@ export {
     RadioButton,
     RadioButtonContainer,
     Ripple,
-    RippleWihoutJs,
     Select,
     SelectOption,
     SelectV2,
