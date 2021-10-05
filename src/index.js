@@ -66,7 +66,7 @@ import {
     getBackgroundClass
 } from "./mixins/backgroundColorTextClassMixin.js";
 import getVariable from "./mixins/variablesMixin.js";
-import {LazySrcDirective} from "./directives/lazySrc/LazySrc";
+import {default as LazySrcDirective} from "./directives/lazySrc/LazySrc";
 
 
 let VueRtStyle = {
