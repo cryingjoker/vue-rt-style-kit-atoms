@@ -1,6 +1,6 @@
 <script type="text/jsx">
 
-import {deviceTypeStore} from "../../index";
+import { deviceTypeStore } from "../../stores/deviceTypeStoreMixin.js";
 
 function WebpIsSupported(callback) {
   // If the browser doesn't has the method createImageBitmap, you can't display webp format
