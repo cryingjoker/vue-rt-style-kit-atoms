@@ -72,7 +72,7 @@
 	      isHover: false,
         selected: {},
         isOpenListOnTop: false,
-        hasSelected: this.text ? true : false,
+        hasSelected: !!this.text,
         focused: false,
         multiLocalValue: [],
         multiValue: ''
@@ -190,11 +190,7 @@
             this.isOpen = true;
           if (this.isOpen) {
             this.scrollToSelected();
-            if (window.innerHeight - e.clientY < 200 && e.clientY > 200) {
-              this.isOpenListOnTop = true;
-            }else{
-              this.isOpenListOnTop = false;
-            }
+            this.isOpenListOnTop = window.innerHeight - e.clientY < 200 && e.clientY > 200;
             setTimeout(() => {
               this.bindEvents();
             });
