@@ -40,11 +40,7 @@ export default {
     updateRadioData(radioData){
       const uidArray = this.radioNamesMap[radioData.name];
       uidArray.forEach((uid)=>{
-        if(uid !== radioData['_uid']) {
-          this.radioData[uid].checked = false;
-        }else{
-          this.radioData[uid].checked = true;
-        }
+        this.radioData[uid].checked = uid === radioData['_uid'];
       });
       this.emitSelectedData();
     },
