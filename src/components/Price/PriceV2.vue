@@ -190,7 +190,7 @@ export default {
     this.showPriceLocal = this.showOnlyPrice || this.showPrice
   },
   render(h) {
-    return <div><div class={this.wrapperClass}>{this.optionRender}{this.oldValueRender}{this.valueRender}{this.postCodeRender}</div></div>
+    return <div class={this.wrapperClass}>{this.optionRender}{this.oldValueRender}{this.valueRender}{this.postCodeRender}</div>
   }
 }
 </script>
