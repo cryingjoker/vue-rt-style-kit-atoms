@@ -219,11 +219,16 @@ export default {
   },
   render(h) {
     if (this.v2) {
-      return <rt-price-v2 bright={this.bright} value={this.value} old-value={this.oldValue}
-                          option-label={this.optionLabel} show-float={this.showFloat} currency={this.currency}
-                          only-price={this.onlyPrice}
+      return <div>{this.onlyPrice ? 1 : 0}<rt-price-v2 bright={this.bright}
+                          value={this.value}
+                          old-value={this.oldValue}
+                          option-label={this.optionLabel}
+                          show-float={this.showFloat}
+                          currency={this.currency}
+                          show-only-price={this.onlyPrice}
                           is-small={this.isSmall}
-                          time-interval={this.timeInterval} is-option={this.isOption}>{this.$slots.default}</rt-price-v2>
+                          time-interval={this.timeInterval}
+                               is-option={this.isOption}>{this.$slots.default}</rt-price-v2></div>
     }
     const rtPriceInfoClass = "rt-price__info" + (this.boldOption ? " rt-price__info--bold-font" : "");
     const timeIntervalRender = () => {
