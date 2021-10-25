@@ -1,31 +1,31 @@
 <script type="text/jsx">
+import './SwitchV2.styl'
 
-const componentsList = {};
-
+const componentsList = {}
 
 export default {
   name: "RtSwitchV2",
   components: componentsList,
   props: {
     id:{
-      type:String,
+      type: String,
       default:''
     },
-    disabled: {
+    name: {
+      type: String,
+      default: ''
+    },
+    value: { // v-model = :value + @input
       type: Boolean,
       default: false
     },
-    checked: {
+    disabled: {
       type: Boolean,
       default: false
     },
     bright: {
       type: Boolean,
       default: false
-    },
-    name: {
-      type: String,
-      default: ''
     },
     invert:{
       type: Boolean,
@@ -35,10 +35,12 @@ export default {
       type: String,
       default: 'orange'
     }
-
-
   },
-
+  data() {
+    return {
+      localValue: this.value
+    }
+  },
   computed:{
     switchClassName(){
       const switchClassName = ['switch-v2']
@@ -54,13 +56,17 @@ export default {
       return switchClassName.join(' ')
     }
   },
-  mounted: function () {
-
-  },
-
   methods: {
-    onChange(){
-
+    onChange($event){
+      this.localValue = $event.target.checked
+      this.$emit('input', this.localValue)
+    }
+  },
+  watch: {
+    value(newValue, oldValue) {
+      if (newValue != oldValue && newValue != this.localValue) {
+        this.localValue = newValue
+      }
     }
   },
   render(h) {
@@ -70,7 +76,7 @@ export default {
                       id={this.id}
                       name={this.name}
                       disabled={this.disabled}
-                      checked={this.checked}
+                      checked={this.localValue}
                       type="checkbox"
                       class="switch-v2-element"
                       onChange={this.onChange}/>
@@ -78,7 +84,7 @@ export default {
         return <input ref="input"
                       id={this.id}
                       disabled={this.disabled}
-                      checked={this.checked}
+                      checked={this.localValue}
                       type="checkbox"
                       class="switch-v2-element"
                       onChange={this.onChange}/>
@@ -93,5 +99,5 @@ export default {
       </div>
     </label>
   }
-};
+}
 </script>

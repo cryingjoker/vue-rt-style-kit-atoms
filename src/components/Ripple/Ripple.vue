@@ -1,13 +1,5 @@
-<!-- @touchmove.passive -->
-<!-- @mousedown.passive -->
-<!-- @touchstart.passive -->
-<template>
-  <div class="ripple" @mousedown="renderRipple">
-    <slot />
-  </div>
-</template>
-
-<script>
+<script type="text/jsx">
+import './Ripple.styl'
 const componentsList = {};
 export default {
   name: "RtRipple",
@@ -94,6 +86,9 @@ export default {
         top: $event.offsetY + "px"
       };
     }
+  },
+  render(h) {
+    return <div class="ripple" onMousedown={this.renderRipple}>{this.$slots.default}</div>
   }
 };
 </script>

@@ -1,4 +1,6 @@
 <script type="text/jsx">
+import './CircleNumber.styl'
+
 export default {
   name: "RtCircleNumber",
   props: {

@@ -1,4 +1,5 @@
 <script type="text/jsx">
+import './PriceV2.styl'
 export default {
   name: "RtPriceV2",
   props: {
@@ -42,6 +43,11 @@ export default {
       type: Boolean,
       default: false
     },
+    showOnlyPrice: {
+      type: Boolean,
+      default: false
+    },
+
     isSmall:{
       type:  Boolean,
       default: false
@@ -53,8 +59,16 @@ export default {
     priceType: "",
     normalizeCurrency: '',
     normalizeTimeInterval: 0,
+    showPriceLocal: false
   }),
-  watch: {},
+  watch:{
+    onlyPrice(newVal){
+      this.showPriceLocal = newVal
+    },
+    showOnlyPrice(newVal){
+      this.showPriceLocal = newVal
+    },
+  },
   computed: {
     normalOldValue() {
       if (this.oldValue) {
@@ -101,10 +115,8 @@ export default {
         }
         return <div class={classList}>{this.currency}
         </div>;
-
       }
       return null;
-
     },
     oldValueRender() {
       if (this.oldValue && parseFloat(this.oldValue) > 0) {
@@ -120,7 +132,7 @@ export default {
       }
     },
     timeIntervalRender() {
-      if (this.timeInterval && !this.onlyPrice) {
+      if (this.timeInterval && !this.showPriceLocal) {
         const classList = ["rt-price-v2__info-item"];
         if(this.isSmall){
           classList.push('font-t-xs');
@@ -154,16 +166,14 @@ export default {
       }else{
         classList.push('font-h1')
       }
-
       if (this.oldValue && parseFloat(this.oldValue) > 0) {
         classList.push("sp-l-0-1")
       }
-
       return <div class={classList.join(' ')}>{this.$slots.default || this.normalValue}</div>;
     },
     postCodeRender(){
       const classNames = ["d-inline-block", "flex-column", "sp-l-0-1", "rt-price-n__info"]
-      if(this.onlyPrice){
+      if(this.showPriceLocal){
         classNames.push('rt-price-n__info-price')
       }
       return <div class={classNames.join(' ')}>{this.currencyRender}{this.timeIntervalRender}</div>
@@ -176,17 +186,11 @@ export default {
       return classList.join(' ')
     }
   },
-
-
   mounted() {
-
-
+    this.showPriceLocal = this.showOnlyPrice || this.showPrice
   },
   render(h) {
     return <div class={this.wrapperClass}>{this.optionRender}{this.oldValueRender}{this.valueRender}{this.postCodeRender}</div>
   }
-
-
 }
-
 </script>

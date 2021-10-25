@@ -1,5 +1,6 @@
 <script type="text/jsx">
 import PriceV2 from './PriceV2.vue'
+import './Price.styl'
 
 const componentsList = {};
 componentsList[PriceV2.name] = PriceV2
@@ -8,7 +9,6 @@ export default {
   name: "RtPrice",
   components: componentsList,
   props: {
-
     bright: {
       type: Boolean,
       default: false
@@ -219,11 +219,16 @@ export default {
   },
   render(h) {
     if (this.v2) {
-      return <rt-price-v2 bright={this.bright} value={this.value} old-value={this.oldValue}
-                          option-label={this.optionLabel} show-float={this.showFloat} currency={this.currency}
-                          only-price={this.onlyPrice}
+      return <rt-price-v2 bright={this.bright}
+                          value={this.value}
+                          old-value={this.oldValue}
+                          option-label={this.optionLabel}
+                          show-float={this.showFloat}
+                          currency={this.currency}
+                          show-only-price={this.onlyPrice}
                           is-small={this.isSmall}
-                          time-interval={this.timeInterval} is-option={this.isOption}>{this.$slots.default}</rt-price-v2>
+                          time-interval={this.timeInterval}
+                               is-option={this.isOption}>{this.$slots.default}</rt-price-v2>
     }
     const rtPriceInfoClass = "rt-price__info" + (this.boldOption ? " rt-price__info--bold-font" : "");
     const timeIntervalRender = () => {

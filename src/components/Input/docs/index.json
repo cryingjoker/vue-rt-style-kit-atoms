@@ -163,20 +163,6 @@
     },
     {
       "name": "rt-input",
-      "property": ":has-timer",
-      "type": "Boolean",
-      "description": "Добавляет таймер обратного отсчёта рядом с полем ввода",
-      "value": "false"
-    },
-    {
-      "name": "rt-input",
-      "property": "timer-duration",
-      "type": "String",
-      "description": "Задаёт длительность обратного отсчёта",
-      "value": ""
-    },
-    {
-      "name": "rt-input",
       "property": "input-button",
       "type": "Boolean",
       "description": "Флаг отображения кнопки в инпуте",

@@ -1,5 +1,7 @@
 
 <script type="text/jsx">
+import './Annotation.styl'
+
 export default {
   name: "RtAnnotation",
   components: {},
