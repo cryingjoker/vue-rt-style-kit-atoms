@@ -20,22 +20,6 @@
     mobileSize: {
       type: [Number, String],
       default: -1
-    },
-    hide: {
-      type: Boolean,
-      default: false
-    },
-    mHide: {
-      type: Boolean,
-      default: false
-    },
-    tHide: {
-      type: Boolean,
-      default: false
-    },
-    lgHide: {
-      type: Boolean,
-      default: false
     }
   }
   const componentsList = {};
@@ -52,44 +36,27 @@
     },
     computed: {
       rowClassName() {
-        const classNamesArray = [...spacesParamsNames.map((name) => {
-          if (this[name] >= 0) {
-            return getSpacesClass(name, this[name]);
-          }
-        }), ...displayParamsNames.map((name) => {
-          if (this[name]) {
-            return getDisplayClass(name, this[name]);
-          }
-        }), ...this.sizeParams.map((name) => {
+        const classNamesArray = [
+          ...spacesParamsNames.map((name) => {
+              const getSpacesClassFn = getSpacesClass.bind(this)
+              return getSpacesClassFn(name, this[name])
+          }), (()=>{
+            const displayObj = {}
+            displayParamsNames.map((spaceName)=> {
+              if(spaceName in this) {
+                displayObj[spaceName] = this[spaceName]
+              }
+            })
+            return getDisplayClass(displayObj);
+          })(),
+          ...this.sizeParams.map((name) => {
           if (this[name] >= 0) {
             return this.getClassName(name, this[name])
           }
         })
         ].filter((i) => i && i.length > 0);
-        if (this.hide || this.lgHide || this.tHide || this.mHide) {
-          ['hide', 'lgHide', 'tHide', 'mHide'].forEach((key) => {
-            let prefix = key.replace(/hide/gi, '');
-            if (this[key]) {
-              let hideClass = ['d', 'none']
-              if(prefix == 'm' || prefix == 't'){
-                prefix += 'd'
-              }
-	            if (prefix.length > 0) {
-                hideClass.unshift(prefix)
-              }
 
-              classNamesArray.push(hideClass.join('-'))
-            } else {
-              let hideClass = ['d', 'block']
-              if (prefix.length > 0) {
-                hideClass.unshift(prefix)
-              }
-              classNamesArray.push(hideClass.join('-'))
-            }
-          })
-        }
-
-        return classNamesArray.join(' ');
+        return classNamesArray;
       }
     },
     methods: {

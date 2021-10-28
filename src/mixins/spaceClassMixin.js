@@ -1,4 +1,6 @@
+import spaceAdaptive from '../space-adaptive-map.json'
 export const spacesParamsNames  = ['top', 'bottom', 'left', 'right', 'tabletTop', 'tabletBottom', 'tabletLeft', 'tabletRight', 'mobileTop', 'mobileBottom', 'mobileLeft', 'mobileRight']
+
 export const spacesParamsProps  = {
     top: {
         type: [Number, String],
@@ -47,6 +49,22 @@ export const spacesParamsProps  = {
     mobileRight: {
         type: [Number, String],
         default: -1
+    },
+    topAdaptive:{
+        type:Boolean,
+        default: false
+    },
+    bottomAdaptive:{
+        type:Boolean,
+        default: false
+    },
+    leftAdaptive:{
+        type:Boolean,
+        default: false
+    },
+    rightAdaptive:{
+        type:Boolean,
+        default: false
     }
 }
 export function getSpacesClass(name, value)  {
@@ -54,55 +72,57 @@ export function getSpacesClass(name, value)  {
     if (localValue < 0) {
         return ''
     } else {
-        const classNamesParts = ['rt-'];
+        let isAdaptive = false;
+        const classNamesParts = [];
         if (name.search('tablet') === 0) {
             classNamesParts.push('td-')
         }
         if (name.search('mobile') === 0) {
             classNamesParts.push('md-')
         }
-        classNamesParts.push('space-')
+        classNamesParts.push('sp-')
         switch (true) {
             case name.search(/left/ig) >= 0:
-                classNamesParts.push('left');
+                classNamesParts.push('l');
+                if(this.leftAdaptive){
+                    isAdaptive = true
+                }
                 break;
             case name.search(/right/ig) >= 0:
-                classNamesParts.push('right');
+                classNamesParts.push('r');
+                if(this.rightAdaptive){
+                    isAdaptive = true
+                }
                 break;
             case name.search(/top/ig) >= 0:
-                classNamesParts.push('top');
+                classNamesParts.push('t');
+                if(this.topAdaptive){
+                    isAdaptive = true
+                }
+                
                 break;
             case name.search(/bottom/ig) >= 0:
-                classNamesParts.push('bottom');
+                classNamesParts.push('b');
+                if(this.bottomAdaptive){
+                    isAdaptive = true
+                }
                 break
         }
-        switch (true) {
-            case localValue % 20 === 0:
-                if (localValue === 0) {
-                    classNamesParts.push('-none')
-                } else if (localValue !== 20) {
-                    classNamesParts.push(localValue / 20 + '');
+        
+        if (localValue === 0) {
+            classNamesParts.push('-none')
+        }else {
+            if(isAdaptive){
+                const unitSpace = parseInt(localValue / 4);
+                classNamesParts.push('-x'+unitSpace)
+            }else {
+                const unitSpace = parseInt(localValue / 20);
+                const partSpace = parseInt(localValue % 20 / 4);
+                classNamesParts.push('-' + unitSpace)
+                if (partSpace > 0) {
+                    classNamesParts.push('-' + partSpace)
                 }
-                break;
-            case localValue % 10 === 0:
-                if (localValue === 10) {
-                    classNamesParts.push('05');
-                } else {
-                    classNamesParts.push(localValue / 20 * 10 + '');
-                }
-                break;
-            case localValue % 5 === 0:
-                let localName = (localValue - 5) / 20;
-                if (localName === 1) {
-                    localName = ''
-                } else {
-                    localName *= 10;
-                    if (localName < 10) {
-                        localName = '0' + localName
-                    }
-                }
-                localName += '-half'
-                classNamesParts.push(localName);
+            }
         }
         return classNamesParts.join('');
     }

@@ -55,13 +55,18 @@
       rowClassName() {
         const classNamesArray = [...spacesParamsNames.map((name) => {
           if (this[name] >= 0) {
-            return getSpacesClass(name, this[name]);
+            const getSpacesClassFn = getSpacesClass.bind(this)
+            return getSpacesClassFn(name, this[name])
           }
-        }), ...displayParamsNames.map((name) => {
-          if (this[name]) {
-            return getDisplayClass(name, this[name]);
-          }
-        })].filter((i) => i && i.length > 0);
+        }),  (()=>{
+          const displayObj = {}
+          displayParamsNames.map((spaceName)=> {
+            if(spaceName in this) {
+              displayObj[spaceName] = this[spaceName]
+            }
+          })
+          return getDisplayClass(displayObj);
+        })()].filter((i) => i && i.length > 0);
         switch (true) {
           case this.mobileReverseDirection:
             classNamesArray.unshift('row-md-reverse');
