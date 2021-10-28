@@ -298,7 +298,7 @@ for devideStep in steps
   &-end
     align-items: flex-end
 
-$device_media = '(max-width: '+lookup('desktop-lower-limit')+')' '' '(max-width: '+lookup('tablet-upper-limit')+')'   '(max-width: '+lookup('mobile-upper-limit')+')'
+$device_media = '(min-width: '+lookup('desktop-lower-limit')+')' '' '(max-width: '+lookup('tablet-upper-limit')+')'   '(max-width: '+lookup('mobile-upper-limit')+')'
 $device_types_code =  'lg' '' 'td' 'md'
 alignProps = (start flex-start) (center center) (end flex-end)
 
@@ -797,10 +797,10 @@ for $device_index in 0 .. 3
     grid-row-start: 1;
     grid-row-start: 1;
 
-$device_media = '(max-width: '+lookup('desktop-lower-limit')+')' '' lookup('retina-media')  '(max-width: '+lookup('tablet-upper-limit')+')' '(max-width: '+lookup('mobile-upper-limit')+')'
-$device_types_code =  'lg' '' 'x2' 'td' 'md'
+$device_media = '' '(min-width: '+lookup('desktop-lower-limit')+')' lookup('retina-media')  '(max-width: '+lookup('tablet-upper-limit')+')' '(max-width: '+lookup('mobile-upper-limit')+')'
+$device_types_code =  '' 'lg' 'x2' 'td' 'md'
 displayProps = 'none' 'inline' 'inline-block' 'block' 'table' 'table-row' 'table-cell' 'flex' 'inline-flex' 'static' 'none'
-$device_types_tag_code =  'large-display' '' '' 'tablet-display' 'mobile-display'
+$device_types_tag_code = '' 'large-display' '' 'tablet-display' 'mobile-display'
 
 for $device_index in 0 .. 4
   for props in displayProps
