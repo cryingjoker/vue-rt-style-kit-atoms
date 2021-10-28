@@ -78,28 +78,28 @@
       "property": "top-adaptive",
       "type": "Boolean",
       "description": "Флаг включения адаптивного отступа свеху",
-      "value": "-1"
+      "value": "false"
     },
     {
       "name": "rt-row",
       "property": "bottom-adaptive",
       "type": "Boolean",
       "description": "Флаг включения адаптивного отступа снизу",
-      "value": "-1"
+      "value": "false"
     },
     {
       "name": "rt-row",
       "property": "left-adaptive",
       "type": "Boolean",
       "description": "Флаг включения адаптивного отступа слева",
-      "value": "-1"
+      "value": "false"
     },
     {
       "name": "rt-row",
       "property": "right-adaptive",
       "type": "Boolean",
       "description": "Флаг включения адаптивного отступа справа",
-      "value": "-1"
+      "value": "false"
     },
     {
       "name": "rt-col",
@@ -207,28 +207,28 @@
       "property": "top-adaptive",
       "type": "Boolean",
       "description": "Флаг включения адаптивного отступа свеху",
-      "value": "-1"
+      "value": "false"
     },
     {
       "name": "rt-col",
       "property": "bottom-adaptive",
       "type": "Boolean",
       "description": "Флаг включения адаптивного отступа снизу",
-      "value": "-1"
+      "value": "false"
     },
     {
       "name": "rt-col",
       "property": "left-adaptive",
       "type": "Boolean",
       "description": "Флаг включения адаптивного отступа слева",
-      "value": "-1"
+      "value": "false"
     },
     {
       "name": "rt-col",
       "property": "right-adaptive",
       "type": "Boolean",
       "description": "Флаг включения адаптивного отступа справа",
-      "value": "-1"
+      "value": "false"
     }
 
   ]
