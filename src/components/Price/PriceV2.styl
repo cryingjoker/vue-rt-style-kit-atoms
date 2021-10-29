@@ -37,14 +37,18 @@
     top: -1px
     background-color: main-color07
     position: absolute;
+    @media (max-width: tablet-upper-limit)
+      top: 2px
     @media (max-width: mobile-upper-limit)
-      top: 3px
+      top: 2px
     .rt-price-v2-bright &,
     .rt-dark-theme &
       background-color: b2c-white07
 
 .font-t-xs.rt-price-v2__info-item+.rt-price-v2__info-item.font-t-xs
   margin-top: 2px
+  @media (max-width: tablet-upper-limit)
+    margin-top: -2px
   @media (max-width: mobile-upper-limit)
     margin-top: -4px
 .rt-price-v2__old-value
@@ -64,6 +68,9 @@
     .rt-price-v2-bright &,
     .rt-dark-theme &
       background-color: b2c-white07
+@media (max-width: tablet-upper-limit)
+  .rt-price-v2__info-item+.rt-price-v2__info-item
+    margin-top: -2px
 @media (max-width: mobile-upper-limit)
   .rt-price-v2__info-item+.rt-price-v2__info-item
     margin-top: -4px
