@@ -1,4 +1,3 @@
-
 set-font(fontSize, lineHeight)
   font-size unit(fontSize, 'px')
   line-height unit(lineHeight, 'px')
@@ -13,36 +12,50 @@ set-font(fontSize, lineHeight)
 .font-h-s,
 .font-h-xs
   font-weight 500
+
 .font-h-s
   set-font(14, 16)
+
 .font-h-xs
   set-font(12, 16)
+
 .font-t-s
   set-font(14, 20)
+
 .font-t-xs
   set-font(12, 16)
 
 // Mobile
 @media (max-width mobile-upper-limit)
-	.font-h1
+  .font-h1
     set-font(28, 32)
-	.font-h2
+
+  .font-h2
     set-font(24, 32)
-	.font-h3
+
+  .font-h3
     set-font(22, 28)
-	.font-h4
+
+  .font-h4
     set-font(18, 24)
-	.font-h-m
+
+  .font-h-m
     set-font(14, 16)
-	.font-t-m
+
+  .font-t-m
     set-font(14, 20)
-	.font-lb
+
+  .font-lb
+    set-font(12, 16)
+
+  .m-font-t-xs
     set-font(12, 16)
 
 // < Tablet
 @media (max-width tablet-upper-limit)
   .font-h-l
     set-font(16, 20)
+
   .font-t-l
     set-font(16, 24)
 
@@ -55,8 +68,10 @@ set-font(fontSize, lineHeight)
 @media (min-width tablet-lower-limit) and (max-width desktop-upper-limit)
   .font-h2
     set-font(32, 40)
+
   .font-h3
     set-font(24, 32)
+
   .font-h4
     set-font(20, 24)
 
@@ -64,8 +79,10 @@ set-font(fontSize, lineHeight)
 @media (min-width tablet-lower-limit)
   .font-h-m
     set-font(16, 20)
+
   .font-t-m
     set-font(16, 24)
+
   .font-lb
     set-font(14, 16)
 
@@ -81,6 +98,7 @@ set-font(fontSize, lineHeight)
 @media (min-width laptop-lower-limit)
   .font-h-l
     set-font(18, 24)
+
   .font-t-l
     set-font(18, 28)
 
@@ -88,9 +106,12 @@ set-font(fontSize, lineHeight)
 @media (min-width large-desktop-lower-limit)
   .font-h1
     set-font(50, 60)
+
   .font-h2
     set-font(36, 44)
+
   .font-h3
     set-font(28, 36)
+
   .font-h4
     set-font(22, 28)
