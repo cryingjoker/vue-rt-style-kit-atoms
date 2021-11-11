@@ -1,40 +1,41 @@
-export const displayParamsNames  = ["largeDisplay","display", "tabletDisplay", "mobileDisplay"];
+export const displayParamsNames  = ["lgHide","hide","tHide", "mHide"];
 export const displayParamsProps  = {
-    largeDisplay: {
-        type: String,
-        default: null
+    hide: {
+        type: Boolean,
+        default: false
     },
-    display: {
-        type: String,
-        default: null
+    mHide: {
+        type: Boolean,
+        default: false
     },
-    tabletDisplay: {
-        type: String,
-        default: null
+    tHide: {
+        type: Boolean,
+        default: false
     },
-    mobileDisplay: {
-        type: String,
-        default: null
+    lgHide: {
+        type: Boolean,
+        default: false
     }
 };
-export function getDisplayClass(name, value) {
-
-
-    const classNamesParts = [];
-    switch(true){
-        case name.search(/large/i)>=0:
-            classNamesParts.push('lg');
-            break;
-        case name.search(/tablet/i)>=0:
-            classNamesParts.push('td');
-            break;
-        case name.search(/mobile/i)>=0:
-            classNamesParts.push('md');
-            break;
-    }
-    classNamesParts.push('d');
-    classNamesParts.push(value);
-
-    return classNamesParts.join('-');
+const displayParamsPropsClasses = {
+    hide : ['d-none', 'd-block'],
+    mHide : ['md-d-none','md-d-block'],
+    tHide : ['td-d-none','td-d-block'],
+    lgHide : ['lg-d-none','lg-d-block']
+}
+export function getDisplayClass(displayOptions) {
+    const displayClassesArray = []
+    displayParamsNames.forEach((name,index)=>{
+        if(displayOptions[name]){
+            displayClassesArray.push(displayParamsPropsClasses[name][0])
+        }
+        else {
+            if (index > 1 && displayOptions[displayParamsNames[index - 1]]){
+                displayClassesArray.push(displayParamsPropsClasses[displayParamsNames[index]][1])
+            }
+        }
+    })
+    
+    return displayClassesArray.join(' ')
 
 }

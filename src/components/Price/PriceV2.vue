@@ -112,6 +112,7 @@ export default {
           classList.push('font-t-xs');
         }else{
           classList.push('font-t-s');
+          classList.push('m-font-t-xs');
         }
         return <div class={classList}>{this.currency}
         </div>;
@@ -138,6 +139,7 @@ export default {
           classList.push('font-t-xs');
         }else{
           classList.push('font-t-s');
+          classList.push('m-font-t-xs');
         }
         return <div class={classList}>
           {this.timeInterval}
