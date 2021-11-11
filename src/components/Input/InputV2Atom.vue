@@ -164,6 +164,10 @@ export default {
     changeValue(e) {
       const input = this.$refs.input;
 
+      if (this.maxLength && input.value.length > this.maxLength) {
+        input.value = input.value.slice(0, this.maxLength)
+      }
+
       if (this.type === 'number') {
         if(!this.isInteger && input.value.search(/[,.]$/) >= 0){
           this.localValue = input.value
