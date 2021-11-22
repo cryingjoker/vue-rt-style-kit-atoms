@@ -1,7 +1,7 @@
-$device_types = '' 'laptop-upper-limit' 'tablet-upper-limit'  'mobile-upper-limit'
-$device_types_code = '' 'lg' 'td' 'md'
+$device_types = '' 'laptop-upper-limit' 'large-desktop-lower-limit' 'tablet-upper-limit'  'mobile-upper-limit'
+$device_types_code = '' 'lg' 'xd' 'td' 'md'
 $postfixes = '' 'persent'
-$steps = (12 12 6 3)(10 10 10 10)
+$steps = (12 12 12 6 3)(10 10 10 10 10)
 $unitsType = '%' '%'
 
 rt-col
@@ -16,10 +16,12 @@ rt-col
     position relative
 
 gridRender()
-  for $device_index in 0 .. 3
+  for $device_index in 0 .. (length($device_types_code) - 1)
     media = ''
     if $device_types_code[$device_index]
       if $device_types_code[$device_index] == 'lg'
+        media = '(min-width: '+lookup($device_types[$device_index])+')'
+      else if $device_types_code[$device_index] == 'xd'
         media = '(min-width: '+lookup($device_types[$device_index])+')'
       else
         media = '(max-width: '+lookup($device_types[$device_index])+')'
