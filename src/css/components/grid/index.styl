@@ -797,12 +797,12 @@ for $device_index in 0 .. 3
     grid-row-start: 1;
     grid-row-start: 1;
 
-$device_media = '' '(min-width: '+lookup('desktop-lower-limit')+')' lookup('retina-media')  '(max-width: '+lookup('tablet-upper-limit')+')' '(max-width: '+lookup('mobile-upper-limit')+')'
-$device_types_code =  '' 'lg' 'x2' 'td' 'md'
+$device_media = '' '(min-width: '+lookup('desktop-lower-limit')+')' '(min-width: '+lookup('large-desktop-lower-limit')+')' lookup('retina-media')  '(max-width: '+lookup('tablet-upper-limit')+')' '(max-width: '+lookup('mobile-upper-limit')+')'
+$device_types_code =  '' 'lg' 'xd' 'x2' 'td' 'md'
 displayProps = 'none' 'inline' 'inline-block' 'block' 'table' 'table-row' 'table-cell' 'flex' 'inline-flex' 'static' 'none'
 $device_types_tag_code = '' 'large-display' '' 'tablet-display' 'mobile-display'
 
-for $device_index in 0 .. 4
+for $device_index in 0 .. (length($device_types_code) - 1)
   for props in displayProps
     if $device_types_tag_code[$device_index] && length($device_types_tag_code[$device_index]) > 0
       media = $device_media[$device_index]
