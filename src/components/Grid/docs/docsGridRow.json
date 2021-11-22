@@ -103,6 +103,13 @@
     },
     {
       "name": "rt-col",
+      "property": "extra-size",
+      "type": "Number, String",
+      "description": "Устанавливает размер колонки на экстра больших устройствах",
+      "value": "0"
+    },
+    {
+      "name": "rt-col",
       "property": "large-size",
       "type": "Number, String",
       "description": "Устанавливает размер колонки на больших устройствах",
