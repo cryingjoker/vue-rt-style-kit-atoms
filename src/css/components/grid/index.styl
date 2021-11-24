@@ -320,39 +320,27 @@ for $device_index in 0 .. 3
   else
     classRender($device_index)
 
-.d-space-between
-  justify-content space-between
-
-.d-space-center
-  justify-content center
-
-.td-d-space-center
-  @media (max-width: tablet-upper-limit)
-    justify-content center
-.td-space-between
-  @media (max-width: tablet-upper-limit)
-    justify-content space-between
-.md-d-space-center
-  @media (max-width: mobile-upper-limit)
-    justify-content center
-
 .d-stretch
   display flex
   align-items stretch
 
+.d-space-center
+  justify-content center
 
-.md-space-between
-  @media (max-width: mobile-upper-limit)
-    justify-content space-between
-
-
-.md-stretch
-  @media (max-width: mobile-upper-limit)
-    display flex
-    align-items stretch
+.d-space-between
+  justify-content space-between
 
 .td
   @media (max-width: tablet-upper-limit)
+    &-stretch
+      display flex
+      align-items stretch
+
+    &-d-space-center
+      justify-content center
+    
+    &-space-between
+      justify-content space-between
 
     &-flex-end-center
       display flex
@@ -391,6 +379,15 @@ for $device_index in 0 .. 3
 
 .md
   @media (max-width: mobile-upper-limit)
+    &-stretch
+      display flex
+      align-items stretch
+
+    &-d-space-center
+      justify-content center
+
+    &-space-between
+      justify-content space-between
 
     &-flex-end-center
       display flex
@@ -832,6 +829,7 @@ for $device_index in 0 .. (length($device_types_code) - 1)
       classRender($device_index)
   else
     classRender($device_index)
+
 @require './gridRender.styl'
 @require './spaceRender.styl'
 @require './elementOpacity.styl'
