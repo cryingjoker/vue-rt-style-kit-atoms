@@ -815,10 +815,11 @@ for $device_index in 0 .. (length($device_types_code) - 1)
         {attr}
           display s(props)
 
-for $device_index in 0 .. 4
+for $device_index in 0 .. (length($device_types_code) - 1)
   classRender($i)
     for props in displayProps
       className = $device_types_code[$i]
+      p(className)
       if $device_types_code[$i]
         className = className + '-'
       className = className + 'd-'
