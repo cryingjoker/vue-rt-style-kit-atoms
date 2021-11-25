@@ -108,7 +108,7 @@ export default {
     clickValue: ''
   }),
   watch: {
-    def (newVal, oldVal) {
+    defaultValue (newVal, oldVal) {
       if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
         this.setDefaultValue()
       }
