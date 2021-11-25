@@ -10,6 +10,10 @@ export default {
       type: Boolean,
       default: false
     },
+    isOnlyOneOpen:{
+      type: Boolean,
+      default: true
+    },
     hash:{
       type: String,
       default: ''
@@ -96,13 +100,13 @@ export default {
     },
     toggleOpen() {
       this.isOpen = !this.isOpen;
-      this.$emit('toggleAnnotation', this.isOpen)
     }
   },
   render(h) {
       if(this.v2) {
           return <rt-annotation-v2 label={this.label} open={this.open} hash={this.hash} hasWhiteColor={this.hasWhiteColor}
                                    titleFontClass={this.titleFontClass} scrollTimeout={this.scrollTimeout}
+                                   isOnlyOneOpen={this.isOnlyOneOpen}
                                    smallGap={this.smallGap} reversed={this.reversed} color={this.color}>
               <template slot="label">
                   {this.$slots.label}
