@@ -108,6 +108,11 @@ export default {
     clickValue: ''
   }),
   watch: {
+    def (newVal, oldVal) {
+      if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
+        this.setDefaultValue()
+      }
+    },
     clickValue:{
       deep: true,
       handler(newVal, oldVal){
@@ -306,7 +311,7 @@ export default {
     },
     onInputAutoField() {
       if (this.isFocus || this.mouseenter) {
-        if (this.selectActiveLabels[0]?.toLowerCase() != this.$refs.input?.localValue?.toLowerCase() && this.selectOptions?.length > 0 && SelectStore.getInputText(this.name)?.length > 2) {
+        if (this.selectActiveLabels[0]?.toLowerCase() != this.$refs.input?.localValue?.toLowerCase() && this.selectOptions?.length > 0 && SelectStore.getInputText(this.name)?.length) {
           SelectStore.setOpen(this.name)
         } else {
           SelectStore.setClose(this.name)
@@ -318,8 +323,8 @@ export default {
     },
     setActiveValue() {
       if (this.setFirstActive) {
-        if (this.getJson[0]?.value) {
-          SelectStore.setActiveValue(this.name, this.getJson[0]?.value);
+        if (this.getJson()[0]?.value) {
+          SelectStore.setActiveValue(this.name, this.getJson()[0]?.value);
         } else {
           SelectStore.setActiveValue(this.name, this.$children[0].value);
         }
