@@ -1,7 +1,7 @@
 <script type="text/jsx">
   import './Annotation.styl'
 
-  import {AnnotationStore} from "./AnnotationStore";
+  import {annotationStore} from "./AnnotationStore";
   export default {
     name: "RtAnnotationV2",
     components: {},
@@ -13,6 +13,10 @@
       hash:{
         type: String,
         default: ''
+      },
+      isOnlyOneOpen:{
+        type: Boolean,
+        default: true
       },
       label: {
         type: String,
@@ -56,6 +60,7 @@
       isOpen(newVal) {
         if(newVal) {
           this.$refs.content.style.maxHeight = (parseInt(getComputedStyle(this.$refs.contentHeightResolver).height, 10) + 20) + 'px';
+          this.$emit('toggleAnnotation', this.isOpen);
         } else {
           this.$refs.content.style.maxHeight =  0
         }
@@ -90,20 +95,34 @@
     },
     mounted() {
       this.checkHash();
-      AnnotationStore.initStore(this._uid, this.isOpen);
+      this.getParentUid()
+      annotationStore.initStore(this._uid, this.isOpen,{
+        isOnlyOneOpen: this.isOnlyOneOpen,
+        parentUid : this.getParentUid()
+      }, this.closeOutside);
       if(this.isOpen) {
-        AnnotationStore.setActive(this._uid);
+        annotationStore.setActive(this._uid);
         this.$refs.content.style.maxHeight = (parseInt(getComputedStyle(this.$refs.contentHeightResolver).height, 10) + 20) + 'px';
       }
-      AnnotationStore.addWatcher(this._uid, () => {
-        this.closeOutside()
-      });
+
     },
     beforeDestroy(){
-      AnnotationStore.removeWatcher(this._uid);
-      AnnotationStore.clearStore(this._uid);
+      annotationStore.removeWatcher(this.getParentUid());
+      annotationStore.clearStore(this.getParentUid(), this._uid);
     },
     methods: {
+      toggleOpen(){
+        annotationStore.toggle(this.getParentUid(), this._uid);
+      },
+
+      getParentUid(){
+        // check: if we in annotation v1 ?
+        if(this.$parent?.$vnode?.tag.search('annotation')){
+          return this.$parent.$parent._uid
+        }else{
+          return this.$parent._uid
+        }
+      },
       checkHash(){
         if(this.hash.length > 0){
           const hash = global.location.hash.replace('#','');
@@ -115,20 +134,8 @@
           }
         }
       },
-      toggleOpen() {
-        if(AnnotationStore.getActive() != this._uid) {
-          AnnotationStore.setActive(this._uid);
-          this.isOpen = true;
-          this.$emit('toggleAnnotation', this.isOpen);
-        } else {
-          AnnotationStore.setActive(null);
-          this.isOpen = false;
-        }
-      },
       closeOutside() {
-          if(AnnotationStore.getActive() != this._uid) {
-              this.isOpen = false;
-          }
+          this.isOpen = annotationStore.isActive(this.getParentUid(),this._uid);
       }
     },
     render(h) {
