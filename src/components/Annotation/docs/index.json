@@ -69,6 +69,13 @@
       "type" : "String",
       "description" : "Задаёт цвет заголовку. Возможные варианты: `black-main`, `black-additional`, `orange`, `purple`, `grey`",
       "value" : "black-main"
+    },
+    {
+      "name" : "rt-annotation",
+      "property" : ":is-only-one-open",
+      "type" : "Boolean",
+      "description" : "Флаг на установку, что при открытие данного annotation будут закрыты остальные в одной и той же обертке",
+      "value" : "true"
     }
   ]
 }
