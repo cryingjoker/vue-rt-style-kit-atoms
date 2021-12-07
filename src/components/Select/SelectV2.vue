@@ -101,9 +101,27 @@ export default {
     tempIndex: null,
     isFocus: false,
     mouseenter: false,
-    stopOpenAuto: false
+    stopOpenAuto: false,
+    clickValue: ''
   }),
   watch: {
+    clickValue:{
+      deep: true,
+      handler(newVal, oldVal){
+        const a = newVal ? JSON.stringify(newVal) : '';
+        const b = oldVal ? JSON.stringify(oldVal) : ''
+        if(a != b){
+          this.inputLocalValue = newVal.label
+          SelectStore.setActiveValue(this.name, newVal)
+          this.$emit('input', newVal.label)
+          this.$nextTick(() => {
+            this.selectActiveLabels[0] = newVal.label
+          })
+
+          this.$emit('item-select', newVal?.value)
+        }
+      }
+    },
     value: {
       deep: true,
       handler(newVal, oldVal) {
@@ -127,6 +145,7 @@ export default {
           SelectStore.addJson(this.name, newVal)
           this.getSelectType();
           this.getSelectOptions()
+          this.setActiveValue()
           this.$refs.input.$el.querySelector('input').focus()
           this.$nextTick(() => {
             this.$refs.input.$el.querySelector('input').focus()
@@ -258,6 +277,7 @@ export default {
     SelectStore.addWatcher(this.name, this.getActiveValue)
     SelectStore.addWatcher(this.name, this.getSelectType)
     SelectStore.addWatcher(this.name, this.getSelectOpenStatus)
+    SelectStore.addWatcher(this.name, this.getSelectorsClickValue)
     this.setActiveValue();
     this.getSelectType();
     this.getSelectOptions()
@@ -271,6 +291,9 @@ export default {
     SelectStore.clear(this.name)
   },
   methods: {
+    getSelectorsClickValue(){
+      this.clickValue = SelectStore.getSelectorsClickValue(this.name)
+    },
     onInputAutoField(e, a) {
       if (this.isFocus || this.mouseenter) {
         if (this.selectActiveLabels[0]?.toLowerCase() != this.$refs.input?.localValue?.toLowerCase() && this.selectOptions?.length > 0 && SelectStore.getInputText(this.name)?.length > 2) {
