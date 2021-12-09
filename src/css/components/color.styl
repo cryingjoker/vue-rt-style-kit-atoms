@@ -7,6 +7,13 @@ renderColorClass(classname, var, media)
     .{replace(classname, 'color-','dark-theme-color-')}
       .{newAppName}-dark-theme &
         color lookup(var)
+  if media == 'extra-large'
+    @media (min-width: large-desktop-lower-limit)
+      .{replace(classname, 'color-','color-xd-')}
+        color lookup(var)
+      .{replace(classname, 'color-','dark-theme-color-xd-')}
+        .{newAppName}-dark-theme &
+          color lookup(var)
   if media == 'tablet'
     @media (max-width: tablet-upper-limit)
       .{replace(classname, 'color-','color-td-')}
@@ -31,7 +38,7 @@ renderFocusColorClass(classname, var)
   .{classname}
     &:focus
       color lookup(var)
-for $type in ('desktop' 'tablet' 'mobile')
+for $type in ('desktop' 'extra-large' 'tablet' 'mobile')
   for $i in colors
     if search($i,'b2c')   >= 0
       className = 'color-'+replace($i,'b2c-','')

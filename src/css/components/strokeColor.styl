@@ -8,6 +8,13 @@ renderColorClass(classname, var, media)
       .{newAppName}-dark-theme &
         stroke lookup(var)
   if media == 'tablet'
+    @media (min-width: large-desktop-lower-limit)
+      .{replace(classname, 'stroke-color-','stroke-color-xd-')}
+        stroke lookup(var)
+      .{replace(classname, 'stroke-color-','dark-theme-stroke-color-xd-')}
+        .{newAppName}-dark-theme &
+          stroke lookup(var)
+  if media == 'tablet'
     @media (max-width: tablet-upper-limit)
       .{replace(classname, 'stroke-color-','stroke-color-td-')}
         stroke lookup(var)
@@ -21,12 +28,12 @@ renderColorClass(classname, var, media)
       .{replace(classname, 'stroke-color-','dark-theme-stroke-color-md-')}
         .{newAppName}-dark-theme &
           stroke lookup(var)
-for $type in ('desktop' 'tablet' 'mobile')
+
+for $type in ('desktop' 'extra-large' 'tablet' 'mobile')
   for $i in colors
     if search($i,'b2c') >= 0
       className = 'stroke-color-'+replace($i,'b2c-','')
       renderColorClass(className, $i, $type)
-
     else
       if search($i,'main-') == 0
         className = 'stroke-color-'+replace($i,'-color','')
