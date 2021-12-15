@@ -2,8 +2,10 @@ $vertical-direction_adaptive_device = (0 2 3)
 $vertical-direction_index = (0 2 3)
 $direction_names = 'v' 'h' 't' 'b' 'l' 'r'
 $direction_props = (padding-top padding-bottom) (padding-left padding-right) (padding-top) (padding-bottom) (padding-left) (padding-right)
-$device_types = 'laptop-upper-limit' 'desktop-lower-limit'  'tablet-upper-limit'  'mobile-upper-limit'
-$device_types_code = '' 'lg' 'td' 'md'
+//                   1280                  1401                         1024                  767
+$device_types = ''  'desktop-lower-limit' 'large-desktop-lower-limit'  'tablet-upper-limit'  'mobile-upper-limit'
+$device_types_code = '' 'lg' 'xd' 'td' 'md'
+//                  0:sp 1    2    3    4
 vertivalAdaptive = json('../../../space-adaptive-map.json',{ hash: true })
 
 renderProps(className, part_step,$direction)
@@ -38,10 +40,12 @@ for sp in vertivalAdaptive
     sendToAdaptiveSpaceRender(parseInt(sp)/4,parseInt(line[i]), parseInt(i)+1)
 
 spaceRender()
-  for $device_index in  0 .. 3
+  for $device_index in 0 .. (length($device_types_code) - 1)
     media = ''
     if $device_types_code[$device_index]
       if $device_types_code[$device_index] == 'lg'
+        media = '(min-width: '+lookup($device_types[$device_index])+')'
+      else if $device_types_code[$device_index] == 'xd'
         media = '(min-width: '+lookup($device_types[$device_index])+')'
       else
         media = '(max-width: '+lookup($device_types[$device_index])+')'

@@ -7,6 +7,13 @@ renderColorClass(classname, var, media)
     .{replace(classname, 'background-','dark-theme-background-')}
       .{newAppName}-dark-theme &
         background-color lookup(var)
+  if media == 'extra-large'
+    @media (min-width: large-desktop-lower-limit)
+      .{replace(classname, 'background-','background-xd-')}
+        background-color lookup(var)
+      .{replace(classname, 'background-','dark-theme-background-xd-')}
+        .{newAppName}-dark-theme &
+          background-color lookup(var)
   if media == 'tablet'
     @media (max-width: tablet-upper-limit)
       .{replace(classname, 'background-','background-td-')}
@@ -21,7 +28,8 @@ renderColorClass(classname, var, media)
       .{replace(classname, 'background-','dark-theme-background-md-')}
         .{newAppName}-dark-theme &
           background-color lookup(var)
-for $type in ('desktop' 'tablet' 'mobile')
+
+for $type in ('desktop' 'extra-large' 'tablet' 'mobile')
   for $i in colors
     if search($i,'b2c') >= 0
       className = 'background-'+replace($i,'b2c-','')

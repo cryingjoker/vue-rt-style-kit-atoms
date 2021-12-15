@@ -320,39 +320,27 @@ for $device_index in 0 .. 3
   else
     classRender($device_index)
 
-.d-space-between
-  justify-content space-between
-
-.d-space-center
-  justify-content center
-
-.td-d-space-center
-  @media (max-width: tablet-upper-limit)
-    justify-content center
-.td-space-between
-  @media (max-width: tablet-upper-limit)
-    justify-content space-between
-.md-d-space-center
-  @media (max-width: mobile-upper-limit)
-    justify-content center
-
 .d-stretch
   display flex
   align-items stretch
 
+.d-space-center
+  justify-content center
 
-.md-space-between
-  @media (max-width: mobile-upper-limit)
-    justify-content space-between
-
-
-.md-stretch
-  @media (max-width: mobile-upper-limit)
-    display flex
-    align-items stretch
+.d-space-between
+  justify-content space-between
 
 .td
   @media (max-width: tablet-upper-limit)
+    &-stretch
+      display flex
+      align-items stretch
+
+    &-d-space-center
+      justify-content center
+    
+    &-space-between
+      justify-content space-between
 
     &-flex-end-center
       display flex
@@ -391,6 +379,15 @@ for $device_index in 0 .. 3
 
 .md
   @media (max-width: mobile-upper-limit)
+    &-stretch
+      display flex
+      align-items stretch
+
+    &-d-space-center
+      justify-content center
+
+    &-space-between
+      justify-content space-between
 
     &-flex-end-center
       display flex
@@ -797,12 +794,12 @@ for $device_index in 0 .. 3
     grid-row-start: 1;
     grid-row-start: 1;
 
-$device_media = '' '(min-width: '+lookup('desktop-lower-limit')+')' lookup('retina-media')  '(max-width: '+lookup('tablet-upper-limit')+')' '(max-width: '+lookup('mobile-upper-limit')+')'
-$device_types_code =  '' 'lg' 'x2' 'td' 'md'
+$device_media = '' '(min-width: '+lookup('desktop-lower-limit')+')' '(min-width: '+lookup('large-desktop-lower-limit')+')' lookup('retina-media')  '(max-width: '+lookup('tablet-upper-limit')+')' '(max-width: '+lookup('mobile-upper-limit')+')'
+$device_types_code =  '' 'lg' 'xd' 'x2' 'td' 'md'
 displayProps = 'none' 'inline' 'inline-block' 'block' 'table' 'table-row' 'table-cell' 'flex' 'inline-flex' 'static' 'none'
 $device_types_tag_code = '' 'large-display' '' 'tablet-display' 'mobile-display'
 
-for $device_index in 0 .. 4
+for $device_index in 0 .. (length($device_types_code) - 1)
   for props in displayProps
     if $device_types_tag_code[$device_index] && length($device_types_tag_code[$device_index]) > 0
       media = $device_media[$device_index]
@@ -815,7 +812,7 @@ for $device_index in 0 .. 4
         {attr}
           display s(props)
 
-for $device_index in 0 .. 4
+for $device_index in 0 .. (length($device_types_code) - 1)
   classRender($i)
     for props in displayProps
       className = $device_types_code[$i]
@@ -831,6 +828,7 @@ for $device_index in 0 .. 4
       classRender($device_index)
   else
     classRender($device_index)
+
 @require './gridRender.styl'
 @require './spaceRender.styl'
 @require './elementOpacity.styl'
