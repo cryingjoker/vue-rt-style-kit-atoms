@@ -6,8 +6,9 @@ import {StorePrototype} from "./storePrototype.class";
 class DeviceTypeStore extends StorePrototype{
   constructor() {
     super();
-    this.possibleTypes = ['desktop-large','desktop', 'tablet', 'mobile']
+    this.possibleTypes = ['desktop-pc','desktop-large','desktop-pc','desktop', 'tablet', 'mobile']
     this.laptopUpperLimit = getVariable('laptopUpperLimit')
+    this.desktopPsUpperLimit = getVariable('desktopPcLowerLimit')
     this.tabletUpperLimit = getVariable('tabletUpperLimit')
     this.mobileUpperLimit = getVariable('mobileUpperLimit')
     this.mobileUpperLimit = getVariable('mobileUpperLimit')
@@ -27,17 +28,20 @@ class DeviceTypeStore extends StorePrototype{
 
     let newDeviceType;
     switch (true) {
-      case width > this.laptopUpperLimit:
+      case width > this.desktopPsUpperLimit:
         newDeviceType = 0;
         break;
-      case width > this.tabletUpperLimit:
+      case width > this.laptopUpperLimit:
         newDeviceType = 1;
         break;
-      case width > this.mobileUpperLimit:
+      case width > this.tabletUpperLimit:
         newDeviceType = 2;
         break;
+      case width > this.mobileUpperLimit:
+        newDeviceType = 4;
+        break;
       default:
-        newDeviceType = 3;
+        newDeviceType = 5;
     }
     if (newDeviceType != this.deviceType) {
       this.deviceType = newDeviceType;
