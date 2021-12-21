@@ -1,0 +1,11 @@
+{
+  "items": [
+    {
+      "name": "rt-info-icons",
+      "property":"name",
+      "type": "String",
+      "description":"",
+      "value" :"''"
+    }
+  ]
+}
