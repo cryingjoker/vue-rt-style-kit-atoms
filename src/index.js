@@ -1,4 +1,5 @@
 import  "./css/vue-rt-style-kit-atoms.styl";
+import { version } from '../package.json'
 import Global from "./variables.json";
 import {
     Button,
@@ -126,12 +127,11 @@ VueRtStyle = {
  */
 const settingsKey = Global.globalSettingsKey;
 
-const version = "2021-09-27 14:42";
 if (window && window.addEventListener) {
     if (settingsKey) {
         if (!window[settingsKey]) window[settingsKey] = {}
         if (!window[settingsKey].segment) window[settingsKey].segment = Global.defaultSegment
-        window[settingsKey].version = version;
+        window[settingsKey].atoms_version = version
     }
 
 // @Deprecated

@@ -1,13 +1,11 @@
 {
   "name": "vue-rt-style-kit-atoms",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "",
   "main": "lib/vue-rt-style-kit-atoms.js",
   "style": "lib/vue-rt-style-kit-atoms.css",
   "scripts": {
-    "start": "node bin/local/index.js",
-    "build": "NODE_ENV=production node scripts/build.js",
-    "build:development": "NODE_ENV=development node scripts/build.js"
+    "build": "cross-env NODE_ENV=production node scripts/build.js"
   },
   "type": "module",
   "repository": {
