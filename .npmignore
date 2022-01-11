@@ -1,29 +1,44 @@
-**/.*
-*.iml
-*.log
-coverage/
-examples/
-node_modules/
-typings/
-sandbox/
-test/
-public/
-src/
-bin/
-scripts/
-bower.json
-CODE_OF_CONDUCT.md
-COLLABORATOR_GUIDE.md
-CONTRIBUTING.md
-COOKBOOK.md
-ECOSYSTEM.md
-Gruntfile.js
-karma.conf.js
-babel.config.js
-vue.config.js
-sonar-project.properties
+src/pages/*
+images/*
+example-images/*
+examples/*
+tmpImages/*
+static/*
+example/*
+docs/*
+.idea/
+.vscode/
+example-pages/*
+src/example-pages/*
+includes/*
+bin/*
 .gitlab-ci.yml
-nexus-login.js
-webpack.*.js
-sauce_connect.log
-.idea
+.npmrc
+gulpfile.js
+
+# Node modules directory
+node_modules/
+
+# Sass cache directory
+.sass-cache/
+
+# Compiled output
+tmp/
+# dist/
+
+# e2e
+e2e/*.js
+e2e/*.map
+
+# Log files
+*.err
+*.log
+
+# OSX Desktop Service Store files
+.DS_Store
+
+# Build files
+src/assets/images/map.svg
+
+# Test coverage
+coverage
