@@ -1,6 +1,21 @@
-# Jet Brains IDE directory
+src/pages/*
+images/*
+example-images/*
+examples/*
+tmpImages/*
+static/*
+example/*
+docs/*
 .idea/
 .vscode/
+example-pages/*
+src/example-pages/*
+includes/*
+bin/*
+.gitlab-ci.yml
+.npmrc
+scripts/*
+gulpfile.js
 
 # Node modules directory
 node_modules/
@@ -10,9 +25,8 @@ node_modules/
 
 # Compiled output
 tmp/
-dist/
-lib/
-server/
+# dist/
+
 # e2e
 e2e/*.js
 e2e/*.map
@@ -26,9 +40,6 @@ e2e/*.map
 
 # Build files
 src/assets/images/map.svg
-libs/
 
 # Test coverage
 coverage
-
-/package-lock.json
