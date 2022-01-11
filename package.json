@@ -1,6 +1,6 @@
 {
   "name": "@rtru/vue-rt-style-kit-atoms",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "",
   "main": "lib/vue-rt-style-kit-atoms.js",
   "style": "lib/vue-rt-style-kit-atoms.css",
@@ -11,6 +11,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vue-rt-style/vue-rt-style-kit-atoms.git"
+  },
+  "publishConfig": {
+    "registry": "http://nexus.south.rt.ru:8081/repository/npm-local/"
   },
   "keywords": [],
   "author": "Alex Nikolaev / cryingjoker",

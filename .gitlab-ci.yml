@@ -26,13 +26,14 @@ install_dependencies:
       - node_modules/
     expire_in: 1 hour
   only:
-    - RTRU-12171-2
+    - stage
 
-nexus:
+compile_and_publish:
   stage: publish
   script:
-    - node ./prepublish.cjs
+    - node ./scripts/prepublish.cjs
     - npm run build
+    - node ./scripts/nexus-login.cjs
     - npm publish
   only:
-    - RTRU-12171-2
+    - stage
