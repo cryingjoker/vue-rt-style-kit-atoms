@@ -1,5 +1,5 @@
 {
-  "name": "vue-rt-style-kit-atoms",
+  "name": "@rtru/vue-rt-style-kit-atoms",
   "version": "3.1.0",
   "description": "",
   "main": "lib/vue-rt-style-kit-atoms.js",
