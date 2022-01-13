@@ -291,6 +291,7 @@ export default {
     const inputComponent = () => {
       if (this.type == 'number') {
         return <input class="rt-input-v2__input"
+                      name={this.name}
                       value={this.localValue}
                       onInput={this.changeValue}
                       type={this.type}
@@ -308,6 +309,7 @@ export default {
       }
       if (this.type == 'tel') {
         return <input class="rt-input-v2__input"
+                      name={this.name}
                       value={this.localValue}
                       type={this.type}
                       ref="input"
@@ -323,6 +325,7 @@ export default {
                       onSelect={this.onSelect}/>
       }
       return <input class="rt-input-v2__input"
+                    name={this.name}
                     value={this.localValue}
                     onInput={this.changeValue}
                     type={this.type}

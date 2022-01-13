@@ -66,6 +66,10 @@ export default {
       type: String,
       default: ''
     },
+    staticName: {
+      type: String,
+      default: ''
+    },
     setFirstActive: {
       type: Boolean,
       default: false
@@ -501,6 +505,7 @@ export default {
                 onMouseleave={this.mouseleaveFn}>
       <div class="select-v2__container">
         <rt-input version={2}
+                  name={this.staticName || this.name}
                   disabled={this.disabled}
                   placeholder={this.label}
                   ref="input"
