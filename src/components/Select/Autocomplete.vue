@@ -119,18 +119,14 @@ export default {
     },
     clickValue:{
       deep: true,
-      handler(newVal, oldVal){
-        const a = newVal ? JSON.stringify(newVal) : '';
-        const b = oldVal ? JSON.stringify(oldVal) : ''
-        if(a != b){
-          this.inputLocalValue = newVal.label
-          SelectStore.setActiveValue(this.name, newVal)
-          this.$emit('input', newVal.label)
-          this.$nextTick(() => {
-            this.selectActiveLabels[0] = newVal.label
-          })
-          this.$emit('item-select', newVal)
-        }
+      handler (newVal, oldVal) {
+        this.inputLocalValue = newVal.label
+        SelectStore.setActiveValue(this.name, newVal)
+        this.$emit('input', newVal.label)
+        this.$nextTick(() => {
+          this.selectActiveLabels[0] = newVal.label
+        })
+        this.$emit('item-select', newVal)
       }
     },
     value: {
