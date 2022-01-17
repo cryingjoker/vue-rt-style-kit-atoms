@@ -28,7 +28,11 @@ export default {
     },
     label: {
       type: String,
-      default: ""
+      default: ''
+    },
+    placeholder: {
+      type: String,
+      default: ''
     },
     value: {
       type: Array | String,
@@ -507,7 +511,8 @@ export default {
         <rt-input version={2}
                   name={this.staticName || this.name}
                   disabled={this.disabled}
-                  placeholder={this.label}
+                  placeholder={this.placeholder || this.label}
+                  label={this.placeholder && this.label ?  this.label : ''}
                   ref="input"
                   value={this.selectActiveLabels[0] || this.inputLocalValue}
                   onCustom={this.checkMatch}
