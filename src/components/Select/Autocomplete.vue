@@ -255,7 +255,7 @@ export default {
       return <label ref="placeholder" class={classList.join(' ')}>{this.label}</label>
     },
     selectClasses() {
-      let selectClasses = [];
+      let selectClasses = ['rt-autocomplete']
       selectClasses.push('select-v2')
       if (this.hasError) {
         selectClasses.push("select-v2--error text-field--error");
@@ -416,8 +416,9 @@ export default {
         e.stopPropagation()
       }
       if (e.keyCode == 13) {
+        const focusIndex = this.focusIndex === -1 ? 0 : this.focusIndex
         // SelectStore.setClose(this.name)
-        this.$refs['select-item-' + this.focusIndex]?.onClickFire()
+        this.$refs['select-item-' + focusIndex]?.onClickFire()
         e.preventDefault()
         e.stopPropagation()
         if (this.autoComplete) {

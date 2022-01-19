@@ -116,6 +116,7 @@ export default {
     return {
       isNew: false,
       isFocus: false,
+      isHover: false,
       disabledLocal: this.disabled,
       index: null,
       localLabel: this.label,
@@ -161,6 +162,12 @@ export default {
   updated() {},
   beforeDestroy() {},
   methods: {
+    onMouseover (e) {
+      this.isHover = true
+    },
+    onMouseleave (e) {
+      this.isHover = false
+    },
     changeValue(e) {
       const input = this.$refs.input;
 
@@ -201,6 +208,7 @@ export default {
       this.$emit('clear')
     },
     onBlur(e) {
+      this.isFocus = false
       this.$emit('blur', this.localValue, e)
     },
     onPaste(e) {
@@ -213,7 +221,12 @@ export default {
       this.$emit('keyup', e, this.localValue)
     },
     onFocus(e) {
+      this.isFocus = true
       this.$emit('focus', e, this.localValue)
+      const el = e.target
+      setTimeout(() => {
+        el.selectionStart = el.value.length
+      }, 0)
     },
     onInput(e) {
       this.$emit('input', e)
@@ -272,6 +285,19 @@ export default {
         //   </template>
         // }
       }
+
+      if (this.localValue.length && !this.hasError && !this.isHover && !this.isFocus) {
+        return <template slot="icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+               className="rt-input-v2-icon__item--verified">
+            <circle opacity="0.8" cx="12" cy="12" r="10" fill="#5BCF6A"/>
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M17.5612 9.1768L11.0613 15.5704C10.7481 15.8784 10.2452 15.8763 9.93457 15.5657L6.93457 12.5657L8.06594 11.4343L10.5049 13.8733L16.4392 8.03613L17.5612 9.1768Z"
+                  fill="white"/>
+          </svg>
+        </template>
+      }
+
       return this.$slots.icon?.map((icon) => {
         return <template slot="icon">{icon}</template>
       })
@@ -339,7 +365,9 @@ export default {
                     placeholder={this.placeholder}
                     disabled={this.disabledLocal}/>
     }
-    return <div class={this.inputClass}>
+    return <div class={this.inputClass}
+                onMouseover={this.onMouseover}
+                onMouseleave={this.onMouseleave}>
       <label class="rt-input-v2-wrapper">
         {inputComponent()}
         <span class="rt-input-v2-placeholder">{this.placeholder || this.label}</span>
