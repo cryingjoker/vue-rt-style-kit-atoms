@@ -245,6 +245,15 @@ export default {
     }
   },
   render() {
+    const validVerificationIcon = () => {
+      return <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+             className="rt-input-v2-icon__item--verified">
+          <circle opacity="0.8" cx="12" cy="12" r="10" fill="#5BCF6A"/>
+          <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M17.5612 9.1768L11.0613 15.5704C10.7481 15.8784 10.2452 15.8763 9.93457 15.5657L6.93457 12.5657L8.06594 11.4343L10.5049 13.8733L16.4392 8.03613L17.5612 9.1768Z"
+                fill="white"/>
+        </svg>
+    }
     const icons = () => {
       if(this.$slots.informer){
         return <template slot="icon">
@@ -258,10 +267,7 @@ export default {
       if(this.needVerification && this.localValue.length == 18) {
         if(this.localVerified === 1) {
           return <template slot="icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"class="rt-input-v2-icon__item--verified">
-              <circle opacity="0.8" cx="12" cy="12" r="10" fill="#5BCF6A"/>
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M17.5612 9.1768L11.0613 15.5704C10.7481 15.8784 10.2452 15.8763 9.93457 15.5657L6.93457 12.5657L8.06594 11.4343L10.5049 13.8733L16.4392 8.03613L17.5612 9.1768Z" fill="white"/>
-            </svg>
+            {validVerificationIcon()}
           </template>
         } else if(this.localVerified === 0){
           return <template slot="icon">
@@ -288,13 +294,7 @@ export default {
 
       if (this.localValue.length && !this.hasError && !this.isHover && !this.isFocus) {
         return <template slot="icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-               className="rt-input-v2-icon__item--verified">
-            <circle opacity="0.8" cx="12" cy="12" r="10" fill="#5BCF6A"/>
-            <path fill-rule="evenodd" clip-rule="evenodd"
-                  d="M17.5612 9.1768L11.0613 15.5704C10.7481 15.8784 10.2452 15.8763 9.93457 15.5657L6.93457 12.5657L8.06594 11.4343L10.5049 13.8733L16.4392 8.03613L17.5612 9.1768Z"
-                  fill="white"/>
-          </svg>
+          {validVerificationIcon()}
         </template>
       }
 
