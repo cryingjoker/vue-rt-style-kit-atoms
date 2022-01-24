@@ -434,14 +434,14 @@ for $device_index in 0 .. 3
   max-width container-upper-limit
   margin-left auto
   margin-right auto
-  padding-left 30px
-  padding-right 30px
+  padding-left 60px
+  padding-right 60px
   transition-timing-function ease-in-out
   transition-duration 3s
   transition-property opacity, visibility
-  @media (min-width: desktop-lower-limit)
-    padding-left 70px
-    padding-right 70px
+  @media (max-width: container-device-limit)
+    padding-left 30px
+    padding-right 30px
   @media (max-width: container-upper-limit)
     max-width 100vw
   @media (max-width: tablet-upper-limit)

@@ -1,5 +1,6 @@
 import  "./css/vue-rt-style-kit-atoms.styl";
-import { version } from '../package.json'
+// import { version } from '../package.json'
+let version = ''
 import Global from "./variables.json";
 import {
     Button,
