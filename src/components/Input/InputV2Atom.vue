@@ -155,6 +155,9 @@ export default {
       if (this.disabledLocal) {
         inputClassName.push('rt-input-v2--disabled')
       }
+      if (this.localValue.length === 0) {
+        inputClassName.push('rt-input-v2--empty')
+      }
       return inputClassName.join(' ')
     }
   },
@@ -207,6 +210,12 @@ export default {
       this.changeValue()
       this.$emit('clear')
     },
+    focusErrorOrEmptyField () {
+      const input = document.querySelector('.rt-input-v2--empty input, .rt-input-v2--error input')
+      if (input) {
+        input.focus()
+      }
+    },
     onBlur(e) {
       this.isFocus = false
       this.$emit('blur', this.localValue, e)
@@ -218,6 +227,9 @@ export default {
       this.$emit('keydown', e, this.localValue)
     },
     onKeyup(e) {
+      if (e.keyCode === 13) {
+        this.focusErrorOrEmptyField()
+      }
       this.$emit('keyup', e, this.localValue)
     },
     onFocus(e) {
