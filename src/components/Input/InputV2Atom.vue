@@ -107,6 +107,10 @@ export default {
       type: Boolean,
       default: null
     },
+    readyIndicator: {
+      type: Boolean,
+      default: false
+    },
     inputType: {
       type: String,
       default: 'text'
@@ -214,6 +218,8 @@ export default {
       const input = document.querySelector('.rt-input-v2--empty input, .rt-input-v2--error input')
       if (input) {
         input.focus()
+      } else {
+        this.$refs.input.blur()
       }
     },
     onBlur(e) {
@@ -304,7 +310,7 @@ export default {
         // }
       }
 
-      if (this.localValue.length && !this.hasError && !this.isHover && !this.isFocus) {
+      if (this.readyIndicator && this.localValue.length && !this.hasError && !this.isHover && !this.isFocus) {
         return <template slot="icon">
           {validVerificationIcon()}
         </template>

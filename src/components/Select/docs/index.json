@@ -111,6 +111,13 @@
       "type": "Boolean",
       "description":"Устанавливает данный пункт выпадающего списка, как выбранный по умолчанию",
       "value" :"false"
+    },
+    {
+      "name": "rt-autocomplete",
+      "property": ":ready-indicator",
+      "type": "Boolean",
+      "description": "Индикатор готовности поля (зеленая галка в не пустом валидном поле)",
+      "value": "false"
     }
   ]
 }

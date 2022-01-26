@@ -54,7 +54,11 @@ export default {
     verified: {
       type: Boolean,
       default: false
-    }
+    },
+    readyIndicator: {
+      type: Boolean,
+      default: false
+    },
   },
   data: () => ({
     localType: 'tel',

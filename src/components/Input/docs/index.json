@@ -181,6 +181,13 @@
       "type": "Boolean",
       "description": "Флаг запрещающий ввод дробных чисел для `type='number'`",
       "value": "false"
+    },
+    {
+      "name": "rt-input",
+      "property": ":ready-indicator",
+      "type": "Boolean",
+      "description": "Индикатор готовности поля (зеленая галка в не пустом валидном поле)",
+      "value": "false"
     }
   ]
 }

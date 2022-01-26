@@ -93,7 +93,11 @@ export default {
     sep: {
       type: String,
       default: ', '
-    }
+    },
+    readyIndicator: {
+      type: Boolean,
+      default: false
+    },
   },
   data: () => ({
     selectOptions: [],
@@ -516,6 +520,7 @@ export default {
                   label={this.placeholder && this.label ?  this.label : ''}
                   ref="input"
                   value={this.selectActiveLabels[0] || this.inputLocalValue}
+                  readyIndicator={this.readyIndicator}
                   onCustom={this.checkMatch}
                   onClear={this.clearValue}
                   onChange={this.onChange}
