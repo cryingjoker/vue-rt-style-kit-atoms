@@ -133,7 +133,11 @@ export default {
     verified: {
       type: Boolean,
       default: false
-    }
+    },
+    readyIndicator: {
+      type: Boolean,
+      default: false
+    },
   },
   data() {
     return {
@@ -587,6 +591,7 @@ export default {
           isInteger={this.isInteger}
           needVerification={this.needVerification}
           verified={this.verified}
+          readyIndicator={this.readyIndicator}
       >{renderSlots}</rt-input-v2>
     }
 
