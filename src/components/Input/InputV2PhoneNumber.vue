@@ -69,9 +69,7 @@ export default {
   }),
   watch:{
     value(newVal) {
-      if(newVal === '') {
-        this.localValue = ''
-      }
+      this.localValue = newVal
       this.value = newVal
       this.$refs.input.$refs.input.value = newVal
       this.addMask()
