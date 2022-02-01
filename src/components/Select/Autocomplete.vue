@@ -93,10 +93,6 @@ export default {
     sep: {
       type: String,
       default: ', '
-    },
-    focusOnSelect: {
-      type: Boolean,
-      default: true
     }
   },
   data: () => ({
@@ -155,9 +151,6 @@ export default {
                 SelectStore.setClose(this.name)
               })
             }
-            if(this.focusOnSelect) {
-              this.$refs.input.$el.querySelector('input').focus()
-            }
           }
         }
       }
@@ -180,9 +173,6 @@ export default {
           SelectStore.addJson(this.name, a)
           this.getSelectType();
           this.getSelectOptions()
-          if(this.focusOnSelect) {
-            this.$refs.input.$el.querySelector('input').focus()
-          }
           this.onInputAutoField();
         }
       }
