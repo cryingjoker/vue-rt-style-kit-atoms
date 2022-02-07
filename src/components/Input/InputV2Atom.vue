@@ -159,7 +159,7 @@ export default {
       if (this.disabledLocal) {
         inputClassName.push('rt-input-v2--disabled')
       }
-      if (this.localValue.length === 0) {
+      if (typeof this.localValue === 'string' && this.localValue.length === 0) {
         inputClassName.push('rt-input-v2--empty')
       }
       return inputClassName.join(' ')
