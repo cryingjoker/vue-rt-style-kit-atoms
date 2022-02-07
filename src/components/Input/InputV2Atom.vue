@@ -225,6 +225,7 @@ export default {
     onBlur(e) {
       this.isFocus = false
       this.$emit('blur', this.localValue, e)
+      this.localValue = this.localValue.trim()
     },
     onPaste(e) {
       this.$emit('paste', e)
