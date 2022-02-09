@@ -128,6 +128,7 @@ export default {
     clickValue:{
       deep: true,
       handler (newVal, oldVal) {
+        if (!newVal) return
         this.inputLocalValue = newVal.label
         SelectStore.setActiveValue(this.name, newVal)
         this.$emit('input', newVal.label)
