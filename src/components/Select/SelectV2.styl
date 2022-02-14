@@ -131,6 +131,7 @@
   opacity 0
   pointer-events none
   position absolute
+  top 48px
   left 0
   right 0
   margin-top 2px
@@ -223,8 +224,6 @@
       color b2c-purple-night
   &--hidden
     display none
-  &__mismatch
-    opacity .5
 
 .select-v2-option__inner
   .rt-font-label
@@ -312,3 +311,8 @@
 
 .select-v2__error-message
   margin-top 6px
+
+.rt-autocomplete
+  .select-v2-option
+    &__mismatch
+      opacity .5

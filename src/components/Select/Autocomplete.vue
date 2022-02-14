@@ -93,7 +93,11 @@ export default {
     sep: {
       type: String,
       default: ', '
-    }
+    },
+    readyIndicator: {
+      type: Boolean,
+      default: false
+    },
   },
   data: () => ({
     selectOptions: [],
@@ -264,7 +268,7 @@ export default {
       return <label ref="placeholder" class={classList.join(' ')}>{this.label}</label>
     },
     selectClasses() {
-      let selectClasses = [];
+      let selectClasses = ['rt-autocomplete']
       selectClasses.push('select-v2')
       if (this.hasError) {
         selectClasses.push("select-v2--error text-field--error");
@@ -425,8 +429,9 @@ export default {
         e.stopPropagation()
       }
       if (e.keyCode == 13) {
+        const focusIndex = this.focusIndex === -1 ? 0 : this.focusIndex
         // SelectStore.setClose(this.name)
-        this.$refs['select-item-' + this.focusIndex]?.onClickFire()
+        this.$refs['select-item-' + focusIndex]?.onClickFire()
         e.preventDefault()
         e.stopPropagation()
         if (this.autoComplete) {
@@ -524,6 +529,7 @@ export default {
                   label={this.placeholder && this.label ?  this.label : ''}
                   ref="input"
                   value={this.selectActiveLabels[0] || this.inputLocalValue}
+                  readyIndicator={this.readyIndicator}
                   onCustom={this.checkMatch}
                   onClear={this.clearValue}
                   onChange={this.onChange}

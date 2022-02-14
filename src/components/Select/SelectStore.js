@@ -78,7 +78,7 @@ class SelectStoreClass extends StorePrototype {
           this.setClose(id)
         }
         this.selectorsActiveValue[id].push(value)
-        if(isOnClick){
+        if (isOnClick) {
           this.selectorsClickValue[id] = this.selectorsValue[id][value]
         }
         if (this.selectorsTypes[id]?.multiple) {
