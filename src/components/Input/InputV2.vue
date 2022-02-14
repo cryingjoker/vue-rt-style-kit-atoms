@@ -114,7 +114,11 @@ export default {
     verified: {
       type: Boolean,
       default: false
-    }
+    },
+    readyIndicator: {
+      type: Boolean,
+      default: false
+    },
   },
 
   methods: {

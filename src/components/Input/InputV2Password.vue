@@ -51,6 +51,10 @@ export default {
       type: String,
       default: "purple"
     },
+    readyIndicator: {
+      type: Boolean,
+      default: false
+    },
   },
   data: () => ({
     localType: 'password'
