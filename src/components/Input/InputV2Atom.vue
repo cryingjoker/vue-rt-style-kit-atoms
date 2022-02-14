@@ -311,7 +311,7 @@ export default {
         // }
       }
 
-      if (this.readyIndicator && this.localValue.length && !this.hasError && !this.isHover && !this.isFocus) {
+      if (this.readyIndicator && this.localValue?.length && !this.hasError && !this.isHover && !this.isFocus) {
         return <template slot="icon">
           {validVerificationIcon()}
         </template>
