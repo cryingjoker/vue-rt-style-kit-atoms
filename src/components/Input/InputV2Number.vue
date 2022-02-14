@@ -70,8 +70,11 @@ export default {
     isInteger:{
       type: Boolean,
       default: false
-
-    }
+    },
+    readyIndicator: {
+      type: Boolean,
+      default: false
+    },
   },
   data() {
     return {

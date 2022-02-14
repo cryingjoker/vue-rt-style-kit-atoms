@@ -94,10 +94,10 @@ export default {
       type: String,
       default: ', '
     },
-    focusOnSelect: {
+    readyIndicator: {
       type: Boolean,
-      default: true
-    }
+      default: false
+    },
   },
   data: () => ({
     selectOptions: [],
@@ -127,18 +127,14 @@ export default {
     },
     clickValue:{
       deep: true,
-      handler(newVal, oldVal){
-        const a = newVal ? JSON.stringify(newVal) : '';
-        const b = oldVal ? JSON.stringify(oldVal) : ''
-        if(a != b){
-          this.inputLocalValue = newVal.label
-          SelectStore.setActiveValue(this.name, newVal)
-          this.$emit('input', newVal.label)
-          this.$nextTick(() => {
-            this.selectActiveLabels[0] = newVal.label
-          })
-          this.$emit('item-select', newVal)
-        }
+      handler (newVal, oldVal) {
+        this.inputLocalValue = newVal.label
+        SelectStore.setActiveValue(this.name, newVal)
+        this.$emit('input', newVal.label)
+        this.$nextTick(() => {
+          this.selectActiveLabels[0] = newVal.label
+        })
+        this.$emit('item-select', newVal)
       }
     },
     value: {
@@ -263,7 +259,7 @@ export default {
       return <label ref="placeholder" class={classList.join(' ')}>{this.label}</label>
     },
     selectClasses() {
-      let selectClasses = [];
+      let selectClasses = ['rt-autocomplete']
       selectClasses.push('select-v2')
       if (this.hasError) {
         selectClasses.push("select-v2--error text-field--error");
@@ -424,8 +420,9 @@ export default {
         e.stopPropagation()
       }
       if (e.keyCode == 13) {
+        const focusIndex = this.focusIndex === -1 ? 0 : this.focusIndex
         // SelectStore.setClose(this.name)
-        this.$refs['select-item-' + this.focusIndex]?.onClickFire()
+        this.$refs['select-item-' + focusIndex]?.onClickFire()
         e.preventDefault()
         e.stopPropagation()
         if (this.autoComplete) {
@@ -523,6 +520,7 @@ export default {
                   label={this.placeholder && this.label ?  this.label : ''}
                   ref="input"
                   value={this.selectActiveLabels[0] || this.inputLocalValue}
+                  readyIndicator={this.readyIndicator}
                   onCustom={this.checkMatch}
                   onClear={this.clearValue}
                   onChange={this.onChange}
