@@ -128,28 +128,24 @@ export default {
     clickValue:{
       deep: true,
       handler(newVal, oldVal){
-        const a = newVal ? JSON.stringify(newVal) : '';
-        const b = oldVal ? JSON.stringify(oldVal) : ''
-        if(a != b){
-          if(newVal.prevent) {
-            // RTRUB2B-6062 если нажато поле, нажатие которого не должно приводить
-            // к выбору айтема (имеет свойство prevent: true), а должно просто закрыть
-            // дропдаут и оставить вэлью инпута таким, которое ввёл пользователь
-            // (например выбор айтема "Моей компании нет в списке" должен сохранить
-            // в инпуте то, что ввел пользователь)
-            this.inputLocalValue = this.value
-            this.selectActiveLabels[0] = this.value
-            this.$emit('item-select', newVal)
-            return
-          }
-          this.inputLocalValue = newVal.label
-          SelectStore.setActiveValue(this.name, newVal)
-          this.$emit('input', newVal.label)
-          this.$nextTick(() => {
-            this.selectActiveLabels[0] = newVal.label
-          })
+        if (newVal.prevent) {
+          // RTRUB2B-6062 если нажато поле, нажатие которого не должно приводить
+          // к выбору айтема (имеет свойство prevent: true), а должно просто закрыть
+          // дропдаут и оставить вэлью инпута таким, которое ввёл пользователь
+          // (например выбор айтема "Моей компании нет в списке" должен сохранить
+          // в инпуте то, что ввел пользователь)
+          this.inputLocalValue = this.value
+          this.selectActiveLabels[0] = this.value
           this.$emit('item-select', newVal)
+          return
         }
+        this.inputLocalValue = newVal.label
+        SelectStore.setActiveValue(this.name, newVal)
+        this.$emit('input', newVal.label)
+        this.$nextTick(() => {
+          this.selectActiveLabels[0] = newVal.label
+        })
+        this.$emit('item-select', newVal)
       }
     },
     value: {
