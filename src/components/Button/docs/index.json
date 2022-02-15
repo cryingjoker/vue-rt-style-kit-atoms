@@ -4,6 +4,7 @@
 			"name": "rt-button",
 			"property": ":small",
 			"type": "Boolean",
+			"label": "мини-размер",
 			"description": "Делает small button на desktop, tablet и mobile",
 			"value": "",
 			"version": "0.2"
@@ -12,6 +13,7 @@
 			"name": "rt-button",
 			"property": ":tablet-small",
 			"type": "Boolean",
+			"label": "мини-размер в tablet, mobile",
 			"description": "Делает small button на tablet и mobile",
 			"value": "",
 			"version": "0.3.35"
@@ -20,6 +22,7 @@
 			"name": "rt-button",
 			"property": ":mobile-small",
 			"type": "Boolean",
+			"label": "мини-размер в mobile",
 			"description": "Делает small button на mobile",
 			"value": "",
 			"version": "0.3.35"
@@ -34,16 +37,9 @@
 		},
 		{
 			"name": "rt-button",
-			"property": ":ga",
-			"type": "Object",
-			"description": "Устанавливает google analitics",
-			"value": "",
-			"version": "0.1.68"
-		},
-		{
-			"name": "rt-button",
 			"property": ":is-block",
 			"type": "Boolean",
+			"label": "ширина по колонкам",
 			"description": "Задаёт кнопке блочное позиционирование. Кнопка занимает 100% доступной ширины",
 			"value": "false"
 		},
@@ -59,6 +55,7 @@
 			"name": "rt-button",
 			"property": ":is-disabled",
 			"type": "Boolean",
+			"label": "неактивное состояние",
 			"description": "Делает кнопку неактивной, так же, как атрибут `disabled`",
 			"value": "false"
 		},
@@ -66,6 +63,7 @@
 			"name": "rt-button",
 			"property": ":is-fetched",
 			"type": "Boolean",
+			"label": "состояние при загрузке",
 			"description": "Устанавливает спиннер вместо кнопки",
 			"value": "false"
 		},
@@ -73,6 +71,7 @@
 			"name": "rt-button",
 			"property": ":has-icon",
 			"type": "Boolean",
+			"label": "с иконкой",
 			"description": "Добавляет в кнопку иконку",
 			"value": "false"
 		},
@@ -81,6 +80,7 @@
 			"property": ":checkbox-behavior",
 			"type": "Boolean",
 			"description": "Устанавливает кнопкам логику поведения `radiobutton`. Необходимо устанавливать на несколько кнопок для соблюдения этой логики",
+			"hidden": "true",
 			"value": "false"
 		},
 		{
@@ -88,13 +88,14 @@
 			"property": "radio-group-name",
 			"type": "String",
 			"description": "Используется совместно с `checkbox-behavior`. Объединяет кнопки в группу для обеспечения логики взаимодействия описанной выше",
+			"hidden": "true",
 			"value": "radio-group"
 		},
 		{
 			"name": "rt-button",
 			"property": "button-class-list",
 			"type": "String",
-			"description": "Устанавливает список классов для кнопки. `String`!! Классы пишутся через пробел",
+			"description": "Устанавливает список классов для кнопки в виде строки. Классы пишутся через пробел, без точки (myclassname myclassname--state)",
 			"value": ""
 		},
 		{
@@ -102,19 +103,22 @@
 			"property": "radio-value",
 			"type": "String",
 			"description": "Устанавливает значение для кнопки при использовании `checkbox-behavior`",
+			"hidden": "true",
 			"value": ""
 		},
 		{
 			"name": "rt-button",
 			"property": ":show-as-tag",
 			"type": "Boolean",
-			"description": "Отображение как у тега",
+			"label": "отобразить как тег",
+			"description": "Отображение как у тэга",
 			"value": "false"
 		},
 		{
 			"name": "rt-button",
 			"property": "color",
 			"type": "String",
+			"label": "выберите цвет",
 			"description": "Задаёт цвет кнопки установкой класса `rt-button-{указанный цвет}`",
 			"value": ""
 		},
@@ -123,6 +127,7 @@
 			"property": ":popup-button",
 			"type": "Boolean",
 			"description": "Флаг, указывающий, что по нажатию кнопки открывается попап",
+			"hidden": "true",
 			"value": "false"
 		},
 		{
@@ -130,12 +135,14 @@
 			"property": "target-popup",
 			"type": "String",
 			"description": "Связывает кнопку с попапом, который должен открываться при нажатии на кнопку",
+			"hidden": "true",
 			"value": ""
 		},
 		{
 			"name": "rt-button",
 			"property": ":href",
 			"type": "String",
+			"label": "ссылка",
 			"description": "Устанавливает ссылку для кнопки /  вместо <button> рендерится <a>",
 			"value": "''",
 			"version": "0.2.17"
@@ -144,6 +151,7 @@
 			"name": "rt-button",
 			"property": ":target",
 			"type": "String",
+			"label": "target атрибут для ссылки",
 			"description": "Устанавливает атрибут для кнопки-ссылки",
 			"value": "_blank",
 			"version": "0.2.17"
@@ -153,6 +161,7 @@
 			"property": ":active-class",
 			"type": "String",
 			"description": "Устанавливает класс для активной кнопки для checkbox-behavior props",
+			"hidden": "true",
 			"value": "''",
 			"version": "0.2.17"
 		},
@@ -161,6 +170,7 @@
 			"property": ":is-active",
 			"type": "Boolean",
 			"description": "Устанавливает флаг активной кнопки для checkbox-behavior props",
+			"hidden": "true",
 			"value": "flase",
 			"version": "0.2.17"
 		},
@@ -169,6 +179,7 @@
 			"property": ":not-active-class",
 			"type": "String",
 			"description": "Устанавливает класс для неактивной кнопки для checkbox-behavior props",
+			"hidden": "true",
 			"value": "''",
 			"version": "0.2.17"
 		}
