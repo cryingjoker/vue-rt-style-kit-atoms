@@ -244,7 +244,9 @@ export default {
       this.$emit('focus', e, this.localValue)
       const el = e.target
       setTimeout(() => {
-        el.selectionStart = el.value.length
+        if (el?.setSelectionRange) {
+          el.setSelectionRange(el.value.length, el.value.length)
+        }
       }, 0)
     },
     onInput(e) {
