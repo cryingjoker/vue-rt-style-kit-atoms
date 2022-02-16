@@ -127,7 +127,18 @@ export default {
     },
     clickValue:{
       deep: true,
-      handler (newVal, oldVal) {
+      handler(newVal, oldVal){
+        if (newVal.prevent) {
+          // RTRUB2B-6062 если нажато поле, нажатие которого не должно приводить
+          // к выбору айтема (имеет свойство prevent: true), а должно просто закрыть
+          // дропдаут и оставить вэлью инпута таким, которое ввёл пользователь
+          // (например выбор айтема "Моей компании нет в списке" должен сохранить
+          // в инпуте то, что ввел пользователь)
+          this.inputLocalValue = this.value
+          this.selectActiveLabels[0] = this.value
+          this.$emit('item-select', newVal)
+          return
+        }
         if (!newVal) return
         this.inputLocalValue = newVal.label
         SelectStore.setActiveValue(this.name, newVal)
@@ -152,7 +163,6 @@ export default {
                 SelectStore.setClose(this.name)
               })
             }
-            this.$refs.input.$el.querySelector('input').focus()
           }
         }
       }
@@ -175,7 +185,6 @@ export default {
           SelectStore.addJson(this.name, a)
           this.getSelectType();
           this.getSelectOptions()
-          this.$refs.input.$el.querySelector('input').focus()
           this.onInputAutoField();
         }
       }

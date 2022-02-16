@@ -72,7 +72,7 @@ export default {
     selection: false
   }),
   watch:{
-    value (newVal, oldVal) {
+    value(newVal) {
       this.localValue = newVal
       this.value = newVal
       this.$refs.input.$refs.input.value = newVal
