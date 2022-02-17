@@ -159,7 +159,7 @@ export default {
       if (this.disabledLocal) {
         inputClassName.push('rt-input-v2--disabled')
       }
-      if (typeof this.localValue === 'string' && this.localValue.length === 0) {
+      if (typeof this.localValue === 'string' && this.localValue?.length === 0) {
         inputClassName.push('rt-input-v2--empty')
       }
       return inputClassName.join(' ')
@@ -225,7 +225,7 @@ export default {
     onBlur(e) {
       this.isFocus = false
       this.$emit('blur', this.localValue, e)
-      this.localValue = this.localValue.trim()
+      this.localValue = this.localValue?.trim()
     },
     onPaste(e) {
       this.$emit('paste', e)
