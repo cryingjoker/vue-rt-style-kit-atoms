@@ -67,12 +67,14 @@
           this.textContent = hintStore.getHintData().text;
         }
         if(hintStore.getHintData().hovered) {
-          this.posLeft =
-            (window.innerWidth <= parseInt(variables["mobile-upper-limit"]) && !this.isSmall)
-              ? 20
-              : hintStore.getHintData().coords.x;
-          this.posTop = hintStore.getHintData().coords.y;
-          this.countTextPos();
+          this.$nextTick(() => {
+            this.posLeft =
+              (window.innerWidth <= parseInt(variables["mobile-upper-limit"]) && !this.isSmall)
+                ? 20
+                : hintStore.getHintData().coords.x;
+            this.posTop = hintStore.getHintData().coords.y;
+            this.countTextPos();
+          })
         }
         if(!hintStore.getHintData().hovered && !this.isHovered)
           this.hideHint();
