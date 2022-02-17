@@ -444,6 +444,21 @@
     .ripple-wave
       background-color b2c-cool-grey
 
+.rt-button-gradient
+  color b2c-white
+  background: linear-gradient(84.51deg, #70f -3.1%, #5f02eb 30.57%, #dd3338 55.08%, #dd3338 62%, #70f 82%)
+  background-size: 300% 100%
+  background-position: 40%
+  transition: background .5s
+
+  &:hover
+    @media (hover hover)
+      background-position: 80%
+
+  &[disabled]
+    color main-color05
+    background-color main-color005
+
 .rt-button--as-tag
   width auto
   min-width auto
