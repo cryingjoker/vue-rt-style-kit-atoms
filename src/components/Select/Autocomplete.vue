@@ -139,6 +139,7 @@ export default {
           this.$emit('item-select', newVal)
           return
         }
+        if (!newVal) return
         this.inputLocalValue = newVal.label
         SelectStore.setActiveValue(this.name, newVal)
         this.$emit('input', newVal.label)
