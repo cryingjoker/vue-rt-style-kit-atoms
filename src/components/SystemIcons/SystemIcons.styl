@@ -14,16 +14,17 @@ renderColorClass(classname, classNameHover,classNameFocus, var)
     fill lookup(var)
     .rt-dark-theme &
       fill lookup(var)
-renderColorClass(classname, classNameHover,classNameFocus, var)
   @media(hover: hover)
     .{classNameHover}
-      fill lookup(var)
-      .rt-dark-theme &
         fill lookup(var)
+        .rt-dark-theme &
+          fill lookup(var)
   .{classNameFocus}
-      fill lookup(var)
-      .rt-dark-theme &
-        fill lookup(var)
+      &:focus
+        .rt-sys-icon
+          fill lookup(var)
+          .rt-dark-theme &
+            fill lookup(var)
 
 for $i in colors
   if search($i,'b2c') >= 0 || search($i,'main-color') >= 0
