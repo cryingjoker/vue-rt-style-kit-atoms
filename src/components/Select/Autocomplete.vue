@@ -128,6 +128,7 @@ export default {
     clickValue:{
       deep: true,
       handler(newVal, oldVal){
+        if (!newVal) return
         if (newVal.prevent) {
           // RTRUB2B-6062 если нажато поле, нажатие которого не должно приводить
           // к выбору айтема (имеет свойство prevent: true), а должно просто закрыть
@@ -139,7 +140,6 @@ export default {
           this.$emit('item-select', newVal)
           return
         }
-        if (!newVal) return
         this.inputLocalValue = newVal.label
         SelectStore.setActiveValue(this.name, newVal)
         this.$emit('input', newVal.label)
