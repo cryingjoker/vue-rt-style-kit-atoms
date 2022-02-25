@@ -5,6 +5,7 @@
       "property": "custom-rules",
       "type": "Array",
       "description": "Задаваемые правила валидации",
+      "hidden": true,
       "value": "[]"
     },
     {
@@ -12,6 +13,7 @@
       "property": "max-length",
       "type": "Number",
       "description": "Ограничение длины сообщения",
+      "label": "Максимальная длина",
       "value": "null"
     },
     {
@@ -19,6 +21,7 @@
       "property": "min-number",
       "type": "Number",
       "description": "Ограничение числового значения(нижний порог)",
+      "hidden": true,
       "value": "null"
     },
     {
@@ -26,6 +29,7 @@
       "property": "max-number",
       "type": "Number",
       "description": "Ограничение числового значения(верхний порог)",
+      "hidden": true,
       "value": "null"
     },
     {
@@ -33,6 +37,7 @@
       "property": "insert-lang",
       "type": "String",
       "description": "Разрешение на ввод определённого языка. Поддерживаемые значения: `ru, en`",
+      "hidden": true,
       "value": ""
     },
     {
@@ -40,6 +45,7 @@
       "property": "insert-type",
       "type": "String",
       "description": "Указывает тип(предназначение) поля ввода. Поддерживаемые значения: `number, string, password, tel`",
+      "hidden": true,
       "value": ""
     },
     {
@@ -47,6 +53,7 @@
       "property": ":disabled",
       "type": "Boolean",
       "description": "Устанавливает неактивное состояние инпута. Аналагично атрибуту disabled",
+      "hidden": true,
       "value": "false"
     },
     {
@@ -68,6 +75,7 @@
       "property": ":has-error",
       "type": "Boolean",
       "description": "Флаг ошибки",
+      "hidden": true,
       "value": "false"
     },
     {
@@ -75,6 +83,7 @@
       "property": ":error-message-func",
       "type": "Function",
       "description": "Задаёт функцию выполняемую при ошибке",
+      "hidden": true,
       "value": "null"
     },
     {
@@ -82,6 +91,7 @@
       "property": "error-message",
       "type": "String",
       "description": "Устанавливает сообщение, выводимое при ошибке",
+      "hidden": true,
       "value": ""
     },
     {
@@ -89,6 +99,7 @@
       "property": "value",
       "type": "String",
       "description": "Устанавливает значение атрибута `value`",
+      "label": "Значение",
       "value": ""
     },
     {
@@ -96,6 +107,7 @@
       "property": ":is-white",
       "type": "Boolean",
       "description": "Флаг белого цвета шрифта и иконки очистки поля",
+      "hidden": true,
       "value": "false"
     },
     {
@@ -103,6 +115,7 @@
       "property": "name",
       "type": "String",
       "description": "Устанавливает значение атрибута `name`",
+      "hidden": true,
       "value": ""
     },
     {
@@ -110,6 +123,7 @@
       "property": ":show-numbers-buttons",
       "type": "Boolean",
       "description": "Флаг устанавливающий наличие кнопок `+/-` при вводе цифр",
+      "hidden": true,
       "value": "false"
     },
     {
@@ -117,6 +131,7 @@
       "property": "label",
       "type": "String",
       "description": "Устанавливает `<label/>` для поля ввода",
+      "hidden": true,
       "value": "null"
     },
     {
@@ -124,6 +139,7 @@
       "property": "type",
       "type": "String",
       "description": "Устанавливает атрибут `type`. (Аналог `insert-type`)",
+      "label": "Тип значение",
       "value": "text"
     },
     {
@@ -131,6 +147,7 @@
       "property": ":is-b2b-input",
       "type": "Boolean",
       "description": "Устанавливает стили отображения сегмента b2b для поля ввода",
+      "hidden": true,
       "value": "false"
     },
     {
@@ -138,6 +155,7 @@
       "property": ":outlined",
       "type": "Boolean",
       "description": "Устанавливает обводку(границы) вокруг поля ввода",
+      "hidden": true,
       "value": "false"
     },
     {
@@ -145,6 +163,7 @@
       "property": "color",
       "type": "String",
       "description": "Задаёт цвет элементам поля ввода. Возможные значения `orange и purple`",
+      "hidden": true,
       "value": "purple"
     },
     {
@@ -152,6 +171,7 @@
       "property": ":is-hidden",
       "type": "Boolean",
       "description": "Скрывает поле ввода",
+      "hidden": true,
       "value": "false"
     },
     {
@@ -159,6 +179,7 @@
       "property": ":approved",
       "type": "Boolean",
       "description": "Флаг отображения подтверждения введённых данных",
+      "label": "Флаг",
       "value": "false"
     },
     {
@@ -166,6 +187,7 @@
       "property": "input-button",
       "type": "Boolean",
       "description": "Флаг отображения кнопки в инпуте",
+      "hidden": true,
       "value": "false"
     },
     {
@@ -173,6 +195,7 @@
       "property": "input-button-text",
       "type": "String",
       "description": "Устанавливает текст в кнопке, описанной выше",
+      "hidden": true,
       "value": ""
     },
     {
@@ -180,6 +203,7 @@
       "property": ":is-integer",
       "type": "Boolean",
       "description": "Флаг запрещающий ввод дробных чисел для `type='number'`",
+      "hidden": true,
       "value": "false"
     },
     {
@@ -187,6 +211,7 @@
       "property": ":ready-indicator",
       "type": "Boolean",
       "description": "Индикатор готовности поля (зеленая галка в не пустом валидном поле)",
+      "hidden": true,
       "value": "false"
     }
   ]

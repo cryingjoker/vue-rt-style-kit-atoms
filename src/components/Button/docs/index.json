@@ -5,8 +5,8 @@
       "property": ":small",
       "type": "Boolean",
       "description": "Делает small button на desktop, tablet и mobile",
-      "value": "small кнопка везде",
-      "label":""
+      "value": "",
+      "label":"small кнопка везде"
 
     },
     {
@@ -39,7 +39,8 @@
       "property": ":is-block",
       "type": "Boolean",
       "description": "Задаёт кнопке блочное позиционирование. Кнопка занимает 100% доступной ширины",
-      "value": "false"
+      "value": "false",
+      "label": "ширина по колонкам"
     },
     {
       "name": "rt-button",
@@ -55,6 +56,7 @@
       "property": ":is-disabled",
       "type": "Boolean",
       "description": "Делает кнопку неактивной, так же, как атрибут `disabled`",
+      "label": "неактивное состояние",
       "value": "false"
     },
     {
@@ -62,6 +64,7 @@
       "property": ":is-fetched",
       "type": "Boolean",
       "description": "Устанавливает спиннер вместо кнопки",
+      "label": "состояние при загрузке",
       "value": "false",
       "hidden": true
     },
@@ -70,6 +73,7 @@
       "property": ":has-icon",
       "type": "Boolean",
       "description": "Добавляет в кнопку иконку",
+      "label": "с иконкой",
       "value": "false",
       "hidden": true
     },
@@ -93,7 +97,7 @@
       "name": "rt-button",
       "property": "button-class-list",
       "type": "String",
-      "description": "Устанавливает список классов для кнопки. `String`!! Классы пишутся через пробел",
+      "description": "Устанавливает список классов для кнопки в виде строки. Классы пишутся через пробел, без точки (myclassname myclassname--state)",
       "value": "",
       "hidden": true
     },
@@ -109,7 +113,8 @@
       "name": "rt-button",
       "property": ":show-as-tag",
       "type": "Boolean",
-      "description": "Отображение как у тега",
+			"description": "Отображение как у тэга",
+      "label": "отобразить как тег",
       "value": "false",
       "hidden": true
     },
@@ -117,6 +122,7 @@
       "name": "rt-button",
       "property": "color",
       "type": "String",
+      "label": "выберите цвет",
       "description": "Задаёт цвет кнопки установкой класса `rt-button-{указанный цвет}`",
       "value": "",
       "variants": [
@@ -156,7 +162,7 @@
       "type": "String",
       "description": "Устанавливает ссылку для кнопки /  вместо <button> рендерится <a>",
       "value": "''",
-      "label":""
+      "label": "ссылка"
     },
     {
       "name": "rt-button",
@@ -164,7 +170,7 @@
       "type": "String",
       "description": "Устанавливает атрибут для кнопки-ссылки",
       "value": "_blank",
-      "label":""
+      "label": "target атрибут для ссылки"
     },
     {
       "name": "rt-button",
