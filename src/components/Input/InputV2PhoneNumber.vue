@@ -72,10 +72,11 @@ export default {
     selection: false
   }),
   watch:{
-    value(newVal) {
-      this.localValue = newVal
-      this.value = newVal
-      this.$refs.input.$refs.input.value = newVal
+    value(newVal, oldVal) {
+      const value = (newVal === '+7 (7' && oldVal === '+7') ? oldVal : newVal // RTRU-12539
+      this.localValue = value
+      this.value = value
+      this.$refs.input.$refs.input.value = value
       this.addMask()
     }
   },
