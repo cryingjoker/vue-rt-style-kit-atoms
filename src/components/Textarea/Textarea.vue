@@ -162,6 +162,9 @@ export default {
     onInput(value) {
       this.$emit('input', value)
     },
+    onChange(e) {
+      this.$emit('change', e, this.localValue)
+    },
     setDisabled() {
       this.$refs.textarea.disabled = Boolean(
           this.disabled
@@ -204,6 +207,7 @@ export default {
             error-message={this.errorMessage}
             value={this.value}
             on-input={this.onInput}
+            on-change={this.onChange}
             field-id={this.fieldId}
             resize={this.resize}
             label={this.label}
