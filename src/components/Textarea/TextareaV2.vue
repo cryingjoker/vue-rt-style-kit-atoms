@@ -148,17 +148,25 @@ export default {
     },
     onInput() {
       this.localValue = this.$refs.textarea.value
+    },
+    onChange(e) {
+      this.$emit('change', e)
     }
   },
   render(h) {
     return <div class={this.textareaClassname}>
-      <textarea disabled={this.disabled} class={this.textareaTagClassname} ref="textarea"
-                onInput={this.onInput}></textarea>
+      <textarea
+        disabled={this.disabled}
+        class={this.textareaTagClassname}
+        ref="textarea"
+        onInput={this.onInput}
+        onChange={this.onChange}
+      ></textarea>
       <p class={this.textareaLabelClassname}>{this.label || this.placeholder}</p>
       <div class="rt-textarea-v2__line"></div>
       <div class="rt-textarea-v2-footer">
-      {this.sizeRender}
-      {this.renderError}
+        {this.sizeRender}
+        {this.renderError}
       </div>
 
 
