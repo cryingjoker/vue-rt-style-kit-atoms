@@ -32,6 +32,7 @@ import {
     HintBody,
     VideoPlayer,
     SystemIcons,
+    InfoIcons,
     ArrowAnchor,
     CircleNumber,
     Line,
@@ -104,6 +105,7 @@ let VueRtStyle = {
             Vue.component(Hint.name, Hint);
             Vue.component(HintBody.name, HintBody);
             Vue.component(SystemIcons.name, SystemIcons);
+            Vue.component(InfoIcons.name, InfoIcons);
             Vue.component(VideoPlayer.name, VideoPlayer);
             Vue.component(ArrowAnchor.name, ArrowAnchor);
             Vue.component(CircleNumber.name, CircleNumber);
@@ -208,6 +210,7 @@ export {
     getBackgroundClassByProps,
     getBackgroundClass,
     SystemIcons,
+    InfoIcons,
     Line,
     StorePrototype,
     viewportPositionStore,

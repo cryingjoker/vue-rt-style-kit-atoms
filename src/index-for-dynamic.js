@@ -72,6 +72,7 @@ export default { // Сортировака по группам, как в pages
   ...load('RtPrice', 'Price/Price.vue'),
   ...load('RtSpinner', 'Spinner/Spinner.vue'),
   ...load('RtSystemIcons', 'SystemIcons/SystemIcons.vue'),
+  ...load('RtInfoIcons', 'InfoIcons/InfoIcons.vue'),
   ...load('RtUssd', 'Ussd/Ussd.vue'),
   ...load('RtVideoPlayer', 'VideoPlayer/VideoPlayer.vue')
 
